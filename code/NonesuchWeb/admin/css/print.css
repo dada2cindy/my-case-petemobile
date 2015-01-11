@@ -1,0 +1,94 @@
+﻿/* FORM: PRESENTATION */
+
+.InputLabel
+{
+	font-family: "微軟正黑體";
+	width: 60px;
+	font-size: 12px;
+	height: 20px;
+	color: #333333;
+}
+.InvisibleInPrint
+{
+	visibility: hidden;
+	text-decoration: overline;
+}
+.VisibleInPrint
+{
+	visibility:hidden;
+}
+h1
+{
+	font-family: "微軟正黑體";
+	text-decoration: underline;
+	font-size: 14px;
+}
+.fieldset
+{
+	font-family: "微軟正黑體";
+}
+.FieldsetInside
+{
+	font-family: "微軟正黑體";
+}
+
+
+.tdLabel
+{
+	font-size: 12px;
+	float: left;
+	width: 130px; /*width of label (left column)*/
+	text-transform: uppercase;
+}
+.tdInput
+{
+	font-size: 12px;
+	float: left;
+}
+
+
+/* table style */
+.datagrid
+{
+	font-family: 微軟正黑體,verdana,sans-serif;
+	font-size: 12px;
+	width: 800px;
+}
+
+/* common cell styles */
+.datagrid th, .datagrid td
+{
+	cursor: default;
+	height: 13px;
+}
+
+/* header cell style */
+.datagrid th
+{
+	color: #59483f;
+	font-weight: normal;
+	text-align: left;
+}
+
+/* cell styles */
+.datagrid td
+{
+	color: #000;
+}
+.GrayLabel
+{
+	font-family:微軟正黑體;
+	background: #ffffff no-repeat left center;
+	color: #808080;
+	font-size: 12px;
+	text-decoration: none;
+}
+/* mouseover row style */
+.datagrid tr:hover
+{
+	background-color: #f2e8da;
+}
+
+
+
+

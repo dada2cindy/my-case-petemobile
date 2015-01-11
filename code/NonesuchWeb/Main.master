@@ -1,0 +1,29 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Main.master.cs" Inherits="Main" %>
+
+<%@ Register Src="UserControl/MainFooter.ascx" TagName="Footer" TagPrefix="Main" %>
+<%@ Register Src="UserControl/MainTopMenu.ascx" TagName="TopMenu" TagPrefix="Main" %>
+<!DOCTYPE HTML>
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>臻美美學診所</title>
+    <link href="css/Webcss.css" rel="stylesheet" type="text/css">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">           
+<div id="Red_Contact"><a href="ask.aspx"><img src="image/red_contact.png" width="57" height="307"></a></div>
+<div id="InDown">
+  <div class="AllTable">
+    <main:TopMenu ID="topMenu" runat="server" />    
+    <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    
+  </div>
+  <main:Footer ID="footer" runat="server" />
+</div>
+    </form>
+</body>
+</html>
