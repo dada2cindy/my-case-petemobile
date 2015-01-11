@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="WuDada.Provider.ResourceHandle.Domain" assembly="WuDada.Provider.ResourceHandle">
+
+  <class name="StorageFileVO" lazy="true" table="STORAGE_FILE" dynamic-update="true" dynamic-insert="true">
+
+    <id name="StorageFileId" column="StorageFileId" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+
+    
+    <property name="DisplayName" column="DisplayName" type="String" length="255" not-null="true"/>
+    <property name="HtmlContent" type="StringClob" >
+      <column name="HtmlContent" sql-type="nvarchar(max)"/>
+    </property>
+    <property name="FileName" column="FileName" type="String" length="255" not-null="true"/>
+    <property name="IsTemporary" column="IsTemporary" type="Boolean" />
+    <property name="SourceUri" column="SourceUri" type="String" length="255"/>
+    <property name="CurrentPath" column="CurrentPath" type="String" length="255"/>
+    <property name="FileSize" column="FileSize" type="Int64"/>
+    <property name="SourceType" column="SourceType" type="Int32"/>
+    <property name="SourceId" column="SourceId" type="Int32"/>
+    <property name="IsCover" column="IsCover" type="Boolean" />
+    <property column="SortNo" type="Int32" name="SortNo" />
+
+    <property column="CreatedBy" type="String" name="CreatedBy"  />
+    <property column="UpdatedBy" type="String" name="UpdatedBy"  />
+    <property column="UpdatedDate" type="DateTime" name="UpdatedDate"  />
+    <property column="CreatedDate" type="DateTime" name="CreatedDate"  />
+
+  </class>
+
+</hibernate-mapping>

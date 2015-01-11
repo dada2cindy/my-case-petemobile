@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:db="http://www.springframework.net/database">
+  <!-- Index:
+        * DAO objects 設定
+        * Service objects 設定
+    -->
+  <!-- DAO objects 設定 -->
+  <object id="MemberDao" type="WuDada.Core.Member.Persistence.MemberDao, WuDada.Core.Member">
+    <property name="AdoTemplate" ref="AdoTemplate"/>
+    <property name="NHibernateDao" ref="NHibernateDao"/>
+  </object>
+
+  <!-- Service objects 設定 --> 
+
+  <object id="MemberServiceProxy" parent="TxProxyConfigurationTemplate">
+    <property name="Target" ref="MemberService"/>
+  </object>
+  <object id="MemberService" type="WuDada.Core.Member.Service.Impl.MemberService, WuDada.Core.Member">                                   
+    <property name="MemberDao" ref="MemberDao"/>
+  </object>
+
+</objects>

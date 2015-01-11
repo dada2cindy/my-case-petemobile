@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="WuDada.Core.Member.Domain" assembly="WuDada.Core.Member">
+
+  <class name="MemberVO" lazy="true" table="MEMBER" dynamic-update="true" dynamic-insert="true">
+
+    <id name="MemberId" column="ID" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    
+    <property name="LoginId" column="LoginID" type="String" length="50"/>
+    <property name="Password" column="Password" type="String" length="50"/>
+    <property name="Name" column="Name" type="String" length="100"/>
+    <property name="Company" column="Company" type="String" length="100"/>            
+    <property name="Dept" column="Dept" type="String" length="100"/>
+    <property name="JobTitle" column="JobTitle" type="String" length="100"/>
+    <property name="Phone" column="Phone" type="String" length="50" />
+    <property name="Mobile" column="Mobile" type="String" length="50" />
+    <property name="Fax" column="Fax" type="String" length="30"/>
+    <property name="Email" column="Email" type="String" length="200"/>
+    <property name="CreatedDate" column="CreatedDate" type="DateTime"/>
+    <property name="UpdatedDate" column="UpdatedDate" type="DateTime"/>
+    <property name="CreateIP" column="CreateIP" type="String" length="20" not-null="true"/>
+    <property name="Sex" column="Sex" type="String" length="10"/>
+    <property name="Status" column="Status" type="String" length="1"/>
+    <property name="UserConfirm" column="UserConfirm" type="String" length="1"/>
+    <property name="Token" column="Token" type="String" length="50"/>
+    <property name="ApplyDate" column="ApplyDate" type="DateTime"/>
+    <property name="DueDate" column="DueDate" type="DateTime"/>
+    <property name="Birthday" column="Birthday" type="DateTime"/>
+    <property name="Project" column="Project" type="String" />
+    <property name="Product" column="Product" type="String" />
+    <property name="PhoneSer" column="PhoneSer" type="String" />
+    <property name="PhonePrice" column="PhonePrice" type="Double" />
+    <property name="PhoneSellPrice" column="PhoneSellPrice" type="Double" />
+    <property name="Commission" column="Commission" type="Double" />
+    <property name="BreakMoney" column="BreakMoney" type="Double" />
+    <property name="Compensation" column="Compensation" type="Double" />
+    <property name="ContractMonths" column="ContractMonths" type="Double" />
+    <property name="Sales" column="Sales" type="String" length="50" />
+    <property name="Note" type="StringClob" >
+      <column name="Note" sql-type="nvarchar(max)"/>
+    </property>
+
+  </class>
+
+</hibernate-mapping>

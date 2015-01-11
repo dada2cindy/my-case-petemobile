@@ -1,0 +1,10 @@
+D:\我的case\小布\Duluck\SVN上傳\trunk\code\lib\WuDada.Core.Member.dll
+D:\我的case\小布\Duluck\SVN上傳\trunk\code\lib\WuDada.Core.Member.pdb
+D:\我的case\小布\Duluck\SVN上傳\trunk\code\WuDada.Core.Member\obj\Release\WuDada.Core.Member.dll
+D:\我的case\小布\Duluck\SVN上傳\trunk\code\WuDada.Core.Member\obj\Release\WuDada.Core.Member.pdb
+D:\我的case\小布\Duluck\SVN上傳\trunk\code\WuDada.Core.Member\obj\Release\WuDada.Core.Member.csprojResolveAssemblyReference.cache
+D:\我的case\小布\銀河診所\SVN上傳\trunk\code\lib\WuDada.Core.Member.dll
+D:\我的case\小布\銀河診所\SVN上傳\trunk\code\lib\WuDada.Core.Member.pdb
+D:\我的case\小布\銀河診所\SVN上傳\trunk\code\WuDada.Core.Member\obj\Release\WuDada.Core.Member.csprojResolveAssemblyReference.cache
+D:\我的case\小布\銀河診所\SVN上傳\trunk\code\WuDada.Core.Member\obj\Release\WuDada.Core.Member.dll
+D:\我的case\小布\銀河診所\SVN上傳\trunk\code\WuDada.Core.Member\obj\Release\WuDada.Core.Member.pdb
