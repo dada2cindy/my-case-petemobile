@@ -13,9 +13,8 @@ public partial class admin_UC04_0421 : System.Web.UI.Page
     private PostFactory m_PostFactory;
     private IPostService m_PostService;
     private WebLogService m_WebLogService;
-
-    //服務項目分類NodeId=14
-    private int m_NodeId = 14;
+    
+    private int m_NodeId = 6;
 
     private int m_Mode
     {
@@ -68,7 +67,7 @@ public partial class admin_UC04_0421 : System.Web.UI.Page
         NodeVO nodeVO = new NodeVO();
         nodeVO.Name = txtNodeName.Text.Trim();
         nodeVO.SortNo = int.Parse(txtSortNo.Text.Trim());
-        nodeVO.HtmlContent = txtContent.Text.Trim();
+        //nodeVO.HtmlContent = txtContent.Text.Trim();
         nodeVO.ParentNode = m_PostService.GetNodeById(m_NodeId); ;
         m_PostService.CreateNode(nodeVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.新增, nodeVO);
@@ -81,7 +80,7 @@ public partial class admin_UC04_0421 : System.Web.UI.Page
         m_Mode = 0;
         txtNodeName.Text = string.Empty;
         txtSortNo.Text = string.Empty;
-        txtContent.Text = string.Empty;
+        //txtContent.Text = string.Empty;
     }
     protected void gvList_RowCommand1(object sender, GridViewCommandEventArgs e)
     {
@@ -94,7 +93,7 @@ public partial class admin_UC04_0421 : System.Web.UI.Page
                 m_Mode = nodeId;
                 txtNodeName.Text = nodeVO.Name;
                 txtSortNo.Text = nodeVO.SortNo.ToString();
-                txtContent.Text = nodeVO.HtmlContent;
+                //txtContent.Text = nodeVO.HtmlContent;
                 ShowMode();
                 break;
             case "myDel":
@@ -105,7 +104,7 @@ public partial class admin_UC04_0421 : System.Web.UI.Page
                 }
                 catch (Exception ex)
                 {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("無法刪除分類，分類底下尚有文章。"), false);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("無法刪除品名，尚有關聯資料。"), false);
                     m_Log.Error(ex);
                 }
                 break;
@@ -125,7 +124,7 @@ public partial class admin_UC04_0421 : System.Web.UI.Page
         NodeVO nodeVO = m_PostService.GetNodeById(m_Mode);
         nodeVO.Name = txtNodeName.Text.Trim();
         nodeVO.SortNo = int.Parse(txtSortNo.Text.Trim());
-        nodeVO.HtmlContent = txtContent.Text.Trim();
+        //nodeVO.HtmlContent = txtContent.Text.Trim();
         m_PostService.UpdateNode(nodeVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.修改, nodeVO);
         GetList();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
   <TopNode>[0-1016]D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\Nonesuch.Test\bin\Debug\Nonesuch.Test.dll</TopNode>
-  <SelectedNode>[0-1000]GalaxyClinic.Test.NHibernate.TestSchema</SelectedNode>
+  <SelectedNode>[0-1004]GalaxyClinic.Test.Service.InitWebDataService.InitWebData</SelectedNode>
   <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
     <Node UniqueName="[0-1016]D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\Nonesuch.Test\bin\Debug\Nonesuch.Test.dll" Expanded="true" />

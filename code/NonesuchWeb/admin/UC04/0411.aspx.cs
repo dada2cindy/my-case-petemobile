@@ -14,8 +14,7 @@ public partial class admin_UC04_0411 : System.Web.UI.Page
     private IPostService m_PostService;
     private WebLogService m_WebLogService;
 
-    //美麗見證分類NodeId=10
-    private int m_NodeId = 10;
+    private int m_NodeId = 3;
 
     private int m_Mode
     {
@@ -97,7 +96,7 @@ public partial class admin_UC04_0411 : System.Web.UI.Page
                 }
                 catch (Exception ex)
                 {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("無法刪除分類，分類底下尚有文章。"), false);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("無法刪除類別，類別底下尚有關聯資料。"), false);
                     m_Log.Error(ex);
                 }
                 break;

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>臻美美學診所 整合平台</title>
+    <title> 整合平台</title>
     <link href="../css/css.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
@@ -28,16 +28,16 @@
                 </tr>
                 <tr>
                     <td height="34" background="../images/white.gif" class="text01-12-black">
-                        <font size="3">臻美美學診所 整合平台</font>
+                        <font size="3"> 整合平台</font>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <table width="100" border="0" cellpadding="0" cellspacing="0" class="table01">
                             <tr>
-                                <td width="467" height="388" align="center">
+                                <%--<td width="467" height="388" align="center">
                                     <img src="../../image/logo.png"/>
-                                </td>
+                                </td>--%>
                                 <td width="511">
                                     <table width="393" border="0" align="center" cellpadding="9" cellspacing="0" class="logintable">
                                         <tr>

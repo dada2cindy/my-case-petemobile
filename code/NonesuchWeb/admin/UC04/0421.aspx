@@ -8,15 +8,15 @@
             <fieldset class="fieldset">
                 <asp:Panel ID="pnlContent" runat="server">
                     <h1>
-                        服務項目分類編輯</h1>
+                        庫存品名編輯</h1>
                     <table style="width: 100%" class="FormTable">
                         <tr>
                             <td>
-                                分類名稱
+                                品名
                             </td>
                             <td>
                                 <asp:TextBox ID="txtNodeName" runat="server" Width="300px"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="請輸入分類名稱"
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="請輸入品名"
                                     ControlToValidate="txtNodeName"></asp:RequiredFieldValidator>
                             </td>
                         </tr>
@@ -32,17 +32,17 @@
                                     ControlToValidate="txtSortNo" MaximumValue="1000000" MinimumValue="0" Type="Integer" Display="Dynamic"></asp:RangeValidator>
                             </td>
                         </tr>
-                        <tr>
+                        <%--<tr>
                             <td valign="top">
-                                分類簡介
+                                品名簡介
                             </td>
                             <td>
                                 <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Width="400px" Height="150px"></asp:TextBox>
                             </td>
-                        </tr>
+                        </tr>--%>
                         <tr>
                             <td colspan="2" height="30px" align="center">
-                                <asp:Button ID="btnAdd" runat="server" Text="新增分類" onclick="btnAdd_Click"  />
+                                <asp:Button ID="btnAdd" runat="server" Text="新增品名" onclick="btnAdd_Click"  />
                                 <asp:Button ID="btnSave" runat="server" Text="儲存修改" onclick="btnSave_Click"  />
                                 <asp:Button ID="btnCancel" runat="server" Text="取消" onclick="btnCancel_Click" CausesValidation="false" />
                                 <asp:Label ID="lblMsg" runat="server" Text="" ForeColor="Red" EnableViewState="false"></asp:Label>
@@ -71,7 +71,7 @@
                                         <%# Container.DataItemIndex + 1 %></ItemTemplate>
                                     <ItemStyle Width="5%" />
                                 </asp:TemplateField>
-                            <asp:TemplateField HeaderText="分類名稱">
+                            <asp:TemplateField HeaderText="品名">
                                 <ItemTemplate>
                                     <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                                 </ItemTemplate>
@@ -96,7 +96,7 @@
                             <asp:TemplateField HeaderText="刪除">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnDelete" runat="server" CommandArgument='<%# Eval("NodeId") %>'
-                                        CommandName="myDel" CausesValidation="False" Text="刪除" OnClientClick="return confirm('確認刪除此分類?')" />
+                                        CommandName="myDel" CausesValidation="False" Text="刪除" OnClientClick="return confirm('確認刪除此品名?')" />
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Center" Width="10%" />
                                 <HeaderStyle HorizontalAlign="Center" />
@@ -104,7 +104,7 @@
                         </Columns>
                         <EmptyDataTemplate>
                             <div align="left">
-                                請新增分類資料。</div>
+                                請新增品名資料。</div>
                         </EmptyDataTemplate>
                     </asp:GridView>
                 </fieldset></asp:Panel>

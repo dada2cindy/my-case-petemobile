@@ -69,7 +69,7 @@ public class WebMailService
                     sbMailList.Append(string.Format("{0};", contactor.Value));
                 }
 
-                string mailTitle = string.Format("收到一封由【{0}】從臻美美學診所網站發出的線上諮詢。", messageVO.CreateName);
+                string mailTitle = string.Format("收到一封由【{0}】從網站發出的線上諮詢。", messageVO.CreateName);
                 string mailContent = GenMailContent(messageVO);
 
                 mailService.SendMail(mailVO.SendEmail, sbMailList.ToString(), mailTitle, mailContent);
@@ -107,7 +107,7 @@ public class WebMailService
             SystemParamVO mailVO = m_SystemService.GetSystemParamByRoot();
             MailService mailService = new MailService(mailVO.MailSmtp, int.Parse(mailVO.MailPort), mailVO.EnableSSL, mailVO.Account, mailVO.Password);
 
-            string mailTitle = "收到一封從臻美美學診所網站的會員認證信。";
+            string mailTitle = "收到一封從網站的會員認證信。";
             string mailContent = GenMailContent(memberVO);
 
             mailService.SendMail(mailVO.SendEmail, memberVO.Email, mailTitle, mailContent);
