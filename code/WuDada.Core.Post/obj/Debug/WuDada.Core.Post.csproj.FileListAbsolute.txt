@@ -19,6 +19,5 @@ D:\我的case\小布\臻美診所\SVN上傳\trunk\code\lib\WuDada.Core.Post.pdb
 D:\我的case\小布\臻美診所\SVN上傳\trunk\code\WuDada.Core.Post\obj\Debug\WuDada.Core.Post.csprojResolveAssemblyReference.cache
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\lib\WuDada.Core.Post.dll
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\lib\WuDada.Core.Post.pdb
-D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\WuDada.Core.Post\obj\Debug\WuDada.Core.Post.csprojResolveAssemblyReference.cache
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\WuDada.Core.Post\obj\Debug\WuDada.Core.Post.dll
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\WuDada.Core.Post\obj\Debug\WuDada.Core.Post.pdb

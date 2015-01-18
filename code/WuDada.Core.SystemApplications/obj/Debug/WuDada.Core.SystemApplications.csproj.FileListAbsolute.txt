@@ -5,6 +5,5 @@ D:\我的case\小布\臻美診所\SVN上傳\trunk\code\WuDada.Core.SystemApplica
 D:\我的case\小布\臻美診所\SVN上傳\trunk\code\WuDada.Core.SystemApplications\obj\Debug\WuDada.Core.SystemApplications.pdb
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\lib\WuDada.Core.SystemApplications.dll
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\lib\WuDada.Core.SystemApplications.pdb
-D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\WuDada.Core.SystemApplications\obj\Debug\WuDada.Core.SystemApplications.csprojResolveAssemblyReference.cache
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\WuDada.Core.SystemApplications\obj\Debug\WuDada.Core.SystemApplications.dll
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\WuDada.Core.SystemApplications\obj\Debug\WuDada.Core.SystemApplications.pdb

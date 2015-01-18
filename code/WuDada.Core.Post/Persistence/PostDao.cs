@@ -46,6 +46,7 @@ namespace WuDada.Core.Post.Persistence
             DetachedCriteria dCriteria = DetachedCriteria.For<NodeVO>();
             dCriteria.CreateCriteria("ParentNode").Add(Expression.Eq("NodeId", parentId));
             dCriteria.AddOrder(Order.Asc("SortNo"));
+            dCriteria.AddOrder(Order.Asc("Name"));
 
             int count = NHibernateDao.CountByDetachedCriteria(dCriteria);
 
@@ -526,6 +527,8 @@ namespace WuDada.Core.Post.Persistence
             AppendPostParentPost(conditions, whereScript, param);
             AppendPostFlag(conditions, whereScript, param);
             AppendPostIsRecommend(conditions, whereScript, param);
+            AppendPostDate(conditions, whereScript, param);
+            AppendPostType(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -534,6 +537,39 @@ namespace WuDada.Core.Post.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendPostType(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("Type"))
+            {
+                whereScript.Append(" and p.Type = ? ");
+                param.Add(conditions["Type"]);
+            }
+        }
+
+        private void AppendPostDate(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("ShowDateStart"))
+            {
+                whereScript.Append(" and p.ShowDate >= ? ");
+                param.Add(Convert.ToDateTime(conditions["ShowDateStart"]));
+            }
+            if (conditions.IsContainsValue("ShowDateEnd"))
+            {
+                whereScript.Append(" and p.ShowDate <= ? ");
+                param.Add(Convert.ToDateTime(conditions["ShowDateEnd"]));
+            }
+            if (conditions.IsContainsValue("CloseDateStart"))
+            {
+                whereScript.Append(" and p.CloseDate >= ? ");
+                param.Add(Convert.ToDateTime(conditions["CloseDateStart"]));
+            }
+            if (conditions.IsContainsValue("CloseDateEnd"))
+            {
+                whereScript.Append(" and p.CloseDate <= ? ");
+                param.Add(Convert.ToDateTime(conditions["CloseDateEnd"]));
+            }
         }
 
         private void AppendPostIsRecommend(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
@@ -584,7 +620,8 @@ namespace WuDada.Core.Post.Persistence
         {
             if (conditions.IsContainsValue("KeyWord"))
             {
-                whereScript.Append(" and (p.Title like ? or p.HtmlContent like ? ) ");
+                whereScript.Append(" and (p.Title like ? or p.HtmlContent like ? or p.CustomField1 like ? ) ");
+                param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
             }

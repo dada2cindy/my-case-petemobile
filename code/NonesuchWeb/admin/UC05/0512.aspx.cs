@@ -7,6 +7,7 @@ using WuDada.Core.Post;
 using WuDada.Core.Post.Domain;
 using WuDada.Core.Post.Service;
 using WuDada.Core.SystemApplications.Domain;
+using System.Collections.Generic;
 
 public partial class admin_UC05_0512 : System.Web.UI.Page
 {
@@ -14,9 +15,8 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
     private PostFactory m_PostFactory;
     private IPostService m_PostService;
     private WebLogService m_WebLogService;
-
-    //臻美專欄NodeId=5
-    private int m_NodeId = 5;
+    
+    private int m_NodeId = 2;
 
     private int m_Mode
     {
@@ -49,30 +49,55 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         if (m_Mode == 0)
         {
             btnAdd.Visible = true;
-            btnSave.Visible = false;
+            btnSold.Visible = false;
+            btnDelete.Visible = false;
         }
         else
         {
             btnAdd.Visible = false;
-            btnSave.Visible = true;
+            btnSold.Visible = true;
+            btnDelete.Visible = true;
         }
     }
 
     private void fillGridView()
     {
         //搜尋條件
-        //DateTime? startDate = ConvertUtil.ToDateTimeMin(DateTime.Now);
+        Dictionary<string, string> conditions = new Dictionary<string, string>();
+        conditions.Add("Flag", "1");
+        conditions.Add("KeyWord", txtSearchKeyword.Text.Trim());
+        conditions.Add("Type", ddlSearchType.SelectedValue);
+        if (!string.IsNullOrEmpty(txtSearchShowDateStart.Text.Trim()))
+        {
+            conditions.Add("ShowDateStart", txtSearchShowDateStart.Text.Trim());
+        }
 
-        DateTime? startDate = null;
-        string sortField = "ShowDate";
-        bool sortDesc = true;
+        if (!string.IsNullOrEmpty(txtSearchShowDateEnd.Text.Trim()))
+        {
+            conditions.Add("ShowDateEnd", txtSearchShowDateEnd.Text.Trim());
+        }
+
+        if (!string.IsNullOrEmpty(txtSearchCloseDateStart.Text.Trim()))
+        {
+            conditions.Add("CloseDateStart", txtSearchCloseDateStart.Text.Trim());
+        }
+
+        if (!string.IsNullOrEmpty(txtSearchCloseDateEnd.Text.Trim()))
+        {
+            conditions.Add("CloseDateEnd", txtSearchCloseDateEnd.Text.Trim());
+        }
+        
 
         //分頁
-        AspNetPager1.RecordCount = m_PostService.CountPostListByNodeId(m_NodeId, false, startDate);
+        AspNetPager1.RecordCount = m_PostService.GetPostCount(conditions);
+        lblTotalCount.Text = string.Format("共查出 {0} 筆資料", AspNetPager1.RecordCount.ToString());
         int pageIndex = (AspNetPager1.CurrentPageIndex - 1);
         int pageSize = AspNetPager1.PageSize;
+        conditions.Add("PageIndex", pageIndex.ToString());
+        conditions.Add("PageSize", pageSize.ToString());
+        conditions.Add("Order", "order by p.CloseDate desc, p.ShowDate desc, p.Title");
 
-        gvList.DataSource = m_PostService.GetPostListByNodeId(m_NodeId, false, startDate, pageIndex, pageSize, sortField, sortDesc);
+        gvList.DataSource = m_PostService.GetPostList(conditions);
         gvList.DataBind();
     }
 
@@ -84,24 +109,17 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
     protected void btnAdd_Click(object sender, EventArgs e)
     {
         PostVO postVO = new PostVO();
-        postVO.Title = txtTitle.Text.Trim();
-        postVO.SortNo = int.Parse(txtSortNo.Text.Trim());
+        UIHelper.FillVO(pnlContent, postVO);
         postVO.Node = m_PostService.GetNodeById(m_NodeId);
-        postVO.HtmlContent = ckeContent.value;
-        postVO.PicFileName = m_PicFileName;
-        postVO.Flag = int.Parse(ddlFlag.SelectedValue);
-        if (!string.IsNullOrEmpty(txtShowDate.Text.Trim()))
-        {
-            postVO.ShowDate = DateTime.Parse(txtShowDate.Text.Trim());
-        }
-        //postVO.LinkUrl = txtLinkUrl.Text.Trim();
-        //if (!string.IsNullOrEmpty(txtLinkUrl.Text.Trim()))
+        //postVO.PicFileName = m_PicFileName;
+        postVO.Flag = 1;
+        //if (!string.IsNullOrEmpty(txtShowDate.Text.Trim()))
         //{
-        //    postVO.Type = 1;
+        //    postVO.ShowDate = DateTime.Parse(txtShowDate.Text.Trim());
         //}
-        //else
+        //if (!string.IsNullOrEmpty(txtCloseDate.Text.Trim()))
         //{
-        //    postVO.Type = 0;
+        //    postVO.ShowDate = DateTime.Parse(txtCloseDate.Text.Trim());
         //}
         m_PostService.CreatePost(postVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.新增, postVO);
@@ -109,25 +127,38 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         fillGridView();
     }
 
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        PostVO postVO = m_PostService.GetPostById(m_Mode);
+        postVO.Flag = 0;
+        m_PostService.UpdatePost(postVO);
+        m_WebLogService.AddSystemLog(MsgVO.Action.刪除, postVO, "", string.Format("單號:{0}", postVO.PostId));
+        ClearUI();
+        fillGridView();
+    }
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        fillGridView();
+    }
+
     private void ClearUI()
     {
         m_Mode = 0;
-        m_PicFileName = string.Empty;
-        ltlImg.Text = string.Empty;
-        txtTitle.Text = string.Empty;
-        txtSortNo.Text = string.Empty;
-        ckeContent.value = string.Empty;
-        ddlFlag.SelectedValue = string.Empty;
-        txtShowDate.Text = string.Empty;
-        //txtLinkUrl.Text = string.Empty;
+        //m_PicFileName = string.Empty;
+        //ltlImg.Text = string.Empty;
+        UIHelper.ClearUI(pnlContent);
         pnlContent.Visible = false;
         btnShowAdd.Enabled = true;
+        rfClodeDate.Visible = false;
+        rfCustomField2.Visible = false;
+        rfSellPrice.Visible = false;        
     }
 
-    private string GetPic(string fileName)
-    {
-        return "<img src='../../upload/" + fileName + "' width='145' height='108' border='0'>";
-    }
+    //private string GetPic(string fileName)
+    //{
+    //    return "<img src='../../upload/" + fileName + "' width='145' height='108' border='0'>";
+    //}
 
     protected void gvList_RowCommand1(object sender, GridViewCommandEventArgs e)
     {
@@ -139,27 +170,23 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             case "myModify":
                 ClearUI();
                 m_Mode = postId;
-                m_PicFileName = postVO.PicFileName;
-                ltlImg.Text = GetPic(m_PicFileName);
-                txtTitle.Text = postVO.Title;
-                txtSortNo.Text = postVO.SortNo.ToString();
-                ckeContent.value = postVO.HtmlContent;
-                ddlFlag.SelectedValue = postVO.Flag.ToString();
-                if (postVO.ShowDate != null)
-                {
-                    txtShowDate.Text = postVO.ShowDate.Value.ToShortDateString();
-                }
-                //if (postVO.Type == 1)
-                //{
-                //    txtLinkUrl.Text = postVO.LinkUrl;
-                //}
+                UIHelper.FillUI(pnlContent, postVO);
                 ShowMode();
+                if (postVO.Type == 1)
+                {
+                    btnSold.Visible = false;
+                }
                 pnlContent.Visible = true;
+                rfClodeDate.Visible = true;
+                rfCustomField2.Visible = true;
+                rfSellPrice.Visible = true;
+                txtTitle.Enabled = false;
                 break;
-            case "myDel":
-                m_PostService.DeletePost(postVO);
-                m_WebLogService.AddSystemLog(MsgVO.Action.刪除, postVO);
-                break;
+            //case "myDel":
+            //    postVO.Flag = 0;
+            //    m_PostService.UpdatePost(postVO);
+            //    m_WebLogService.AddSystemLog(MsgVO.Action.刪除, postVO, "", string.Format("單號:{0}", postVO.PostId));
+            //    break;
 
             default:
                 break;
@@ -173,32 +200,15 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         ShowMode();
     }
 
-    protected void btnSave_Click(object sender, EventArgs e)
+    protected void btnSold_Click(object sender, EventArgs e)
     {
         try
         {
             PostVO postVO = m_PostService.GetPostById(m_Mode);
-            postVO.Title = txtTitle.Text.Trim();
-            postVO.SortNo = int.Parse(txtSortNo.Text.Trim());
-            postVO.Node = m_PostService.GetNodeById(m_NodeId);
-            postVO.HtmlContent = ckeContent.value;
-            postVO.PicFileName = m_PicFileName;
-            postVO.Flag = int.Parse(ddlFlag.SelectedValue);
-            if (!string.IsNullOrEmpty(txtShowDate.Text.Trim()))
-            {
-                postVO.ShowDate = DateTime.Parse(txtShowDate.Text.Trim());
-            }
-            //postVO.LinkUrl = txtLinkUrl.Text.Trim();
-            //if (!string.IsNullOrEmpty(txtLinkUrl.Text.Trim()))
-            //{
-            //    postVO.Type = 1;
-            //}
-            //else
-            //{
-            //    postVO.Type = 0;
-            //}
+            UIHelper.FillVO(pnlContent, postVO);
+            postVO.Type = 1;
             m_PostService.UpdatePost(postVO);
-            m_WebLogService.AddSystemLog(MsgVO.Action.修改, postVO);
+            m_WebLogService.AddSystemLog(MsgVO.Action.售出, postVO, "", string.Format("單號:{0}", postVO.PostId));
             fillGridView();
             ClearUI();
             ShowMode();
@@ -235,32 +245,32 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         fillGridView();
     }
 
-    protected void btnUpliad_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            HttpFileCollection hfc = Request.Files;
-            for (int i = 0; i < hfc.Count; i++)
-            {
-                HttpPostedFile hpf = hfc[i];
-                if (hpf.ContentLength > 0)
-                {
-                    string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + System.IO.Path.GetFileName(hpf.FileName);
-                    hpf.SaveAs(Server.MapPath("~\\") + "\\upload\\" + fileName);
-                    ltlImg.Text = GetPic(fileName);
-                    m_PicFileName = fileName;
-                }
-                else
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("請點選您要上傳的照片!"), false);
-                    return;
-                }
-            }
-        }
-        catch
-        {
-            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("檔案傳輸錯誤!"), false);
-            return;
-        }
-    }
+    //protected void btnUpliad_Click(object sender, EventArgs e)
+    //{
+    //    try
+    //    {
+    //        HttpFileCollection hfc = Request.Files;
+    //        for (int i = 0; i < hfc.Count; i++)
+    //        {
+    //            HttpPostedFile hpf = hfc[i];
+    //            if (hpf.ContentLength > 0)
+    //            {
+    //                string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + System.IO.Path.GetFileName(hpf.FileName);
+    //                hpf.SaveAs(Server.MapPath("~\\") + "\\upload\\" + fileName);
+    //                ltlImg.Text = GetPic(fileName);
+    //                m_PicFileName = fileName;
+    //            }
+    //            else
+    //            {
+    //                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("請點選您要上傳的照片!"), false);
+    //                return;
+    //            }
+    //        }
+    //    }
+    //    catch
+    //    {
+    //        ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("檔案傳輸錯誤!"), false);
+    //        return;
+    //    }
+    //}
 }

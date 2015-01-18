@@ -9,61 +9,100 @@
     <asp:Panel ID="pnlContent" runat="server">
         <fieldset class="fieldset">
             <h1>
-                臻美專欄編輯</h1>
-            <table style="width: 100%" class="FormTable">                
+                庫存編輯</h1>
+            <table style="width: 100%" class="FormTable">
                 <tr>
                     <td>
-                        文章標題
+                        類別
                     </td>
                     <td>
-                        <asp:TextBox ID="txtTitle" runat="server" Width="700px"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="請輸入名稱"
-                            ControlToValidate="txtTitle"></asp:RequiredFieldValidator>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        上架
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="ddlFlag" runat="server">
-                            <asp:ListItem Text="請選擇" Value=""></asp:ListItem>
-                            <asp:ListItem Text="是" Value="1"></asp:ListItem>
-                            <asp:ListItem Text="否" Value="0"></asp:ListItem>
+                        <asp:DropDownList ID="ddlTypeList" runat="server">
                         </asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="請選擇是否上架"
-                            ControlToValidate="ddlFlag"></asp:RequiredFieldValidator>
+                        <asp:TextBox ID="txtCustomField1" runat="server" Width="700px"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="請輸入類別"
+                            ControlToValidate="txtCustomField1" ValidationGroup="Save"></asp:RequiredFieldValidator>
                     </td>
-                </tr>
+                </tr>                                
                 <tr>
                     <td>
-                        日期
+                        進貨日
                     </td>
                     <td>
                         <asp:TextBox ID="txtShowDate" runat="server" Width="100px"></asp:TextBox>
                         <cc1:CalendarExtender ID="CalendarExtender1" runat="server" CssClass="MyCalendar"
-                            PopupPosition="TopLeft" Format="yyyy/MM/dd" PopupButtonID="butDay1" TargetControlID="txtShowDate" />
-                        <asp:Image ID="butDay1" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />
+                            PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="calendar1" TargetControlID="txtShowDate" />
+                        <asp:Image ID="calendar1" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtShowDate"
-                            ErrorMessage="請輸入日期" Display="Dynamic"></asp:RequiredFieldValidator>
+                            ErrorMessage="請輸入進貨日" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="日期格式錯誤"
-                            ControlToValidate="txtShowDate" Display="Dynamic" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
+                            ControlToValidate="txtShowDate" Display="Dynamic" ValidationGroup="Save" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        排序編號
+                        銷貨日
                     </td>
                     <td>
-                        <asp:TextBox ID="txtSortNo" runat="server" Width="100px"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="請輸入排序編號(數字)"
-                                    ControlToValidate="txtSortNo" Display="Dynamic"></asp:RequiredFieldValidator>
-                        <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="請輸入排序編號(數字)"
-                            ControlToValidate="txtSortNo" MaximumValue="1000000" MinimumValue="0" Type="Integer"
-                            Display="Dynamic"></asp:RangeValidator>
+                        <asp:TextBox ID="txtCloseDate" runat="server" Width="100px"></asp:TextBox>
+                        <cc1:CalendarExtender ID="CalendarExtender2" runat="server" CssClass="MyCalendar"
+                            PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="calendar2" TargetControlID="txtCloseDate" />
+                        <asp:Image ID="calendar2" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />
+                        <asp:RequiredFieldValidator ID="rfClodeDate" runat="server" ControlToValidate="txtCloseDate"
+                            ErrorMessage="請輸入銷貨日" Display="Dynamic" Visible="false" ValidationGroup="Save"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="日期格式錯誤"
+                            ControlToValidate="txtCloseDate" Display="Dynamic" ValidationGroup="Save" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        品名
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlProductList" runat="server">
+                        </asp:DropDownList>
+                        <asp:TextBox ID="txtTitle" runat="server" Width="700px"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="請輸入品名"
+                            ControlToValidate="txtTitle" ValidationGroup="Save"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        進貨價
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtPrice" runat="server" Width="100px"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="請輸入進貨價"
+                                    ControlToValidate="txtPrice" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
+                        <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="進貨價請輸入大於1的整數"
+                            ControlToValidate="txtPrice" MaximumValue="1000000" MinimumValue="1" Type="Integer"
+                            Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        售價
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtSellPrice" runat="server" Width="100px"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rfSellPrice" runat="server" ErrorMessage="請輸入售價"
+                                    ControlToValidate="txtSellPrice" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>
+                        <asp:RangeValidator ID="RangeValidator2" runat="server" ErrorMessage="售價請輸入大於1的整數"
+                            ControlToValidate="txtSellPrice" MaximumValue="1000000" MinimumValue="1" Type="Integer"
+                            Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        銷售員
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlCustomField2" runat="server">
+                        </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="rfCustomField2" runat="server" ErrorMessage="請選擇銷售員"
+                            ControlToValidate="ddlCustomField2" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <%--<tr>
                     <td valign="top">
                         圖片
                     </td>
@@ -86,19 +125,20 @@
                             </tr>
                         </table>
                     </td>
-                </tr>
-                <tr>
+                </tr>--%>
+                <%--<tr>
                     <td valign="top">
                         內容
                     </td>
                     <td>
                         <uc1:CKEditor ID="ckeContent" runat="server" />
                     </td>
-                </tr>
+                </tr>--%>
                 <tr>
                     <td colspan="2" height="30px" align="center">
-                        <asp:Button ID="btnAdd" runat="server" Text="確定新增" OnClick="btnAdd_Click" />
-                        <asp:Button ID="btnSave" runat="server" Text="儲存修改" OnClick="btnSave_Click" />
+                        <asp:Button ID="btnAdd" runat="server" Text="確定新增" ValidationGroup="Save" OnClick="btnAdd_Click" />
+                        <asp:Button ID="btnSold" runat="server" Text="售出" ValidationGroup="Save" OnClick="btnSold_Click" />
+                        <asp:Button ID="btnDelete" runat="server" Text="刪除" OnClick="btnDelete_Click" OnClientClick="return confirm('確認刪除?')" />
                         <asp:Button ID="btnCancel" runat="server" Text="取消" OnClick="btnCancel_Click" CausesValidation="false" />
                         <asp:Label ID="lblMsg" runat="server" Text="" ForeColor="Red" EnableViewState="false"></asp:Label>
                     </td>
@@ -107,16 +147,60 @@
         </fieldset>
     </asp:Panel>
     <br />
-    <asp:Panel ID="pnlGv" runat="server">
+    <asp:Panel ID="pnlGv" runat="server" DefaultButton="btnSearch">
         <fieldset class="fieldset">
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr>
                     <td align="left">
-                        <asp:Button ID="btnShowAdd" runat="server" Text="新增文章" OnClick="btnShowAdd_Click" />
+                    <br />
+                        關鍵字:
+                        <asp:TextBox ID="txtSearchKeyword" runat="server"></asp:TextBox>
+                        &nbsp;&nbsp;&nbsp;
+                        狀態: 
+                        <asp:DropDownList ID="ddlSearchType" runat="server">
+                            <asp:ListItem Text="全部" Value=""></asp:ListItem>
+                            <asp:ListItem Text="庫存" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="售出" Value="1"></asp:ListItem>
+                        </asp:DropDownList>
+                        <br />
+                        進貨日:
+                        <asp:TextBox ID="txtSearchShowDateStart" runat="server"></asp:TextBox>  
+                        <cc1:CalendarExtender ID="CalendarExtender3" runat="server" CssClass="MyCalendar"
+                            PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="searchCalendar1" TargetControlID="txtSearchShowDateStart" />
+                        <asp:Image ID="searchCalendar1" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />                        
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="日期格式錯誤"
+                            ControlToValidate="txtSearchShowDateStart" Display="Dynamic" ValidationGroup="Search" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
+                        ~                        
+                        <asp:TextBox ID="txtSearchShowDateEnd" runat="server"></asp:TextBox> 
+                        <cc1:CalendarExtender ID="CalendarExtender4" runat="server" CssClass="MyCalendar"
+                            PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="searchCalendar2" TargetControlID="txtSearchShowDateEnd" />
+                        <asp:Image ID="searchCalendar2" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />                        
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="日期格式錯誤"
+                            ControlToValidate="txtSearchShowDateEnd" Display="Dynamic" ValidationGroup="Search" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
+                            <br />
+                        銷貨日:
+                        <asp:TextBox ID="txtSearchCloseDateStart" runat="server"></asp:TextBox>  
+                        <cc1:CalendarExtender ID="CalendarExtender5" runat="server" CssClass="MyCalendar"
+                            PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="searchCalendar3" TargetControlID="txtSearchCloseDateStart" />
+                        <asp:Image ID="searchCalendar3" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />                        
+                         <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ErrorMessage="日期格式錯誤"
+                            ControlToValidate="txtSearchCloseDateStart" Display="Dynamic" ValidationGroup="Search" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
+                        ~                       
+                        <asp:TextBox ID="txtSearchCloseDateEnd" runat="server"></asp:TextBox> 
+                        <cc1:CalendarExtender ID="CalendarExtender6" runat="server" CssClass="MyCalendar"
+                            PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="searchCalendar4" TargetControlID="txtSearchCloseDateEnd" />
+                        <asp:Image ID="searchCalendar4" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />                        
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="日期格式錯誤"
+                            ControlToValidate="txtSearchCloseDateEnd" Display="Dynamic" ValidationGroup="Search" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
+                        <br /><br />
+                        <asp:Button ID="btnSearch" runat="server" Text="查詢" OnClick="btnSearch_Click" ValidationGroup="Search" />
+                        &nbsp;&nbsp;&nbsp;
+                        <asp:Button ID="btnShowAdd" runat="server" Text="新增庫存" OnClick="btnShowAdd_Click" />
+                        <br />
+                        <br />
+                        <asp:Label ID="lblTotalCount" runat="server" Text="" ForeColor="Blue"></asp:Label>
                     </td>
-                    <td align="right" class="labelText">
-                      <%--  分類搜尋:<asp:DropDownList ID="ddlSelect" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSelect_SelectedIndexChanged">
-                        </asp:DropDownList>--%>
+                    <td align="right" class="labelText">                        
                     </td>
                 </tr>
             </table>
@@ -131,56 +215,79 @@
                 <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
                 <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
                 <AlternatingRowStyle BackColor="White" />
-                <Columns>
-                    <asp:TemplateField HeaderText="No.">
+                <Columns>                    
+                    <asp:TemplateField HeaderText="品名">
                         <ItemTemplate>
-                            <%# Container.DataItemIndex + 1 %></ItemTemplate>
-                        <ItemStyle Width="5%" />
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="文章標題">
-                        <ItemTemplate>
-                            <asp:Label ID="lblName" runat="server" Text='<%# Bind("Title") %>'></asp:Label>
+                            <asp:Label ID="lblTitle" runat="server" Text='<%# Bind("Title") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Left" Width="45%" />
+                        <ItemStyle HorizontalAlign="Left" Width="300" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="排序">
+                    <asp:TemplateField HeaderText="類別">
                         <ItemTemplate>
-                            <asp:Label ID="lblSort" runat="server" Text='<%# Bind("SortNo") %>'></asp:Label>
+                            <asp:Label ID="lblCustomField1" runat="server" Text='<%# Bind("CustomField1") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Center" Width="10%" />
+                        <ItemStyle HorizontalAlign="Left" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="上架">
+                    <asp:TemplateField HeaderText="狀態">
                         <ItemTemplate>
-                            <asp:Label ID="lblGetStr_Flag" runat="server" Text='<%# Bind("GetStr_Flag") %>'></asp:Label>
+                            <asp:Label ID="lblGetStr_Flag" runat="server" Text='<%# Bind("GetStr_Type") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Center" Width="10%" />
+                        <ItemStyle HorizontalAlign="Center" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="日期">
+                    <asp:TemplateField HeaderText="進貨日">
                         <ItemTemplate>
                             <asp:Label ID="lblShowDate" runat="server" Text='<%# Eval("ShowDate","{0:yyyy-MM-dd}") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Left" Width="10%" />
+                        <ItemStyle HorizontalAlign="Left" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="修改">
+                    <asp:TemplateField HeaderText="銷貨日">
+                        <ItemTemplate>
+                            <asp:Label ID="lblCloseDate" runat="server" Text='<%# Eval("CloseDate","{0:yyyy-MM-dd}") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Left" Width="150" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>                    
+                    <asp:TemplateField HeaderText="進貨價">
+                        <ItemTemplate>
+                            <asp:Label ID="lblPrice" runat="server" Text='<%# Bind("Price") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Left" Width="150" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="售價">
+                        <ItemTemplate>
+                            <asp:Label ID="lblSellPrice" runat="server" Text='<%# Bind("SellPrice") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Left" Width="150" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="銷售員">
+                        <ItemTemplate>
+                            <asp:Label ID="lblCustomField2" runat="server" Text='<%# Bind("CustomField2") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Left" Width="100" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="查看">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnModify" runat="server" CommandArgument='<%# Eval("PostId") %>'
-                                Text="修改" CommandName="myModify" CausesValidation="False" />
+                                Text="查看" CommandName="myModify" CausesValidation="False" />
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Center" Width="10%" />
+                        <ItemStyle HorizontalAlign="Center" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="刪除">
+                    <%--<asp:TemplateField HeaderText="刪除">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnDelete" runat="server" CommandArgument='<%# Eval("PostId") %>'
-                                CommandName="myDel" CausesValidation="False" Text="刪除" OnClientClick="return confirm('確認刪除此文章?')" />
+                                CommandName="myDel" CausesValidation="False" Text="刪除" OnClientClick="return confirm('確認刪除此庫存?')" />
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" Width="10%" />
                         <HeaderStyle HorizontalAlign="Center" />
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
                 </Columns>
                 <EmptyDataTemplate>
                     <div align="left">

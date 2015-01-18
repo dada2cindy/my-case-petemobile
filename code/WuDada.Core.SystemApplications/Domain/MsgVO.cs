@@ -44,7 +44,8 @@ namespace WuDada.Core.SystemApplications.Domain
             修改,
             查詢,
             執行,
-            新增或修改
+            新增或修改,
+            售出
         }
 
         public enum LogTitleName

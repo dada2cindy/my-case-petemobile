@@ -726,7 +726,20 @@ public class UIHelper
                 }
                 else
                 {
-                    ow.SetPropertyValue(fieldName, null);
+                    if (propertyType == typeof(Double))
+                    {
+
+                        ow.SetPropertyValue(fieldName, default(Double));
+                    }
+                    else if (propertyType == typeof(int))
+                    {
+
+                        ow.SetPropertyValue(fieldName, default(int));
+                    }
+                    else
+                    {
+                        ow.SetPropertyValue(fieldName, null);
+                    }
                 }
             }
         }

@@ -102,7 +102,7 @@ namespace WuDada.Core.Post.Domain
         public virtual DateTime? CloseDate { get; set; }
 
         /// <summary>
-        /// 0.站內 1.連結
+        /// 0.站內/庫存 1.連結/售出
         /// </summary>
         [DataMember]
         public virtual int Type { get; set; }
@@ -153,13 +153,13 @@ namespace WuDada.Core.Post.Domain
         /// 價格/進貨價
         /// </summary>
         [DataMember]
-        public virtual double Price { get; set; }
+        public virtual double? Price { get; set; }
 
         /// <summary>
         /// 價格/售價
         /// </summary>
         [DataMember]
-        public virtual double SellPrice { get; set; }
+        public virtual double? SellPrice { get; set; }
 
         /// <summary>
         /// 是否為暫存
@@ -198,6 +198,29 @@ namespace WuDada.Core.Post.Domain
                 else if (Flag == 1)
                 {
                     result = "是";
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 取文字_庫存出售
+        /// </summary>
+        [DataMember]
+        public virtual string GetStr_Type
+        {
+            get
+            {
+                string result = "";
+
+                if (Type == 0)
+                {
+                    result = "庫存";
+                }
+                else if (Type == 1)
+                {
+                    result = "售出";
                 }
 
                 return result;
