@@ -8,6 +8,7 @@ using WuDada.Core.Post.Domain;
 using WuDada.Core.Post.Service;
 using WuDada.Core.SystemApplications.Domain;
 using System.Collections.Generic;
+using System.Data;
 
 public partial class admin_UC05_0512 : System.Web.UI.Page
 {
@@ -91,6 +92,14 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         //分頁
         AspNetPager1.RecordCount = m_PostService.GetPostCount(conditions);
         lblTotalCount.Text = string.Format("共查出 {0} 筆資料", AspNetPager1.RecordCount.ToString());
+        if (AspNetPager1.RecordCount > 0)
+        {
+            btnSearchExport.Visible = true;
+        }
+        else
+        {
+            btnSearchExport.Visible = false;
+        }
         int pageIndex = (AspNetPager1.CurrentPageIndex - 1);
         int pageSize = AspNetPager1.PageSize;
         conditions.Add("PageIndex", pageIndex.ToString());
@@ -140,6 +149,69 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         fillGridView();
+    }
+
+    protected void btnSearchExport_Click(object sender, EventArgs e)
+    {
+        //搜尋條件
+        Dictionary<string, string> conditions = new Dictionary<string, string>();
+        conditions.Add("Flag", "1");
+        conditions.Add("KeyWord", txtSearchKeyword.Text.Trim());
+        conditions.Add("Type", ddlSearchType.SelectedValue);
+        if (!string.IsNullOrEmpty(txtSearchShowDateStart.Text.Trim()))
+        {
+            conditions.Add("ShowDateStart", txtSearchShowDateStart.Text.Trim());
+        }
+
+        if (!string.IsNullOrEmpty(txtSearchShowDateEnd.Text.Trim()))
+        {
+            conditions.Add("ShowDateEnd", txtSearchShowDateEnd.Text.Trim());
+        }
+
+        if (!string.IsNullOrEmpty(txtSearchCloseDateStart.Text.Trim()))
+        {
+            conditions.Add("CloseDateStart", txtSearchCloseDateStart.Text.Trim());
+        }
+
+        if (!string.IsNullOrEmpty(txtSearchCloseDateEnd.Text.Trim()))
+        {
+            conditions.Add("CloseDateEnd", txtSearchCloseDateEnd.Text.Trim());
+        }
+        conditions.Add("Order", "order by p.CloseDate desc, p.ShowDate desc, p.Title");
+
+        IList<PostVO> postList = m_PostService.GetPostList(conditions);
+        DataTable table = new DataTable();
+        table.Columns.Add("類別", typeof(string));
+        table.Columns.Add("狀態", typeof(string));
+        table.Columns.Add("進貨日", typeof(string));
+        table.Columns.Add("銷貨日", typeof(string));
+        table.Columns.Add("品名", typeof(string));
+        table.Columns.Add("進貨價", typeof(string));
+        table.Columns.Add("售價", typeof(string));
+        table.Columns.Add("銷售員", typeof(string));
+
+        if (postList != null && postList.Count > 0)
+        {
+            foreach (PostVO postVO in postList)
+            {
+                DataRow dr = table.NewRow();
+
+                string showDate = postVO.ShowDate.HasValue ? postVO.ShowDate.Value.ToString("yyyy/MM/dd") : "";
+                string closeDate = postVO.CloseDate.HasValue ? postVO.CloseDate.Value.ToString("yyyy/MM/dd") : "";
+
+                dr[0] = postVO.CustomField1;
+                dr[1] = postVO.GetStr_Type;
+                dr[2] = showDate;
+                dr[3] = closeDate;
+                dr[4] = postVO.Title;
+                dr[5] = postVO.Price;
+                dr[6] = postVO.SellPrice;
+                dr[7] = postVO.CustomField2;
+                table.Rows.Add(dr);                
+            }
+        }
+
+        NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}庫存.xls",DateTime.Today.ToString("yyyyMMdd")));
     }
 
     private void ClearUI()

@@ -195,6 +195,8 @@
                         <br /><br />
                         <asp:Button ID="btnSearch" runat="server" Text="查詢" OnClick="btnSearch_Click" ValidationGroup="Search" />
                         &nbsp;&nbsp;&nbsp;
+                        <asp:Button ID="btnSearchExport" runat="server" Text="查詢結果匯出" OnClick="btnSearchExport_Click" ValidationGroup="Search" />
+                        &nbsp;&nbsp;&nbsp;
                         <asp:Button ID="btnShowAdd" runat="server" Text="新增庫存" OnClick="btnShowAdd_Click" />
                         <br />
                         <br />
