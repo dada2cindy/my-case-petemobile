@@ -29,7 +29,6 @@ D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\WuDada.Core.Member\bin
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\WuDada.Core.Member\bin\Debug\Spring.Data.NHibernate32.dll
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\WuDada.Core.Member\bin\Debug\WuDada.Core.dll
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\WuDada.Core.Member\bin\Debug\WuDada.Core.pdb
-D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\WuDada.Core.Member\obj\Debug\WuDada.Core.Member.csprojResolveAssemblyReference.cache
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\WuDada.Core.Member\obj\Debug\WuDada.Core.Member.dll
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\WuDada.Core.Member\obj\Debug\WuDada.Core.Member.pdb
 D:\我的case\小布\小炫通訊行\SVN上傳\trunk\code\lib\WuDada.Core.Member.dll

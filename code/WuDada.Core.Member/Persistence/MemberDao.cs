@@ -96,6 +96,7 @@ namespace WuDada.Core.Member.Persistence
             AppendMemberUserConfirm(conditions, whereScript, param);
             AppendMemberSex(conditions, whereScript, param);
             AppendMemberCreateDate(conditions, whereScript, param);
+            AppendMemberDate(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -104,6 +105,30 @@ namespace WuDada.Core.Member.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendMemberDate(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("ApplyDateStart"))
+            {
+                whereScript.Append(" and p.ApplyDate >= ? ");
+                param.Add(Convert.ToDateTime(conditions["ApplyDateStart"]));
+            }
+            if (conditions.IsContainsValue("ApplyDateEnd"))
+            {
+                whereScript.Append(" and p.ApplyDate <= ? ");
+                param.Add(Convert.ToDateTime(conditions["ApplyDateEnd"]));
+            }
+            if (conditions.IsContainsValue("DueDateStart"))
+            {
+                whereScript.Append(" and p.DueDate >= ? ");
+                param.Add(Convert.ToDateTime(conditions["DueDateStart"]));
+            }
+            if (conditions.IsContainsValue("DueDateEnd"))
+            {
+                whereScript.Append(" and p.DueDate <= ? ");
+                param.Add(Convert.ToDateTime(conditions["DueDateEnd"]));
+            }
         }
 
         private string AppendMemberOrder(IDictionary<string, string> conditions)
