@@ -9,12 +9,17 @@ using WuDada.Core.Post.Service;
 using WuDada.Core.SystemApplications.Domain;
 using System.Collections.Generic;
 using System.Data;
+using WuDada.Core.Auth;
+using WuDada.Core.Auth.Service;
+using WuDada.Core.Auth.Domain;
 
 public partial class admin_UC05_0512 : System.Web.UI.Page
 {
     private ILog m_Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
     private PostFactory m_PostFactory;
     private IPostService m_PostService;
+    private AuthFactory m_AuthFactory;
+    private IAuthService m_AuthService;
     private WebLogService m_WebLogService;
     
     private int m_NodeId = 2;
@@ -34,6 +39,8 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
     {
         m_WebLogService = new WebLogService();
         m_PostFactory = new PostFactory();
+        m_AuthFactory = new AuthFactory();
+        m_AuthService = m_AuthFactory.GetAuthService();
         m_PostService = m_PostFactory.GetPostService();
 
         if (!IsPostBack)
@@ -253,6 +260,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
                 rfCustomField2.Visible = true;
                 rfSellPrice.Visible = true;
                 txtTitle.Enabled = false;
+                ddlProductList.Visible = false;
                 break;
             //case "myDel":
             //    postVO.Flag = 0;
@@ -310,6 +318,72 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         ShowMode();
         pnlContent.Visible = true;
         btnShowAdd.Enabled = false;
+        ////帶入類別
+        IList<NodeVO> typeList = m_PostService.GetNodeListByParentId(3);
+        ddlTypeList.Items.Clear();
+        if (typeList != null && typeList.Count > 0)
+        {
+            ddlTypeList.Items.Add(new ListItem("自訂", ""));
+            txtCustomField1.Visible = true;
+            foreach (NodeVO node in typeList)
+            {
+                ddlTypeList.Items.Add(node.Name);
+            }
+        }
+
+        ////帶入品名
+        IList<NodeVO> productList = m_PostService.GetNodeListByParentId(6);
+        ddlProductList.Visible = true;
+        ddlProductList.Items.Clear();
+        if (productList != null && productList.Count > 0)
+        {
+            ddlProductList.Items.Add(new ListItem("自訂", ""));
+            txtTitle.Visible = true;
+            foreach (NodeVO node in productList)
+            {
+                ddlProductList.Items.Add(node.Name);
+            }
+        }
+
+        //帶入銷售員
+        IList<LoginUserVO> userList = m_AuthService.GetLoginUserList("1=1 ORDER BY ArrivedDate");
+        ddlCustomField2.Items.Clear();
+        if (userList != null && userList.Count > 0)
+        {
+            ddlCustomField2.Items.Add(new ListItem("請選擇銷售員", ""));
+            foreach (LoginUserVO loginUserVO in userList)
+            {
+                ddlCustomField2.Items.Add(loginUserVO.FullNameInChinese);
+            }
+        }
+    }
+
+    protected void ddlProductList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (string.IsNullOrEmpty(ddlProductList.SelectedValue))
+        {
+            txtTitle.Text = string.Empty;
+            txtTitle.Visible = true;
+        }
+        else
+        {
+            txtTitle.Text = ddlProductList.SelectedValue;
+            txtTitle.Visible = false;
+        }
+    }
+
+    protected void ddlTypeList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (string.IsNullOrEmpty(ddlTypeList.SelectedValue))
+        {
+            txtCustomField1.Text = string.Empty;
+            txtCustomField1.Visible = true;
+        }
+        else
+        {
+            txtCustomField1.Text = ddlTypeList.SelectedValue;
+            txtCustomField1.Visible = false;
+        }
     }
 
     protected void ddlSelect_SelectedIndexChanged(object sender, EventArgs e)
@@ -344,5 +418,5 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
     //        ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("檔案傳輸錯誤!"), false);
     //        return;
     //    }
-    //}
+    //}        
 }

@@ -12,13 +12,14 @@
                 庫存編輯</h1>
             <table style="width: 100%" class="FormTable">
                 <tr>
-                    <td>
+                    <td width="40px">
                         類別
                     </td>
-                    <td>
-                        <asp:DropDownList ID="ddlTypeList" runat="server">
+                    <td width="900px">
+                        <asp:DropDownList ID="ddlTypeList" runat="server" AutoPostBack="True" 
+                            onselectedindexchanged="ddlTypeList_SelectedIndexChanged">
                         </asp:DropDownList>
-                        <asp:TextBox ID="txtCustomField1" runat="server" Width="700px"></asp:TextBox>
+                        <asp:TextBox ID="txtCustomField1" runat="server" Width="300px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="請輸入類別"
                             ControlToValidate="txtCustomField1" ValidationGroup="Save"></asp:RequiredFieldValidator>
                     </td>
@@ -58,9 +59,10 @@
                         品名
                     </td>
                     <td>
-                        <asp:DropDownList ID="ddlProductList" runat="server">
+                        <asp:DropDownList ID="ddlProductList" runat="server" AutoPostBack="True" 
+                            onselectedindexchanged="ddlProductList_SelectedIndexChanged">
                         </asp:DropDownList>
-                        <asp:TextBox ID="txtTitle" runat="server" Width="700px"></asp:TextBox>
+                        <asp:TextBox ID="txtTitle" runat="server" Width="300px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="請輸入品名"
                             ControlToValidate="txtTitle" ValidationGroup="Save"></asp:RequiredFieldValidator>
                     </td>
