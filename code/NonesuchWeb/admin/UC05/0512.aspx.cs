@@ -229,7 +229,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         UIHelper.ClearUI(pnlContent);
         pnlContent.Visible = false;
         btnShowAdd.Enabled = true;
-        rfClodeDate.Visible = false;
+        rfCloseDate.Visible = false;
         rfCustomField2.Visible = false;
         rfSellPrice.Visible = false;        
     }
@@ -256,7 +256,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
                     btnSold.Visible = false;
                 }
                 pnlContent.Visible = true;
-                rfClodeDate.Visible = true;
+                rfCloseDate.Visible = true;
                 rfCustomField2.Visible = true;
                 rfSellPrice.Visible = true;
                 txtTitle.Enabled = false;
@@ -384,11 +384,6 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             txtCustomField1.Text = ddlTypeList.SelectedValue;
             txtCustomField1.Visible = false;
         }
-    }
-
-    protected void ddlSelect_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        fillGridView();
     }
 
     //protected void btnUpliad_Click(object sender, EventArgs e)

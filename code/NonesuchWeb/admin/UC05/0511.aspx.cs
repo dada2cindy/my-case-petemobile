@@ -3,20 +3,25 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Common.Logging;
-using WuDada.Core.Post;
-using WuDada.Core.Post.Domain;
-using WuDada.Core.Post.Service;
 using WuDada.Core.SystemApplications.Domain;
+using System.Collections.Generic;
+using System.Data;
+using WuDada.Core.Auth;
+using WuDada.Core.Auth.Service;
+using WuDada.Core.Auth.Domain;
+using WuDada.Core.Member;
+using WuDada.Core.Member.Service;
+using WuDada.Core.Member.Domain;
 
 public partial class admin_UC05_0511 : System.Web.UI.Page
 {
     private ILog m_Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-    private PostFactory m_PostFactory;
-    private IPostService m_PostService;
+    private MemberFactory m_MemberFactory;
+    private IMemberService m_MemberService;
+    private AuthFactory m_AuthFactory;
+    private IAuthService m_AuthService;
     private WebLogService m_WebLogService;
-
-    //臻美快訊NodeId=4
-    private int m_NodeId = 4;
+    private HttpHelper m_HttpHelper;
 
     private int m_Mode
     {
@@ -32,8 +37,11 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         m_WebLogService = new WebLogService();
-        m_PostFactory = new PostFactory();
-        m_PostService = m_PostFactory.GetPostService();
+        m_MemberFactory = new MemberFactory();
+        m_AuthFactory = new AuthFactory();
+        m_HttpHelper = new HttpHelper();
+        m_AuthService = m_AuthFactory.GetAuthService();
+        m_MemberService = m_MemberFactory.GetMemberService();
 
         if (!IsPostBack)
         {
@@ -49,30 +57,63 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         if (m_Mode == 0)
         {
             btnAdd.Visible = true;
-            btnSave.Visible = false;
+            btnEdit.Visible = false;
+            btnDelete.Visible = false;
         }
         else
         {
             btnAdd.Visible = false;
-            btnSave.Visible = true;
+            btnEdit.Visible = true;
+            btnDelete.Visible = true;
         }
     }
 
     private void fillGridView()
     {
         //搜尋條件
-        //DateTime? startDate = ConvertUtil.ToDateTimeMin(DateTime.Now);
+        Dictionary<string, string> conditions = new Dictionary<string, string>();
+        conditions.Add("Status", "1");
+        conditions.Add("KeyWord", txtSearchKeyword.Text.Trim());
 
-        DateTime? startDate = null;
-        string sortField = "ShowDate";
-        bool sortDesc = true;
+        if (!string.IsNullOrEmpty(txtSearchApplyDateStart.Text.Trim()))
+        {
+            conditions.Add("ApplyDateStart", txtSearchApplyDateStart.Text.Trim());
+        }
+
+        if (!string.IsNullOrEmpty(txtSearchApplyDateEnd.Text.Trim()))
+        {
+            conditions.Add("ApplyDateEnd", txtSearchApplyDateEnd.Text.Trim());
+        }
+
+        if (!string.IsNullOrEmpty(txtSearchDueDateStart.Text.Trim()))
+        {
+            conditions.Add("DueDateStart", txtSearchDueDateStart.Text.Trim());
+        }
+
+        if (!string.IsNullOrEmpty(txtSearchDueDateEnd.Text.Trim()))
+        {
+            conditions.Add("DueDateEnd", txtSearchDueDateEnd.Text.Trim());
+        }
+        
 
         //分頁
-        AspNetPager1.RecordCount = m_PostService.CountPostListByNodeId(m_NodeId, false, startDate);
+        AspNetPager1.RecordCount = m_MemberService.GetMemberCount(conditions);
+        lblTotalCount.Text = string.Format("共查出 {0} 筆資料", AspNetPager1.RecordCount.ToString());
+        if (AspNetPager1.RecordCount > 0)
+        {
+            btnSearchExport.Visible = true;
+        }
+        else
+        {
+            btnSearchExport.Visible = false;
+        }
         int pageIndex = (AspNetPager1.CurrentPageIndex - 1);
         int pageSize = AspNetPager1.PageSize;
+        conditions.Add("PageIndex", pageIndex.ToString());
+        conditions.Add("PageSize", pageSize.ToString());
+        conditions.Add("Order", "order by m.ApplyDate desc, m.Name");
 
-        gvList.DataSource = m_PostService.GetPostListByNodeId(m_NodeId, false, startDate, pageIndex, pageSize, sortField, sortDesc);
+        gvList.DataSource = m_MemberService.GetMemberList(conditions);
         gvList.DataBind();
     }
 
@@ -83,83 +124,149 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
 
     protected void btnAdd_Click(object sender, EventArgs e)
     {
-        PostVO postVO = new PostVO();
-        postVO.Title = txtTitle.Text.Trim();
-        postVO.SortNo = int.Parse(txtSortNo.Text.Trim());
-        postVO.Node = m_PostService.GetNodeById(m_NodeId);
-        postVO.HtmlContent = ckeContent.value;
-        postVO.PicFileName = m_PicFileName;
-        postVO.Flag = int.Parse(ddlFlag.SelectedValue);
-        if (!string.IsNullOrEmpty(txtShowDate.Text.Trim()))
-        {
-            postVO.ShowDate = DateTime.Parse(txtShowDate.Text.Trim());
-        }
-        //postVO.LinkUrl = txtLinkUrl.Text.Trim();
-        //if (!string.IsNullOrEmpty(txtLinkUrl.Text.Trim()))
-        //{
-        //    postVO.Type = 1;
-        //}
-        //else
-        //{
-        //    postVO.Type = 0;
-        //}
-        m_PostService.CreatePost(postVO);
-        m_WebLogService.AddSystemLog(MsgVO.Action.新增, postVO);
+        MemberVO memberVO = new MemberVO();
+        UIHelper.FillVO(pnlContent, memberVO);
+        //postVO.PicFileName = m_PicFileName;
+        memberVO.Status = "1";
+        memberVO.CreateIP = m_HttpHelper.GetUserIp(Context);
+        m_MemberService.CreateMember(memberVO);
+        m_WebLogService.AddSystemLog(MsgVO.Action.新增, memberVO);
         ClearUI();
         fillGridView();
+    }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        MemberVO memberVO = m_MemberService.GetMemberById(m_Mode);
+        memberVO.Status = "0";
+        m_MemberService.UpdateMember(memberVO);
+        m_WebLogService.AddSystemLog(MsgVO.Action.刪除, memberVO, "", string.Format("單號:{0}", memberVO.MemberId));
+        ClearUI();
+        fillGridView();
+    }
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        fillGridView();
+    }
+
+    protected void btnSearchExport_Click(object sender, EventArgs e)
+    {
+        //搜尋條件
+        Dictionary<string, string> conditions = new Dictionary<string, string>();
+        conditions.Add("Status", "1");
+        conditions.Add("KeyWord", txtSearchKeyword.Text.Trim());
+
+        if (!string.IsNullOrEmpty(txtSearchApplyDateStart.Text.Trim()))
+        {
+            conditions.Add("ApplyDateStart", txtSearchApplyDateStart.Text.Trim());
+        }
+
+        if (!string.IsNullOrEmpty(txtSearchApplyDateEnd.Text.Trim()))
+        {
+            conditions.Add("ApplyDateEnd", txtSearchApplyDateEnd.Text.Trim());
+        }
+
+        if (!string.IsNullOrEmpty(txtSearchDueDateStart.Text.Trim()))
+        {
+            conditions.Add("DueDateStart", txtSearchDueDateStart.Text.Trim());
+        }
+
+        if (!string.IsNullOrEmpty(txtSearchDueDateEnd.Text.Trim()))
+        {
+            conditions.Add("DueDateEnd", txtSearchDueDateEnd.Text.Trim());
+        }
+        conditions.Add("Order", "order by m.ApplyDate desc, m.Name");
+
+        IList<MemberVO> memberList = m_MemberService.GetMemberList(conditions);
+        DataTable table = new DataTable();
+        table.Columns.Add("申辦日期", typeof(string));
+        table.Columns.Add("客戶大名", typeof(string));
+        table.Columns.Add("聯絡電話", typeof(string));        
+        table.Columns.Add("客戶生日", typeof(string));
+        table.Columns.Add("申辦專案", typeof(string));
+        table.Columns.Add("搭配手機", typeof(string));
+        table.Columns.Add("手機序號", typeof(string));
+        table.Columns.Add("申辦號碼", typeof(string));
+        table.Columns.Add("手機進價", typeof(string));
+        table.Columns.Add("銷售金額", typeof(string));
+        table.Columns.Add("門號佣金", typeof(string));
+        table.Columns.Add("違約金", typeof(string));
+        table.Columns.Add("補償金", typeof(string));
+        table.Columns.Add("綁約月數", typeof(string));
+        table.Columns.Add("門號到期日", typeof(string));
+        table.Columns.Add("備註", typeof(string));
+        table.Columns.Add("銷售員", typeof(string));        
+
+        if (memberList != null && memberList.Count > 0)
+        {
+            foreach (MemberVO memberVO in memberList)
+            {
+                DataRow dr = table.NewRow();
+
+                string applyDate = memberVO.ApplyDate.HasValue ? memberVO.ApplyDate.Value.ToString("yyyy/MM/dd") : "";
+                string dueDate = memberVO.DueDate.HasValue ? memberVO.DueDate.Value.ToString("yyyy/MM/dd") : "";
+                string birthday = memberVO.Birthday.HasValue ? memberVO.Birthday.Value.ToString("yyyy/MM/dd") : "";
+
+                dr[0] = applyDate;
+                dr[1] = memberVO.Name;
+                dr[2] = memberVO.Phone;
+                dr[3] = birthday;
+                dr[4] = memberVO.Project;
+                dr[5] = memberVO.Product;
+                dr[6] = memberVO.PhoneSer;
+                dr[7] = memberVO.Mobile;
+                dr[8] = memberVO.PhonePrice;
+                dr[9] = memberVO.PhoneSellPrice;
+                dr[10] = memberVO.Commission;
+                dr[11] = memberVO.BreakMoney;
+                dr[12] = memberVO.Compensation;
+                dr[13] = memberVO.ContractMonths;
+                dr[14] = dueDate;
+                dr[15] = memberVO.Sales;
+                dr[16] = memberVO.Note;
+
+                table.Rows.Add(dr);                
+            }
+        }
+
+        NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}客戶.xls",DateTime.Today.ToString("yyyyMMdd")));
     }
 
     private void ClearUI()
     {
         m_Mode = 0;
-        m_PicFileName = string.Empty;
-        ltlImg.Text = string.Empty;
-        txtTitle.Text = string.Empty;
-        txtSortNo.Text = string.Empty;
-        ckeContent.value = string.Empty;
-        ddlFlag.SelectedValue = string.Empty;
-        txtShowDate.Text = string.Empty;
-        //txtLinkUrl.Text = string.Empty;
+        //m_PicFileName = string.Empty;
+        //ltlImg.Text = string.Empty;
+        UIHelper.ClearUI(pnlContent);
         pnlContent.Visible = false;
-        btnShowAdd.Enabled = true;
+        btnShowAdd.Enabled = true;       
     }
 
-    private string GetPic(string fileName)
-    {
-        return "<img src='../../upload/" + fileName + "' width='145' height='108' border='0'>";
-    }
+    //private string GetPic(string fileName)
+    //{
+    //    return "<img src='../../upload/" + fileName + "' width='145' height='108' border='0'>";
+    //}
 
     protected void gvList_RowCommand1(object sender, GridViewCommandEventArgs e)
     {
         string cmdName = e.CommandName;
-        int postId = int.Parse(e.CommandArgument.ToString());
-        PostVO postVO = m_PostService.GetPostById(postId);
+        int memberId = int.Parse(e.CommandArgument.ToString());
+        MemberVO memberVO = m_MemberService.GetMemberById(memberId);
         switch (cmdName)
         {
             case "myModify":
                 ClearUI();
-                m_Mode = postId;
-                m_PicFileName = postVO.PicFileName;
-                ltlImg.Text = GetPic(m_PicFileName);
-                txtTitle.Text = postVO.Title;
-                txtSortNo.Text = postVO.SortNo.ToString();
-                ckeContent.value = postVO.HtmlContent;
-                ddlFlag.SelectedValue = postVO.Flag.ToString();
-                if (postVO.ShowDate != null)
-                {
-                    txtShowDate.Text = postVO.ShowDate.Value.ToShortDateString();
-                }
-                //if (postVO.Type == 1)
-                //{
-                //    txtLinkUrl.Text = postVO.LinkUrl;
-                //}
+                m_Mode = memberId;
+                UIHelper.FillUI(pnlContent, memberVO);
                 ShowMode();
                 pnlContent.Visible = true;
                 break;
-            case "myDel":
-                m_PostService.DeletePost(postVO);
-                m_WebLogService.AddSystemLog(MsgVO.Action.刪除, postVO);
-                break;
+            //case "myDel":
+            //    postVO.Flag = 0;
+            //    m_PostService.UpdatePost(postVO);
+            //    m_WebLogService.AddSystemLog(MsgVO.Action.刪除, postVO, "", string.Format("單號:{0}", postVO.PostId));
+            //    break;
 
             default:
                 break;
@@ -173,32 +280,14 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         ShowMode();
     }
 
-    protected void btnSave_Click(object sender, EventArgs e)
+    protected void btnEdit_Click(object sender, EventArgs e)
     {
         try
         {
-            PostVO postVO = m_PostService.GetPostById(m_Mode);
-            postVO.Title = txtTitle.Text.Trim();
-            postVO.SortNo = int.Parse(txtSortNo.Text.Trim());
-            postVO.Node = m_PostService.GetNodeById(m_NodeId);
-            postVO.HtmlContent = ckeContent.value;
-            postVO.PicFileName = m_PicFileName;
-            postVO.Flag = int.Parse(ddlFlag.SelectedValue);
-            if (!string.IsNullOrEmpty(txtShowDate.Text.Trim()))
-            {
-                postVO.ShowDate = DateTime.Parse(txtShowDate.Text.Trim());
-            }
-            //postVO.LinkUrl = txtLinkUrl.Text.Trim();
-            //if (!string.IsNullOrEmpty(txtLinkUrl.Text.Trim()))
-            //{
-            //    postVO.Type = 1;
-            //}
-            //else
-            //{
-            //    postVO.Type = 0;
-            //}
-            m_PostService.UpdatePost(postVO);
-            m_WebLogService.AddSystemLog(MsgVO.Action.修改, postVO);
+            MemberVO memberVO = m_MemberService.GetMemberById(m_Mode);
+            UIHelper.FillVO(pnlContent, memberVO);
+            m_MemberService.UpdateMember(memberVO);
+            m_WebLogService.AddSystemLog(MsgVO.Action.修改, memberVO, "", string.Format("單號:{0}", memberVO.MemberId));
             fillGridView();
             ClearUI();
             ShowMode();
@@ -227,40 +316,47 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         m_PicFileName = string.Empty;
         ShowMode();
         pnlContent.Visible = true;
-        btnShowAdd.Enabled = false;
-    }
+        btnShowAdd.Enabled = false;        
 
-    protected void ddlSelect_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        fillGridView();
-    }
-
-    protected void btnUpliad_Click(object sender, EventArgs e)
-    {
-        try
+        //帶入銷售員
+        IList<LoginUserVO> userList = m_AuthService.GetLoginUserList("1=1 ORDER BY ArrivedDate");
+        ddlSales.Items.Clear();
+        if (userList != null && userList.Count > 0)
         {
-            HttpFileCollection hfc = Request.Files;
-            for (int i = 0; i < hfc.Count; i++)
+            ddlSales.Items.Add(new ListItem("請選擇銷售員", ""));
+            foreach (LoginUserVO loginUserVO in userList)
             {
-                HttpPostedFile hpf = hfc[i];
-                if (hpf.ContentLength > 0)
-                {
-                    string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + System.IO.Path.GetFileName(hpf.FileName);
-                    hpf.SaveAs(Server.MapPath("~\\") + "\\upload\\" + fileName);
-                    ltlImg.Text = GetPic(fileName);
-                    m_PicFileName = fileName;
-                }
-                else
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("請點選您要上傳的照片!"), false);
-                    return;
-                }
+                ddlSales.Items.Add(loginUserVO.FullNameInChinese);
             }
         }
-        catch
-        {
-            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("檔案傳輸錯誤!"), false);
-            return;
-        }
-    }
+    }    
+
+    //protected void btnUpliad_Click(object sender, EventArgs e)
+    //{
+    //    try
+    //    {
+    //        HttpFileCollection hfc = Request.Files;
+    //        for (int i = 0; i < hfc.Count; i++)
+    //        {
+    //            HttpPostedFile hpf = hfc[i];
+    //            if (hpf.ContentLength > 0)
+    //            {
+    //                string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + System.IO.Path.GetFileName(hpf.FileName);
+    //                hpf.SaveAs(Server.MapPath("~\\") + "\\upload\\" + fileName);
+    //                ltlImg.Text = GetPic(fileName);
+    //                m_PicFileName = fileName;
+    //            }
+    //            else
+    //            {
+    //                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("請點選您要上傳的照片!"), false);
+    //                return;
+    //            }
+    //        }
+    //    }
+    //    catch
+    //    {
+    //        ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("檔案傳輸錯誤!"), false);
+    //        return;
+    //    }
+    //}        
 }

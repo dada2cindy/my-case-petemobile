@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/AdmMasterPage.master" AutoEventWireup="true" CodeFile="0512.aspx.cs" Inherits="admin_UC05_0512" ValidateRequest="false" %>
 
-<%@ Register Src="../UserControl/CKEditor.ascx" TagName="CKEditor" TagPrefix="uc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="aspnetpager" Namespace="Wuqi.Webdiyer" TagPrefix="Webdiyer" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -48,7 +47,7 @@
                         <cc1:CalendarExtender ID="CalendarExtender2" runat="server" CssClass="MyCalendar"
                             PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="calendar2" TargetControlID="txtCloseDate" />
                         <asp:Image ID="calendar2" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />
-                        <asp:RequiredFieldValidator ID="rfClodeDate" runat="server" ControlToValidate="txtCloseDate"
+                        <asp:RequiredFieldValidator ID="rfCloseDate" runat="server" ControlToValidate="txtCloseDate"
                             ErrorMessage="請輸入銷貨日" Display="Dynamic" Visible="false" ValidationGroup="Save"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="日期格式錯誤"
                             ControlToValidate="txtCloseDate" Display="Dynamic" ValidationGroup="Save" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
@@ -75,7 +74,7 @@
                         <asp:TextBox ID="txtPrice" runat="server" Width="100px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="請輸入進貨價"
                                     ControlToValidate="txtPrice" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
-                        <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="進貨價請輸入大於1的整數"
+                        <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="進貨價請輸入大於0的整數"
                             ControlToValidate="txtPrice" MaximumValue="1000000" MinimumValue="1" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>
@@ -88,7 +87,7 @@
                         <asp:TextBox ID="txtSellPrice" runat="server" Width="100px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfSellPrice" runat="server" ErrorMessage="請輸入售價"
                                     ControlToValidate="txtSellPrice" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>
-                        <asp:RangeValidator ID="RangeValidator2" runat="server" ErrorMessage="售價請輸入大於1的整數"
+                        <asp:RangeValidator ID="RangeValidator2" runat="server" ErrorMessage="售價請輸入大於0的整數"
                             ControlToValidate="txtSellPrice" MaximumValue="1000000" MinimumValue="1" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>

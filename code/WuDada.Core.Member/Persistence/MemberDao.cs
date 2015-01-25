@@ -111,22 +111,22 @@ namespace WuDada.Core.Member.Persistence
         {
             if (conditions.IsContainsValue("ApplyDateStart"))
             {
-                whereScript.Append(" and p.ApplyDate >= ? ");
+                whereScript.Append(" and m.ApplyDate >= ? ");
                 param.Add(Convert.ToDateTime(conditions["ApplyDateStart"]));
             }
             if (conditions.IsContainsValue("ApplyDateEnd"))
             {
-                whereScript.Append(" and p.ApplyDate <= ? ");
+                whereScript.Append(" and m.ApplyDate <= ? ");
                 param.Add(Convert.ToDateTime(conditions["ApplyDateEnd"]));
             }
             if (conditions.IsContainsValue("DueDateStart"))
             {
-                whereScript.Append(" and p.DueDate >= ? ");
+                whereScript.Append(" and m.DueDate >= ? ");
                 param.Add(Convert.ToDateTime(conditions["DueDateStart"]));
             }
             if (conditions.IsContainsValue("DueDateEnd"))
             {
-                whereScript.Append(" and p.DueDate <= ? ");
+                whereScript.Append(" and m.DueDate <= ? ");
                 param.Add(Convert.ToDateTime(conditions["DueDateEnd"]));
             }
         }
@@ -171,7 +171,10 @@ namespace WuDada.Core.Member.Persistence
         {
             if (conditions.IsContainsValue("KeyWord"))
             {
-                whereScript.Append(" and (m.Name like ? or m.Email like ? or m.Phone like ? or m.Mobile like ? ) ");
+                whereScript.Append(" and (m.Name like ? or m.Email like ? or m.Phone like ? or m.Mobile like ? or m.Project like ? or m.Product like ? or m.PhoneSer like ? ) ");
+                param.Add("%" + conditions["KeyWord"] + "%");
+                param.Add("%" + conditions["KeyWord"] + "%");
+                param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");

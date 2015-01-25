@@ -964,3 +964,322 @@
 2015-01-24 18:22:48,326 [7812] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
 2015-01-24 18:22:48,330 [7812] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
 2015-01-24 18:22:48,354 [7812] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-24 18:25:23,552 [7812] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-24 18:25:23,557 [7812] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-24 18:25:23,573 [7812] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-24 18:25:31,052 [9180] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-24 18:25:31,058 [9180] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-24 18:25:31,091 [9180] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-24 18:33:20,619 [3352] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-24 18:33:22,360 [2496] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-24 18:33:22,891 [2496] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-24 18:33:22,891 [3352] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-24 18:33:23,019 [3352] DEBUG UIHelper [(null)] - set txtCustomField1 = 334533
+2015-01-24 18:33:23,021 [3352] DEBUG UIHelper [(null)] - set txtShowDate = 2015/01/29
+2015-01-24 18:33:23,024 [3352] DEBUG UIHelper [(null)] - set txtCloseDate = 2015/01/31
+2015-01-24 18:33:23,026 [3352] DEBUG UIHelper [(null)] - set txtTitle = 434343
+2015-01-24 18:33:23,028 [3352] DEBUG UIHelper [(null)] - set txtPrice = 333
+2015-01-24 18:33:23,030 [3352] DEBUG UIHelper [(null)] - set txtSellPrice = 10000
+2015-01-24 18:33:23,032 [3352] DEBUG UIHelper [(null)] - set ddlCustomField2 = 系統管理者
+2015-01-24 18:33:23,033 [3352] DEBUG UIHelper [(null)] - value:系統管理者
+2015-01-24 18:33:23,033 [3352] DEBUG UIHelper [(null)] - itemvalue:系統管理者
+2015-01-24 18:33:34,685 [2496] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-24 18:33:34,784 [2496] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/index.aspx
+2015-01-24 18:33:34,789 [2496] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-24 18:33:34,802 [2496] DEBUG WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - lock UserMenuFuncContainer loadUser
+2015-01-24 18:33:35,418 [2496] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-24 18:33:35,423 [2496] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-24 18:33:37,569 [2496] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-24 18:33:37,574 [2496] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-24 18:33:37,589 [2496] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-24 18:33:39,521 [2496] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-24 18:33:39,527 [2496] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-24 18:33:39,543 [2496] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-24 18:33:39,566 [2496] DEBUG UIHelper [(null)] - set txtCustomField1 = 334533
+2015-01-24 18:33:39,566 [2496] DEBUG UIHelper [(null)] - set txtShowDate = 2015/01/29
+2015-01-24 18:33:39,567 [2496] DEBUG UIHelper [(null)] - set txtCloseDate = 2015/01/31
+2015-01-24 18:33:39,568 [2496] DEBUG UIHelper [(null)] - set txtTitle = 434343
+2015-01-24 18:33:39,569 [2496] DEBUG UIHelper [(null)] - set txtPrice = 333
+2015-01-24 18:33:39,570 [2496] DEBUG UIHelper [(null)] - set txtSellPrice = 10000
+2015-01-24 18:33:39,571 [2496] DEBUG UIHelper [(null)] - set ddlCustomField2 = 系統管理者
+2015-01-24 18:33:44,823 [2496] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-24 18:33:44,830 [2496] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-24 18:33:44,856 [2496] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-24 18:33:49,009 [2496] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-24 18:33:49,014 [2496] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-24 18:33:49,058 [2496] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-24 18:33:49,077 [2496] DEBUG UIHelper [(null)] - set txtShowDate = 2015/01/18
+2015-01-24 18:33:49,079 [2496] DEBUG UIHelper [(null)] - set txtTitle = 333
+2015-01-24 18:33:49,079 [2496] DEBUG UIHelper [(null)] - set txtPrice = 333
+2015-01-24 18:33:49,080 [2496] DEBUG UIHelper [(null)] - set txtSellPrice = 0
+2015-01-24 18:33:49,081 [2496] DEBUG UIHelper [(null)] - set ddlCustomField2 = 
+2015-01-24 18:33:52,492 [2496] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-24 18:33:52,499 [2496] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-24 18:33:52,520 [2496] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-25 18:42:26,297 [8556] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/index.aspx
+2015-01-25 18:52:12,024 [5380] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 18:52:12,355 [1336] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/index.aspx
+2015-01-25 18:52:12,358 [1336] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 18:52:12,396 [1336] DEBUG WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - lock UserMenuFuncContainer loadUser
+2015-01-25 18:52:13,072 [1336] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 18:52:13,080 [1336] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 18:52:19,817 [5380] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-25 18:52:19,820 [5380] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 18:52:19,836 [5380] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-25 18:53:04,880 [1336] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-25 18:53:04,883 [1336] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 18:53:04,901 [1336] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-25 18:53:06,498 [1336] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 18:53:06,521 [1336] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 18:53:06,535 [1336] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 18:58:56,591 [1336] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-25 18:58:56,596 [1336] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 18:58:56,640 [1336] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-25 18:58:59,874 [1336] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-25 18:58:59,880 [1336] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 18:58:59,892 [1336] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-25 18:59:01,855 [8584] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0512.aspx
+2015-01-25 18:59:01,863 [8584] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 18:59:01,879 [8584] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 庫存列表
+2015-01-25 18:59:01,907 [8584] DEBUG UIHelper [(null)] - set txtCustomField1 = 手機殼
+2015-01-25 18:59:01,941 [8584] DEBUG UIHelper [(null)] - set txtShowDate = 2015/01/24
+2015-01-25 18:59:01,943 [8584] DEBUG UIHelper [(null)] - set txtCloseDate = 2015/01/24
+2015-01-25 18:59:01,945 [8584] DEBUG UIHelper [(null)] - set txtTitle = aq
+2015-01-25 18:59:01,946 [8584] DEBUG UIHelper [(null)] - set txtPrice = 1
+2015-01-25 18:59:01,947 [8584] DEBUG UIHelper [(null)] - set txtSellPrice = 2
+2015-01-25 18:59:01,948 [8584] DEBUG UIHelper [(null)] - set ddlCustomField2 = 
+2015-01-25 19:56:42,396 [6484] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 19:56:44,415 [6484] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 19:57:10,667 [6484] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 19:57:10,683 [6484] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 19:57:18,704 [6484] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 19:57:18,804 [6484] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/index.aspx
+2015-01-25 19:57:18,807 [6484] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 19:57:18,815 [6484] DEBUG WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - lock UserMenuFuncContainer loadUser
+2015-01-25 19:57:19,412 [6484] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 19:57:19,417 [6484] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 19:57:21,324 [6484] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 19:57:21,330 [6484] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 19:57:21,353 [6484] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 19:57:27,274 [6484] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 19:57:27,278 [6484] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 19:57:27,308 [6484] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 19:58:32,200 [6484] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 19:58:32,205 [6484] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 19:58:32,223 [6484] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 19:58:33,796 [6364] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 19:58:33,802 [6364] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 19:58:33,825 [6364] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 19:58:52,720 [6484] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 19:58:52,725 [6484] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 19:58:52,740 [6484] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 19:58:54,143 [6364] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 19:58:54,150 [6364] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 19:58:54,182 [6364] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 20:01:10,759 [6484] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 20:01:10,763 [6484] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 20:01:10,776 [6484] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 20:01:10,827 [6484] DEBUG UIHelper [(null)] - set MemberVO, ApplyDate = 2015/1/25 上午 12:00:00
+2015-01-25 20:01:10,827 [6484] DEBUG UIHelper [(null)] - set MemberVO, ApplyDate = 2015/1/25 上午 12:00:00
+2015-01-25 20:01:10,828 [6484] DEBUG UIHelper [(null)] - set MemberVO, Name = 吳信達
+2015-01-25 20:01:10,828 [6484] DEBUG UIHelper [(null)] - set MemberVO, Name = 吳信達
+2015-01-25 20:01:10,829 [6484] DEBUG UIHelper [(null)] - set MemberVO, Phone = 0912345678
+2015-01-25 20:01:10,829 [6484] DEBUG UIHelper [(null)] - set MemberVO, Phone = 0912345678
+2015-01-25 20:01:10,829 [6484] DEBUG UIHelper [(null)] - set MemberVO, Birthday = 2015/1/25 上午 12:00:00
+2015-01-25 20:01:10,830 [6484] DEBUG UIHelper [(null)] - set MemberVO, Birthday = 2015/1/25 上午 12:00:00
+2015-01-25 20:01:10,830 [6484] DEBUG UIHelper [(null)] - set MemberVO, Project = XXx專案
+2015-01-25 20:01:10,831 [6484] DEBUG UIHelper [(null)] - set MemberVO, Project = XXx專案
+2015-01-25 20:01:10,831 [6484] DEBUG UIHelper [(null)] - set MemberVO, Product = 哀鳳
+2015-01-25 20:01:10,832 [6484] DEBUG UIHelper [(null)] - set MemberVO, Product = 哀鳳
+2015-01-25 20:01:10,833 [6484] DEBUG UIHelper [(null)] - set MemberVO, PhoneSer = Ser12345
+2015-01-25 20:01:10,833 [6484] DEBUG UIHelper [(null)] - set MemberVO, PhoneSer = Ser12345
+2015-01-25 20:01:10,834 [6484] DEBUG UIHelper [(null)] - set MemberVO, Mobile = 0988111111
+2015-01-25 20:01:10,835 [6484] DEBUG UIHelper [(null)] - set MemberVO, Mobile = 0988111111
+2015-01-25 20:01:10,836 [6484] DEBUG UIHelper [(null)] - set MemberVO, PhonePrice = 100
+2015-01-25 20:01:10,837 [6484] DEBUG UIHelper [(null)] - set MemberVO, PhonePrice = 100
+2015-01-25 20:01:10,838 [6484] DEBUG UIHelper [(null)] - set MemberVO, PhoneSellPrice = 200
+2015-01-25 20:01:10,839 [6484] DEBUG UIHelper [(null)] - set MemberVO, PhoneSellPrice = 200
+2015-01-25 20:01:10,840 [6484] DEBUG UIHelper [(null)] - set MemberVO, Commission = 300
+2015-01-25 20:01:10,840 [6484] DEBUG UIHelper [(null)] - set MemberVO, Commission = 300
+2015-01-25 20:01:10,841 [6484] DEBUG UIHelper [(null)] - set MemberVO, BreakMoney = 400
+2015-01-25 20:01:10,841 [6484] DEBUG UIHelper [(null)] - set MemberVO, BreakMoney = 400
+2015-01-25 20:01:10,842 [6484] DEBUG UIHelper [(null)] - set MemberVO, Compensation = 500
+2015-01-25 20:01:10,842 [6484] DEBUG UIHelper [(null)] - set MemberVO, Compensation = 500
+2015-01-25 20:01:10,843 [6484] DEBUG UIHelper [(null)] - set MemberVO, ContractMonths = 36
+2015-01-25 20:01:10,843 [6484] DEBUG UIHelper [(null)] - set MemberVO, ContractMonths = 36
+2015-01-25 20:01:10,847 [6484] DEBUG UIHelper [(null)] - set MemberVO, DueDate = 2015/1/25 上午 12:00:00
+2015-01-25 20:01:10,847 [6484] DEBUG UIHelper [(null)] - set MemberVO, DueDate = 2015/1/25 上午 12:00:00
+2015-01-25 20:01:10,848 [6484] DEBUG UIHelper [(null)] - set MemberVO, Note = 備註備註
+
+1234
+2015-01-25 20:01:10,848 [6484] DEBUG UIHelper [(null)] - set MemberVO, Note = 備註備註
+
+1234
+2015-01-25 20:01:10,849 [6484] DEBUG UIHelper [(null)] - set MemberVO, Sales = 系統管理者
+2015-01-25 20:01:10,849 [6484] DEBUG UIHelper [(null)] - set MemberVO, Sales = 系統管理者
+2015-01-25 20:04:49,731 [6364] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 20:04:49,734 [6364] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 20:04:49,746 [6364] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 20:04:49,789 [6364] DEBUG UIHelper [(null)] - set MemberVO, ApplyDate = 2015/1/25 上午 12:00:00
+2015-01-25 20:04:49,789 [6364] DEBUG UIHelper [(null)] - set MemberVO, ApplyDate = 2015/1/25 上午 12:00:00
+2015-01-25 20:04:49,789 [6364] DEBUG UIHelper [(null)] - set MemberVO, Name = 吳信達
+2015-01-25 20:04:49,789 [6364] DEBUG UIHelper [(null)] - set MemberVO, Name = 吳信達
+2015-01-25 20:04:49,790 [6364] DEBUG UIHelper [(null)] - set MemberVO, Phone = 0912345678
+2015-01-25 20:04:49,790 [6364] DEBUG UIHelper [(null)] - set MemberVO, Phone = 0912345678
+2015-01-25 20:04:49,790 [6364] DEBUG UIHelper [(null)] - set MemberVO, Birthday = 2015/1/25 上午 12:00:00
+2015-01-25 20:04:49,790 [6364] DEBUG UIHelper [(null)] - set MemberVO, Birthday = 2015/1/25 上午 12:00:00
+2015-01-25 20:04:49,790 [6364] DEBUG UIHelper [(null)] - set MemberVO, Project = XXx專案
+2015-01-25 20:04:49,790 [6364] DEBUG UIHelper [(null)] - set MemberVO, Project = XXx專案
+2015-01-25 20:04:49,791 [6364] DEBUG UIHelper [(null)] - set MemberVO, Product = 哀鳳
+2015-01-25 20:04:49,791 [6364] DEBUG UIHelper [(null)] - set MemberVO, Product = 哀鳳
+2015-01-25 20:04:49,791 [6364] DEBUG UIHelper [(null)] - set MemberVO, PhoneSer = Ser12345
+2015-01-25 20:04:49,791 [6364] DEBUG UIHelper [(null)] - set MemberVO, PhoneSer = Ser12345
+2015-01-25 20:04:49,791 [6364] DEBUG UIHelper [(null)] - set MemberVO, Mobile = 0988111111
+2015-01-25 20:04:49,791 [6364] DEBUG UIHelper [(null)] - set MemberVO, Mobile = 0988111111
+2015-01-25 20:04:49,791 [6364] DEBUG UIHelper [(null)] - set MemberVO, PhonePrice = 100
+2015-01-25 20:04:49,792 [6364] DEBUG UIHelper [(null)] - set MemberVO, PhonePrice = 100
+2015-01-25 20:04:49,792 [6364] DEBUG UIHelper [(null)] - set MemberVO, PhoneSellPrice = 200
+2015-01-25 20:04:49,792 [6364] DEBUG UIHelper [(null)] - set MemberVO, PhoneSellPrice = 200
+2015-01-25 20:04:49,792 [6364] DEBUG UIHelper [(null)] - set MemberVO, Commission = 300
+2015-01-25 20:04:49,793 [6364] DEBUG UIHelper [(null)] - set MemberVO, Commission = 300
+2015-01-25 20:04:49,793 [6364] DEBUG UIHelper [(null)] - set MemberVO, BreakMoney = 400
+2015-01-25 20:04:49,793 [6364] DEBUG UIHelper [(null)] - set MemberVO, BreakMoney = 400
+2015-01-25 20:04:49,793 [6364] DEBUG UIHelper [(null)] - set MemberVO, Compensation = 500
+2015-01-25 20:04:49,793 [6364] DEBUG UIHelper [(null)] - set MemberVO, Compensation = 500
+2015-01-25 20:04:49,793 [6364] DEBUG UIHelper [(null)] - set MemberVO, ContractMonths = 36
+2015-01-25 20:04:49,794 [6364] DEBUG UIHelper [(null)] - set MemberVO, ContractMonths = 36
+2015-01-25 20:04:49,794 [6364] DEBUG UIHelper [(null)] - set MemberVO, DueDate = 2015/1/25 上午 12:00:00
+2015-01-25 20:04:49,794 [6364] DEBUG UIHelper [(null)] - set MemberVO, DueDate = 2015/1/25 上午 12:00:00
+2015-01-25 20:04:49,794 [6364] DEBUG UIHelper [(null)] - set MemberVO, Note = 備註備註
+
+1234
+2015-01-25 20:04:49,794 [6364] DEBUG UIHelper [(null)] - set MemberVO, Note = 備註備註
+
+1234
+2015-01-25 20:04:49,794 [6364] DEBUG UIHelper [(null)] - set MemberVO, Sales = 系統管理者
+2015-01-25 20:04:49,795 [6364] DEBUG UIHelper [(null)] - set MemberVO, Sales = 系統管理者
+2015-01-25 20:04:54,034 [6364] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 20:04:54,040 [6364] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 20:04:54,064 [6364] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 20:04:56,999 [6364] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 20:04:57,002 [6364] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 20:04:57,027 [6364] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 20:04:57,146 [6364] DEBUG UIHelper [(null)] - set txtApplyDate = 2015/01/25
+2015-01-25 20:04:57,150 [6364] DEBUG UIHelper [(null)] - set txtName = 吳信達
+2015-01-25 20:04:57,151 [6364] DEBUG UIHelper [(null)] - set txtPhone = 0912345678
+2015-01-25 20:04:57,151 [6364] DEBUG UIHelper [(null)] - set txtBirthday = 2015/01/25
+2015-01-25 20:04:57,153 [6364] DEBUG UIHelper [(null)] - set txtProject = XXx專案
+2015-01-25 20:04:57,154 [6364] DEBUG UIHelper [(null)] - set txtProduct = 哀鳳
+2015-01-25 20:04:57,155 [6364] DEBUG UIHelper [(null)] - set txtPhoneSer = Ser12345
+2015-01-25 20:04:57,156 [6364] DEBUG UIHelper [(null)] - set txtMobile = 0988111111
+2015-01-25 20:04:57,157 [6364] DEBUG UIHelper [(null)] - set txtPhonePrice = 100
+2015-01-25 20:04:57,160 [6364] DEBUG UIHelper [(null)] - set txtPhoneSellPrice = 200
+2015-01-25 20:04:57,163 [6364] DEBUG UIHelper [(null)] - set txtCommission = 300
+2015-01-25 20:04:57,164 [6364] DEBUG UIHelper [(null)] - set txtBreakMoney = 400
+2015-01-25 20:04:57,165 [6364] DEBUG UIHelper [(null)] - set txtCompensation = 500
+2015-01-25 20:04:57,166 [6364] DEBUG UIHelper [(null)] - set txtContractMonths = 36
+2015-01-25 20:04:57,166 [6364] DEBUG UIHelper [(null)] - set txtDueDate = 2015/01/25
+2015-01-25 20:04:57,168 [6364] DEBUG UIHelper [(null)] - set txtNote = 備註備註
+
+1234
+2015-01-25 20:04:57,168 [6364] DEBUG UIHelper [(null)] - set ddlSales = 系統管理者
+2015-01-25 20:04:57,169 [6364] DEBUG UIHelper [(null)] - value:系統管理者
+2015-01-25 20:04:57,169 [6364] DEBUG UIHelper [(null)] - itemvalue:系統管理者
+2015-01-25 20:05:04,675 [6484] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 20:05:04,679 [6484] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 20:05:04,708 [6484] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 20:05:08,413 [6364] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 20:05:08,420 [6364] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 20:05:08,433 [6364] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 20:05:08,453 [6364] DEBUG UIHelper [(null)] - set txtApplyDate = 2015/01/25
+2015-01-25 20:05:08,454 [6364] DEBUG UIHelper [(null)] - set txtName = 吳信達
+2015-01-25 20:05:08,455 [6364] DEBUG UIHelper [(null)] - set txtPhone = 0912345678
+2015-01-25 20:05:08,455 [6364] DEBUG UIHelper [(null)] - set txtBirthday = 2015/01/25
+2015-01-25 20:05:08,456 [6364] DEBUG UIHelper [(null)] - set txtProject = XXx專案
+2015-01-25 20:05:08,456 [6364] DEBUG UIHelper [(null)] - set txtProduct = 哀鳳
+2015-01-25 20:05:08,456 [6364] DEBUG UIHelper [(null)] - set txtPhoneSer = Ser12345
+2015-01-25 20:05:08,457 [6364] DEBUG UIHelper [(null)] - set txtMobile = 0988111111
+2015-01-25 20:05:08,457 [6364] DEBUG UIHelper [(null)] - set txtPhonePrice = 100
+2015-01-25 20:05:08,458 [6364] DEBUG UIHelper [(null)] - set txtPhoneSellPrice = 200
+2015-01-25 20:05:08,458 [6364] DEBUG UIHelper [(null)] - set txtCommission = 300
+2015-01-25 20:05:08,459 [6364] DEBUG UIHelper [(null)] - set txtBreakMoney = 400
+2015-01-25 20:05:08,459 [6364] DEBUG UIHelper [(null)] - set txtCompensation = 500
+2015-01-25 20:05:08,460 [6364] DEBUG UIHelper [(null)] - set txtContractMonths = 36
+2015-01-25 20:05:08,460 [6364] DEBUG UIHelper [(null)] - set txtDueDate = 2015/01/25
+2015-01-25 20:05:08,462 [6364] DEBUG UIHelper [(null)] - set txtNote = 備註備註
+
+1234
+2015-01-25 20:05:08,462 [6364] DEBUG UIHelper [(null)] - set ddlSales = 系統管理者
+2015-01-25 20:05:08,463 [6364] DEBUG UIHelper [(null)] - value:系統管理者
+2015-01-25 20:05:08,463 [6364] DEBUG UIHelper [(null)] - itemvalue:系統管理者
+2015-01-25 20:05:30,961 [6484] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 20:05:30,970 [6484] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 20:05:30,995 [6484] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 20:05:31,014 [6484] DEBUG UIHelper [(null)] - set MemberVO, ApplyDate = 2015/1/26 上午 12:00:00
+2015-01-25 20:05:31,015 [6484] DEBUG UIHelper [(null)] - set MemberVO, ApplyDate = 2015/1/26 上午 12:00:00
+2015-01-25 20:05:31,015 [6484] DEBUG UIHelper [(null)] - set MemberVO, Name = 吳信達1
+2015-01-25 20:05:31,015 [6484] DEBUG UIHelper [(null)] - set MemberVO, Name = 吳信達1
+2015-01-25 20:05:31,015 [6484] DEBUG UIHelper [(null)] - set MemberVO, Phone = 09123456781
+2015-01-25 20:05:31,016 [6484] DEBUG UIHelper [(null)] - set MemberVO, Phone = 09123456781
+2015-01-25 20:05:31,016 [6484] DEBUG UIHelper [(null)] - set MemberVO, Birthday = 2015/1/25 上午 12:00:00
+2015-01-25 20:05:31,016 [6484] DEBUG UIHelper [(null)] - set MemberVO, Birthday = 2015/1/25 上午 12:00:00
+2015-01-25 20:05:31,017 [6484] DEBUG UIHelper [(null)] - set MemberVO, Project = XXx專案1
+2015-01-25 20:05:31,017 [6484] DEBUG UIHelper [(null)] - set MemberVO, Project = XXx專案1
+2015-01-25 20:05:31,017 [6484] DEBUG UIHelper [(null)] - set MemberVO, Product = 哀鳳1
+2015-01-25 20:05:31,017 [6484] DEBUG UIHelper [(null)] - set MemberVO, Product = 哀鳳1
+2015-01-25 20:05:31,018 [6484] DEBUG UIHelper [(null)] - set MemberVO, PhoneSer = Ser123451
+2015-01-25 20:05:31,018 [6484] DEBUG UIHelper [(null)] - set MemberVO, PhoneSer = Ser123451
+2015-01-25 20:05:31,018 [6484] DEBUG UIHelper [(null)] - set MemberVO, Mobile = 09881111113
+2015-01-25 20:05:31,018 [6484] DEBUG UIHelper [(null)] - set MemberVO, Mobile = 09881111113
+2015-01-25 20:05:31,018 [6484] DEBUG UIHelper [(null)] - set MemberVO, PhonePrice = 1001
+2015-01-25 20:05:31,019 [6484] DEBUG UIHelper [(null)] - set MemberVO, PhonePrice = 1001
+2015-01-25 20:05:31,019 [6484] DEBUG UIHelper [(null)] - set MemberVO, PhoneSellPrice = 2001
+2015-01-25 20:05:31,019 [6484] DEBUG UIHelper [(null)] - set MemberVO, PhoneSellPrice = 2001
+2015-01-25 20:05:31,019 [6484] DEBUG UIHelper [(null)] - set MemberVO, Commission = 3001
+2015-01-25 20:05:31,020 [6484] DEBUG UIHelper [(null)] - set MemberVO, Commission = 3001
+2015-01-25 20:05:31,020 [6484] DEBUG UIHelper [(null)] - set MemberVO, BreakMoney = 4001
+2015-01-25 20:05:31,020 [6484] DEBUG UIHelper [(null)] - set MemberVO, BreakMoney = 4001
+2015-01-25 20:05:31,020 [6484] DEBUG UIHelper [(null)] - set MemberVO, Compensation = 5001
+2015-01-25 20:05:31,021 [6484] DEBUG UIHelper [(null)] - set MemberVO, Compensation = 5001
+2015-01-25 20:05:31,021 [6484] DEBUG UIHelper [(null)] - set MemberVO, ContractMonths = 361
+2015-01-25 20:05:31,021 [6484] DEBUG UIHelper [(null)] - set MemberVO, ContractMonths = 361
+2015-01-25 20:05:31,021 [6484] DEBUG UIHelper [(null)] - set MemberVO, DueDate = 2015/1/27 上午 12:00:00
+2015-01-25 20:05:31,022 [6484] DEBUG UIHelper [(null)] - set MemberVO, DueDate = 2015/1/27 上午 12:00:00
+2015-01-25 20:05:31,022 [6484] DEBUG UIHelper [(null)] - set MemberVO, Note = 備註備註
+
+12341
+2015-01-25 20:05:31,022 [6484] DEBUG UIHelper [(null)] - set MemberVO, Note = 備註備註
+
+12341
+2015-01-25 20:05:31,022 [6484] DEBUG UIHelper [(null)] - set MemberVO, Sales = 店員
+2015-01-25 20:05:31,023 [6484] DEBUG UIHelper [(null)] - set MemberVO, Sales = 店員
+2015-01-25 20:05:33,100 [8752] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 20:05:33,109 [8752] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 20:05:33,138 [8752] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 20:05:33,158 [8752] DEBUG UIHelper [(null)] - set txtApplyDate = 2015/01/26
+2015-01-25 20:05:33,159 [8752] DEBUG UIHelper [(null)] - set txtName = 吳信達1
+2015-01-25 20:05:33,160 [8752] DEBUG UIHelper [(null)] - set txtPhone = 09123456781
+2015-01-25 20:05:33,160 [8752] DEBUG UIHelper [(null)] - set txtBirthday = 2015/01/25
+2015-01-25 20:05:33,161 [8752] DEBUG UIHelper [(null)] - set txtProject = XXx專案1
+2015-01-25 20:05:33,162 [8752] DEBUG UIHelper [(null)] - set txtProduct = 哀鳳1
+2015-01-25 20:05:33,163 [8752] DEBUG UIHelper [(null)] - set txtPhoneSer = Ser123451
+2015-01-25 20:05:33,163 [8752] DEBUG UIHelper [(null)] - set txtMobile = 09881111113
+2015-01-25 20:05:33,163 [8752] DEBUG UIHelper [(null)] - set txtPhonePrice = 1001
+2015-01-25 20:05:33,164 [8752] DEBUG UIHelper [(null)] - set txtPhoneSellPrice = 2001
+2015-01-25 20:05:33,167 [8752] DEBUG UIHelper [(null)] - set txtCommission = 3001
+2015-01-25 20:05:33,168 [8752] DEBUG UIHelper [(null)] - set txtBreakMoney = 4001
+2015-01-25 20:05:33,169 [8752] DEBUG UIHelper [(null)] - set txtCompensation = 5001
+2015-01-25 20:05:33,170 [8752] DEBUG UIHelper [(null)] - set txtContractMonths = 361
+2015-01-25 20:05:33,171 [8752] DEBUG UIHelper [(null)] - set txtDueDate = 2015/01/27
+2015-01-25 20:05:33,172 [8752] DEBUG UIHelper [(null)] - set txtNote = 備註備註
+
+12341
+2015-01-25 20:05:33,172 [8752] DEBUG UIHelper [(null)] - set ddlSales = 店員
+2015-01-25 20:05:33,173 [8752] DEBUG UIHelper [(null)] - value:店員
+2015-01-25 20:05:33,173 [8752] DEBUG UIHelper [(null)] - itemvalue:店員
+2015-01-25 20:05:38,183 [6364] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 20:05:38,191 [6364] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 20:05:38,218 [6364] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
+2015-01-25 20:05:40,220 [8752] DEBUG AuthModule [(null)] - Uri=http://localhost:6895/NonesuchWeb/admin/UC05/0511.aspx
+2015-01-25 20:05:40,223 [8752] INFO  WuDada.Core.Auth.Container.UserMenuFuncContainer [(null)] - ....System Init....
+2015-01-25 20:05:40,248 [8752] DEBUG LogModule [(null)] - functionName:客戶/庫存管理 >> 客戶列表
