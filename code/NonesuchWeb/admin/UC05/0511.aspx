@@ -11,10 +11,10 @@
                 客戶編輯</h1>
             <table style="width: 100%" class="FormTable">                               
                 <tr>
-                    <td width="40px">
+                    <td width="80px">
                         申辦日期
                     </td>
-                    <td width="900px">
+                    <td width="860px">
                         <asp:TextBox ID="txtApplyDate" runat="server" Width="100px"></asp:TextBox>
                         <cc1:CalendarExtender ID="CalendarExtender1" runat="server" CssClass="MyCalendar"
                             PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="calendar1" TargetControlID="txtApplyDate" />

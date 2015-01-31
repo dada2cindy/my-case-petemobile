@@ -249,6 +249,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             case "myModify":
                 ClearUI();
                 m_Mode = postId;
+		InitDDL();
                 UIHelper.FillUI(pnlContent, postVO);
                 ShowMode();
                 if (postVO.Type == 1)
@@ -318,6 +319,11 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         ShowMode();
         pnlContent.Visible = true;
         btnShowAdd.Enabled = false;
+        InitDDL();
+    }
+
+    private void InitDDL()
+    {
         ////帶入類別
         IList<NodeVO> typeList = m_PostService.GetNodeListByParentId(3);
         ddlTypeList.Items.Clear();
@@ -355,7 +361,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             {
                 ddlCustomField2.Items.Add(loginUserVO.FullNameInChinese);
             }
-        }
+        }        
     }
 
     protected void ddlProductList_SelectedIndexChanged(object sender, EventArgs e)

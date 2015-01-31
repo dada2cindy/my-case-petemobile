@@ -258,6 +258,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             case "myModify":
                 ClearUI();
                 m_Mode = memberId;
+		InitDDL();
                 UIHelper.FillUI(pnlContent, memberVO);
                 ShowMode();
                 pnlContent.Visible = true;
@@ -318,6 +319,11 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         pnlContent.Visible = true;
         btnShowAdd.Enabled = false;        
 
+        InitDDL();
+    }
+    
+    private void InitDDL()
+    {
         //帶入銷售員
         IList<LoginUserVO> userList = m_AuthService.GetLoginUserList("1=1 ORDER BY ArrivedDate");
         ddlSales.Items.Clear();
@@ -328,7 +334,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             {
                 ddlSales.Items.Add(loginUserVO.FullNameInChinese);
             }
-        }
+        }     
     }    
 
     //protected void btnUpliad_Click(object sender, EventArgs e)
