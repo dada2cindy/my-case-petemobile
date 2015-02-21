@@ -157,6 +157,10 @@
                         關鍵字:
                         <asp:TextBox ID="txtSearchKeyword" runat="server"></asp:TextBox>
                         &nbsp;&nbsp;&nbsp;
+                        類別:
+                        <asp:DropDownList ID="ddlSearchCustomField1" runat="server" >
+                        </asp:DropDownList>
+                        &nbsp;&nbsp;&nbsp;
                         狀態: 
                         <asp:DropDownList ID="ddlSearchType" runat="server">
                             <asp:ListItem Text="全部" Value=""></asp:ListItem>

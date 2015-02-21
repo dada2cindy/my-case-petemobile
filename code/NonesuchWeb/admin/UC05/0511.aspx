@@ -50,14 +50,18 @@
                         客戶生日
                     </td>
                     <td width="900px">
-                        <asp:TextBox ID="txtBirthday" runat="server" Width="100px"></asp:TextBox>
+                        <asp:DropDownList ID="ddlBirthDayYear" runat="server">
+                        </asp:DropDownList>
+                        <asp:DropDownList ID="ddlBirthDayMonth" runat="server">
+                        </asp:DropDownList>
+                        <asp:DropDownList ID="ddlBirthDayDay" runat="server">
+                        </asp:DropDownList>
+                        <%--<asp:TextBox ID="txtBirthday" runat="server" Width="100px"></asp:TextBox>
                         <cc1:CalendarExtender ID="CalendarExtender7" runat="server" CssClass="MyCalendar"
                             PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="calendar3" TargetControlID="txtBirthday" />
                         <asp:Image ID="calendar3" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />
-                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtBirthday"
-                            ErrorMessage="請輸入客戶生日" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ErrorMessage="日期格式錯誤"
-                            ControlToValidate="txtBirthday" Display="Dynamic" ValidationGroup="Save" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
+                            ControlToValidate="txtBirthday" Display="Dynamic" ValidationGroup="Save" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>--%>
                     </td>
                 </tr>
                 <tr>
@@ -268,6 +272,10 @@
                         關鍵字:
                         <asp:TextBox ID="txtSearchKeyword" runat="server"></asp:TextBox>
                         &nbsp;&nbsp;&nbsp;
+                        <br />
+                        生日:
+                        <asp:DropDownList ID="ddlSearchBirthDay" runat="server">
+                        </asp:DropDownList>
                         <br />
                         申辦日期:
                         <asp:TextBox ID="txtSearchApplyDateStart" runat="server"></asp:TextBox>  

@@ -45,6 +45,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            InitDDL();
             pnlContent.Visible = false;
             fillGridView();
             ShowMode();
@@ -56,6 +57,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
     {
         if (m_Mode == 0)
         {
+            txtTitle.Enabled = true;
             btnAdd.Visible = true;
             btnSold.Visible = false;
             btnDelete.Visible = false;
@@ -75,6 +77,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         conditions.Add("Flag", "1");
         conditions.Add("KeyWord", txtSearchKeyword.Text.Trim());
         conditions.Add("Type", ddlSearchType.SelectedValue);
+        conditions.Add("CustomField1", ddlSearchCustomField1.SelectedValue);
         if (!string.IsNullOrEmpty(txtSearchShowDateStart.Text.Trim()))
         {
             conditions.Add("ShowDateStart", txtSearchShowDateStart.Text.Trim());
@@ -329,11 +332,24 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         ddlTypeList.Items.Clear();
         if (typeList != null && typeList.Count > 0)
         {
-            ddlTypeList.Items.Add(new ListItem("自訂", ""));
+            ddlTypeList.Items.Add(new ListItem("自訂", ""));            
             txtCustomField1.Visible = true;
             foreach (NodeVO node in typeList)
             {
-                ddlTypeList.Items.Add(node.Name);
+                ddlTypeList.Items.Add(node.Name);                
+            }
+        }
+
+        if (string.IsNullOrEmpty(ddlSearchCustomField1.SelectedValue))
+        {
+            ddlSearchCustomField1.Items.Clear();
+            if (typeList != null && typeList.Count > 0)
+            {
+                ddlSearchCustomField1.Items.Add(new ListItem("全部", ""));
+                foreach (NodeVO node in typeList)
+                {
+                    ddlSearchCustomField1.Items.Add(node.Name);
+                }
             }
         }
 

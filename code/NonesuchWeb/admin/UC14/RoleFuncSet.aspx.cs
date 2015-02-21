@@ -146,8 +146,8 @@ public partial class adm_UC14_UC14_4_RoleFuncSet : System.Web.UI.Page
 
         foreach (GridViewRow row in gvAuth.Rows)
         {
-            CheckBox ckAuth = (CheckBox)row.Cells[2].FindControl("ckIsAuth");
-            HiddenField hdnId = (HiddenField)row.Cells[2].FindControl("hdnId");
+            CheckBox ckAuth = (CheckBox)row.FindControl("ckIsAuth");
+            HiddenField hdnId = (HiddenField)row.FindControl("hdnId");
 
             if (ckAuth.Checked == true)
             {

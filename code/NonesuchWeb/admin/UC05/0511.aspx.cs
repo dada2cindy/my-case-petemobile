@@ -48,7 +48,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             pnlContent.Visible = false;
             fillGridView();
             ShowMode();
-
+            InitDDL();
         }
     }
 
@@ -94,6 +94,23 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         {
             conditions.Add("DueDateEnd", txtSearchDueDateEnd.Text.Trim());
         }
+
+        if (!string.IsNullOrEmpty(ddlSearchBirthDay.SelectedValue))
+        {
+            switch (ddlSearchBirthDay.SelectedValue)
+            {
+                case "今天生日":
+                    conditions.Add("BirthdayMonth", DateTime.Today.Month.ToString());
+                    conditions.Add("BirthdayDay", DateTime.Today.Day.ToString());
+                    break;
+                case "本月生日":
+                    conditions.Add("BirthdayMonth", DateTime.Today.Month.ToString());
+                    break;
+                case "下個月生日":
+                    conditions.Add("BirthdayMonth", DateTime.Today.AddMonths(1).Month.ToString());
+                    break;
+            }
+        }        
         
 
         //分頁
@@ -334,7 +351,39 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             {
                 ddlSales.Items.Add(loginUserVO.FullNameInChinese);
             }
-        }     
+        }
+     
+        ////生日年月日
+        ddlBirthDayYear.Items.Clear();
+        ddlBirthDayYear.Items.Add("請選擇年");
+        for (int i = 1900; i <= DateTime.Today.Year; i++)
+        {
+            ddlBirthDayYear.Items.Add(i.ToString());
+        }
+
+
+        ddlBirthDayMonth.Items.Clear();
+        ddlBirthDayMonth.Items.Add("請選擇月");
+        for (int i = 1; i <= 12; i++)
+        {
+            ddlBirthDayMonth.Items.Add(i.ToString());
+        }
+
+        ddlBirthDayDay.Items.Clear();
+        ddlBirthDayDay.Items.Add("請選擇日");
+        for (int i = 1; i <= 31; i++)
+        {
+            ddlBirthDayDay.Items.Add(i.ToString());
+        }
+
+        if (string.IsNullOrEmpty(ddlSearchBirthDay.SelectedValue))
+        {
+            ddlSearchBirthDay.Items.Clear();
+            ddlSearchBirthDay.Items.Add("");
+            ddlSearchBirthDay.Items.Add("今天生日");
+            ddlSearchBirthDay.Items.Add("本月生日");
+            ddlSearchBirthDay.Items.Add("下個月生日");
+        }
     }    
 
     //protected void btnUpliad_Click(object sender, EventArgs e)
