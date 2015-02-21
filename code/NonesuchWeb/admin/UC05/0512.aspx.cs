@@ -168,6 +168,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         conditions.Add("Flag", "1");
         conditions.Add("KeyWord", txtSearchKeyword.Text.Trim());
         conditions.Add("Type", ddlSearchType.SelectedValue);
+        conditions.Add("CustomField1", ddlSearchCustomField1.SelectedValue);
         if (!string.IsNullOrEmpty(txtSearchShowDateStart.Text.Trim()))
         {
             conditions.Add("ShowDateStart", txtSearchShowDateStart.Text.Trim());

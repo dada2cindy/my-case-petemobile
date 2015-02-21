@@ -193,6 +193,24 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         {
             conditions.Add("DueDateEnd", txtSearchDueDateEnd.Text.Trim());
         }
+
+        if (!string.IsNullOrEmpty(ddlSearchBirthDay.SelectedValue))
+        {
+            switch (ddlSearchBirthDay.SelectedValue)
+            {
+                case "今天生日":
+                    conditions.Add("BirthdayMonth", DateTime.Today.Month.ToString());
+                    conditions.Add("BirthdayDay", DateTime.Today.Day.ToString());
+                    break;
+                case "本月生日":
+                    conditions.Add("BirthdayMonth", DateTime.Today.Month.ToString());
+                    break;
+                case "下個月生日":
+                    conditions.Add("BirthdayMonth", DateTime.Today.AddMonths(1).Month.ToString());
+                    break;
+            }
+        } 
+
         conditions.Add("Order", "order by m.ApplyDate desc, m.Name");
 
         IList<MemberVO> memberList = m_MemberService.GetMemberList(conditions);
@@ -223,7 +241,9 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
 
                 string applyDate = memberVO.ApplyDate.HasValue ? memberVO.ApplyDate.Value.ToString("yyyy/MM/dd") : "";
                 string dueDate = memberVO.DueDate.HasValue ? memberVO.DueDate.Value.ToString("yyyy/MM/dd") : "";
-                string birthday = memberVO.Birthday.HasValue ? memberVO.Birthday.Value.ToString("yyyy/MM/dd") : "";
+                string birthday = !string.IsNullOrEmpty(memberVO.BirthdayYear) ? memberVO.BirthdayYear + "/" : "";
+                birthday += !string.IsNullOrEmpty(memberVO.BirthdayMonth) ? memberVO.BirthdayMonth + "/" : "";
+                birthday += (!string.IsNullOrEmpty(memberVO.BirthdayMonth) && !string.IsNullOrEmpty(memberVO.BirthdayDay)) ? memberVO.BirthdayDay : "";
 
                 dr[0] = applyDate;
                 dr[1] = memberVO.Name;
@@ -355,7 +375,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
      
         ////生日年月日
         ddlBirthDayYear.Items.Clear();
-        ddlBirthDayYear.Items.Add("請選擇年");
+        ddlBirthDayYear.Items.Add(new ListItem("請選擇年", ""));
         for (int i = 1900; i <= DateTime.Today.Year; i++)
         {
             ddlBirthDayYear.Items.Add(i.ToString());
@@ -363,14 +383,14 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
 
 
         ddlBirthDayMonth.Items.Clear();
-        ddlBirthDayMonth.Items.Add("請選擇月");
+        ddlBirthDayMonth.Items.Add(new ListItem("請選擇月", ""));
         for (int i = 1; i <= 12; i++)
         {
             ddlBirthDayMonth.Items.Add(i.ToString());
         }
 
         ddlBirthDayDay.Items.Clear();
-        ddlBirthDayDay.Items.Add("請選擇日");
+        ddlBirthDayDay.Items.Add(new ListItem("請選擇日", ""));
         for (int i = 1; i <= 31; i++)
         {
             ddlBirthDayDay.Items.Add(i.ToString());
