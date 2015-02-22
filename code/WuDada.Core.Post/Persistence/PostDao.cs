@@ -529,6 +529,7 @@ namespace WuDada.Core.Post.Persistence
             AppendPostIsRecommend(conditions, whereScript, param);
             AppendPostDate(conditions, whereScript, param);
             AppendPostType(conditions, whereScript, param);
+            AppendPostCustomField1(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -537,6 +538,15 @@ namespace WuDada.Core.Post.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendPostCustomField1(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("CustomField1"))
+            {
+                whereScript.Append(" and p.CustomField1 = ? ");
+                param.Add(conditions["CustomField1"]);
+            }
         }
 
         private void AppendPostType(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)

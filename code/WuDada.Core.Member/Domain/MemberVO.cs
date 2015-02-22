@@ -158,6 +158,24 @@ namespace WuDada.Core.Member.Domain
         public virtual DateTime? Birthday { get; set; }
 
         /// <summary>
+        /// 生日-年
+        /// </summary>
+        [DataMember]
+        public virtual string BirthdayYear { get; set; }
+
+        /// <summary>
+        /// 生日-月
+        /// </summary>
+        [DataMember]
+        public virtual string BirthdayMonth { get; set; }
+
+        /// <summary>
+        /// 生日-日
+        /// </summary>
+        [DataMember]
+        public virtual string BirthdayDay { get; set; }
+
+        /// <summary>
         /// 申辦專案
         /// </summary>
         [DataMember]

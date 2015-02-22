@@ -27,6 +27,9 @@
     <property name="ApplyDate" column="ApplyDate" type="DateTime"/>
     <property name="DueDate" column="DueDate" type="DateTime"/>
     <property name="Birthday" column="Birthday" type="DateTime"/>
+    <property name="BirthdayYear" column="BirthdayYear" type="String" />
+    <property name="BirthdayMonth" column="BirthdayMonth" type="String" />
+    <property name="BirthdayDay" column="BirthdayDay" type="String" />
     <property name="Project" column="Project" type="String" />
     <property name="Product" column="Product" type="String" />
     <property name="PhoneSer" column="PhoneSer" type="String" />

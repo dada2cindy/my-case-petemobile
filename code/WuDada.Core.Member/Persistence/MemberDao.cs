@@ -97,6 +97,7 @@ namespace WuDada.Core.Member.Persistence
             AppendMemberSex(conditions, whereScript, param);
             AppendMemberCreateDate(conditions, whereScript, param);
             AppendMemberDate(conditions, whereScript, param);
+            AppendMemberBirthDay(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -105,6 +106,21 @@ namespace WuDada.Core.Member.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendMemberBirthDay(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("BirthdayMonth"))
+            {
+                whereScript.Append(" and m.BirthdayMonth = ? ");
+                param.Add(conditions["BirthdayMonth"]);
+            }
+
+            if (conditions.IsContainsValue("BirthdayDay"))
+            {
+                whereScript.Append(" and m.BirthdayDay = ? ");
+                param.Add(conditions["BirthdayDay"]);
+            }
         }
 
         private void AppendMemberDate(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
