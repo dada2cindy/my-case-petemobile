@@ -112,8 +112,8 @@
                         <asp:TextBox ID="txtPhonePrice" runat="server" Width="100px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="請輸入手機進價"
                                     ControlToValidate="txtPhonePrice" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
-                        <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="手機進價請輸入大於0的整數"
-                            ControlToValidate="txtPhonePrice" MaximumValue="1000000" MinimumValue="1" Type="Integer"
+                        <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="手機進價請輸入0以上的整數"
+                            ControlToValidate="txtPhonePrice" MaximumValue="1000000" MinimumValue="0" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>
                 </tr>
