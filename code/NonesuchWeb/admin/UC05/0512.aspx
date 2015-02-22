@@ -74,8 +74,8 @@
                         <asp:TextBox ID="txtPrice" runat="server" Width="100px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="請輸入進貨價"
                                     ControlToValidate="txtPrice" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
-                        <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="進貨價請輸入大於0的整數"
-                            ControlToValidate="txtPrice" MaximumValue="1000000" MinimumValue="1" Type="Integer"
+                        <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="進貨價請輸入0以上的整數"
+                            ControlToValidate="txtPrice" MaximumValue="1000000" MinimumValue="0" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>
                 </tr>
@@ -87,8 +87,8 @@
                         <asp:TextBox ID="txtSellPrice" runat="server" Width="100px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfSellPrice" runat="server" ErrorMessage="請輸入售價"
                                     ControlToValidate="txtSellPrice" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>
-                        <asp:RangeValidator ID="RangeValidator2" runat="server" ErrorMessage="售價請輸入大於0的整數"
-                            ControlToValidate="txtSellPrice" MaximumValue="1000000" MinimumValue="1" Type="Integer"
+                        <asp:RangeValidator ID="RangeValidator2" runat="server" ErrorMessage="售價請輸入0以上的整數"
+                            ControlToValidate="txtSellPrice" MaximumValue="1000000" MinimumValue="0" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>
                 </tr>

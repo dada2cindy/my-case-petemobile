@@ -125,8 +125,8 @@
                         <asp:TextBox ID="txtPhoneSellPrice" runat="server" Width="100px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfSellPrice" runat="server" ErrorMessage="請輸入銷售金額"
                                     ControlToValidate="txtPhoneSellPrice" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>
-                        <asp:RangeValidator ID="RangeValidator2" runat="server" ErrorMessage="銷售金額請輸入大於0的整數"
-                            ControlToValidate="txtPhoneSellPrice" MaximumValue="1000000" MinimumValue="1" Type="Integer"
+                        <asp:RangeValidator ID="RangeValidator2" runat="server" ErrorMessage="銷售金額請輸入0以上的整數"
+                            ControlToValidate="txtPhoneSellPrice" MaximumValue="1000000" MinimumValue="0" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>
                 </tr>
@@ -138,8 +138,8 @@
                         <asp:TextBox ID="txtCommission" runat="server" Width="100px"></asp:TextBox>
                         <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入門號佣金"
                                     ControlToValidate="txtCommission" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>--%>
-                        <asp:RangeValidator ID="RangeValidator3" runat="server" ErrorMessage="門號佣金請輸入大於0的整數"
-                            ControlToValidate="txtCommission" MaximumValue="1000000" MinimumValue="1" Type="Integer"
+                        <asp:RangeValidator ID="RangeValidator3" runat="server" ErrorMessage="門號佣金請輸入0以上的整數"
+                            ControlToValidate="txtCommission" MaximumValue="1000000" MinimumValue="0" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>
                 </tr>
@@ -151,8 +151,8 @@
                         <asp:TextBox ID="txtBreakMoney" runat="server" Width="100px"></asp:TextBox>
                         <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入違約金"
                                     ControlToValidate="txtBreakMoney" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>--%>
-                        <asp:RangeValidator ID="RangeValidator4" runat="server" ErrorMessage="違約金請輸入大於0的整數"
-                            ControlToValidate="txtBreakMoney" MaximumValue="1000000" MinimumValue="1" Type="Integer"
+                        <asp:RangeValidator ID="RangeValidator4" runat="server" ErrorMessage="違約金請輸入0以上的整數"
+                            ControlToValidate="txtBreakMoney" MaximumValue="1000000" MinimumValue="0" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>
                 </tr>
@@ -164,8 +164,8 @@
                         <asp:TextBox ID="txtCompensation" runat="server" Width="100px"></asp:TextBox>
                         <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入補償金"
                                     ControlToValidate="txtCompensation" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>--%>
-                        <asp:RangeValidator ID="RangeValidator5" runat="server" ErrorMessage="補償金請輸入大於0的整數"
-                            ControlToValidate="txtCompensation" MaximumValue="1000000" MinimumValue="1" Type="Integer"
+                        <asp:RangeValidator ID="RangeValidator5" runat="server" ErrorMessage="補償金請輸入0以上的整數"
+                            ControlToValidate="txtCompensation" MaximumValue="1000000" MinimumValue="0" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>
                 </tr>
@@ -177,8 +177,8 @@
                         <asp:TextBox ID="txtContractMonths" runat="server" Width="100px"></asp:TextBox>
                         <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入補償金"
                                     ControlToValidate="txtContractMonths" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>--%>
-                        <asp:RangeValidator ID="RangeValidator6" runat="server" ErrorMessage="綁約月數請輸入大於0的整數"
-                            ControlToValidate="txtContractMonths" MaximumValue="1000000" MinimumValue="1" Type="Integer"
+                        <asp:RangeValidator ID="RangeValidator6" runat="server" ErrorMessage="綁約月數請輸入0以上的整數"
+                            ControlToValidate="txtContractMonths" MaximumValue="1000000" MinimumValue="0" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>
                 </tr>
