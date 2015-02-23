@@ -371,14 +371,14 @@
                         <ItemTemplate>
                             <asp:Label ID="lblPhonePrice" runat="server" Text='<%# Bind("PhonePrice") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Left" Width="100" />
+                        <ItemStyle HorizontalAlign="Right" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="銷售金額">
                         <ItemTemplate>
                             <asp:Label ID="lblPhoneSellPrice" runat="server" Text='<%# Bind("PhoneSellPrice") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Left" Width="100" />
+                        <ItemStyle HorizontalAlign="Right" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="門號到期日">

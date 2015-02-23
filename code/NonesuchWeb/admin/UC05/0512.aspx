@@ -94,6 +94,19 @@
                 </tr>
                 <tr>
                     <td>
+                        數量
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtQuantity" runat="server" Width="100px"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="請輸入數量"
+                                    ControlToValidate="txtQuantity" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
+                        <asp:RangeValidator ID="RangeValidator3" runat="server" ErrorMessage="數量請輸入大於0的整數"
+                            ControlToValidate="txtQuantity" MaximumValue="1000000" MinimumValue="1" Type="Integer"
+                            Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         銷售員
                     </td>
                     <td>
@@ -262,14 +275,21 @@
                         <ItemTemplate>
                             <asp:Label ID="lblPrice" runat="server" Text='<%# Bind("Price") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Left" Width="150" />
+                        <ItemStyle HorizontalAlign="Right" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="售價">
                         <ItemTemplate>
                             <asp:Label ID="lblSellPrice" runat="server" Text='<%# Bind("SellPrice") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Left" Width="150" />
+                        <ItemStyle HorizontalAlign="Right" Width="150" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="數量">
+                        <ItemTemplate>
+                            <asp:Label ID="lblQuantity" runat="server" Text='<%# Bind("Quantity") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="銷售員">

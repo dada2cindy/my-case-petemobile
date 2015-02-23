@@ -61,12 +61,14 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             btnAdd.Visible = true;
             btnSold.Visible = false;
             btnDelete.Visible = false;
+            txtQuantity.Enabled = true;
         }
         else
         {
             btnAdd.Visible = false;
             btnSold.Visible = true;
             btnDelete.Visible = true;
+            txtQuantity.Enabled = false;
         }
     }
 
@@ -183,7 +185,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         {
             conditions.Add("CloseDateStart", txtSearchCloseDateStart.Text.Trim());
         }
-
+        
         if (!string.IsNullOrEmpty(txtSearchCloseDateEnd.Text.Trim()))
         {
             conditions.Add("CloseDateEnd", txtSearchCloseDateEnd.Text.Trim());
@@ -290,13 +292,33 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         try
         {
             PostVO postVO = m_PostService.GetPostById(m_Mode);
-            UIHelper.FillVO(pnlContent, postVO);
-            postVO.Type = 1;
-            m_PostService.UpdatePost(postVO);
-            m_WebLogService.AddSystemLog(MsgVO.Action.售出, postVO, "", string.Format("單號:{0}", postVO.PostId));
-            fillGridView();
-            ClearUI();
-            ShowMode();
+
+            //判斷數量大於1就另外增加一筆新的
+            if (postVO.Quantity > 1)
+            {
+                PostVO newPostVO = new PostVO();
+                UIHelper.FillVO(pnlContent, newPostVO);
+                newPostVO.Quantity = 1;
+                newPostVO.Type = 1;
+                m_PostService.CreatePost(newPostVO);
+                m_WebLogService.AddSystemLog(MsgVO.Action.售出, postVO, "", string.Format("單號:{0}", postVO.PostId));
+
+                postVO.Quantity -= 1;
+                m_PostService.UpdatePost(postVO);
+                fillGridView();
+                ClearUI();
+                ShowMode();
+            }
+            else
+            {
+                UIHelper.FillVO(pnlContent, postVO);
+                postVO.Type = 1;
+                m_PostService.UpdatePost(postVO);
+                m_WebLogService.AddSystemLog(MsgVO.Action.售出, postVO, "", string.Format("單號:{0}", postVO.PostId));
+                fillGridView();
+                ClearUI();
+                ShowMode();
+            }
         }
         catch (Exception ex)
         {
