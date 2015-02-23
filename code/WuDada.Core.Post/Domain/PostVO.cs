@@ -90,6 +90,12 @@ namespace WuDada.Core.Post.Domain
         public virtual int Flag { get; set; }
 
         /// <summary>
+        /// 數量
+        /// </summary>
+        [DataMember]
+        public virtual int Quantity { get; set; }
+
+        /// <summary>
         /// 上架日/進貨日
         /// </summary>
         [DataMember]

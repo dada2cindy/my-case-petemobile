@@ -27,6 +27,7 @@
     <many-to-one name="ParentPost" class="PostVO" column="ParentPostId" unique="false" />
     <property column="SortNo" type="Int32" name="SortNo" />
     <property column="Flag" type="Int32" name="Flag" />
+    <property column="Quantity" type="Int32" name="Quantity" />
     <property column="PicFileName" type="String" name="PicFileName" />
     <property column="PicFileName2" type="String" name="PicFileName2" />
     <!--<property column="PicFileNameENG" type="String" name="PicFileNameENG" />-->
