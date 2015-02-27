@@ -239,6 +239,7 @@
                     <asp:TemplateField HeaderText="品名">
                         <ItemTemplate>
                             <asp:Label ID="lblTitle" runat="server" Text='<%# Bind("Title") %>'></asp:Label>
+                            <asp:HiddenField ID="hdnPostId" runat="server" Value='<%# Bind("PostId") %>' />
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left" Width="300" />
                         <HeaderStyle HorizontalAlign="Center" />
@@ -288,6 +289,13 @@
                     <asp:TemplateField HeaderText="數量">
                         <ItemTemplate>
                             <asp:Label ID="lblQuantity" runat="server" Text='<%# Bind("Quantity") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" Width="150" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="在庫總數量">
+                        <ItemTemplate>
+                            <asp:Label ID="lblTotalQuantity" runat="server"></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Right" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />

@@ -195,5 +195,12 @@ namespace WuDada.Core.Post.Persistence
         /// <param name="conditions"></param>
         /// <returns></returns>
         int GetPostCount(IDictionary<string, string> conditions);
+
+        /// <summary>
+        /// 取得數量
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        int GetTotalQuantity(IDictionary<string, string> conditions);
     }
 }

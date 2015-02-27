@@ -320,5 +320,15 @@ namespace WuDada.Core.Post.Service.Impl
         {
             return PostDao.GetPostCount(conditions);
         }
+
+        /// <summary>
+        /// 取得數量
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public int GetTotalQuantity(IDictionary<string, string> conditions)
+        {
+            return PostDao.GetTotalQuantity(conditions);
+        }
     }
 }

@@ -520,6 +520,25 @@ namespace WuDada.Core.Post.Persistence
             return count;
         }
 
+        /// <summary>
+        /// 取得數量
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public int GetTotalQuantity(IDictionary<string, string> conditions)
+        {
+            int count = 0;
+            ArrayList param = new ArrayList();
+            string fromScript = "select sum(p.Quantity) from PostVO p ";
+            StringBuilder whereScript = new StringBuilder();
+            IList result = this.QueryPost(param, fromScript, whereScript, conditions, false);
+            if (result.Count > 0)
+            {
+                count = Convert.ToInt32(result[0]);
+            }
+            return count;
+        }
+
         private IList QueryPost(ArrayList param, string fromScript, StringBuilder whereScript, IDictionary<string, string> conditions, bool useOrder)
         {
             AppendPostKeyWord(conditions, whereScript, param);
@@ -530,6 +549,7 @@ namespace WuDada.Core.Post.Persistence
             AppendPostDate(conditions, whereScript, param);
             AppendPostType(conditions, whereScript, param);
             AppendPostCustomField1(conditions, whereScript, param);
+            AppendPostEqualTitle(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -538,6 +558,15 @@ namespace WuDada.Core.Post.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendPostEqualTitle(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("EqualTitle"))
+            {
+                whereScript.Append(" and p.Title = ? ");
+                param.Add(conditions["EqualTitle"]);
+            }
         }
 
         private void AppendPostCustomField1(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)

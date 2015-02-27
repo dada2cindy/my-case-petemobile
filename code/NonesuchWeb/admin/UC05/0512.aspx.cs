@@ -201,6 +201,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         table.Columns.Add("品名", typeof(string));
         table.Columns.Add("進貨價", typeof(string));
         table.Columns.Add("售價", typeof(string));
+        table.Columns.Add("數量", typeof(string));
         table.Columns.Add("銷售員", typeof(string));
 
         if (postList != null && postList.Count > 0)
@@ -219,7 +220,8 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
                 dr[4] = postVO.Title;
                 dr[5] = postVO.Price;
                 dr[6] = postVO.SellPrice;
-                dr[7] = postVO.CustomField2;
+                dr[7] = postVO.Quantity;
+                dr[8] = postVO.CustomField2;
                 table.Rows.Add(dr);                
             }
         }
@@ -329,13 +331,21 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
 
     protected void gvList_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        //GridView gv = (GridView)sender;
-        //if (e.Row.RowIndex != -1)
-        //{
-        //    Control ctrl = e.Row;
-        //    int postId = int.Parse(UIHelper.FindHiddenValue(ref ctrl, "hdnPostId"));
-        //    PostVO postVO = m_PostService.GetPostById(postId);
-        //}
+        GridView gv = (GridView)sender;
+        if (e.Row.RowIndex != -1)
+        {
+            Control ctrl = e.Row;
+            int postId = int.Parse(UIHelper.FindHiddenValue(ref ctrl, "hdnPostId"));
+            PostVO postVO = m_PostService.GetPostById(postId);
+
+            Dictionary<string, string> conditions = new Dictionary<string, string>();
+            conditions.Add("Flag", "1");
+            conditions.Add("Type", "0");
+            conditions.Add("EqualTitle", postVO.Title);
+            ////在庫總庫存
+            int totalQuantity = m_PostService.GetTotalQuantity(conditions);
+            UIHelper.SetLabelText(ref ctrl, "lblTotalQuantity", totalQuantity.ToString());
+        }
     }
 
     protected void btnShowAdd_Click(object sender, EventArgs e)
