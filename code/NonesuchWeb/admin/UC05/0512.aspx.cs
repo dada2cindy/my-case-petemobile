@@ -116,7 +116,8 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         int pageSize = AspNetPager1.PageSize;
         conditions.Add("PageIndex", pageIndex.ToString());
         conditions.Add("PageSize", pageSize.ToString());
-        conditions.Add("Order", "order by p.CloseDate desc, p.ShowDate desc, p.Title");
+        conditions.Add("Order", string.Format("order by {0}", ddlSearchOrder.SelectedValue));
+        //conditions.Add("Order", "order by p.CloseDate desc, p.ShowDate desc, p.Title");
 
         gvList.DataSource = m_PostService.GetPostList(conditions);
         gvList.DataBind();
@@ -190,7 +191,8 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         {
             conditions.Add("CloseDateEnd", txtSearchCloseDateEnd.Text.Trim());
         }
-        conditions.Add("Order", "order by p.CloseDate desc, p.ShowDate desc, p.Title");
+        conditions.Add("Order", string.Format("order by {0}", ddlSearchOrder.SelectedValue));
+        //conditions.Add("Order", "order by p.CloseDate desc, p.ShowDate desc, p.Title");
 
         IList<PostVO> postList = m_PostService.GetPostList(conditions);
         DataTable table = new DataTable();
@@ -199,9 +201,9 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         table.Columns.Add("進貨日", typeof(string));
         table.Columns.Add("銷貨日", typeof(string));
         table.Columns.Add("品名", typeof(string));
-        table.Columns.Add("進貨價", typeof(string));
-        table.Columns.Add("售價", typeof(string));
-        table.Columns.Add("數量", typeof(string));
+        table.Columns.Add("進貨價", typeof(double));
+        table.Columns.Add("售價", typeof(double));
+        table.Columns.Add("數量", typeof(int));
         table.Columns.Add("銷售員", typeof(string));
 
         if (postList != null && postList.Count > 0)
@@ -218,8 +220,8 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
                 dr[2] = showDate;
                 dr[3] = closeDate;
                 dr[4] = postVO.Title;
-                dr[5] = postVO.Price;
-                dr[6] = postVO.SellPrice;
+                dr[5] = postVO.Price == null ? 0 : postVO.Price;
+                dr[6] = postVO.SellPrice == null ? 0 : postVO.SellPrice;
                 dr[7] = postVO.Quantity;
                 dr[8] = postVO.CustomField2;
                 table.Rows.Add(dr);                

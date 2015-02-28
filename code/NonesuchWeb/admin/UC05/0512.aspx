@@ -210,6 +210,18 @@
                         <asp:Image ID="searchCalendar4" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />                        
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="日期格式錯誤"
                             ControlToValidate="txtSearchCloseDateEnd" Display="Dynamic" ValidationGroup="Search" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
+                        <br />
+                        排序:
+                        <asp:DropDownList ID="ddlSearchOrder" runat="server">
+                            <asp:ListItem Text="品名▲" Value="p.Title"></asp:ListItem>
+                            <asp:ListItem Text="品名▼" Value="p.Title desc"></asp:ListItem>
+                            <asp:ListItem Text="進貨日▲" Value="p.ShowDate"></asp:ListItem>
+                            <asp:ListItem Text="進貨日▼" Value="p.ShowDate desc"></asp:ListItem>
+                            <asp:ListItem Text="狀態▲" Value="p.Type"></asp:ListItem>
+                            <asp:ListItem Text="狀態▼" Value="p.Type desc"></asp:ListItem>
+                            <asp:ListItem Text="銷貨日▲" Value="p.CloseDate"></asp:ListItem>
+                            <asp:ListItem Text="銷貨日▼" Value="p.CloseDate desc" Selected="True"></asp:ListItem>                            
+                        </asp:DropDownList>
                         <br /><br />
                         <asp:Button ID="btnSearch" runat="server" Text="查詢" OnClick="btnSearch_Click" ValidationGroup="Search" />
                         &nbsp;&nbsp;&nbsp;
