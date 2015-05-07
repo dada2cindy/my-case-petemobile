@@ -62,6 +62,8 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             btnSold.Visible = false;
             btnDelete.Visible = false;
             txtQuantity.Enabled = true;
+            txtCloseDate.Enabled = true;
+            calendar2.Visible = true;
         }
         else
         {
@@ -69,6 +71,8 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             btnSold.Visible = true;
             btnDelete.Visible = true;
             txtQuantity.Enabled = false;
+            txtCloseDate.Enabled = false;
+            calendar2.Visible = false;
         }
     }
 
@@ -265,6 +269,10 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
                 if (postVO.Type == 1)
                 {
                     btnSold.Visible = false;
+                }
+                else
+                {
+                    txtCloseDate.Text = DateTime.Today.ToString("yyyy/MM/dd");
                 }
                 pnlContent.Visible = true;
                 rfCloseDate.Visible = true;
