@@ -222,16 +222,17 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         table.Columns.Add("申辦專案", typeof(string));
         table.Columns.Add("搭配手機", typeof(string));
         table.Columns.Add("手機序號", typeof(string));
+        table.Columns.Add("保固商", typeof(string));
+        table.Columns.Add("手機盤商", typeof(string));
         table.Columns.Add("申辦號碼", typeof(string));
         table.Columns.Add("手機進價", typeof(double));
         table.Columns.Add("銷售金額", typeof(double));
         table.Columns.Add("門號佣金", typeof(double));
-        table.Columns.Add("違約金", typeof(double));
-        table.Columns.Add("補償金", typeof(double));
+        table.Columns.Add("違約金", typeof(double));        
         table.Columns.Add("綁約月數", typeof(double));
         table.Columns.Add("門號到期日", typeof(string));
-        table.Columns.Add("備註", typeof(string));
-        table.Columns.Add("銷售員", typeof(string));        
+        table.Columns.Add("銷售員", typeof(string));
+        table.Columns.Add("備註", typeof(string));        
 
         if (memberList != null && memberList.Count > 0)
         {
@@ -252,16 +253,17 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                 dr[4] = memberVO.Project;
                 dr[5] = memberVO.Product;
                 dr[6] = memberVO.PhoneSer;
-                dr[7] = memberVO.Mobile;
-                dr[8] = memberVO.PhonePrice == null ? 0 : memberVO.PhonePrice;
-                dr[9] = memberVO.PhoneSellPrice == null ? 0 : memberVO.PhoneSellPrice;
-                dr[10] = memberVO.Commission == null ? 0 : memberVO.Commission;
-                dr[11] = memberVO.BreakMoney == null ? 0 : memberVO.BreakMoney;
-                dr[12] = memberVO.Compensation == null ? 0 : memberVO.Compensation;
-                dr[13] = memberVO.ContractMonths == null ? 0 : memberVO.ContractMonths;
-                dr[14] = dueDate;
-                dr[15] = memberVO.Sales;
-                dr[16] = memberVO.Note;
+                dr[7] = memberVO.WarrantySuppliers;
+                dr[8] = memberVO.MobileWholesalers;
+                dr[9] = memberVO.Mobile;
+                dr[10] = memberVO.PhonePrice == null ? 0 : memberVO.PhonePrice;
+                dr[11] = memberVO.PhoneSellPrice == null ? 0 : memberVO.PhoneSellPrice;
+                dr[12] = memberVO.Commission == null ? 0 : memberVO.Commission;
+                dr[13] = memberVO.BreakMoney == null ? 0 : memberVO.BreakMoney;                
+                dr[14] = memberVO.ContractMonths == null ? 0 : memberVO.ContractMonths;
+                dr[15] = dueDate;
+                dr[16] = memberVO.Sales;
+                dr[17] = memberVO.Note;
 
                 table.Rows.Add(dr);                
             }

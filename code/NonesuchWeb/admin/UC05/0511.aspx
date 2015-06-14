@@ -96,6 +96,22 @@
                 </tr>
                 <tr>
                     <td>
+                        保固商
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtWarrantySuppliers" runat="server" Width="300px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        手機盤商
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtMobileWholesalers" runat="server" Width="300px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         申辦號碼
                     </td>
                     <td>
@@ -153,19 +169,6 @@
                                     ControlToValidate="txtBreakMoney" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>--%>
                         <asp:RangeValidator ID="RangeValidator4" runat="server" ErrorMessage="違約金請輸入0以上的整數"
                             ControlToValidate="txtBreakMoney" MaximumValue="1000000" MinimumValue="0" Type="Integer"
-                            Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        補償金
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txtCompensation" runat="server" Width="100px"></asp:TextBox>
-                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入補償金"
-                                    ControlToValidate="txtCompensation" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>--%>
-                        <asp:RangeValidator ID="RangeValidator5" runat="server" ErrorMessage="補償金請輸入0以上的整數"
-                            ControlToValidate="txtCompensation" MaximumValue="1000000" MinimumValue="0" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>
                 </tr>
@@ -366,7 +369,21 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" Width="300" />
                         <HeaderStyle HorizontalAlign="Center" />
-                    </asp:TemplateField>                                                             
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="保固商">
+                        <ItemTemplate>
+                            <asp:Label ID="lblWarrantySuppliers" runat="server" Text='<%# Bind("WarrantySuppliers") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" Width="150" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField> 
+                    <asp:TemplateField HeaderText="手機盤商">
+                        <ItemTemplate>
+                            <asp:Label ID="lblMobileWholesalers" runat="server" Text='<%# Bind("MobileWholesalers") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" Width="150" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>                                                              
                     <asp:TemplateField HeaderText="手機進價">
                         <ItemTemplate>
                             <asp:Label ID="lblPhonePrice" runat="server" Text='<%# Bind("PhonePrice") %>'></asp:Label>
