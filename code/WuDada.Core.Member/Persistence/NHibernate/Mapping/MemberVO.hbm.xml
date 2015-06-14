@@ -40,6 +40,8 @@
     <property name="Compensation" column="Compensation" type="Double" />
     <property name="ContractMonths" column="ContractMonths" type="Double" />
     <property name="Sales" column="Sales" type="String" length="50" />
+    <property name="WarrantySuppliers" column="WarrantySuppliers" type="String" length="100" />
+    <property name="MobileWholesalers" column="MobileWholesalers" type="String" length="100" />
     <property name="Note" type="StringClob" >
       <column name="Note" sql-type="nvarchar(max)"/>
     </property>

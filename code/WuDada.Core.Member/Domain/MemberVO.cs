@@ -241,6 +241,18 @@ namespace WuDada.Core.Member.Domain
         [DataMember]
         public virtual string Note { get; set; }
 
+        /// <summary>
+        /// 保固商
+        /// </summary>
+        [DataMember]
+        public virtual string WarrantySuppliers { get; set; }
+
+        /// <summary>
+        /// 手機盤商
+        /// </summary>
+        [DataMember]
+        public virtual string MobileWholesalers { get; set; }
+
         public virtual string GetStr_Status
         {
             get
