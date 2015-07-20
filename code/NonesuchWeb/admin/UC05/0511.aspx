@@ -177,12 +177,20 @@
                         綁約月數
                     </td>
                     <td>
-                        <asp:TextBox ID="txtContractMonths" runat="server" Width="100px"></asp:TextBox>
+                        <asp:DropDownList ID="ddlContractMonths" runat="server" AutoPostBack="true" 
+                            onselectedindexchanged="ddlContractMonths_SelectedIndexChanged">                            
+                            <asp:ListItem Text="請選擇" Value=""></asp:ListItem>
+                            <asp:ListItem Text="12" Value="12"></asp:ListItem>
+                            <asp:ListItem Text="24" Value="24"></asp:ListItem>
+                            <asp:ListItem Text="30" Value="30"></asp:ListItem>
+                            <asp:ListItem Text="36" Value="36"></asp:ListItem>
+                        </asp:DropDownList>
+                        <%--<asp:TextBox ID="txtContractMonths" runat="server" Width="100px"></asp:TextBox>--%>
                         <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入補償金"
                                     ControlToValidate="txtContractMonths" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>--%>
-                        <asp:RangeValidator ID="RangeValidator6" runat="server" ErrorMessage="綁約月數請輸入0以上的整數"
+                        <%--<asp:RangeValidator ID="RangeValidator6" runat="server" ErrorMessage="綁約月數請輸入0以上的整數"
                             ControlToValidate="txtContractMonths" MaximumValue="1000000" MinimumValue="0" Type="Integer"
-                            Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
+                            Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>--%>
                     </td>
                 </tr>
                 <tr>

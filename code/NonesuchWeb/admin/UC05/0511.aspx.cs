@@ -279,7 +279,8 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         //ltlImg.Text = string.Empty;
         UIHelper.ClearUI(pnlContent);
         pnlContent.Visible = false;
-        btnShowAdd.Enabled = true;       
+        btnShowAdd.Enabled = true;
+        ddlContractMonths.SelectedValue = "";
     }
 
     //private string GetPic(string fileName)
@@ -374,6 +375,13 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                 ddlSales.Items.Add(loginUserVO.FullNameInChinese);
             }
         }
+
+        ddlContractMonths.Items.Clear();
+        ddlContractMonths.Items.Add(new ListItem("請選擇綁約月數 ", ""));
+        ddlContractMonths.Items.Add(new ListItem("12 ", "12"));
+        ddlContractMonths.Items.Add(new ListItem("24 ", "24"));
+        ddlContractMonths.Items.Add(new ListItem("30 ", "30"));
+        ddlContractMonths.Items.Add(new ListItem("36 ", "36"));
      
         ////生日年月日
         ddlBirthDayYear.Items.Clear();
@@ -436,4 +444,32 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
     //        return;
     //    }
     //}        
+    protected void ddlContractMonths_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if(!string.IsNullOrEmpty(txtApplyDate.Text.Trim()) && !string.IsNullOrEmpty(ddlContractMonths.SelectedValue))
+        {
+            try
+            {
+                DateTime applyDate = DateTime.Parse(txtApplyDate.Text.Trim());
+                DateTime dueDate;
+                switch (ddlContractMonths.SelectedValue)
+                {
+                    case "12":
+                    case "24":
+                    case "36":
+                        dueDate = applyDate.AddDays((365 * (int.Parse(ddlContractMonths.SelectedValue) / 12)));
+                        txtDueDate.Text = dueDate.ToString("yyyy/MM/dd");
+                        break;
+                    case "30":
+                        dueDate = applyDate.AddDays(910);
+                        txtDueDate.Text = dueDate.ToString("yyyy/MM/dd");
+                        break;
+                }
+                //DateTime dueDate = applyDate.AddDays
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+    }
 }
