@@ -1179,7 +1179,7 @@ public class NPOIHelper
     /// <param name="dtSource">源DataTable</param>
     /// <param name="strHeaderText">表头文本</param>
     /// <param name="strFileName">文件名</param>
-    public static void ExportByWeb(DataTable dtSource, string strHeaderText, string strFileName)
+    public static void ExportByWeb(DataTable dtSource, string strHeaderText, string strFileName, bool usePassword)
     {
         HttpContext curContext = HttpContext.Current;
 
@@ -1190,7 +1190,7 @@ public class NPOIHelper
         curContext.Response.AppendHeader("Content-Disposition",
         "attachment;filename=" + HttpUtility.UrlEncode(strFileName, Encoding.UTF8));
 
-        curContext.Response.BinaryWrite(Export(dtSource, strHeaderText).GetBuffer());
+        curContext.Response.BinaryWrite(Export(dtSource, strHeaderText, usePassword).GetBuffer());
         curContext.Response.End();
     }
 
@@ -1201,10 +1201,35 @@ public class NPOIHelper
     /// </summary>
     /// <param name="dtSource">源DataTable</param>
     /// <param name="strHeaderText">表头文本</param>
-    public static MemoryStream Export(DataTable dtSource, string strHeaderText)
+    public static MemoryStream Export(DataTable dtSource, string strHeaderText, bool usePassword)
     {
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        HSSFSheet sheet = workbook.CreateSheet() as HSSFSheet;
+        string path = @"D:\temp.xls";
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+
+        HSSFWorkbook fakeWorkbook = new HSSFWorkbook();
+        HSSFSheet fakeSheet = fakeWorkbook.CreateSheet() as HSSFSheet;
+        FileStream savefile = new FileStream(path, FileMode.Create);
+        fakeWorkbook.Write(savefile);
+        savefile.Close();
+        savefile.Dispose();        
+
+        FileStream file = new FileStream(path, FileMode.Open, FileAccess.Read);
+        if (usePassword)
+        {
+            NPOI.HSSF.Record.Crypto.Biff8EncryptionKey.CurrentUserPassword = "12345";//打开前调用
+        }
+        HSSFWorkbook workbook = new HSSFWorkbook(file);
+        if (usePassword)
+        {
+            workbook.WriteProtectWorkbook("vul3vm04", "");//设置新密码
+        }
+        file.Close();
+
+        HSSFSheet sheet = (HSSFSheet)workbook.GetSheetAt(0);
 
         #region 右击文件 属性信息
         {

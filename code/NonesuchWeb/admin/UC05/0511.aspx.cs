@@ -269,7 +269,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             }
         }
 
-        NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}客戶.xls",DateTime.Today.ToString("yyyyMMdd")));
+        NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}客戶.xls", DateTime.Today.ToString("yyyyMMdd")), true);
     }
 
     private void ClearUI()
