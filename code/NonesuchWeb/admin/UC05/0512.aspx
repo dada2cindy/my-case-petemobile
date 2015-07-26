@@ -11,7 +11,7 @@
                 庫存編輯</h1>
             <table style="width: 100%" class="FormTable">
                 <tr>
-                    <td width="40px">
+                    <td width="80px">
                         類別
                     </td>
                     <td width="900px">
