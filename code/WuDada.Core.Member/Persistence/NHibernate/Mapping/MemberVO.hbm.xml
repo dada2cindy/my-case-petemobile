@@ -45,6 +45,9 @@
     <property name="Note" type="StringClob" >
       <column name="Note" sql-type="nvarchar(max)"/>
     </property>
+    <property name="ApplyDate2" column="ApplyDate2" type="DateTime"/>
+    <property name="PID" column="PID" type="String" length="20"/>
+    <property name="Store" column="Store" type="String" length="20"/>
 
   </class>
 

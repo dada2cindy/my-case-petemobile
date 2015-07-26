@@ -98,6 +98,7 @@ namespace WuDada.Core.Member.Persistence
             AppendMemberCreateDate(conditions, whereScript, param);
             AppendMemberDate(conditions, whereScript, param);
             AppendMemberBirthDay(conditions, whereScript, param);
+            AppendMemberStore(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -106,6 +107,15 @@ namespace WuDada.Core.Member.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendMemberStore(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("Store"))
+            {
+                whereScript.Append(" and m.Store = ? ");
+                param.Add(conditions["Store"]);
+            }
         }
 
         private void AppendMemberBirthDay(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
@@ -144,6 +154,16 @@ namespace WuDada.Core.Member.Persistence
             {
                 whereScript.Append(" and m.DueDate <= ? ");
                 param.Add(Convert.ToDateTime(conditions["DueDateEnd"]));
+            }
+            if (conditions.IsContainsValue("ApplyDate2Start"))
+            {
+                whereScript.Append(" and m.ApplyDate2 >= ? ");
+                param.Add(Convert.ToDateTime(conditions["ApplyDate2Start"]));
+            }
+            if (conditions.IsContainsValue("ApplyDate2End"))
+            {
+                whereScript.Append(" and m.ApplyDate2 <= ? ");
+                param.Add(Convert.ToDateTime(conditions["ApplyDate2End"]));
             }
         }
 
@@ -187,7 +207,8 @@ namespace WuDada.Core.Member.Persistence
         {
             if (conditions.IsContainsValue("KeyWord"))
             {
-                whereScript.Append(" and (m.Name like ? or m.Email like ? or m.Phone like ? or m.Mobile like ? or m.Project like ? or m.Product like ? or m.PhoneSer like ? ) ");
+                whereScript.Append(" and (m.Name like ? or m.Email like ? or m.Phone like ? or m.Mobile like ? or m.Project like ? or m.Product like ? or m.PhoneSer like ? or m.PID like ? ) ");
+                param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");

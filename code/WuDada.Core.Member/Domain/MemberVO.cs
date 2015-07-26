@@ -140,7 +140,7 @@ namespace WuDada.Core.Member.Domain
         public virtual string Token { get; set; }
 
         /// <summary>
-        /// 申請日期
+        /// 開通日期
         /// </summary>
         [DataMember]
         public virtual DateTime? ApplyDate { get; set; }
@@ -252,6 +252,24 @@ namespace WuDada.Core.Member.Domain
         /// </summary>
         [DataMember]
         public virtual string MobileWholesalers { get; set; }
+
+        /// <summary>
+        /// 申辦日期
+        /// </summary>
+        [DataMember]
+        public virtual DateTime? ApplyDate2 { get; set; }
+
+        /// <summary>
+        /// 身分證字號
+        /// </summary>
+        [DataMember]
+        public virtual string PID { get; set; }
+
+        /// <summary>
+        /// 店家
+        /// </summary>
+        [DataMember]
+        public virtual string Store { get; set; }
 
         public virtual string GetStr_Status
         {
