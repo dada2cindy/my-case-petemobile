@@ -12,16 +12,21 @@ using WuDada.Core.Auth.Domain;
 using WuDada.Core.Member;
 using WuDada.Core.Member.Service;
 using WuDada.Core.Member.Domain;
+using WuDada.Core.Post.Service;
+using WuDada.Core.Post;
+using WuDada.Core.Post.Domain;
 
 public partial class admin_UC05_0511 : System.Web.UI.Page
 {
     private ILog m_Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    private PostFactory m_PostFactory;
     private MemberFactory m_MemberFactory;
     private IMemberService m_MemberService;
     private AuthFactory m_AuthFactory;
     private IAuthService m_AuthService;
     private WebLogService m_WebLogService;
     private HttpHelper m_HttpHelper;
+    private IPostService m_PostService;
 
     private int m_Mode
     {
@@ -37,11 +42,13 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         m_WebLogService = new WebLogService();
+        m_PostFactory = new PostFactory();
         m_MemberFactory = new MemberFactory();
         m_AuthFactory = new AuthFactory();
         m_HttpHelper = new HttpHelper();
         m_AuthService = m_AuthFactory.GetAuthService();
         m_MemberService = m_MemberFactory.GetMemberService();
+        m_PostService = m_PostFactory.GetPostService();
 
         if (!IsPostBack)
         {
@@ -95,6 +102,16 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             conditions.Add("DueDateEnd", txtSearchDueDateEnd.Text.Trim());
         }
 
+        if (!string.IsNullOrEmpty(txtSearchApplyDate2Start.Text.Trim()))
+        {
+            conditions.Add("ApplyDate2Start", txtSearchApplyDate2Start.Text.Trim());
+        }
+
+        if (!string.IsNullOrEmpty(txtSearchApplyDate2End.Text.Trim()))
+        {
+            conditions.Add("ApplyDate2End", txtSearchApplyDate2End.Text.Trim());
+        }
+
         if (!string.IsNullOrEmpty(ddlSearchBirthDay.SelectedValue))
         {
             switch (ddlSearchBirthDay.SelectedValue)
@@ -110,7 +127,12 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                     conditions.Add("BirthdayMonth", DateTime.Today.AddMonths(1).Month.ToString());
                     break;
             }
-        }        
+        }
+
+        if (!string.IsNullOrEmpty(ddlStore.SelectedValue))
+        {
+            conditions.Add("Store", ddlStore.SelectedValue);
+        }
         
 
         //分頁
@@ -194,6 +216,16 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             conditions.Add("DueDateEnd", txtSearchDueDateEnd.Text.Trim());
         }
 
+        if (!string.IsNullOrEmpty(txtSearchApplyDate2Start.Text.Trim()))
+        {
+            conditions.Add("ApplyDate2Start", txtSearchApplyDate2Start.Text.Trim());
+        }
+
+        if (!string.IsNullOrEmpty(txtSearchApplyDate2End.Text.Trim()))
+        {
+            conditions.Add("ApplyDate2End", txtSearchApplyDate2End.Text.Trim());
+        }
+
         if (!string.IsNullOrEmpty(ddlSearchBirthDay.SelectedValue))
         {
             switch (ddlSearchBirthDay.SelectedValue)
@@ -209,14 +241,21 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                     conditions.Add("BirthdayMonth", DateTime.Today.AddMonths(1).Month.ToString());
                     break;
             }
-        } 
+        }
+
+        if (!string.IsNullOrEmpty(ddlStore.SelectedValue))
+        {
+            conditions.Add("Store", ddlStore.SelectedValue);
+        }
 
         conditions.Add("Order", "order by m.ApplyDate desc, m.Name");
 
         IList<MemberVO> memberList = m_MemberService.GetMemberList(conditions);
         DataTable table = new DataTable();
-        table.Columns.Add("申辦日期", typeof(string));
+        table.Columns.Add("申請日期", typeof(string));
+        table.Columns.Add("開通日期", typeof(string));
         table.Columns.Add("客戶大名", typeof(string));
+        table.Columns.Add("身分證字號", typeof(string));
         table.Columns.Add("聯絡電話", typeof(string));        
         table.Columns.Add("客戶生日", typeof(string));
         table.Columns.Add("申辦專案", typeof(string));
@@ -232,6 +271,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         table.Columns.Add("綁約月數", typeof(double));
         table.Columns.Add("門號到期日", typeof(string));
         table.Columns.Add("銷售員", typeof(string));
+        table.Columns.Add("店家", typeof(string));
         table.Columns.Add("備註", typeof(string));        
 
         if (memberList != null && memberList.Count > 0)
@@ -241,29 +281,33 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                 DataRow dr = table.NewRow();
 
                 string applyDate = memberVO.ApplyDate.HasValue ? memberVO.ApplyDate.Value.ToString("yyyy/MM/dd") : "";
+                string applyDate2 = memberVO.ApplyDate2.HasValue ? memberVO.ApplyDate2.Value.ToString("yyyy/MM/dd") : "";
                 string dueDate = memberVO.DueDate.HasValue ? memberVO.DueDate.Value.ToString("yyyy/MM/dd") : "";
                 string birthday = !string.IsNullOrEmpty(memberVO.BirthdayYear) ? memberVO.BirthdayYear + "/" : "";
                 birthday += !string.IsNullOrEmpty(memberVO.BirthdayMonth) ? memberVO.BirthdayMonth + "/" : "";
                 birthday += (!string.IsNullOrEmpty(memberVO.BirthdayMonth) && !string.IsNullOrEmpty(memberVO.BirthdayDay)) ? memberVO.BirthdayDay : "";
 
-                dr[0] = applyDate;
-                dr[1] = memberVO.Name;
-                dr[2] = memberVO.Phone;
-                dr[3] = birthday;
-                dr[4] = memberVO.Project;
-                dr[5] = memberVO.Product;
-                dr[6] = memberVO.PhoneSer;
-                dr[7] = memberVO.WarrantySuppliers;
-                dr[8] = memberVO.MobileWholesalers;
-                dr[9] = memberVO.Mobile;
-                dr[10] = memberVO.PhonePrice == null ? 0 : memberVO.PhonePrice;
-                dr[11] = memberVO.PhoneSellPrice == null ? 0 : memberVO.PhoneSellPrice;
-                dr[12] = memberVO.Commission == null ? 0 : memberVO.Commission;
-                dr[13] = memberVO.BreakMoney == null ? 0 : memberVO.BreakMoney;                
-                dr[14] = memberVO.ContractMonths == null ? 0 : memberVO.ContractMonths;
-                dr[15] = dueDate;
-                dr[16] = memberVO.Sales;
-                dr[17] = memberVO.Note;
+                dr[0] = applyDate2;
+                dr[1] = applyDate;
+                dr[2] = memberVO.Name;
+                dr[3] = memberVO.PID;
+                dr[4] = memberVO.Phone;
+                dr[5] = birthday;
+                dr[6] = memberVO.Project;
+                dr[7] = memberVO.Product;
+                dr[8] = memberVO.PhoneSer;
+                dr[9] = memberVO.WarrantySuppliers;
+                dr[10] = memberVO.MobileWholesalers;
+                dr[11] = memberVO.Mobile;
+                dr[12] = memberVO.PhonePrice == null ? 0 : memberVO.PhonePrice;
+                dr[13] = memberVO.PhoneSellPrice == null ? 0 : memberVO.PhoneSellPrice;
+                dr[14] = memberVO.Commission == null ? 0 : memberVO.Commission;
+                dr[15] = memberVO.BreakMoney == null ? 0 : memberVO.BreakMoney;                
+                dr[16] = memberVO.ContractMonths == null ? 0 : memberVO.ContractMonths;
+                dr[17] = dueDate;
+                dr[18] = memberVO.Sales;
+                dr[19] = memberVO.Store;
+                dr[20] = memberVO.Note;
 
                 table.Rows.Add(dr);                
             }
@@ -414,6 +458,23 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             ddlSearchBirthDay.Items.Add("本月生日");
             ddlSearchBirthDay.Items.Add("下個月生日");
         }
+
+        ////帶入店家
+        IList<NodeVO> storetList = m_PostService.GetNodeListByParentId(54);        
+        ddlStore.Items.Clear();
+        ddlSearchStore.Items.Clear();
+        if (storetList != null && storetList.Count > 0)
+        {
+            ddlStore.Items.Add(new ListItem("請選擇店家", ""));
+            ddlSearchStore.Items.Add(new ListItem("全部", ""));            
+            foreach (NodeVO node in storetList)
+            {
+                ddlStore.Items.Add(node.Name);
+                ddlSearchStore.Items.Add(node.Name);
+            }
+        }
+
+        ddlStore.SelectedValue = "興安總店";
     }    
 
     //protected void btnUpliad_Click(object sender, EventArgs e)

@@ -9,10 +9,25 @@
         <fieldset class="fieldset">
             <h1>
                 客戶編輯</h1>
-            <table style="width: 100%" class="FormTable">                               
+            <table style="width: 100%" class="FormTable">   
                 <tr>
                     <td width="80px">
                         申辦日期
+                    </td>
+                    <td width="860px">
+                        <asp:TextBox ID="txtApplyDate2" runat="server" Width="100px"></asp:TextBox>
+                        <cc1:CalendarExtender ID="CalendarExtender7" runat="server" CssClass="MyCalendar"
+                            PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="calendar10" TargetControlID="txtApplyDate2" />
+                        <asp:Image ID="calendar10" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtApplyDate2"
+                            ErrorMessage="請輸入申辦日期" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ErrorMessage="日期格式錯誤"
+                            ControlToValidate="txtApplyDate2" Display="Dynamic" ValidationGroup="Save" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
+                    </td>
+                </tr>                            
+                <tr>
+                    <td width="80px">
+                        開通日期
                     </td>
                     <td width="860px">
                         <asp:TextBox ID="txtApplyDate" runat="server" Width="100px"></asp:TextBox>
@@ -20,7 +35,7 @@
                             PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="calendar1" TargetControlID="txtApplyDate" />
                         <asp:Image ID="calendar1" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtApplyDate"
-                            ErrorMessage="請輸入申辦日期" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
+                            ErrorMessage="請輸入開通日期" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="日期格式錯誤"
                             ControlToValidate="txtApplyDate" Display="Dynamic" ValidationGroup="Save" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
                     </td>
@@ -33,6 +48,16 @@
                         <asp:TextBox ID="txtName" runat="server" Width="100px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="請輸入客戶大名"
                             ControlToValidate="txtName" ValidationGroup="Save"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        身分證字號
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtPID" runat="server" Width="100px"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="請輸入身分證字號"
+                            ControlToValidate="txtPID" ValidationGroup="Save"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -228,7 +253,18 @@
                         <asp:RequiredFieldValidator ID="rfCustomField2" runat="server" ErrorMessage="請選擇銷售員"
                             ControlToValidate="ddlSales" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>
                     </td>
-                </tr>                
+                </tr>
+                <tr>
+                    <td>
+                        店家
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlStore" runat="server">
+                        </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="請選擇店家"
+                            ControlToValidate="ddlStore" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>                 
                 <%--<tr>
                     <td valign="top">
                         圖片
@@ -288,7 +324,26 @@
                         <asp:DropDownList ID="ddlSearchBirthDay" runat="server">
                         </asp:DropDownList>
                         <br />
+                        店家:
+                        <asp:DropDownList ID="ddlSearchStore" runat="server">
+                        </asp:DropDownList>
+                        <br />
                         申辦日期:
+                        <asp:TextBox ID="txtSearchApplyDate2Start" runat="server"></asp:TextBox>  
+                        <cc1:CalendarExtender ID="CalendarExtender8" runat="server" CssClass="MyCalendar"
+                            PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="searchCalendar10" TargetControlID="txtSearchApplyDate2Start" />
+                        <asp:Image ID="searchCalendar10" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />                        
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" ErrorMessage="日期格式錯誤"
+                            ControlToValidate="txtSearchApplyDate2Start" Display="Dynamic" ValidationGroup="Search" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
+                        ~                        
+                        <asp:TextBox ID="txtSearchApplyDate2End" runat="server"></asp:TextBox> 
+                        <cc1:CalendarExtender ID="CalendarExtender9" runat="server" CssClass="MyCalendar"
+                            PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="searchCalendar11" TargetControlID="txtSearchApplyDate2End" />
+                        <asp:Image ID="searchCalendar11" runat="server" AlternateText="開啟日曆，點選日期" ImageUrl="~/admin/images/calendar.gif" />                        
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ErrorMessage="日期格式錯誤"
+                            ControlToValidate="txtSearchApplyDate2End" Display="Dynamic" ValidationGroup="Search" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
+                            <br />
+                        開通日期:
                         <asp:TextBox ID="txtSearchApplyDateStart" runat="server"></asp:TextBox>  
                         <cc1:CalendarExtender ID="CalendarExtender3" runat="server" CssClass="MyCalendar"
                             PopupPosition="BottomLeft" Format="yyyy/MM/dd" PopupButtonID="searchCalendar1" TargetControlID="txtSearchApplyDateStart" />
@@ -345,6 +400,13 @@
                 <Columns> 
                     <asp:TemplateField HeaderText="申辦日">
                         <ItemTemplate>
+                            <asp:Label ID="lblApplyDate2" runat="server" Text='<%# Eval("ApplyDate2","{0:yyyy-MM-dd}") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Left" Width="150" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="開通日">
+                        <ItemTemplate>
                             <asp:Label ID="lblApplyDate" runat="server" Text='<%# Eval("ApplyDate","{0:yyyy-MM-dd}") %>'></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left" Width="150" />
@@ -355,6 +417,13 @@
                             <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left" Width="150" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="身分證">
+                        <ItemTemplate>
+                            <asp:Label ID="lblPID" runat="server" Text='<%# Bind("PID") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Left" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="聯絡電話">
@@ -418,6 +487,13 @@
                             <asp:Label ID="lblSales" runat="server" Text='<%# Bind("Sales") %>'></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left" Width="100" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="店家">
+                        <ItemTemplate>
+                            <asp:Label ID="lblStore" runat="server" Text='<%# Bind("Store") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Left" Width="50" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="查看">
