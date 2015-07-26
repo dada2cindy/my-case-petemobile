@@ -58,6 +58,12 @@
     <property column="CustomField1" type="String" name="CustomField1" />
     <property column="CustomField2" type="String" name="CustomField2" />
 
+    <property name="MemberName" column="MemberName" type="String" length="100"/>
+    <property name="MemberPhone" column="MemberPhone" type="String" length="50"/>
+    <property name="ProductSer" column="ProductSer" type="String" length="100"/>
+    <property name="WarrantySuppliers" column="WarrantySuppliers" type="String" length="100" />
+    <property name="Wholesalers" column="Wholesalers" type="String" length="100" />
+
   </class>
 
 </hibernate-mapping>

@@ -185,6 +185,36 @@ namespace WuDada.Core.Post.Domain
         [DataMember]
         public virtual string CustomField2 { get; set; }
 
+        /// <summary>
+        /// 客戶姓名
+        /// </summary>
+        [DataMember]
+        public virtual string MemberName { get; set; }
+
+        /// <summary>
+        /// 客戶電話
+        /// </summary>
+        [DataMember]
+        public virtual string MemberPhone { get; set; }
+
+        /// <summary>
+        /// 商品序號
+        /// </summary>
+        [DataMember]
+        public virtual string ProductSer { get; set; }
+
+        /// <summary>
+        /// 保固商
+        /// </summary>
+        [DataMember]
+        public virtual string WarrantySuppliers { get; set; }
+
+        /// <summary>
+        /// 進貨盤商
+        /// </summary>
+        [DataMember]
+        public virtual string Wholesalers { get; set; }
+
         #endregion
 
         /// <summary>

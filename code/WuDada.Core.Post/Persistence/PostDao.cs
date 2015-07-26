@@ -659,7 +659,9 @@ namespace WuDada.Core.Post.Persistence
         {
             if (conditions.IsContainsValue("KeyWord"))
             {
-                whereScript.Append(" and (p.Title like ? or p.HtmlContent like ? or p.CustomField1 like ? ) ");
+                whereScript.Append(" and (p.Title like ? or p.HtmlContent like ? or p.CustomField1 like ? or p.MemberName like ? or p.MemberPhone like ? ) ");
+                param.Add("%" + conditions["KeyWord"] + "%");
+                param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
