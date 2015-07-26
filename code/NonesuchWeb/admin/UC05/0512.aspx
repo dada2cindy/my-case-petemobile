@@ -107,6 +107,46 @@
                 </tr>
                 <tr>
                     <td>
+                        客戶姓名
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtMemberName" runat="server" Width="100px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        客戶電話
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtMemberPhone" runat="server" Width="100px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        商品序號
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtProductSer" runat="server" Width="300px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        保固商
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtWarrantySuppliers" runat="server" Width="300px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        進貨盤商
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtWholesalers" runat="server" Width="300px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         銷售員
                     </td>
                     <td>
@@ -283,7 +323,14 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
-                    </asp:TemplateField>                    
+                    </asp:TemplateField>  
+                    <asp:TemplateField HeaderText="客戶">
+                        <ItemTemplate>
+                            <asp:Label ID="lblMemberName" runat="server" Text='<%# Bind("MemberName") %>'></asp:Label>                            
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Left" Width="100" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>                  
                     <asp:TemplateField HeaderText="進貨價">
                         <ItemTemplate>
                             <asp:Label ID="lblPrice" runat="server" Text='<%# Bind("Price") %>'></asp:Label>
