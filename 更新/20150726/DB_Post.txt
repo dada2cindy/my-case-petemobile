@@ -1,0 +1,5 @@
+ALTER TABLE POST ADD MemberName nvarchar(100);
+ALTER TABLE POST ADD MemberPhone nvarchar(50);
+ALTER TABLE POST ADD ProductSer nvarchar(100);
+ALTER TABLE POST ADD WarrantySuppliers nvarchar(100);
+ALTER TABLE POST ADD Wholesalers nvarchar(100);
