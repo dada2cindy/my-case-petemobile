@@ -1,0 +1,41 @@
+ALTER TABLE MEMBER ADD ApplyDate2 DateTime;
+ALTER TABLE MEMBER ADD PID nvarchar(20);
+ALTER TABLE MEMBER ADD Store nvarchar(20);
+UPDATE MEMBER SET [Store] = '興安總店';
+
+
+INSERT INTO [POST_NODE]
+           ([Name]
+           ,[ParentId]
+           ,[SortNo]
+           ,[Flag]
+           ,[UType]
+           ,[CreatedBy]
+           ,[UpdatedBy])
+     VALUES
+           ('店家'
+           ,1
+           ,3
+           ,1
+           ,0
+           ,'admin'
+           ,'admin')
+GO
+
+INSERT INTO [POST_NODE]
+           ([Name]
+           ,[ParentId]
+           ,[SortNo]
+           ,[Flag]
+           ,[UType]
+           ,[CreatedBy]
+           ,[UpdatedBy])
+     VALUES
+           ('興安總店'
+           ,(SELECT [NodeId] FROM [POST_NODE] where Name='店家')
+           ,1
+           ,1
+           ,0
+           ,'admin'
+           ,'admin')
+GO
