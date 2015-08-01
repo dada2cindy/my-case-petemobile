@@ -21,6 +21,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
     private AuthFactory m_AuthFactory;
     private IAuthService m_AuthService;
     private WebLogService m_WebLogService;
+    private SessionHelper m_SessionHelper;
     
     private int m_NodeId = 2;
 
@@ -40,6 +41,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         m_WebLogService = new WebLogService();
         m_PostFactory = new PostFactory();
         m_AuthFactory = new AuthFactory();
+        m_SessionHelper = new SessionHelper();
         m_AuthService = m_AuthFactory.GetAuthService();
         m_PostService = m_PostFactory.GetPostService();
 
@@ -73,6 +75,11 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             txtQuantity.Enabled = false;
             txtCloseDate.Enabled = false;
             calendar2.Visible = false;
+        }
+
+        if (!m_SessionHelper.IsAdmin)
+        {
+            btnSearchExport.Visible = false;
         }
     }
 
@@ -208,6 +215,11 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         table.Columns.Add("進貨價", typeof(double));
         table.Columns.Add("售價", typeof(double));
         table.Columns.Add("數量", typeof(int));
+        table.Columns.Add("客戶姓名", typeof(string));
+        table.Columns.Add("客戶電話", typeof(string));
+        table.Columns.Add("商品序號", typeof(string));
+        table.Columns.Add("保固商", typeof(string));
+        table.Columns.Add("進貨盤商", typeof(string));
         table.Columns.Add("銷售員", typeof(string));
 
         if (postList != null && postList.Count > 0)
@@ -227,7 +239,12 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
                 dr[5] = postVO.Price == null ? 0 : postVO.Price;
                 dr[6] = postVO.SellPrice == null ? 0 : postVO.SellPrice;
                 dr[7] = postVO.Quantity;
-                dr[8] = postVO.CustomField2;
+                dr[8] = postVO.MemberName;
+                dr[9] = postVO.MemberPhone;
+                dr[10] = postVO.ProductSer;
+                dr[11] = postVO.WarrantySuppliers;
+                dr[12] = postVO.Wholesalers;
+                dr[13] = postVO.CustomField2;
                 table.Rows.Add(dr);                
             }
         }

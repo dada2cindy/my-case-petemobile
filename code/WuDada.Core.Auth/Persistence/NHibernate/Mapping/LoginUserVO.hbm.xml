@@ -8,9 +8,9 @@
     </id>
     <version name="Version"/>
 
-    <bag name="LoginRoleList" table="AUTH_USER_IN_ROLE" cascade="save-update" lazy="true" >
+    <bag name="LoginRoleList" table="AUTH_USER_IN_ROLE" cascade="save-update" lazy="false" >
       <key column="UserId"  />
-      <many-to-many class="WuDada.Core.Auth.Domain.LoginRoleVO" column="RoleId" lazy="proxy"/>
+      <many-to-many class="WuDada.Core.Auth.Domain.LoginRoleVO" column="RoleId" lazy="false"/>
     </bag>
     
     <property name ="Password" length="50" type="String" />

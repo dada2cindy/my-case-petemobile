@@ -25,6 +25,8 @@ using System.IO;
 using WuDada.Core.Member.Domain;
 using WuDada.Core.Member.Service;
 using WuDada.Core.Member;
+using WuDada.Core.Accounting.Service;
+using WuDada.Core.Accounting.Domain;
 
 namespace GalaxyClinic.Test.Service
 {
@@ -43,6 +45,8 @@ namespace GalaxyClinic.Test.Service
         private IStorageFileService m_StorageFileService { get; set; }
         private MemberFactory m_MemberFactory { get; set; }
         private IMemberService m_MemberService { get; set; }
+        private AccountingFactory m_AccountingFactory { get; set; }
+        private IAccountingService m_AccountingService { get; set; }        
 
         [TestFixtureSetUp]
         public void TestCaseInit()
@@ -52,6 +56,7 @@ namespace GalaxyClinic.Test.Service
             m_SystemFactory = new SystemFactory();
             m_StorageFactory = new StorageFactory();
             m_MemberFactory = new MemberFactory();
+            m_AccountingFactory = new AccountingFactory();
             m_AuthService = m_AuthFactory.GetAuthService();
             m_PostService = m_PostFactory.GetPostService();
             m_TemplateService = m_SystemFactory.GetTemplateService();
@@ -59,6 +64,7 @@ namespace GalaxyClinic.Test.Service
             m_MessageService = m_PostFactory.GetMessageService();
             m_StorageFileService = m_StorageFactory.GetStorageFileService();
             m_MemberService = m_MemberFactory.GetMemberService();
+            m_AccountingService = m_AccountingFactory.GetAccountingService();
         }
 
         [Test]
@@ -263,6 +269,20 @@ ORDER BY SortNo "
             int memberCount = m_MemberService.GetMemberCount(conditions);
             IList<MemberVO> memberList = m_MemberService.GetMemberList(conditions);
             Assert.AreEqual(memberCount, memberList.Count);
+        }
+
+        [Test]
+        public void Test_IsAdmin()
+        {
+            LoginUserVO user = m_AuthService.GetLoginUserById("petechen");
+            Assert.IsTrue(m_AuthService.IsAdmin(user));
+        }
+
+        [Test]
+        public void Test_GetSalesStatistics()
+        {
+            IList<SalesStatisticsVO> list = m_AccountingService.GetSalesStatistics("yyyyMM");
+            Assert.IsNotNull(list);
         }
 
         private void InitMenu()

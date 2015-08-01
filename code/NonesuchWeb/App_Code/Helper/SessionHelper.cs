@@ -20,6 +20,7 @@ public class SessionHelper : System.Web.UI.Page
     private readonly string LOGIN_USER_BELONGTOBRANCH = "LOGIN_USER_BELONGTOBRANCH";
     private readonly string MEMBER = "MEMBER";
     private readonly string FRONT_LANGUAGE = "FRONT_LANGUAGE";
+    private readonly string IS_AMDIN = "IS_AMDIN";
 
     /// <summary>
     ///  目前的後台清單是否開啟
@@ -133,5 +134,15 @@ public class SessionHelper : System.Web.UI.Page
         get { return (Session[LOGIN_USER_BELONGTOBRANCH] == null ? "" : Session[LOGIN_USER_BELONGTOBRANCH].ToString()); }
 
         set { Session[LOGIN_USER_BELONGTOBRANCH] = value; }
+    }
+
+    /// <summary>
+    ///  判斷是否是admin
+    /// </summary>
+    public bool IsAdmin
+    {
+        get { return ((Session[IS_AMDIN] == null || String.IsNullOrEmpty(Session[IS_AMDIN].ToString())) ? true : (bool)Session[IS_AMDIN]); }
+
+        set { Session[IS_AMDIN] = value; }
     }
 }

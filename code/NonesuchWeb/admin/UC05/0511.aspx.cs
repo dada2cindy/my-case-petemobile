@@ -27,6 +27,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
     private WebLogService m_WebLogService;
     private HttpHelper m_HttpHelper;
     private IPostService m_PostService;
+    private SessionHelper m_SessionHelper;
 
     private int m_Mode
     {
@@ -46,6 +47,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         m_MemberFactory = new MemberFactory();
         m_AuthFactory = new AuthFactory();
         m_HttpHelper = new HttpHelper();
+        m_SessionHelper = new SessionHelper();
         m_AuthService = m_AuthFactory.GetAuthService();
         m_MemberService = m_MemberFactory.GetMemberService();
         m_PostService = m_PostFactory.GetPostService();
@@ -72,6 +74,12 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             btnAdd.Visible = false;
             btnEdit.Visible = true;
             btnDelete.Visible = true;
+        }
+
+        if (!m_SessionHelper.IsAdmin)
+        {
+            btnSearchExport.Visible = false;
+            btnEdit.Visible = false;
         }
     }
 

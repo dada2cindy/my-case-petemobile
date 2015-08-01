@@ -184,5 +184,12 @@ namespace WuDada.Core.Auth.Service
         /// <param name="menuFuncVO">要加入Path的功能</param>
         /// <param name="path">要加入Path</param>
         void AddOtherPath(MenuFuncVO menuFuncVO, string path);
+
+        /// <summary>
+        /// 判斷是否是admin
+        /// </summary>
+        /// <param name="loginUser"></param>
+        /// <returns></returns>
+        bool IsAdmin(LoginUserVO loginUser);
     }
 }

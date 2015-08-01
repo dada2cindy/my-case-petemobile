@@ -455,5 +455,25 @@ namespace WuDada.Core.Auth.Service.Impl
 
             MenuFuncDao.CreateFunctionPath(functionPathVO);
         }
+
+        /// <summary>
+        /// 判斷是否是admin
+        /// </summary>
+        /// <param name="loginUser"></param>
+        /// <returns></returns>
+        public bool IsAdmin(LoginUserVO user)
+        {
+            LoginUserVO loginUserVO = GetLoginUserById(user.UserId);
+            IList<LoginRoleVO> loginRoleList = loginUserVO.LoginRoleList;
+            foreach (LoginRoleVO role in loginRoleList)
+            {
+                if ("系統管理員".Equals(role.RoleName))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

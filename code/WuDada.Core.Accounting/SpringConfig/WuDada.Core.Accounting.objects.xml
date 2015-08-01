@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:db="http://www.springframework.net/database">
+  <!-- Index:
+        * DAO objects 設定
+        * Service objects 設定
+    -->
+  <!-- DAO objects 設定 -->
+  
+  <!-- Service objects 設定 --> 
+
+  <object id="AccountingServiceProxy" parent="TxProxyConfigurationTemplate">
+    <property name="Target" ref="AccountingService"/>
+  </object>
+  <object id="AccountingService" type="WuDada.Core.Accounting.Service.Impl.AccountingService, WuDada.Core.Accounting">
+    <property name="PostService" ref="PostService"/>
+    <property name="MemberService" ref="MemberService"/>
+    <property name="AuthService" ref="AuthService"/>
+  </object>
+
+</objects>

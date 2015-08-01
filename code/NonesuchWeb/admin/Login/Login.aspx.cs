@@ -41,6 +41,7 @@ public partial class admin_Login_Login : System.Web.UI.Page
             SessionHelper sHelper = new SessionHelper();
 
             sHelper.LoginUser = loginUser;
+            sHelper.IsAdmin = m_AuthService.IsAdmin(loginUser);
             //sHelper.LoginUserBelongToBranchNo = loginUser.BelongToBranch[0].BranchNo;
             //加入log
             webLogService.AddSystemLogLogin(loginUser.UserId);
