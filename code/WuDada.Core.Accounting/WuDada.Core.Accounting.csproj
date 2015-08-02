@@ -82,6 +82,9 @@
   <ItemGroup>
     <Compile Include="AccountingFactory.cs" />
     <Compile Include="Domain\SalesStatisticsVO.cs" />
+    <Compile Include="Domain\TargetVO.cs" />
+    <Compile Include="Persistence\IAccountingDao.cs" />
+    <Compile Include="Persistence\AccountingDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\IAccountingService.cs" />
     <Compile Include="Service\Impl\AccountingService.cs" />
@@ -113,8 +116,11 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Persistence\NHibernate\" />
+    <EmbeddedResource Include="Persistence\NHibernate\TargetVO.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -550,6 +550,7 @@ namespace WuDada.Core.Post.Persistence
             AppendPostType(conditions, whereScript, param);
             AppendPostCustomField1(conditions, whereScript, param);
             AppendPostEqualTitle(conditions, whereScript, param);
+            AppendPostCustomField2(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -558,6 +559,15 @@ namespace WuDada.Core.Post.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendPostCustomField2(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("CustomField2"))
+            {
+                whereScript.Append(" and p.CustomField2 = ? ");
+                param.Add(conditions["CustomField2"]);
+            }
         }
 
         private void AppendPostEqualTitle(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)

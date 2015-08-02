@@ -6,6 +6,10 @@
         * Service objects 設定
     -->
   <!-- DAO objects 設定 -->
+  <object id="AccountingDao" type="WuDada.Core.Accounting.Persistence.AccountingDao, WuDada.Core.Accounting">
+    <property name="AdoTemplate" ref="AdoTemplate"/>
+    <property name="NHibernateDao" ref="NHibernateDao"/>
+  </object>
   
   <!-- Service objects 設定 --> 
 
@@ -16,6 +20,7 @@
     <property name="PostService" ref="PostService"/>
     <property name="MemberService" ref="MemberService"/>
     <property name="AuthService" ref="AuthService"/>
+    <property name="AccountingDao" ref="AccountingDao"/>
   </object>
 
 </objects>

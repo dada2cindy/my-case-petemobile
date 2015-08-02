@@ -2,25 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WuDada.Core.Member.Domain;
 using WuDada.Core.Accounting.Domain;
 
-namespace WuDada.Core.Accounting.Service
+namespace WuDada.Core.Accounting.Persistence
 {
-    public interface IAccountingService
+    public interface IAccountingDao
     {
-        /// <summary>
-        /// 取得當月業績
-        /// </summary>
-        /// <param name="ym">yyyyMM</param>
-        /// <returns></returns>
-        IList<SalesStatisticsVO> GetSalesStatistics(string ym, string store);
-
-        /// <summary>
-        /// 更新業績
-        /// </summary>
-        /// <param name="targetList"></param>
-        void UpdateTargetList(IList<TargetVO> targetList);
-
         /// <summary>
         /// 取得業績目標 by Id
         /// </summary>

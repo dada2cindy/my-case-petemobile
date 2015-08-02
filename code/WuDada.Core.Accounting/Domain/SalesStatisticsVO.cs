@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace WuDada.Core.Accounting.Domain
 {
     /// <summary>
-    /// 後台角色
+    /// 業績統計
     /// </summary>
     [Serializable]
     [DataContract]
@@ -33,7 +33,7 @@ namespace WuDada.Core.Accounting.Domain
         /// 本月目標
         /// </summary>
         [DataMember]
-        public virtual double Target { get; set; }
+        public virtual double? Target { get; set; }
 
         /// <summary>
         /// 門號件數
@@ -45,13 +45,13 @@ namespace WuDada.Core.Accounting.Domain
         /// 門號營收
         /// </summary>
         [DataMember]
-        public virtual double ApplyRevenue { get; set; }
+        public virtual double? ApplyRevenue { get; set; }
 
         /// <summary>
         /// 門號毛利
         /// </summary>
         [DataMember]
-        public virtual double ApplyProfit { get; set; }
+        public virtual double? ApplyProfit { get; set; }
 
         /// <summary>
         /// 配件件數
@@ -63,13 +63,25 @@ namespace WuDada.Core.Accounting.Domain
         /// 配件營收
         /// </summary>
         [DataMember]
-        public virtual double FittingRevenue { get; set; }
+        public virtual double? FittingRevenue { get; set; }
 
         /// <summary>
         /// 配件毛利
         /// </summary>
         [DataMember]
-        public virtual double FittingProfit { get; set; }
+        public virtual double? FittingProfit { get; set; }
+
+        /// <summary>
+        /// 總毛利
+        /// </summary>
+        [DataMember]
+        public virtual double? TotalProfit { get; set; }
+
+        /// <summary>
+        /// 達成率
+        /// </summary>
+        [DataMember]
+        public virtual double? TargetAchievementRates { get; set; }
         
 
         #endregion

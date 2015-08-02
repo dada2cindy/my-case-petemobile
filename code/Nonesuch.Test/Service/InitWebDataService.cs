@@ -281,8 +281,29 @@ ORDER BY SortNo "
         [Test]
         public void Test_GetSalesStatistics()
         {
-            IList<SalesStatisticsVO> list = m_AccountingService.GetSalesStatistics("yyyyMM");
+            IList<SalesStatisticsVO> list = m_AccountingService.GetSalesStatistics("201507", "興安總店");
             Assert.IsNotNull(list);
+        }
+
+        [Test]
+        public void Test_CreateTarget()
+        {
+            IList<TargetVO> targetList = new List<TargetVO>();
+
+            double targetAmount = 20000;
+
+            IList<LoginUserVO> userList = m_AuthService.GetAllLoginUserList();
+            foreach (LoginUserVO user in userList)
+            {
+                TargetVO targetVO = new TargetVO();
+                targetVO.Id = string.Format("{0}{1}", "201507", user.FullNameInChinese);
+                targetVO.Name = user.FullNameInChinese;
+                targetVO.Amount = targetAmount;
+                targetAmount += 5000;
+                targetList.Add(targetVO);
+            }
+
+            m_AccountingService.UpdateTargetList(targetList);
         }
 
         private void InitMenu()

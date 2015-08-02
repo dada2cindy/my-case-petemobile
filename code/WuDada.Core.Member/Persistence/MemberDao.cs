@@ -99,6 +99,7 @@ namespace WuDada.Core.Member.Persistence
             AppendMemberDate(conditions, whereScript, param);
             AppendMemberBirthDay(conditions, whereScript, param);
             AppendMemberStore(conditions, whereScript, param);
+            AppendMemberSales(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -107,6 +108,15 @@ namespace WuDada.Core.Member.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendMemberSales(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("Sales"))
+            {
+                whereScript.Append(" and m.Sales = ? ");
+                param.Add(conditions["Sales"]);
+            }
         }
 
         private void AppendMemberStore(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
