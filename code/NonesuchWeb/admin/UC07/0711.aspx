@@ -54,7 +54,7 @@
                             <asp:Label ID="lblTarget" runat="server" Text='<%# Bind("Target") %>'></asp:Label>
                             <asp:TextBox ID="txtTarget" runat="server" Text='<%# Bind("Target") %>' Width="100px"></asp:TextBox>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Right" Width="120" />
+                        <ItemStyle HorizontalAlign="Right" Width="140" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="上線件數">
@@ -82,7 +82,7 @@
                         <ItemTemplate>
                             <asp:Label ID="lblFittingCount" runat="server" Text='<%# Bind("FittingCount") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Right" Width="120" />
+                        <ItemStyle HorizontalAlign="Right" Width="140" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="配件營收">
