@@ -621,6 +621,9 @@ body
 	border-top-style: solid;
 	border-top-width: 1px;
 	border-top-color: #000000;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-left-color: #000000;
 	background: #B4C7C5;
 	color: #59483f;
 	font-weight: normal;
@@ -653,6 +656,9 @@ body
 	border-top-style: solid;
 	border-top-width: 1px;
 	border-top-color: #000000;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-left-color: #000000;
 }
 
 /* mouseover row style */
