@@ -36,7 +36,7 @@ namespace WuDada.Core.Accounting.Service.Impl
             log.Debug("GetSalesStatistics");
 
             //test
-            IList<LoginUserVO> userList = AuthService.GetAllLoginUserList();
+            IList<LoginUserVO> userList = AuthService.GetAllLoginUserList().Where(u => u.IsAlive == 1).ToList();
             if (userList != null && userList.Count > 0)
             {
                 IList<SalesStatisticsVO> result = new List<SalesStatisticsVO>();
@@ -47,7 +47,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                 DateTime dateEnd = dateStart.AddMonths(1).AddDays(-1);
 
                 foreach (LoginUserVO user in userList)
-                {
+                {                    
                     SalesStatisticsVO salesStatisticsVO = new SalesStatisticsVO();                    
 
                     string targetId = string.Format("{0}{1}", ym, user.FullNameInChinese);
@@ -112,13 +112,25 @@ namespace WuDada.Core.Accounting.Service.Impl
                         if (DateTime.Today.ToString("yyyyMM").Equals(dateStart.ToString("yyyyMM")))
                         {
                             //為本月要算出目前日子已過了本月幾分之幾, 進度達成率=總毛利/ [本月目標* (當月已過天數/當月天數)]
-                            salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TotalProfit / (salesStatisticsVO.Target * (DateTime.Today.Day / DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month)))) * 100;
+                            //salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TotalProfit / (salesStatisticsVO.Target * (DateTime.Today.Day / DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month))));
+                            salesStatisticsVO.TargetAchievementRates = salesStatisticsVO.TotalProfit / salesStatisticsVO.Target;
+
+                            double rates = Convert.ToDouble(salesStatisticsVO.TargetAchievementRates * 100);
+                            salesStatisticsVO.TargetAchievementRates = Math.Round(rates, 2);
+
+                            salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TargetAchievementRates * DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month)) / DateTime.Today.Day;
+
+                            rates = Convert.ToDouble(salesStatisticsVO.TargetAchievementRates);
+                            salesStatisticsVO.TargetAchievementRates = Math.Round(rates, 2);
                         }
                         else
                         {
                             //進度達成率=總毛利/ 本月目標
                             salesStatisticsVO.TargetAchievementRates = salesStatisticsVO.TotalProfit / salesStatisticsVO.Target;
-                        }
+
+                            double rates = Convert.ToDouble(salesStatisticsVO.TargetAchievementRates * 100);
+                            salesStatisticsVO.TargetAchievementRates = Math.Round(rates, 2);
+                        }                        
                     }      
                     else
                     {

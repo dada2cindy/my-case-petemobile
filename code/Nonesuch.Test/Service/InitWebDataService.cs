@@ -313,6 +313,7 @@ ORDER BY SortNo "
             CreateSubMenu("庫存列表", parentMenu51, 1002, "admin/UC05/0512.aspx");
             CreateSubMenu("庫存類別", parentMenu51, 1003, "admin/UC04/0411.aspx");
             CreateSubMenu("庫存品名", parentMenu51, 1004, "admin/UC04/0421.aspx");
+            CreateSubMenu("業績報表", parentMenu51, 1005, "admin/UC07/0711.aspx");
 
             //MenuFuncVO parentMenu42 = CreateParentMenu("服務項目管理", 2000);
             //CreateSubMenu("服務項目分類", parentMenu42, 2001, "admin/UC04/0421.aspx");
