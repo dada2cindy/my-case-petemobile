@@ -54,14 +54,14 @@
                             <asp:Label ID="lblTarget" runat="server" Text='<%# Bind("Target") %>'></asp:Label>
                             <asp:TextBox ID="txtTarget" runat="server" Text='<%# Bind("Target") %>' Width="100px"></asp:TextBox>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Right" Width="140" />
+                        <ItemStyle HorizontalAlign="Right" Width="130" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="上線件數">
                         <ItemTemplate>
                             <asp:Label ID="lblApplyCount" runat="server" Text='<%# Bind("ApplyCount") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Right" Width="100" />
+                        <ItemStyle HorizontalAlign="Right" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>                   
                     <asp:TemplateField HeaderText="門號營收">
