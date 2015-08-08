@@ -43,6 +43,7 @@
     <property column="UpdatedBy" type="String" name="UpdatedBy"  length="50"/>
     <property column="UpdatedDate" type="DateTime" name="UpdatedDate" />
     <property column="IsAlive" type="Int32" name="IsAlive" />
+    <property column="ShowInSalesStatistics" type="Int32" name="ShowInSalesStatistics" />
 
   </class>
 

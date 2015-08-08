@@ -204,6 +204,12 @@ namespace WuDada.Core.Auth.Domain
         [DataMember]
         public virtual int IsAlive { get; set; }
 
+        /// <summary>
+        /// 是否顯示在統計報表
+        /// </summary>
+        [DataMember]
+        public virtual int ShowInSalesStatistics { get; set; }
+
         #endregion
     }
 }
