@@ -52,9 +52,9 @@
                     <asp:TemplateField HeaderText="本月目標">
                         <ItemTemplate>
                             <asp:Label ID="lblTarget" runat="server" Text='<%# Bind("Target") %>'></asp:Label>
-                            <asp:TextBox ID="txtTarget" runat="server" Text='<%# Bind("Target") %>'></asp:TextBox>
+                            <asp:TextBox ID="txtTarget" runat="server" Text='<%# Bind("Target") %>' Width="100px"></asp:TextBox>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Right" Width="150" />
+                        <ItemStyle HorizontalAlign="Right" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="上線件數">
