@@ -36,7 +36,7 @@ namespace WuDada.Core.Accounting.Service.Impl
             log.Debug("GetSalesStatistics");
 
             //test
-            IList<LoginUserVO> userList = AuthService.GetAllLoginUserList().Where(u => u.ShowInSalesStatistics == 1).ToList();
+            IList<LoginUserVO> userList = AuthService.GetAllLoginUserList().Where(u => u.ShowInSalesStatistics == 1).OrderBy(u => u.SortNo).ToList();
             if (userList != null && userList.Count > 0)
             {
                 IList<SalesStatisticsVO> result = new List<SalesStatisticsVO>();

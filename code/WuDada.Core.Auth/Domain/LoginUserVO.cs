@@ -18,6 +18,7 @@ namespace WuDada.Core.Auth.Domain
         public LoginUserVO()
         {
             this.IsAlive = 1;
+            this.SortNo = 9999;
         }
 
         #endregion
@@ -209,6 +210,12 @@ namespace WuDada.Core.Auth.Domain
         /// </summary>
         [DataMember]
         public virtual int ShowInSalesStatistics { get; set; }
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        [DataMember]
+        public virtual int SortNo { get; set; }
 
         #endregion
     }
