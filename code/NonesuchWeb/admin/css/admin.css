@@ -566,6 +566,13 @@ body
 	width: 800px;
 	border: solid 1px #ad9e87;
 }
+.datagrid2
+{
+	font-family: ·L³n¥¿¶ÂÅé,verdana,sans-serif;
+	font-size: 16px;
+	width: 800px;
+	border: solid 1px #ad9e87;
+}
 .datagridEmpty
 {
 	border-style: none;
@@ -580,14 +587,14 @@ body
 	border-style: none;
 }
 /* common cell styles */
-.datagrid th, .datagrid td
+.datagrid th, .datagrid td, .datagrid2 th, .datagrid2 td
 {
 	cursor: default;
 	height: 15px;
 }
 
 /* header cell style */
-.datagrid th
+.datagrid th, .datagrid2 th
 {
 	padding: 2px 8px;
 	border-right-style: solid;
@@ -603,7 +610,7 @@ body
 }
 
 /* cell styles */
-.datagrid td
+.datagrid td,.datagrid2 td
 {
 	color: #000;
 	padding: 2px 8px;
@@ -616,7 +623,7 @@ body
 }
 
 /* mouseover row style */
-.datagrid tr:hover
+.datagrid tr:hover, .datagrid2 tr:hover
 {
 	background-color: #f2e8da;
 }

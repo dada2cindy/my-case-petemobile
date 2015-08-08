@@ -148,6 +148,14 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
                 UIHelper.SetContrlVisible(ref ctrl, "lblTarget", true);
                 UIHelper.SetContrlVisible(ref ctrl, "txtTarget", false);
             }
+
+
+            Label lblTargetAchievementRates = (Label)ctrl.FindControl("lblTargetAchievementRates");
+            double rates = double.Parse(lblTargetAchievementRates.Text.Trim());
+            if (rates < 60)
+            {
+                lblTargetAchievementRates.ForeColor = System.Drawing.Color.Red;
+            }            
         }
     }
     

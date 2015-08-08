@@ -33,7 +33,7 @@
             <br />
             <asp:GridView ID="gvList" runat="server" BackColor="White" BorderColor="#DEDFDE"
                 AutoGenerateColumns="false" BorderStyle="None" BorderWidth="1px" CellPadding="4"
-                ForeColor="Black" GridLines="Vertical" Width="100%" CssClass="datagrid"
+                ForeColor="Black" GridLines="Vertical" Width="100%" CssClass="datagrid2"
                 OnRowDataBound="gvList_RowDataBound">
                 <RowStyle BackColor="#F7F7DE" />
                 <FooterStyle BackColor="#CCCC99" />
@@ -108,9 +108,9 @@
                     </asp:TemplateField> 
                     <asp:TemplateField HeaderText="達成率">
                         <ItemTemplate>
-                            <asp:Label ID="lblTargetAchievementRates" runat="server" Text='<%# Bind("TargetAchievementRates") %>'></asp:Label> %
+                            <asp:Label ID="lblTargetAchievementRates" runat="server" Text='<%# Bind("TargetAchievementRates") %>' ForeColor="Blue"></asp:Label> %
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Right" Width="80" />
+                        <ItemStyle HorizontalAlign="Right" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>                                                                                  
                 </Columns>

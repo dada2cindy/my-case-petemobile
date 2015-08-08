@@ -27,7 +27,7 @@
                             </td>
                             <td>
                                 <asp:RadioButtonList ID="rdbIsValidAccount" runat="server" RepeatDirection="Horizontal">
-                                    <asp:ListItem Text="立即啟用" Value="1  " Selected="True"></asp:ListItem>
+                                    <asp:ListItem Text="立即啟用" Value="1" Selected="True"></asp:ListItem>
                                     <asp:ListItem Text="停用" Value="0"></asp:ListItem>
                                 </asp:RadioButtonList>
                             </td>
@@ -68,8 +68,17 @@
                             <td>
                                 電子郵件
                             </td>
-                            <td colspan="3">
+                            <td >
                                 <asp:TextBox ID="txtEmail" runat="server" Width="450px"></asp:TextBox>
+                            </td>
+                            <td>
+                                於業績報表顯示
+                            </td>
+                            <td>
+                                <asp:RadioButtonList ID="rdbShowInSalesStatistics" runat="server" RepeatDirection="Horizontal">
+                                    <asp:ListItem Text="是" Value="1" Selected="True"></asp:ListItem>
+                                    <asp:ListItem Text="否" Value="0"></asp:ListItem>
+                                </asp:RadioButtonList>
                             </td>
                         </tr>
                         <tr>

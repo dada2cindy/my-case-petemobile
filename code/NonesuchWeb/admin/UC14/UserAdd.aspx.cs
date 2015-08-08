@@ -60,6 +60,7 @@ public partial class adm_UC14_UC14_1_UserAdd : System.Web.UI.Page
         string nameInChinese = txtFullNameInChinese.Text.Trim();
         string nameInEnglish = txtFullNameInEnglish.Text.Trim();
         int IsAlive = int.Parse(rdbIsValidAccount.SelectedValue);
+        int ShowInSalesStatistics = int.Parse(rdbShowInSalesStatistics.SelectedValue);
 
         string mobie = txtMobile.Text.Trim();
         string ssid = txtSSID.Text.Trim();
@@ -80,6 +81,7 @@ public partial class adm_UC14_UC14_1_UserAdd : System.Web.UI.Page
             newUser.FullNameInChinese = nameInChinese;
             newUser.FullNameInEnglish = nameInEnglish;
             newUser.IsAlive = IsAlive;
+            newUser.ShowInSalesStatistics = ShowInSalesStatistics;
             newUser.Mobile = mobie;
             newUser.SSID = ssid;
             newUser.Email = email;
@@ -118,6 +120,7 @@ public partial class adm_UC14_UC14_1_UserAdd : System.Web.UI.Page
         string nameInEnglish = txtFullNameInEnglish.Text.Trim();
         string version = hdnVersion.Value;
         int isAlive = int.Parse(rdbIsValidAccount.SelectedValue);
+        int showInSalesStatistics = int.Parse(rdbShowInSalesStatistics.SelectedValue);
         string mobie = txtMobile.Text.Trim();
         string ssid = txtSSID.Text.Trim();
         string email = txtEmail.Text.Trim();
@@ -128,6 +131,7 @@ public partial class adm_UC14_UC14_1_UserAdd : System.Web.UI.Page
         user.FullNameInEnglish = nameInEnglish;
         user.Version = Int32.Parse(version);
         user.IsAlive = isAlive;
+        user.ShowInSalesStatistics = showInSalesStatistics;
         user.Mobile = mobie;
         user.SSID = ssid;
         user.Email = email;
@@ -193,6 +197,7 @@ public partial class adm_UC14_UC14_1_UserAdd : System.Web.UI.Page
         hdnVersion.Value = user.Version.ToString();
 
         rdbIsValidAccount.SelectedValue = user.IsAlive.ToString();
+        rdbShowInSalesStatistics.SelectedValue = user.ShowInSalesStatistics.ToString();
 
         txtMobile.Text = user.Mobile;
         txtSSID.Text = user.SSID;
