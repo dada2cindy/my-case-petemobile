@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title> 整合平台</title>
+    <title> 品讚行動通訊聯合系統</title>
     <link href="../css/css.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <td height="34" background="../images/white.gif" class="text01-12-black">
-                        <font size="3"> 整合平台</font>
+                        <font size="3"> 品讚行動通訊聯合系統</font>
                     </td>
                 </tr>
                 <tr>

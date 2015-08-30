@@ -90,5 +90,15 @@ namespace WuDada.Core.Member.Service.Impl
                 return null;
             }
         }
+
+        /// <summary>
+        /// 取得門號佣金總合
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public int GetTotalCommission(IDictionary<string, string> conditions)
+        {
+            return MemberDao.GetTotalCommission(conditions);
+        }
     }
 }

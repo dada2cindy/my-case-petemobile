@@ -60,14 +60,22 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            if (!IsPostBack)
-            {
-                InitDDL();
-                ShowMode(); 
-            }
+            InitDDL();
+            ShowMode();
                        
-            fillGridView();                    
+            fillGridView();
+
+            LoadUI();
         }
+    }
+
+    private void LoadUI()
+    {
+        Dictionary<string, string> conditions = new Dictionary<string, string>();
+        conditions.Add("Status", "1");
+        conditions.Add("GetCommission", "否");
+
+        lblNotGetCommission.Text = m_MemberService.GetTotalCommission(conditions).ToString();
     }
 
     private void ShowMode()
@@ -99,6 +107,11 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
         DataTable table = new DataTable();
         table.Columns.Add("姓名", typeof(string));
         table.Columns.Add("本月目標", typeof(double));
+        table.Columns.Add("太電", typeof(int));
+        table.Columns.Add("遠傳", typeof(int));
+        table.Columns.Add("中華", typeof(int));
+        table.Columns.Add("亞太", typeof(int));
+        table.Columns.Add("星星", typeof(int));
         table.Columns.Add("上線件數", typeof(int));
         table.Columns.Add("門號營收", typeof(double));
         table.Columns.Add("門號毛利", typeof(double));
@@ -116,14 +129,19 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
 
                 dr[0] = salesStatistics.Name;
                 dr[1] = salesStatistics.Target;
-                dr[2] = salesStatistics.ApplyCount;
-                dr[3] = salesStatistics.ApplyRevenue;
-                dr[4] = salesStatistics.ApplyProfit;
-                dr[5] = salesStatistics.FittingCount;
-                dr[6] = salesStatistics.FittingRevenue;
-                dr[7] = salesStatistics.FittingProfit;
-                dr[8] = salesStatistics.TotalProfit;
-                dr[9] = salesStatistics.TargetAchievementRates;                
+                dr[2] = salesStatistics.ApplyTelCom1Count;
+                dr[3] = salesStatistics.ApplyTelCom2Count;
+                dr[4] = salesStatistics.ApplyTelCom3Count;
+                dr[5] = salesStatistics.ApplyTelCom4Count;
+                dr[6] = salesStatistics.ApplyTelCom5Count;
+                dr[7] = salesStatistics.ApplyCount;
+                dr[8] = salesStatistics.ApplyRevenue;
+                dr[9] = salesStatistics.ApplyProfit;
+                dr[10] = salesStatistics.FittingCount;
+                dr[11] = salesStatistics.FittingRevenue;
+                dr[12] = salesStatistics.FittingProfit;
+                dr[13] = salesStatistics.TotalProfit;
+                dr[14] = salesStatistics.TargetAchievementRates;                
 
                 table.Rows.Add(dr);
             }
@@ -138,7 +156,9 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
         if (e.Row.RowIndex != -1)
         {
             Control ctrl = e.Row;
-            if (m_SessionHelper.IsAdmin)
+            Label lblName = (Label)ctrl.FindControl("lblName");
+
+            if (m_SessionHelper.IsAdmin && !"總合".Equals(lblName.Text))
             {
                 UIHelper.SetContrlVisible(ref ctrl, "lblTarget", false);
                 UIHelper.SetContrlVisible(ref ctrl, "txtTarget", true);

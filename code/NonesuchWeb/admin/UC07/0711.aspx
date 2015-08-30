@@ -25,6 +25,7 @@
                         <asp:Button ID="btnSearchExport" runat="server" Text="查詢結果匯出" OnClick="btnSearchExport_Click" ValidationGroup="Search" />                                          
                         <br />
                         <br />
+                        <div class="customNumber">未核發佣金總額：<asp:Label ID="lblNotGetCommission" runat="server" Text="0" ForeColor="Red"></asp:Label></div>
                     </td>
                     <td align="right" class="labelText">                        
                     </td>
@@ -52,12 +53,50 @@
                     <asp:TemplateField HeaderText="本月目標">
                         <ItemTemplate>
                             <asp:Label ID="lblTarget" runat="server" Text='<%# Bind("Target") %>'></asp:Label>
-                            <asp:TextBox ID="txtTarget" runat="server" Text='<%# Bind("Target") %>' Width="100px"></asp:TextBox>
+                            <asp:TextBox ID="txtTarget" runat="server" Text='<%# Bind("Target") %>' Width="70px"></asp:TextBox>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Right" Width="130" />
+                        <ItemStyle HorizontalAlign="Right" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="上線件數">
+                    <asp:TemplateField HeaderText="太電">
+                        <ItemTemplate>
+                            <asp:Label ID="lblApplyTelCom1Count" runat="server" Text='<%# Bind("ApplyTelCom1Count") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" Width="70" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="遠傳">
+                        <ItemTemplate>
+                            <asp:Label ID="lblApplyTelCom2Count" runat="server" Text='<%# Bind("ApplyTelCom2Count") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" Width="70" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="中華">
+                        <ItemTemplate>
+                            <asp:Label ID="lblApplyTelCom3Count" runat="server" Text='<%# Bind("ApplyTelCom3Count") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" Width="70" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="亞太">
+                        <ItemTemplate>
+                            <asp:Label ID="lblApplyTelCom4Count" runat="server" Text='<%# Bind("ApplyTelCom4Count") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" Width="70" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="星星">
+                        <ItemTemplate>
+                            <asp:Label ID="lblApplyTelCom5Count" runat="server" Text='<%# Bind("ApplyTelCom5Count") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" Width="70" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField> 
+                    <asp:TemplateField >
+                        <HeaderTemplate>
+                            上線<br />件數
+                        </HeaderTemplate>
                         <ItemTemplate>
                             <asp:Label ID="lblApplyCount" runat="server" Text='<%# Bind("ApplyCount") %>'></asp:Label>
                         </ItemTemplate>
@@ -78,11 +117,14 @@
                         <ItemStyle HorizontalAlign="Right" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="配件件數">
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            配件<br />件數
+                        </HeaderTemplate>
                         <ItemTemplate>
                             <asp:Label ID="lblFittingCount" runat="server" Text='<%# Bind("FittingCount") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Right" Width="140" />
+                        <ItemStyle HorizontalAlign="Right" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="配件營收">

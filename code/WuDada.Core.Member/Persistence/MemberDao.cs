@@ -88,6 +88,25 @@ namespace WuDada.Core.Member.Persistence
             return count;
         }
 
+        /// <summary>
+        /// 取得門號佣金總合
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public int GetTotalCommission(IDictionary<string, string> conditions)
+        {
+            int count = 0;
+            ArrayList param = new ArrayList();
+            string fromScript = "select sum(m.Commission) from MemberVO m ";
+            StringBuilder whereScript = new StringBuilder();
+            IList result = this.QueryMember(param, fromScript, whereScript, conditions, false);
+            if (result.Count > 0)
+            {
+                count = Convert.ToInt32(result[0]);
+            }
+            return count;
+        }
+
         private IList QueryMember(ArrayList param, string fromScript, StringBuilder whereScript, IDictionary<string, string> conditions, bool useOrder)
         {
             AppendMemberLoginId(conditions, whereScript, param);
@@ -100,6 +119,7 @@ namespace WuDada.Core.Member.Persistence
             AppendMemberBirthDay(conditions, whereScript, param);
             AppendMemberStore(conditions, whereScript, param);
             AppendMemberSales(conditions, whereScript, param);
+            AppendMemberGetCommission(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -108,6 +128,15 @@ namespace WuDada.Core.Member.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendMemberGetCommission(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("GetCommission"))
+            {
+                whereScript.Append(" and m.GetCommission = ? ");
+                param.Add(conditions["GetCommission"]);
+            }
         }
 
         private void AppendMemberSales(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)

@@ -48,6 +48,12 @@
     <property name="ApplyDate2" column="ApplyDate2" type="DateTime"/>
     <property name="PID" column="PID" type="String" length="20"/>
     <property name="Store" column="Store" type="String" length="20"/>
+    <property name="OnlineWholesalers" column="OnlineWholesalers" type="String" length="100" />
+    <property name="SimNo" column="SimNo" type="String" length="100" />
+    <property name="Project1" column="Project1" type="String" length="100" />
+    <property name="Project2" column="Project2" type="String" length="100" />
+    <property name="Project3" column="Project3" type="String" length="100" />
+    <property name="GetCommission" column="GetCommission" type="String" length="1"/>
 
   </class>
 

@@ -72,12 +72,22 @@ namespace WuDada.Core.Accounting.Service.Impl
                         salesStatisticsVO.ApplyCount = memberList.Count;
                         salesStatisticsVO.ApplyRevenue = memberList.Sum(m => m.Commission);
                         salesStatisticsVO.ApplyProfit = memberList.Sum(m => m.Commission + m.PhoneSellPrice - m.PhonePrice - m.BreakMoney);
+                        salesStatisticsVO.ApplyTelCom1Count = memberList.Count(m => "太電".Equals(m.Project3));
+                        salesStatisticsVO.ApplyTelCom2Count = memberList.Count(m => "遠傳".Equals(m.Project3));
+                        salesStatisticsVO.ApplyTelCom3Count = memberList.Count(m => "中華".Equals(m.Project3));
+                        salesStatisticsVO.ApplyTelCom4Count = memberList.Count(m => "亞太".Equals(m.Project3));
+                        salesStatisticsVO.ApplyTelCom5Count = memberList.Count(m => "星星".Equals(m.Project3));
                     }
                     else
                     {
                         salesStatisticsVO.ApplyCount = 0;
                         salesStatisticsVO.ApplyRevenue = 0;
                         salesStatisticsVO.ApplyProfit = 0;
+                        salesStatisticsVO.ApplyTelCom1Count = 0;
+                        salesStatisticsVO.ApplyTelCom2Count = 0;
+                        salesStatisticsVO.ApplyTelCom3Count = 0;
+                        salesStatisticsVO.ApplyTelCom4Count = 0;
+                        salesStatisticsVO.ApplyTelCom5Count = 0;
                     }
 
                     //配件
@@ -140,12 +150,69 @@ namespace WuDada.Core.Accounting.Service.Impl
                     result.Add(salesStatisticsVO);
                 }
 
+                result.Add(GetTotal(ym, result));
+
                 return result;
             }
             else
             {
                 return null;
             }
+        }
+
+        private SalesStatisticsVO GetTotal(string ym, IList<SalesStatisticsVO> result)
+        {
+            int year = int.Parse(ym.Substring(0, 4));
+            int month = int.Parse(ym.Substring(4, 2));
+            DateTime dateStart = new DateTime(year, month, 1);
+
+            SalesStatisticsVO salesStatisticsVO = new SalesStatisticsVO();
+            salesStatisticsVO.Name = "總合";
+            salesStatisticsVO.Target = result.Sum(m => m.Target);
+            salesStatisticsVO.ApplyCount = result.Sum(m => m.ApplyCount);
+            salesStatisticsVO.ApplyRevenue = result.Sum(m => m.ApplyRevenue);
+            salesStatisticsVO.ApplyProfit = result.Sum(m => m.ApplyProfit);
+            salesStatisticsVO.ApplyTelCom1Count = result.Sum(m => m.ApplyTelCom1Count);
+            salesStatisticsVO.ApplyTelCom2Count = result.Sum(m => m.ApplyTelCom2Count);
+            salesStatisticsVO.ApplyTelCom3Count = result.Sum(m => m.ApplyTelCom3Count);
+            salesStatisticsVO.ApplyTelCom4Count = result.Sum(m => m.ApplyTelCom4Count);
+            salesStatisticsVO.ApplyTelCom5Count = result.Sum(m => m.ApplyTelCom5Count);
+            salesStatisticsVO.FittingCount = result.Sum(m => m.FittingCount);
+            salesStatisticsVO.FittingRevenue = result.Sum(m => m.FittingRevenue);
+            salesStatisticsVO.FittingProfit = result.Sum(m => m.FittingProfit);
+            salesStatisticsVO.TotalProfit = result.Sum(m => m.TotalProfit);
+
+            if (salesStatisticsVO.TotalProfit != 0 && salesStatisticsVO.Target != 0)
+            {
+                if (DateTime.Today.ToString("yyyyMM").Equals(dateStart.ToString("yyyyMM")))
+                {
+                    //為本月要算出目前日子已過了本月幾分之幾, 進度達成率=總毛利/ [本月目標* (當月已過天數/當月天數)]
+                    //salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TotalProfit / (salesStatisticsVO.Target * (DateTime.Today.Day / DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month))));
+                    salesStatisticsVO.TargetAchievementRates = salesStatisticsVO.TotalProfit / salesStatisticsVO.Target;
+
+                    double rates = Convert.ToDouble(salesStatisticsVO.TargetAchievementRates * 100);
+                    salesStatisticsVO.TargetAchievementRates = Math.Round(rates, 2);
+
+                    salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TargetAchievementRates * DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month)) / DateTime.Today.Day;
+
+                    rates = Convert.ToDouble(salesStatisticsVO.TargetAchievementRates);
+                    salesStatisticsVO.TargetAchievementRates = Math.Round(rates, 2);
+                }
+                else
+                {
+                    //進度達成率=總毛利/ 本月目標
+                    salesStatisticsVO.TargetAchievementRates = salesStatisticsVO.TotalProfit / salesStatisticsVO.Target;
+
+                    double rates = Convert.ToDouble(salesStatisticsVO.TargetAchievementRates * 100);
+                    salesStatisticsVO.TargetAchievementRates = Math.Round(rates, 2);
+                }
+            }
+            else
+            {
+                salesStatisticsVO.TargetAchievementRates = 0;
+            }
+
+            return salesStatisticsVO;
         }
 
         /// <summary>

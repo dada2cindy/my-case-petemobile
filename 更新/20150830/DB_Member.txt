@@ -1,0 +1,10 @@
+ALTER TABLE MEMBER ADD OnlineWholesalers nvarchar(100);
+ALTER TABLE MEMBER ADD SimNo nvarchar(100);
+ALTER TABLE MEMBER ADD Project1 nvarchar(100);
+ALTER TABLE MEMBER ADD Project2 nvarchar(100);
+ALTER TABLE MEMBER ADD Project3 nvarchar(100);
+ALTER TABLE MEMBER ADD GetCommission nvarchar(1);
+
+
+UPDATE [MEMBER]
+   SET [GetCommission] = '¬O'

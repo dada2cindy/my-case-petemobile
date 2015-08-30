@@ -271,6 +271,42 @@ namespace WuDada.Core.Member.Domain
         [DataMember]
         public virtual string Store { get; set; }
 
+        /// <summary>
+        /// 上線盤商
+        /// </summary>
+        [DataMember]
+        public virtual string OnlineWholesalers { get; set; }
+
+        /// <summary>
+        /// Sim卡卡號
+        /// </summary>
+        [DataMember]
+        public virtual string SimNo { get; set; }
+
+        /// <summary>
+        /// 攜碼 新辦 續約
+        /// </summary>
+        [DataMember]
+        public virtual string Project1 { get; set; }
+
+        /// <summary>
+        /// 原電信業者
+        /// </summary>
+        [DataMember]
+        public virtual string Project2 { get; set; }
+
+        /// <summary>
+        /// 新電信業者
+        /// </summary>
+        [DataMember]
+        public virtual string Project3 { get; set; }
+
+        /// <summary>
+        /// 已核發佣金
+        /// </summary>
+        [DataMember]
+        public virtual string GetCommission { get; set; }
+
         public virtual string GetStr_Status
         {
             get

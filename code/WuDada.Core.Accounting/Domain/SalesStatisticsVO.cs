@@ -82,8 +82,37 @@ namespace WuDada.Core.Accounting.Domain
         /// </summary>
         [DataMember]
         public virtual double? TargetAchievementRates { get; set; }
-        
 
+        /// <summary>
+        /// 太電
+        /// </summary>
+        [DataMember]
+        public virtual int ApplyTelCom1Count { get; set; }
+
+        /// <summary>
+        /// 遠傳
+        /// </summary>
+        [DataMember]
+        public virtual int ApplyTelCom2Count { get; set; }
+
+        /// <summary>
+        /// 中華
+        /// </summary>
+        [DataMember]
+        public virtual int ApplyTelCom3Count { get; set; }
+
+        /// <summary>
+        /// 亞太
+        /// </summary>
+        [DataMember]
+        public virtual int ApplyTelCom4Count { get; set; }
+
+        /// <summary>
+        /// 星星
+        /// </summary>
+        [DataMember]
+        public virtual int ApplyTelCom5Count { get; set; }
+        
         #endregion
     }
 }

@@ -48,5 +48,12 @@ namespace WuDada.Core.Member.Persistence
         /// <param name="conditions"></param>
         /// <returns></returns>
         int GetMemberCount(IDictionary<string, string> conditions);
+
+        /// <summary>
+        /// 取得門號佣金總合
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        int GetTotalCommission(IDictionary<string, string> conditions);
     }
 }
