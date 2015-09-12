@@ -81,6 +81,8 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             btnSearchExport.Visible = false;
             btnEdit.Visible = false;
         }
+
+        ddlProject1_SelectedIndexChanged(null, null);
     }
 
     private void fillGridView()
@@ -137,11 +139,15 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             }
         }
 
-        if (!string.IsNullOrEmpty(ddlStore.SelectedValue))
+        if (!string.IsNullOrEmpty(ddlSearchStore.SelectedValue))
         {
-            conditions.Add("Store", ddlStore.SelectedValue);
+            conditions.Add("Store", ddlSearchStore.SelectedValue);
         }
-        
+
+        if (!string.IsNullOrEmpty(ddlSearchGetCommission.SelectedValue))
+        {
+            conditions.Add("GetCommission", ddlSearchGetCommission.SelectedValue);
+        }                
 
         //分頁
         AspNetPager1.RecordCount = m_MemberService.GetMemberCount(conditions);
@@ -251,10 +257,15 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             }
         }
 
-        if (!string.IsNullOrEmpty(ddlStore.SelectedValue))
+        if (!string.IsNullOrEmpty(ddlSearchStore.SelectedValue))
         {
-            conditions.Add("Store", ddlStore.SelectedValue);
+            conditions.Add("Store", ddlSearchStore.SelectedValue);
         }
+
+        if (!string.IsNullOrEmpty(ddlSearchGetCommission.SelectedValue))
+        {
+            conditions.Add("GetCommission", ddlSearchGetCommission.SelectedValue);
+        }   
 
         conditions.Add("Order", "order by m.ApplyDate desc, m.Name");
 
@@ -266,6 +277,8 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         table.Columns.Add("身分證字號", typeof(string));
         table.Columns.Add("聯絡電話", typeof(string));        
         table.Columns.Add("客戶生日", typeof(string));
+        table.Columns.Add("上線盤商", typeof(string));
+        table.Columns.Add("Sim卡卡號", typeof(string));
         table.Columns.Add("申辦專案", typeof(string));
         table.Columns.Add("搭配手機", typeof(string));
         table.Columns.Add("手機序號", typeof(string));
@@ -275,6 +288,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         table.Columns.Add("手機進價", typeof(double));
         table.Columns.Add("銷售金額", typeof(double));
         table.Columns.Add("門號佣金", typeof(double));
+        table.Columns.Add("佣金是否核發", typeof(string));
         table.Columns.Add("違約金", typeof(double));        
         table.Columns.Add("綁約月數", typeof(double));
         table.Columns.Add("門號到期日", typeof(string));
@@ -301,21 +315,24 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                 dr[3] = memberVO.PID;
                 dr[4] = memberVO.Phone;
                 dr[5] = birthday;
-                dr[6] = memberVO.Project;
-                dr[7] = memberVO.Product;
-                dr[8] = memberVO.PhoneSer;
-                dr[9] = memberVO.WarrantySuppliers;
-                dr[10] = memberVO.MobileWholesalers;
-                dr[11] = memberVO.Mobile;
-                dr[12] = memberVO.PhonePrice == null ? 0 : memberVO.PhonePrice;
-                dr[13] = memberVO.PhoneSellPrice == null ? 0 : memberVO.PhoneSellPrice;
-                dr[14] = memberVO.Commission == null ? 0 : memberVO.Commission;
-                dr[15] = memberVO.BreakMoney == null ? 0 : memberVO.BreakMoney;                
-                dr[16] = memberVO.ContractMonths == null ? 0 : memberVO.ContractMonths;
-                dr[17] = dueDate;
-                dr[18] = memberVO.Sales;
-                dr[19] = memberVO.Store;
-                dr[20] = memberVO.Note;
+                dr[6] = memberVO.OnlineWholesalers;
+                dr[7] = memberVO.SimNo;
+                dr[8] = memberVO.GetStr_Project;
+                dr[9] = memberVO.Product;
+                dr[10] = memberVO.PhoneSer;
+                dr[11] = memberVO.WarrantySuppliers;
+                dr[12] = memberVO.MobileWholesalers;
+                dr[13] = memberVO.Mobile;
+                dr[14] = memberVO.PhonePrice == null ? 0 : memberVO.PhonePrice;
+                dr[15] = memberVO.PhoneSellPrice == null ? 0 : memberVO.PhoneSellPrice;
+                dr[16] = memberVO.Commission == null ? 0 : memberVO.Commission;
+                dr[17] = memberVO.GetCommission;
+                dr[18] = memberVO.BreakMoney == null ? 0 : memberVO.BreakMoney;                
+                dr[19] = memberVO.ContractMonths == null ? 0 : memberVO.ContractMonths;
+                dr[20] = dueDate;
+                dr[21] = memberVO.Sales;
+                dr[22] = memberVO.Store;
+                dr[23] = memberVO.Note;
 
                 table.Rows.Add(dr);                
             }
@@ -333,6 +350,9 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         pnlContent.Visible = false;
         btnShowAdd.Enabled = true;
         ddlContractMonths.SelectedValue = "";
+        ddlProject1.SelectedValue = "";
+        ddlOnlineWholesalers.SelectedValue = "";
+        ddlGetCommission.SelectedValue = "否";        
     }
 
     //private string GetPic(string fileName)
@@ -351,8 +371,11 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                 ClearUI();
                 m_Mode = memberId;
 		InitDDL();
-                UIHelper.FillUI(pnlContent, memberVO);
+                UIHelper.FillUI(pnlContent, memberVO);                
                 ShowMode();
+                ddlProject1.SelectedValue = memberVO.Project1;
+                ddlProject2.SelectedValue = memberVO.Project2;
+                ddlProject3.SelectedValue = memberVO.Project3;
                 pnlContent.Visible = true;
                 break;
             //case "myDel":
@@ -539,6 +562,31 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             catch (Exception ex)
             {
             }
+        }
+    }
+
+    protected void ddlProject1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ///先全部清除與鎖定
+        ddlProject2.SelectedValue = "";
+        ddlProject3.SelectedValue = "";
+
+        ddlProject2.Enabled = false;
+        ddlProject3.Enabled = false;
+        
+        //判斷現在選哪個開放選項
+        switch (ddlProject1.SelectedValue)
+        {
+            case "續約":
+                ddlProject2.Enabled = true;
+                break;
+            case "新辦":
+                ddlProject3.Enabled = true;
+                break;
+            case "攜碼":
+                ddlProject2.Enabled = true;
+                ddlProject3.Enabled = true;
+                break;
         }
     }
 }

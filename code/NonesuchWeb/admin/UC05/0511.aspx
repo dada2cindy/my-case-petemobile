@@ -91,10 +91,55 @@
                 </tr>
                 <tr>
                     <td>
+                        上線盤商
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlOnlineWholesalers" runat="server">
+                            <asp:ListItem Text="請選擇" Value=""></asp:ListItem>
+                            <asp:ListItem Text="特約" Value="特約"></asp:ListItem>
+                            <asp:ListItem Text="皇家" Value="皇家"></asp:ListItem>
+                            <asp:ListItem Text="62屋" Value="62屋"></asp:ListItem>
+                            <asp:ListItem Text="立穎" Value="立穎"></asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Sim卡卡號
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtSimNo" runat="server" Width="150px"></asp:TextBox>
+                    </td>
+                </tr> 
+                <tr>
+                    <td>
                         申辦專案
                     </td>
                     <td>
-                        <asp:TextBox ID="txtProject" runat="server" Width="500px"></asp:TextBox>
+                        <asp:DropDownList ID="ddlProject1" runat="server" AutoPostBack="True" 
+                            onselectedindexchanged="ddlProject1_SelectedIndexChanged">
+                            <asp:ListItem Text="請選擇申辦類型" Value=""></asp:ListItem>
+                            <asp:ListItem Text="攜碼" Value="攜碼"></asp:ListItem>
+                            <asp:ListItem Text="新辦" Value="新辦"></asp:ListItem>
+                            <asp:ListItem Text="續約" Value="續約"></asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:DropDownList ID="ddlProject2" runat="server">
+                            <asp:ListItem Text="請選擇原電信業者" Value=""></asp:ListItem>
+                            <asp:ListItem Text="太電" Value="太電"></asp:ListItem>
+                            <asp:ListItem Text="遠傳" Value="遠傳"></asp:ListItem>
+                            <asp:ListItem Text="中華" Value="中華"></asp:ListItem>
+                            <asp:ListItem Text="亞太" Value="亞太"></asp:ListItem>
+                            <asp:ListItem Text="星星" Value="星星"></asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:DropDownList ID="ddlProject3" runat="server">
+                            <asp:ListItem Text="請選擇新電信業者" Value=""></asp:ListItem>
+                            <asp:ListItem Text="太電" Value="太電"></asp:ListItem>
+                            <asp:ListItem Text="遠傳" Value="遠傳"></asp:ListItem>
+                            <asp:ListItem Text="中華" Value="中華"></asp:ListItem>
+                            <asp:ListItem Text="亞太" Value="亞太"></asp:ListItem>
+                            <asp:ListItem Text="星星" Value="星星"></asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:TextBox ID="txtProject" runat="server" Width="250px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="請輸入申辦專案"
                             ControlToValidate="txtProject" ValidationGroup="Save"></asp:RequiredFieldValidator>
                     </td>
@@ -182,6 +227,17 @@
                         <asp:RangeValidator ID="RangeValidator3" runat="server" ErrorMessage="門號佣金請輸入0以上的整數"
                             ControlToValidate="txtCommission" MaximumValue="1000000" MinimumValue="0" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        佣金是否核發
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlGetCommission" runat="server">
+                            <asp:ListItem Text="是" Value="是"></asp:ListItem>
+                            <asp:ListItem Text="否" Value="否"></asp:ListItem>
+                        </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
@@ -326,6 +382,13 @@
                         <br />
                         店家:
                         <asp:DropDownList ID="ddlSearchStore" runat="server">
+                        </asp:DropDownList>
+                        &nbsp;&nbsp;&nbsp;
+                        佣金是否核發:
+                        <asp:DropDownList ID="ddlSearchGetCommission" runat="server">
+                            <asp:ListItem Text="全部" Value=""></asp:ListItem>
+                            <asp:ListItem Text="是" Value="是"></asp:ListItem>
+                            <asp:ListItem Text="否" Value="否"></asp:ListItem>
                         </asp:DropDownList>
                         <br />
                         申辦日期:

@@ -19,6 +19,7 @@ namespace WuDada.Core.Member.Domain
         {
             Status = "0";
             UserConfirm = "0";
+            GetCommission = "否";
         }
 
         #endregion
@@ -319,6 +320,29 @@ namespace WuDada.Core.Member.Domain
                         break;
                     case "1":
                         result = "使用中";
+                        break;
+                }
+
+                return result;
+            }
+        }
+
+        public virtual string GetStr_Project
+        {
+            get
+            {
+                string result = Project;
+                switch (this.Project1)
+                {
+                    case "續約":
+                        result = string.Format("{0}, {1}, {2}", Project1, Project2, Project);
+                        break;
+                    case "新辦":
+                        result = "使用中";
+                        result = string.Format("{0}, {1}, {2}", Project1, Project3, Project);
+                        break;
+                    case "攜碼":
+                        result = string.Format("{0}, {1}->{2}, {3}", Project1, Project2, Project3, Project);
                         break;
                 }
 
