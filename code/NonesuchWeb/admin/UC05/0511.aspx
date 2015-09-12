@@ -489,9 +489,9 @@
                         <ItemStyle HorizontalAlign="Left" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="聯絡電話">
+                    <asp:TemplateField HeaderText="申辦號碼">
                         <ItemTemplate>
-                            <asp:Label ID="lblPhone" runat="server" Text='<%# Bind("Phone") %>'></asp:Label>
+                            <asp:Label ID="lblMobile" runat="server" Text='<%# Bind("Mobile") %>'></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
