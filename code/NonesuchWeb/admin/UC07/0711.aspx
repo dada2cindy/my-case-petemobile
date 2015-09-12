@@ -47,7 +47,7 @@
                         <ItemTemplate>
                             <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>'></asp:Label>                            
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Left" Width="120" />
+                        <ItemStyle HorizontalAlign="Left" Width="140" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="本月目標">
