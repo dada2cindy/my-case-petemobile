@@ -312,12 +312,12 @@
                 </tr>
                 <tr>
                     <td>
-                        店家
+                        銷售店點
                     </td>
                     <td>
                         <asp:DropDownList ID="ddlStore" runat="server">
                         </asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="請選擇店家"
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="請選擇銷售店點"
                             ControlToValidate="ddlStore" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>
                     </td>
                 </tr>                 
@@ -380,7 +380,7 @@
                         <asp:DropDownList ID="ddlSearchBirthDay" runat="server">
                         </asp:DropDownList>
                         <br />
-                        店家:
+                        銷售店點:
                         <asp:DropDownList ID="ddlSearchStore" runat="server">
                         </asp:DropDownList>
                         &nbsp;&nbsp;&nbsp;
@@ -468,9 +468,9 @@
                         <ItemStyle HorizontalAlign="Left" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="開通日">
+                    <asp:TemplateField HeaderText="門號到期日">
                         <ItemTemplate>
-                            <asp:Label ID="lblApplyDate" runat="server" Text='<%# Eval("ApplyDate","{0:yyyy-MM-dd}") %>'></asp:Label>
+                            <asp:Label ID="lblDueDate" runat="server" Text='<%# Eval("DueDate","{0:yyyy-MM-dd}") %>'></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
@@ -482,25 +482,11 @@
                         <ItemStyle HorizontalAlign="Left" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="身分證">
-                        <ItemTemplate>
-                            <asp:Label ID="lblPID" runat="server" Text='<%# Bind("PID") %>'></asp:Label>
-                        </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Left" Width="100" />
-                        <HeaderStyle HorizontalAlign="Center" />
-                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="申辦號碼">
                         <ItemTemplate>
                             <asp:Label ID="lblMobile" runat="server" Text='<%# Bind("Mobile") %>'></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left" Width="150" />
-                        <HeaderStyle HorizontalAlign="Center" />
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="申辦專案">
-                        <ItemTemplate>
-                            <asp:Label ID="lblProject" runat="server" Text='<%# Bind("Project") %>'></asp:Label>
-                        </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Center" Width="300" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="搭配手機">
@@ -513,13 +499,6 @@
                     <asp:TemplateField HeaderText="保固商">
                         <ItemTemplate>
                             <asp:Label ID="lblWarrantySuppliers" runat="server" Text='<%# Bind("WarrantySuppliers") %>'></asp:Label>
-                        </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Center" Width="150" />
-                        <HeaderStyle HorizontalAlign="Center" />
-                    </asp:TemplateField> 
-                    <asp:TemplateField HeaderText="手機盤商">
-                        <ItemTemplate>
-                            <asp:Label ID="lblMobileWholesalers" runat="server" Text='<%# Bind("MobileWholesalers") %>'></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
@@ -538,25 +517,35 @@
                         <ItemStyle HorizontalAlign="Right" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="門號到期日">
+                    <asp:TemplateField HeaderText="門號佣金">
                         <ItemTemplate>
-                            <asp:Label ID="lblDueDate" runat="server" Text='<%# Eval("DueDate","{0:yyyy-MM-dd}") %>'></asp:Label>
+                            <asp:Label ID="lblCommission" runat="server" Text='<%# Bind("Commission") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Left" Width="150" />
+                        <ItemStyle HorizontalAlign="Right" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="上線盤商">
+                        <ItemTemplate>
+                            <asp:Label ID="lblOnlineWholesalers" runat="server" Text='<%# Bind("OnlineWholesalers") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" Width="150" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>                     
                     <asp:TemplateField HeaderText="銷售員">
                         <ItemTemplate>
                             <asp:Label ID="lblSales" runat="server" Text='<%# Bind("Sales") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Left" Width="100" />
+                        <ItemStyle HorizontalAlign="Left" Width="140" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="店家">
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            銷售<br />店點
+                        </HeaderTemplate>
                         <ItemTemplate>
                             <asp:Label ID="lblStore" runat="server" Text='<%# Bind("Store") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Left" Width="50" />
+                        <ItemStyle HorizontalAlign="Left" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="查看">

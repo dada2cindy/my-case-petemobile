@@ -293,7 +293,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         table.Columns.Add("綁約月數", typeof(double));
         table.Columns.Add("門號到期日", typeof(string));
         table.Columns.Add("銷售員", typeof(string));
-        table.Columns.Add("店家", typeof(string));
+        table.Columns.Add("銷售店點", typeof(string));
         table.Columns.Add("備註", typeof(string));        
 
         if (memberList != null && memberList.Count > 0)
