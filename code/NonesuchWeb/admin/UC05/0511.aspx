@@ -524,11 +524,11 @@
                         <ItemStyle HorizontalAlign="Right" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="上線盤商">
+                    <asp:TemplateField HeaderText="申辦專案">
                         <ItemTemplate>
-                            <asp:Label ID="lblOnlineWholesalers" runat="server" Text='<%# Bind("OnlineWholesalers") %>'></asp:Label>
+                            <asp:Label ID="lblProject" runat="server" Text='<%# Bind("GetStr_Project") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Center" Width="150" />
+                        <ItemStyle HorizontalAlign="Left" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>                     
                     <asp:TemplateField HeaderText="銷售員">
