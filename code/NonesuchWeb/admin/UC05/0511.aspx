@@ -530,6 +530,16 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left" Width="150" />
                         <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>   
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            上線<br />盤商
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblOnlineWholesalers" runat="server" Text='<%# Bind("OnlineWholesalers") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" Width="100" />
+                        <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>                     
                     <asp:TemplateField HeaderText="銷售員">
                         <ItemTemplate>
