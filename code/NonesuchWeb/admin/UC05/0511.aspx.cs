@@ -491,7 +491,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         }
 
         ////帶入店家
-        IList<NodeVO> storetList = m_PostService.GetNodeListByParentId(54);        
+        IList<NodeVO> storetList = m_PostService.GetNodeListByParentName("店家");
         ddlStore.Items.Clear();
         ddlSearchStore.Items.Clear();
         if (storetList != null && storetList.Count > 0)
@@ -505,7 +505,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             }
         }
 
-        ddlStore.SelectedValue = "興安總店";
+        ddlStore.SelectedValue = storetList[0].Name;
     }    
 
     //protected void btnUpliad_Click(object sender, EventArgs e)

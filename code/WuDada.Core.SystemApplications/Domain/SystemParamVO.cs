@@ -84,6 +84,12 @@ namespace WuDada.Core.SystemApplications.Domain
         [DataMember]
         public virtual string FacebookCode { get; set; }
 
+        /// <summary>
+        /// 檔案密碼
+        /// </summary>
+        [DataMember]
+        public virtual string FilePassword { get; set; }
+
         #endregion
     }
 }

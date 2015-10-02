@@ -73,7 +73,7 @@ namespace GalaxyClinic.Test.Service
             InitMenu();
             InitLoginRoleAndUser();
             InitNode();
-            //InitSystemParam();
+            InitSystemParam();
         }
 
         [Test]
@@ -402,6 +402,9 @@ ORDER BY SortNo "
             NodeVO nodeVO5 = CreateNode("庫存品名", rootNodeVO, 3);
             NodeVO nodeVO51 = CreateNode("I6 玻璃包護貼-普通", nodeVO5, 1);
             NodeVO nodeVO52 = CreateNode("I6 玻璃包護貼-高級", nodeVO5, 2);
+
+            NodeVO nodeVO6 = CreateNode("店家", rootNodeVO, 4);
+            NodeVO nodeVO61 = CreateNode("台北承德", nodeVO6, 1);
         }
 
         private PostVO CreatePost(string title, NodeVO nodeVO, int sort)
@@ -498,17 +501,18 @@ ORDER BY SortNo "
             //systemParamVO.EnableSSL = true;
             //systemParamVO.Password = "28005786";
 
-            systemParamVO.MailSmtp = "60.248.85.123";
-            systemParamVO.Account = "SmtpUser";
-            systemParamVO.SendEmail = "test@test.com";
-            systemParamVO.MailPort = "25";
-            systemParamVO.EnableSSL = false;
-            systemParamVO.Password = "abc+1234";
+            //systemParamVO.MailSmtp = "60.248.85.123";
+            //systemParamVO.Account = "SmtpUser";
+            //systemParamVO.SendEmail = "test@test.com";
+            //systemParamVO.MailPort = "25";
+            //systemParamVO.EnableSSL = false;
+            //systemParamVO.Password = "abc+1234";
 
             //systemParamVO.PageTitle = "彼得杜拉克社會企業";
             //systemParamVO.PageKeyWord = "彼得杜拉克社會企業";
             //systemParamVO.PageDescription = "彼得杜拉克社會企業";            
 
+            systemParamVO.FilePassword = "";
             m_SystemService.CreateSystemParam(systemParamVO);
         }
     }

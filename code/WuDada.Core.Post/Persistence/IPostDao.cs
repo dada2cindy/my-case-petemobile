@@ -29,6 +29,13 @@ namespace WuDada.Core.Post.Persistence
         IList<NodeVO> GetNodeListByParentId(int parentId);
 
         /// <summary>
+        /// 取得Node By 父層Name
+        /// </summary>
+        /// <param name="name">父層Name</param>
+        /// <returns>Node清單</returns>
+        IList<NodeVO> GetNodeListByParentName(string name);
+
+        /// <summary>
         /// 新增Post
         /// </summary>
         /// <param name="postVO">被新增的Post</param>

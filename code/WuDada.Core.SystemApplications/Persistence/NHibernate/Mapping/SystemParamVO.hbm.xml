@@ -22,6 +22,7 @@
     <property name="FacebookCode" type="StringClob" >
       <column name="FacebookCode" sql-type="nvarchar(max)"/>
     </property>
+    <property name="FilePassword" column="FilePassword" type="String" length="50" />
 
   </class>
 

@@ -59,6 +59,28 @@ namespace WuDada.Core.Post.Persistence
         }
 
         /// <summary>
+        /// 取得Node By 父層Name
+        /// </summary>
+        /// <param name="name">父層Name</param>
+        /// <returns>Node清單</returns>
+        public IList<NodeVO> GetNodeListByParentName(string name)
+        {
+            DetachedCriteria dCriteria = DetachedCriteria.For<NodeVO>();
+            dCriteria.CreateCriteria("ParentNode").Add(Expression.Eq("Name", name));
+            dCriteria.AddOrder(Order.Asc("SortNo"));
+            dCriteria.AddOrder(Order.Asc("Name"));
+
+            int count = NHibernateDao.CountByDetachedCriteria(dCriteria);
+
+            if (count == 0)
+            {
+                return null;
+            }
+
+            return NHibernateDao.SearchByDetachedCriteria<NodeVO>(dCriteria);
+        }
+
+        /// <summary>
         /// 新增Post
         /// </summary>
         /// <param name="postVO">被新增的Post</param>

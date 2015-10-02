@@ -52,6 +52,16 @@ namespace WuDada.Core.Post.Service.Impl
         }
 
         /// <summary>
+        /// 取得Node By 父層Name
+        /// </summary>
+        /// <param name="name">父層Name</param>
+        /// <returns>Node清單</returns>
+        public IList<NodeVO> GetNodeListByParentName(string name)
+        {
+            return PostDao.GetNodeListByParentName(name);
+        }
+
+        /// <summary>
         /// 取得Node By RootNode
         /// </summary>
         /// <returns>Node清單</returns>

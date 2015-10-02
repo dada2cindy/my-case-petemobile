@@ -20,6 +20,9 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using NPOI.XSSF;
 using NPOI.XSSF.UserModel;
+using WuDada.Core.SystemApplications;
+using WuDada.Core.SystemApplications.Service;
+using WuDada.Core.SystemApplications.Domain;
 
 public class NPOIHelper
 {
@@ -1203,6 +1206,10 @@ public class NPOIHelper
     /// <param name="strHeaderText">表头文本</param>
     public static MemoryStream Export(DataTable dtSource, string strHeaderText, bool usePassword)
     {
+        SystemFactory systemFactory = new SystemFactory();
+        ISystemService systemService = systemFactory.GetSystemService();
+        SystemParamVO systemParamVO = systemService.GetSystemParamByRoot();
+
         string path = @"D:\temp.xls";
 
         if (File.Exists(path))
@@ -1218,14 +1225,14 @@ public class NPOIHelper
         savefile.Dispose();        
 
         FileStream file = new FileStream(path, FileMode.Open, FileAccess.Read);
-        if (usePassword)
+        if (usePassword && systemParamVO!=null && !string.IsNullOrEmpty(systemParamVO.FilePassword))
         {
             NPOI.HSSF.Record.Crypto.Biff8EncryptionKey.CurrentUserPassword = "12345";//打开前调用
         }
         HSSFWorkbook workbook = new HSSFWorkbook(file);
-        if (usePassword)
+        if (usePassword && systemParamVO != null && !string.IsNullOrEmpty(systemParamVO.FilePassword))
         {
-            workbook.WriteProtectWorkbook("vul3vm04", "");//设置新密码
+            workbook.WriteProtectWorkbook(systemParamVO.FilePassword, "");//设置新密码
         }
         file.Close();
 
