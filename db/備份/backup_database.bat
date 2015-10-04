@@ -1,0 +1,1 @@
+sqlcmd -S .\SQLEXPRESS2008 -i D:\我的case\Git\my-case-petemobile\db\備份\backup.sql
