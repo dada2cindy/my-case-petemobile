@@ -1,0 +1,6 @@
+ALTER TABLE SYSTEM_SYSTEM_PARAM ADD FilePassword nvarchar(50);
+
+INSERT INTO [SYSTEM_SYSTEM_PARAM]
+           (FilePassword)
+     VALUES
+           ('vul3vm04')
