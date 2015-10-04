@@ -186,8 +186,8 @@
                     </td>
                     <td>
                         <asp:TextBox ID="txtMobile" runat="server" Width="150px"></asp:TextBox>
-                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="請輸入申辦號碼"
-                            ControlToValidate="txtMobile" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator70" runat="server" ErrorMessage="請輸入申辦號碼"
+                            ControlToValidate="txtMobile" ValidationGroup="Save"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
