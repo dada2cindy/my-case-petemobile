@@ -308,6 +308,12 @@ namespace WuDada.Core.Member.Domain
         [DataMember]
         public virtual string GetCommission { get; set; }
 
+        /// <summary>
+        /// 預繳金額
+        /// </summary>
+        [DataMember]
+        public virtual double Prepayment { get; set; }
+
         public virtual string GetStr_Status
         {
             get

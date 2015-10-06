@@ -54,6 +54,7 @@
     <property name="Project2" column="Project2" type="String" length="100" />
     <property name="Project3" column="Project3" type="String" length="100" />
     <property name="GetCommission" column="GetCommission" type="String" length="1"/>
+    <property name="Prepayment" column="Prepayment" type="Double" />
 
   </class>
 

@@ -97,7 +97,7 @@ namespace WuDada.Core.Member.Persistence
         {
             int count = 0;
             ArrayList param = new ArrayList();
-            string fromScript = "select sum(m.Commission) from MemberVO m ";
+            string fromScript = "select sum(m.Commission-m.Prepayment) from MemberVO m ";
             StringBuilder whereScript = new StringBuilder();
             IList result = this.QueryMember(param, fromScript, whereScript, conditions, false);
             if (result.Count > 0)

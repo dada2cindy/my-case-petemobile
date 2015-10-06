@@ -218,6 +218,17 @@
                 </tr>
                 <tr>
                     <td>
+                        預繳金額
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtPrepayment" runat="server" Width="100px"></asp:TextBox>
+                        <asp:RangeValidator ID="RangeValidator5" runat="server" ErrorMessage="預繳金額請輸入0以上的整數"
+                            ControlToValidate="txtPrepayment" MaximumValue="1000000" MinimumValue="0" Type="Integer"
+                            Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         門號佣金
                     </td>
                     <td>
