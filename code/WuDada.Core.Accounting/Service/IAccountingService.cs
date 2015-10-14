@@ -12,6 +12,7 @@ namespace WuDada.Core.Accounting.Service
         /// 取得當月業績
         /// </summary>
         /// <param name="ym">yyyyMM</param>
+        /// <param name="store"></param>
         /// <returns></returns>
         IList<SalesStatisticsVO> GetSalesStatistics(string ym, string store);
 
@@ -34,5 +35,12 @@ namespace WuDada.Core.Accounting.Service
         /// <param name="targetVO"></param>
         /// <returns></returns>
         TargetVO SaveOrUpdateTarget(TargetVO targetVO);
+
+        /// <summary>
+        /// 取得當月業績 從店點角度
+        /// </summary>
+        /// <param name="ym">yyyyMM</param>
+        /// <returns></returns>
+        IList<SalesStatisticsVO> GetSalesStatisticsByStore(string ym);
     }
 }

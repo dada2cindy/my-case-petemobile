@@ -65,18 +65,21 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
                        
             fillGridView();
 
-            LoadUI();
+            //LoadTotalCommission();
         }
     }
 
-    private void LoadUI()
-    {
-        Dictionary<string, string> conditions = new Dictionary<string, string>();
-        conditions.Add("Status", "1");
-        conditions.Add("GetCommission", "否");
+    //private void LoadTotalCommission()
+    //{
+    //    IList<NodeVO> storeList = m_PostService.GetNodeListByParentName("店家");
 
-        lblNotGetCommission.Text = m_MemberService.GetTotalCommission(conditions).ToString();
-    }
+    //    Dictionary<string, string> conditions = new Dictionary<string, string>();
+    //    conditions.Add("Status", "1");
+    //    conditions.Add("GetCommission", "否");
+    //    conditions.Add("Store", storeList[0].Name);
+
+    //    lblNotGetCommission.Text = m_MemberService.GetTotalCommission(conditions).ToString();
+    //}
 
     private void ShowMode()
     {
@@ -89,21 +92,32 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
 
     private void fillGridView()
     {
+        IList<NodeVO> storeList = m_PostService.GetNodeListByParentName("店家");
         string ym = string.Format("{0}{1}", ddlSearchYear.SelectedValue, ddlSearchMonth.SelectedValue);
 
-        gvList.DataSource = m_AccountingService.GetSalesStatistics(ym, "興安總店");
+        gvList.DataSource = m_AccountingService.GetSalesStatistics(ym, storeList[0].Name);
         gvList.DataBind();
+
+        if (storeList.Count > 1)
+        {
+            gvListStore.DataSource = m_AccountingService.GetSalesStatisticsByStore(ym);
+            gvListStore.DataBind();
+        }
     }    
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         fillGridView();
+        //LoadTotalCommission();
     }
 
     protected void btnSearchExport_Click(object sender, EventArgs e)
     {
+        IList<NodeVO> storeList = m_PostService.GetNodeListByParentName("店家");
         string ym = string.Format("{0}{1}", ddlSearchYear.SelectedValue, ddlSearchMonth.SelectedValue);
-        IList<SalesStatisticsVO> salesStatisticsList = m_AccountingService.GetSalesStatistics(ym, "興安總店");
+        IList<SalesStatisticsVO> salesStatisticsList = m_AccountingService.GetSalesStatistics(ym, storeList[0].Name);
+        IList<SalesStatisticsVO> salesStatisticsList2 = m_AccountingService.GetSalesStatisticsByStore(ym);        
+
         DataTable table = new DataTable();
         table.Columns.Add("姓名", typeof(string));
         table.Columns.Add("本月目標", typeof(double));
@@ -120,6 +134,7 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
         table.Columns.Add("配件毛利", typeof(double));
         table.Columns.Add("總毛利", typeof(double));
         table.Columns.Add("達成率", typeof(double));
+        table.Columns.Add("未核發佣金總額", typeof(int));
 
         if (salesStatisticsList != null && salesStatisticsList.Count > 0)
         {
@@ -141,7 +156,35 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
                 dr[11] = salesStatistics.FittingRevenue;
                 dr[12] = salesStatistics.FittingProfit;
                 dr[13] = salesStatistics.TotalProfit;
-                dr[14] = salesStatistics.TargetAchievementRates;                
+                dr[14] = salesStatistics.TargetAchievementRates;
+                dr[15] = salesStatistics.NotGetTotalCommission;  
+
+                table.Rows.Add(dr);
+            }
+        }
+
+        if (storeList.Count > 1 && salesStatisticsList2 != null && salesStatisticsList2.Count > 0)
+        {
+            foreach (SalesStatisticsVO salesStatistics in salesStatisticsList2)
+            {
+                DataRow dr = table.NewRow();
+
+                dr[0] = salesStatistics.Name;
+                dr[1] = salesStatistics.Target;
+                dr[2] = salesStatistics.ApplyTelCom1Count;
+                dr[3] = salesStatistics.ApplyTelCom2Count;
+                dr[4] = salesStatistics.ApplyTelCom3Count;
+                dr[5] = salesStatistics.ApplyTelCom4Count;
+                dr[6] = salesStatistics.ApplyTelCom5Count;
+                dr[7] = salesStatistics.ApplyCount;
+                dr[8] = salesStatistics.ApplyRevenue;
+                dr[9] = salesStatistics.ApplyProfit;
+                dr[10] = salesStatistics.FittingCount;
+                dr[11] = salesStatistics.FittingRevenue;
+                dr[12] = salesStatistics.FittingProfit;
+                dr[13] = salesStatistics.TotalProfit;
+                dr[14] = salesStatistics.TargetAchievementRates;
+                dr[15] = salesStatistics.NotGetTotalCommission;
 
                 table.Rows.Add(dr);
             }
@@ -176,6 +219,35 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
             {
                 lblTargetAchievementRates.ForeColor = System.Drawing.Color.Red;
             }            
+        }
+    }
+
+    protected void gvListStore_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        GridView gv = (GridView)sender;
+        if (e.Row.RowIndex != -1)
+        {
+            Control ctrl = e.Row;
+            Label lblName = (Label)ctrl.FindControl("lblName");
+
+            if (m_SessionHelper.IsAdmin && !"總合".Equals(lblName.Text))
+            {
+                UIHelper.SetContrlVisible(ref ctrl, "lblTarget", false);
+                UIHelper.SetContrlVisible(ref ctrl, "txtTarget", true);
+            }
+            else
+            {
+                UIHelper.SetContrlVisible(ref ctrl, "lblTarget", true);
+                UIHelper.SetContrlVisible(ref ctrl, "txtTarget", false);
+            }
+
+
+            Label lblTargetAchievementRates = (Label)ctrl.FindControl("lblTargetAchievementRates");
+            double rates = double.Parse(lblTargetAchievementRates.Text.Trim());
+            if (rates < 60)
+            {
+                lblTargetAchievementRates.ForeColor = System.Drawing.Color.Red;
+            }
         }
     }
     
@@ -214,6 +286,22 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
             targetVO.Id = string.Format("{0}{1}", ym, lblName.Text);
             targetVO.Name = lblName.Text;
             targetVO.Amount = amount;            
+            targetList.Add(targetVO);
+        }
+
+        for (int i = 0; i < gvListStore.Rows.Count; i++)
+        {
+            Label lblName = (Label)gvListStore.Rows[i].FindControl("lblName");
+            TextBox txtTarget = (TextBox)gvListStore.Rows[i].FindControl("txtTarget");
+
+            double amount = 0;
+
+            double.TryParse(txtTarget.Text.Trim(), out amount);
+
+            TargetVO targetVO = new TargetVO();
+            targetVO.Id = string.Format("{0}{1}", ym, lblName.Text);
+            targetVO.Name = lblName.Text;
+            targetVO.Amount = amount;
             targetList.Add(targetVO);
         }
 

@@ -12,7 +12,7 @@ namespace GalaxyClinic.Test.NHibernate
     public class TestSchema
     {
         public TestHelper TestHelper { get; set; }
-        public readonly string[] AddAssemblies = new string[] { "WuDada.Core", "WuDada.Core.SystemApplications", "WuDada.Core.Common", "WuDada.Core.Auth", "WuDada.Core.Post", "WuDada.Provider.ResourceHandle", "WuDada.Core.Member" };        
+        public readonly string[] AddAssemblies = new string[] { "WuDada.Core", "WuDada.Core.SystemApplications", "WuDada.Core.Common", "WuDada.Core.Auth", "WuDada.Core.Post", "WuDada.Provider.ResourceHandle", "WuDada.Core.Member", "WuDada.Core.Accounting" };        
 
         [TestFixtureSetUp]
         public void TestCaseInit()

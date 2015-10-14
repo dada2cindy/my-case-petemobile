@@ -113,6 +113,12 @@ namespace WuDada.Core.Accounting.Domain
         [DataMember]
         public virtual int ApplyTelCom5Count { get; set; }
         
+        /// <summary>
+        /// 未核發佣金
+        /// </summary>
+        [DataMember]
+        public virtual int NotGetTotalCommission { get; set; }
+        
         #endregion
     }
 }
