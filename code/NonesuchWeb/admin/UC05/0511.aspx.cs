@@ -287,6 +287,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         table.Columns.Add("申辦號碼", typeof(string));
         table.Columns.Add("手機進價", typeof(double));
         table.Columns.Add("銷售金額", typeof(double));
+        table.Columns.Add("預繳金額", typeof(double));
         table.Columns.Add("門號佣金", typeof(double));
         table.Columns.Add("佣金是否核發", typeof(string));
         table.Columns.Add("違約金", typeof(double));        
@@ -325,14 +326,15 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                 dr[13] = memberVO.Mobile;
                 dr[14] = memberVO.PhonePrice == null ? 0 : memberVO.PhonePrice;
                 dr[15] = memberVO.PhoneSellPrice == null ? 0 : memberVO.PhoneSellPrice;
-                dr[16] = memberVO.Commission == null ? 0 : memberVO.Commission;
-                dr[17] = memberVO.GetCommission;
-                dr[18] = memberVO.BreakMoney == null ? 0 : memberVO.BreakMoney;                
-                dr[19] = memberVO.ContractMonths == null ? 0 : memberVO.ContractMonths;
-                dr[20] = dueDate;
-                dr[21] = memberVO.Sales;
-                dr[22] = memberVO.Store;
-                dr[23] = memberVO.Note;
+                dr[16] = memberVO.Prepayment == null ? 0 : memberVO.Prepayment;
+                dr[17] = memberVO.Commission == null ? 0 : memberVO.Commission;
+                dr[18] = memberVO.GetCommission;
+                dr[19] = memberVO.BreakMoney == null ? 0 : memberVO.BreakMoney;                
+                dr[20] = memberVO.ContractMonths == null ? 0 : memberVO.ContractMonths;
+                dr[21] = dueDate;
+                dr[22] = memberVO.Sales;
+                dr[23] = memberVO.Store;
+                dr[24] = memberVO.Note;
 
                 table.Rows.Add(dr);                
             }
