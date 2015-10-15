@@ -246,7 +246,9 @@ namespace WuDada.Core.Member.Persistence
         {
             if (conditions.IsContainsValue("KeyWord"))
             {
-                whereScript.Append(" and (m.Name like ? or m.Email like ? or m.Phone like ? or m.Mobile like ? or m.Project like ? or m.Product like ? or m.PhoneSer like ? or m.PID like ? ) ");
+                whereScript.Append(" and (m.Name like ? or m.Email like ? or m.Phone like ? or m.Mobile like ? or m.Project like ? or m.Product like ? or m.PhoneSer like ? or m.PID like ? or m.OnlineWholesalers like ? or m.MobileWholesalers like ? ) ");
+                param.Add("%" + conditions["KeyWord"] + "%");
+                param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
