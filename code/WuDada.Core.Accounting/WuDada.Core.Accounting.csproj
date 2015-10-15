@@ -78,6 +78,10 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WuDada.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\WuDada.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountingFactory.cs" />
@@ -105,10 +109,6 @@
     <ProjectReference Include="..\WuDada.Core.SystemApplications\WuDada.Core.SystemApplications.csproj">
       <Project>{C9CCE516-1092-44F1-984A-FDA93DFB5BB4}</Project>
       <Name>WuDada.Core.SystemApplications</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WuDada.Core\WuDada.Core.csproj">
-      <Project>{82FA4F65-92DF-40B8-AF7F-1E7E33640B0B}</Project>
-      <Name>WuDada.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

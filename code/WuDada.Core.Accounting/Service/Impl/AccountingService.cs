@@ -339,9 +339,10 @@ namespace WuDada.Core.Accounting.Service.Impl
                     conditionsPost.Add("Type", "1");
                     conditionsPost.Add("CloseDateStart", dateStart.ToString("yyyy/MM/dd"));
                     conditionsPost.Add("CloseDateEnd", dateEnd.ToString("yyyy/MM/dd"));
-                    conditionsPost.Add("Store", store.Name);
+                    //conditionsPost.Add("Store", store.Name);
                     IList<PostVO> postList = PostService.GetPostList(conditionsPost);
-                    if (postList != null)
+                    //因為配件沒有分店家，所以這邊只有第一個本店要算
+                    if (postList != null && store.Name.Equals(storeList[0].Name))
                     {
                         salesStatisticsVO.FittingCount = postList.Count;
                         salesStatisticsVO.FittingRevenue = postList.Sum(p => p.SellPrice);
