@@ -253,13 +253,13 @@
                 </tr>
                 <tr>
                     <td>
-                        違約金
+                        吸收違約金
                     </td>
                     <td>
                         <asp:TextBox ID="txtBreakMoney" runat="server" Width="100px"></asp:TextBox>
-                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入違約金"
+                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入吸收違約金"
                                     ControlToValidate="txtBreakMoney" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>--%>
-                        <asp:RangeValidator ID="RangeValidator4" runat="server" ErrorMessage="違約金請輸入0以上的整數"
+                        <asp:RangeValidator ID="RangeValidator4" runat="server" ErrorMessage="吸收違約金請輸入0以上的整數"
                             ControlToValidate="txtBreakMoney" MaximumValue="1000000" MinimumValue="0" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>

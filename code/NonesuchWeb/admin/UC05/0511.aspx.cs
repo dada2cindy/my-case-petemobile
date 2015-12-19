@@ -290,7 +290,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         table.Columns.Add("預繳金額", typeof(double));
         table.Columns.Add("門號佣金", typeof(double));
         table.Columns.Add("佣金是否核發", typeof(string));
-        table.Columns.Add("違約金", typeof(double));        
+        table.Columns.Add("吸收違約金", typeof(double));        
         table.Columns.Add("綁約月數", typeof(double));
         table.Columns.Add("門號到期日", typeof(string));
         table.Columns.Add("銷售員", typeof(string));
