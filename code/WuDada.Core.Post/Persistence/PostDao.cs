@@ -573,6 +573,7 @@ namespace WuDada.Core.Post.Persistence
             AppendPostCustomField1(conditions, whereScript, param);
             AppendPostEqualTitle(conditions, whereScript, param);
             AppendPostCustomField2(conditions, whereScript, param);
+            AppendPostProductSer(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -581,6 +582,15 @@ namespace WuDada.Core.Post.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendPostProductSer(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("ProductSer"))
+            {
+                whereScript.Append(" and p.ProductSer = ? ");
+                param.Add(conditions["ProductSer"]);
+            }
         }
 
         private void AppendPostCustomField2(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
@@ -691,7 +701,8 @@ namespace WuDada.Core.Post.Persistence
         {
             if (conditions.IsContainsValue("KeyWord"))
             {
-                whereScript.Append(" and (p.Title like ? or p.HtmlContent like ? or p.CustomField1 like ? or p.MemberName like ? or p.MemberPhone like ? ) ");
+                whereScript.Append(" and (p.Title like ? or p.HtmlContent like ? or p.CustomField1 like ? or p.MemberName like ? or p.MemberPhone like ? or p.ProductSer like ? ) ");
+                param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");

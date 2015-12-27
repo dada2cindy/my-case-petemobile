@@ -213,6 +213,12 @@ namespace WuDada.Core.Member.Domain
         public virtual double Commission { get; set; }
 
         /// <summary>
+        /// 後退佣金
+        /// </summary>
+        [DataMember]
+        public virtual double ReturnCommission { get; set; }
+
+        /// <summary>
         /// 違約金
         /// </summary>
         [DataMember]

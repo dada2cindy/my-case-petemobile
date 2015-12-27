@@ -146,6 +146,19 @@
                 </tr>
                 <tr>
                     <td>
+                        手機序號
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtPhoneSer" runat="server" Width="300px" AutoPostBack="True" 
+                            ontextchanged="txtPhoneSer_TextChanged"></asp:TextBox><asp:Label ID="lblPhoneSerMsg" runat="server"
+                                Text="" ForeColor="Red"></asp:Label>
+                        <asp:HiddenField ID="hdnPhoneSerId" runat="server" />
+                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入手機序號"
+                            ControlToValidate="txtPhoneSer" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         搭配手機
                     </td>
                     <td>
@@ -153,17 +166,7 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="請輸入搭配手機"
                             ControlToValidate="txtProduct" ValidationGroup="Save"></asp:RequiredFieldValidator>
                     </td>
-                </tr>
-                <tr>
-                    <td>
-                        手機序號
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txtPhoneSer" runat="server" Width="300px"></asp:TextBox>
-                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入手機序號"
-                            ControlToValidate="txtPhoneSer" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
-                    </td>
-                </tr>
+                </tr>                
                 <tr>
                     <td>
                         保固商
@@ -249,6 +252,17 @@
                             <asp:ListItem Text="是" Value="是"></asp:ListItem>
                             <asp:ListItem Text="否" Value="否"></asp:ListItem>
                         </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        後退佣金
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtReturnCommission" runat="server" Width="100px"></asp:TextBox>                        
+                        <asp:RangeValidator ID="RangeValidator6" runat="server" ErrorMessage="後退佣金請輸入0以上的整數"
+                            ControlToValidate="txtReturnCommission" MaximumValue="1000000" MinimumValue="0" Type="Integer"
+                            Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>
                 </tr>
                 <tr>

@@ -36,6 +36,7 @@
     <property name="PhonePrice" column="PhonePrice" type="Double" />
     <property name="PhoneSellPrice" column="PhoneSellPrice" type="Double" />
     <property name="Commission" column="Commission" type="Double" />
+    <property name="ReturnCommission" column="ReturnCommission" type="Double" />
     <property name="BreakMoney" column="BreakMoney" type="Double" />
     <property name="Compensation" column="Compensation" type="Double" />
     <property name="ContractMonths" column="ContractMonths" type="Double" />
