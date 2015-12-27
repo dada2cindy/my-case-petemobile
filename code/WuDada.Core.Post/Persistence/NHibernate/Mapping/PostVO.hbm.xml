@@ -63,6 +63,7 @@
     <property name="ProductSer" column="ProductSer" type="String" length="100"/>
     <property name="WarrantySuppliers" column="WarrantySuppliers" type="String" length="100" />
     <property name="Wholesalers" column="Wholesalers" type="String" length="100" />
+    <property name="MemberId" column="MemberId" type="String" length="100" />
 
   </class>
 

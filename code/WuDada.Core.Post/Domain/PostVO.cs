@@ -215,6 +215,12 @@ namespace WuDada.Core.Post.Domain
         [DataMember]
         public virtual string Wholesalers { get; set; }
 
+        /// <summary>
+        /// 會員Id
+        /// </summary>
+        [DataMember]
+        public virtual string MemberId { get; set; }
+
         #endregion
 
         /// <summary>

@@ -94,6 +94,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                     //配件
                     Dictionary<string, string> conditionsPost = new Dictionary<string, string>();
                     conditionsPost.Add("Flag", "1");
+                    conditionsPost.Add("WithOutMemberId", "1");
                     conditionsPost.Add("Type", "1");
                     conditionsPost.Add("CloseDateStart", dateStart.ToString("yyyy/MM/dd"));
                     conditionsPost.Add("CloseDateEnd", dateEnd.ToString("yyyy/MM/dd"));
@@ -336,6 +337,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                     //配件
                     Dictionary<string, string> conditionsPost = new Dictionary<string, string>();
                     conditionsPost.Add("Flag", "1");
+                    conditionsPost.Add("WithOutMemberId", "1");
                     conditionsPost.Add("Type", "1");
                     conditionsPost.Add("CloseDateStart", dateStart.ToString("yyyy/MM/dd"));
                     conditionsPost.Add("CloseDateEnd", dateEnd.ToString("yyyy/MM/dd"));

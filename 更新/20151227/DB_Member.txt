@@ -1,0 +1,3 @@
+ALTER TABLE MEMBER ADD ReturnCommission float;
+
+UPDATE MEMBER SET [ReturnCommission] = 0;

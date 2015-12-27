@@ -182,9 +182,9 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         //postVO.PicFileName = m_PicFileName;
         memberVO.Status = "1";
         memberVO.CreateIP = m_HttpHelper.GetUserIp(Context);
-        m_MemberService.CreateMember(memberVO);
+        memberVO = m_MemberService.CreateMember(memberVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.新增, memberVO);
-        UpdateProductByPhoneSer();
+        UpdateProductByPhoneSer(memberVO.MemberId);
         ClearUI();
         fillGridView();
     }
@@ -406,9 +406,9 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         {
             MemberVO memberVO = m_MemberService.GetMemberById(m_Mode);
             UIHelper.FillVO(pnlContent, memberVO);
-            m_MemberService.UpdateMember(memberVO);
+            memberVO = m_MemberService.UpdateMember(memberVO);
             m_WebLogService.AddSystemLog(MsgVO.Action.修改, memberVO, "", string.Format("單號:{0}", memberVO.MemberId));
-            UpdateProductByPhoneSer();
+            UpdateProductByPhoneSer(memberVO.MemberId);
             fillGridView();
             ClearUI();
             ShowMode();
@@ -420,7 +420,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         }
     }
 
-    private void UpdateProductByPhoneSer()
+    private void UpdateProductByPhoneSer(int memberId)
     {
         if (!string.IsNullOrEmpty(hdnPhoneSerId.Value))
         {
@@ -428,11 +428,12 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
 
             if (postVO.Flag == 1 && postVO.Type == 0)
             {
+                postVO.MemberId = memberId.ToString();
                 postVO.Type = 1;
                 postVO.MemberName = txtName.Text.Trim();
                 postVO.MemberPhone = txtMobile.Text.Trim();
                 postVO.SellPrice = 0;
-                postVO.CloseDate = DateTime.Today;
+                postVO.CloseDate = DateTime.Parse(txtApplyDate2.Text.Trim());
                 postVO.CustomField2 = ddlSales.SelectedValue;
                 m_PostService.UpdatePost(postVO);
                 m_WebLogService.AddSystemLog(MsgVO.Action.售出, postVO, "", string.Format("單號:{0}", postVO.PostId));
@@ -626,6 +627,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         if (list != null && list.Count > 0)
         {
             PostVO postVO = m_PostService.GetPostById(list[0].PostId);
+            postVO.MemberId = null;
             postVO.Type = 0;
             postVO.SellPrice = 0;
             postVO.CloseDate = null;

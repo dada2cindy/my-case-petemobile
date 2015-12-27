@@ -574,6 +574,7 @@ namespace WuDada.Core.Post.Persistence
             AppendPostEqualTitle(conditions, whereScript, param);
             AppendPostCustomField2(conditions, whereScript, param);
             AppendPostProductSer(conditions, whereScript, param);
+            AppendPostWithOutMemberId(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -582,6 +583,14 @@ namespace WuDada.Core.Post.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendPostWithOutMemberId(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("WithOutMemberId"))
+            {
+                whereScript.Append(" and (p.MemberId is null or  p.MemberId = '')");                
+            }
         }
 
         private void AppendPostProductSer(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
