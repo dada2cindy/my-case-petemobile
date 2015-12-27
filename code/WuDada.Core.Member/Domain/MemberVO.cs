@@ -320,6 +320,12 @@ namespace WuDada.Core.Member.Domain
         [DataMember]
         public virtual double Prepayment { get; set; }
 
+        /// <summary>
+        /// 是否幫客戶預繳 無,是,否
+        /// </summary>
+        [DataMember]
+        public virtual string SelfPrepayment { get; set; }
+
         public virtual string GetStr_Status
         {
             get

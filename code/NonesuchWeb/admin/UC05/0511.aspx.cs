@@ -289,9 +289,11 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         table.Columns.Add("申辦號碼", typeof(string));
         table.Columns.Add("手機進價", typeof(double));
         table.Columns.Add("銷售金額", typeof(double));
+        table.Columns.Add("是否幫客戶預繳", typeof(string));
         table.Columns.Add("預繳金額", typeof(double));
         table.Columns.Add("門號佣金", typeof(double));
         table.Columns.Add("佣金是否核發", typeof(string));
+        table.Columns.Add("後退佣金", typeof(double));
         table.Columns.Add("吸收違約金", typeof(double));        
         table.Columns.Add("綁約月數", typeof(double));
         table.Columns.Add("門號到期日", typeof(string));
@@ -328,15 +330,17 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                 dr[13] = memberVO.Mobile;
                 dr[14] = memberVO.PhonePrice == null ? 0 : memberVO.PhonePrice;
                 dr[15] = memberVO.PhoneSellPrice == null ? 0 : memberVO.PhoneSellPrice;
-                dr[16] = memberVO.Prepayment == null ? 0 : memberVO.Prepayment;
-                dr[17] = memberVO.Commission == null ? 0 : memberVO.Commission;
-                dr[18] = memberVO.GetCommission;
-                dr[19] = memberVO.BreakMoney == null ? 0 : memberVO.BreakMoney;                
-                dr[20] = memberVO.ContractMonths == null ? 0 : memberVO.ContractMonths;
-                dr[21] = dueDate;
-                dr[22] = memberVO.Sales;
-                dr[23] = memberVO.Store;
-                dr[24] = memberVO.Note;
+                dr[16] = memberVO.SelfPrepayment;
+                dr[17] = memberVO.Prepayment == null ? 0 : memberVO.Prepayment;
+                dr[18] = memberVO.Commission == null ? 0 : memberVO.Commission;
+                dr[19] = memberVO.GetCommission;
+                dr[20] = memberVO.ReturnCommission == null ? 0 : memberVO.ReturnCommission;
+                dr[21] = memberVO.BreakMoney == null ? 0 : memberVO.BreakMoney;                
+                dr[22] = memberVO.ContractMonths == null ? 0 : memberVO.ContractMonths;
+                dr[23] = dueDate;
+                dr[24] = memberVO.Sales;
+                dr[25] = memberVO.Store;
+                dr[26] = memberVO.Note;
 
                 table.Rows.Add(dr);                
             }
@@ -356,7 +360,8 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         ddlContractMonths.SelectedValue = "";
         ddlProject1.SelectedValue = "";
         ddlOnlineWholesalers.SelectedValue = "";
-        ddlGetCommission.SelectedValue = "否";        
+        ddlGetCommission.SelectedValue = "否";
+        ddlSelfPrepayment.SelectedValue = "無";
     }
 
     //private string GetPic(string fileName)

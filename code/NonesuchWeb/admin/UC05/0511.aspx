@@ -221,9 +221,16 @@
                 </tr>
                 <tr>
                     <td>
-                        預繳金額
+                        是否幫客戶預繳
                     </td>
                     <td>
+                        <asp:DropDownList ID="ddlSelfPrepayment" runat="server">
+                            <asp:ListItem Text="無" Value="無"></asp:ListItem>
+                            <asp:ListItem Text="是" Value="是"></asp:ListItem>
+                            <asp:ListItem Text="否" Value="否"></asp:ListItem>
+                        </asp:DropDownList>
+                        &nbsp;&nbsp;&nbsp;
+                        預繳金額：
                         <asp:TextBox ID="txtPrepayment" runat="server" Width="100px"></asp:TextBox>
                         <asp:RangeValidator ID="RangeValidator5" runat="server" ErrorMessage="預繳金額請輸入0以上的整數"
                             ControlToValidate="txtPrepayment" MaximumValue="1000000" MinimumValue="0" Type="Integer"
