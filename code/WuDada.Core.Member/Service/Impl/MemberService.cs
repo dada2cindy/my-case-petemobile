@@ -100,5 +100,33 @@ namespace WuDada.Core.Member.Service.Impl
         {
             return MemberDao.GetTotalCommission(conditions);
         }
+
+        /// <summary>
+        /// 取得未核發佣金總合
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public int GetNotGetTotalCommission(IDictionary<string, string> conditions)
+        {
+            double notGetTotalCommission = 0;
+
+            IList<MemberVO> memberList = MemberDao.GetMemberList(conditions);
+            if (memberList != null && memberList.Count > 0)
+            {
+                foreach (MemberVO member in memberList)
+                {
+                    if ("是".Equals(member.SelfPrepayment))
+                    {
+                        notGetTotalCommission += member.Commission;
+                    }
+                    else
+                    {
+                        notGetTotalCommission += (member.Commission - member.Prepayment);
+                    }
+                }
+            }
+
+            return Convert.ToInt32(notGetTotalCommission); ;
+        }
     }
 }

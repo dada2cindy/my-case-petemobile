@@ -306,7 +306,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                     conditionsNotGetTotalCommission.Add("Status", "1");
                     conditionsNotGetTotalCommission.Add("GetCommission", "否");
                     conditionsNotGetTotalCommission.Add("Store", store.Name);
-                    salesStatisticsVO.NotGetTotalCommission = MemberService.GetTotalCommission(conditionsNotGetTotalCommission);
+                    salesStatisticsVO.NotGetTotalCommission = MemberService.GetNotGetTotalCommission(conditionsNotGetTotalCommission);
 
                     //門號
                     Dictionary<string, string> conditionsMember = new Dictionary<string, string>();

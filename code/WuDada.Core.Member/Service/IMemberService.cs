@@ -62,5 +62,12 @@ namespace WuDada.Core.Member.Service
         /// <param name="conditions"></param>
         /// <returns></returns>
         int GetTotalCommission(IDictionary<string, string> conditions);
+
+        /// <summary>
+        /// 取得未核發佣金總合
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        int GetNotGetTotalCommission(IDictionary<string, string> conditions);
     }
 }
