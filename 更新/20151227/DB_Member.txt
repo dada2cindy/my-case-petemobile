@@ -1,0 +1,6 @@
+ALTER TABLE MEMBER ADD ReturnCommission float;
+
+UPDATE MEMBER SET [ReturnCommission] = 0;
+
+ALTER TABLE MEMBER ADD SelfPrepayment nvarchar(10);
+UPDATE MEMBER SET [SelfPrepayment] = 'µL';

@@ -213,6 +213,12 @@ namespace WuDada.Core.Member.Domain
         public virtual double Commission { get; set; }
 
         /// <summary>
+        /// 後退佣金
+        /// </summary>
+        [DataMember]
+        public virtual double ReturnCommission { get; set; }
+
+        /// <summary>
         /// 違約金
         /// </summary>
         [DataMember]
@@ -313,6 +319,12 @@ namespace WuDada.Core.Member.Domain
         /// </summary>
         [DataMember]
         public virtual double Prepayment { get; set; }
+
+        /// <summary>
+        /// 是否幫客戶預繳 無,是,否
+        /// </summary>
+        [DataMember]
+        public virtual string SelfPrepayment { get; set; }
 
         public virtual string GetStr_Status
         {

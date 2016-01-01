@@ -182,8 +182,9 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         //postVO.PicFileName = m_PicFileName;
         memberVO.Status = "1";
         memberVO.CreateIP = m_HttpHelper.GetUserIp(Context);
-        m_MemberService.CreateMember(memberVO);
+        memberVO = m_MemberService.CreateMember(memberVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.新增, memberVO);
+        UpdateProductByPhoneSer(memberVO.MemberId);
         ClearUI();
         fillGridView();
     }
@@ -193,10 +194,11 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         MemberVO memberVO = m_MemberService.GetMemberById(m_Mode);
         memberVO.Status = "0";
         m_MemberService.UpdateMember(memberVO);
+        UpdateProductByPhoneSerWithDelete(memberVO.PhoneSer);
         m_WebLogService.AddSystemLog(MsgVO.Action.刪除, memberVO, "", string.Format("單號:{0}", memberVO.MemberId));
         ClearUI();
         fillGridView();
-    }
+    }    
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
@@ -287,9 +289,11 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         table.Columns.Add("申辦號碼", typeof(string));
         table.Columns.Add("手機進價", typeof(double));
         table.Columns.Add("銷售金額", typeof(double));
+        table.Columns.Add("是否幫客戶預繳", typeof(string));
         table.Columns.Add("預繳金額", typeof(double));
         table.Columns.Add("門號佣金", typeof(double));
         table.Columns.Add("佣金是否核發", typeof(string));
+        table.Columns.Add("後退佣金", typeof(double));
         table.Columns.Add("吸收違約金", typeof(double));        
         table.Columns.Add("綁約月數", typeof(double));
         table.Columns.Add("門號到期日", typeof(string));
@@ -326,15 +330,17 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                 dr[13] = memberVO.Mobile;
                 dr[14] = memberVO.PhonePrice == null ? 0 : memberVO.PhonePrice;
                 dr[15] = memberVO.PhoneSellPrice == null ? 0 : memberVO.PhoneSellPrice;
-                dr[16] = memberVO.Prepayment == null ? 0 : memberVO.Prepayment;
-                dr[17] = memberVO.Commission == null ? 0 : memberVO.Commission;
-                dr[18] = memberVO.GetCommission;
-                dr[19] = memberVO.BreakMoney == null ? 0 : memberVO.BreakMoney;                
-                dr[20] = memberVO.ContractMonths == null ? 0 : memberVO.ContractMonths;
-                dr[21] = dueDate;
-                dr[22] = memberVO.Sales;
-                dr[23] = memberVO.Store;
-                dr[24] = memberVO.Note;
+                dr[16] = memberVO.SelfPrepayment;
+                dr[17] = memberVO.Prepayment == null ? 0 : memberVO.Prepayment;
+                dr[18] = memberVO.Commission == null ? 0 : memberVO.Commission;
+                dr[19] = memberVO.GetCommission;
+                dr[20] = memberVO.ReturnCommission == null ? 0 : memberVO.ReturnCommission;
+                dr[21] = memberVO.BreakMoney == null ? 0 : memberVO.BreakMoney;                
+                dr[22] = memberVO.ContractMonths == null ? 0 : memberVO.ContractMonths;
+                dr[23] = dueDate;
+                dr[24] = memberVO.Sales;
+                dr[25] = memberVO.Store;
+                dr[26] = memberVO.Note;
 
                 table.Rows.Add(dr);                
             }
@@ -354,7 +360,8 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         ddlContractMonths.SelectedValue = "";
         ddlProject1.SelectedValue = "";
         ddlOnlineWholesalers.SelectedValue = "";
-        ddlGetCommission.SelectedValue = "否";        
+        ddlGetCommission.SelectedValue = "否";
+        ddlSelfPrepayment.SelectedValue = "無";
     }
 
     //private string GetPic(string fileName)
@@ -404,8 +411,9 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         {
             MemberVO memberVO = m_MemberService.GetMemberById(m_Mode);
             UIHelper.FillVO(pnlContent, memberVO);
-            m_MemberService.UpdateMember(memberVO);
+            memberVO = m_MemberService.UpdateMember(memberVO);
             m_WebLogService.AddSystemLog(MsgVO.Action.修改, memberVO, "", string.Format("單號:{0}", memberVO.MemberId));
+            UpdateProductByPhoneSer(memberVO.MemberId);
             fillGridView();
             ClearUI();
             ShowMode();
@@ -414,6 +422,27 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         {
             m_Log.Error(ex);
             lblMsg.Text = ex.ToString();
+        }
+    }
+
+    private void UpdateProductByPhoneSer(int memberId)
+    {
+        if (!string.IsNullOrEmpty(hdnPhoneSerId.Value))
+        {
+            PostVO postVO = m_PostService.GetPostById(int.Parse(hdnPhoneSerId.Value));
+
+            if (postVO.Flag == 1 && postVO.Type == 0)
+            {
+                postVO.MemberId = memberId.ToString();
+                postVO.Type = 1;
+                postVO.MemberName = txtName.Text.Trim();
+                postVO.MemberPhone = txtMobile.Text.Trim();
+                postVO.SellPrice = 0;
+                postVO.CloseDate = DateTime.Parse(txtApplyDate2.Text.Trim());
+                postVO.CustomField2 = ddlSales.SelectedValue;
+                m_PostService.UpdatePost(postVO);
+                m_WebLogService.AddSystemLog(MsgVO.Action.售出, postVO, "", string.Format("單號:{0}", postVO.PostId));
+            }
         }
     }
 
@@ -589,6 +618,69 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                 ddlProject2.Enabled = true;
                 ddlProject3.Enabled = true;
                 break;
+        }
+    }
+
+    private void UpdateProductByPhoneSerWithDelete(string phoneSer)
+    {
+        Dictionary<string, string> conditions = new Dictionary<string, string>();
+        conditions.Add("Flag", "1");
+        conditions.Add("ProductSer", phoneSer);        
+        conditions.Add("PageIndex", "0");
+        conditions.Add("PageSize", "1");
+        IList<PostVO> list = m_PostService.GetPostList(conditions);
+        if (list != null && list.Count > 0)
+        {
+            PostVO postVO = m_PostService.GetPostById(list[0].PostId);
+            postVO.MemberId = null;
+            postVO.Type = 0;
+            postVO.SellPrice = 0;
+            postVO.CloseDate = null;
+            postVO.MemberName = string.Empty;
+            postVO.MemberPhone = string.Empty;
+            postVO.CustomField2 = string.Empty;
+            m_PostService.UpdatePost(postVO);
+            m_WebLogService.AddSystemLog(MsgVO.Action.修改, postVO, "", string.Format("單號:{0}", postVO.PostId));
+        }
+    }
+
+    protected void txtPhoneSer_TextChanged(object sender, EventArgs e)
+    {
+        lblPhoneSerMsg.Text = string.Empty;
+        hdnPhoneSerId.Value = string.Empty;
+
+        Dictionary<string, string> conditions = new Dictionary<string, string>();
+        conditions.Add("Flag", "1");
+        //conditions.Add("ProductSer", txtPhoneSer.Text.Trim());
+        conditions.Add("KeyWord", txtPhoneSer.Text.Trim());
+        conditions.Add("PageIndex", "0");
+        conditions.Add("PageSize", "1");
+        IList<PostVO> list = m_PostService.GetPostList(conditions);
+
+        if (list == null || list.Count == 0)
+        {
+            lblPhoneSerMsg.Text = "查無此手機序號";
+        }
+        else
+        {
+            PostVO product = list[0];
+            if (product.Type == 1)
+            {
+                lblPhoneSerMsg.Text = "此序號手機已售出";
+            }
+            else
+            {
+                //lblPhoneSerMsg.Text = "此手機序號在庫";
+                hdnPhoneSerId.Value = product.PostId.ToString();
+                if (!string.IsNullOrEmpty(product.ProductSer))
+                {
+                    txtPhoneSer.Text = product.ProductSer;
+                }                
+                txtProduct.Text = product.Title;
+                txtPhonePrice.Text = product.Price.ToString();
+                txtWarrantySuppliers.Text = product.WarrantySuppliers;
+                txtMobileWholesalers.Text = product.Wholesalers;
+            }
         }
     }
 }

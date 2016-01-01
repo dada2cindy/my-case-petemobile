@@ -72,7 +72,12 @@ namespace WuDada.Core.Accounting.Service.Impl
                     {
                         salesStatisticsVO.ApplyCount = memberList.Count;
                         salesStatisticsVO.ApplyRevenue = memberList.Sum(m => m.Commission);
-                        salesStatisticsVO.ApplyProfit = memberList.Sum(m => m.Commission + m.PhoneSellPrice - m.PhonePrice - m.BreakMoney);
+                        salesStatisticsVO.ApplyProfit = memberList.Sum(m => m.Commission + m.PhoneSellPrice - m.PhonePrice - m.BreakMoney);    
+                        
+                        //預繳金, 幫客戶預繳的用減的, 沒有幫客戶預繳用加的
+                        salesStatisticsVO.ApplyProfit += memberList.Where(m => m.Prepayment > 0 && "否".Equals(m.SelfPrepayment)).Sum(m => m.Prepayment);
+                        salesStatisticsVO.ApplyProfit -= memberList.Where(m => m.Prepayment > 0 && "是".Equals(m.SelfPrepayment)).Sum(m => m.Prepayment);    
+
                         salesStatisticsVO.ApplyTelCom1Count = memberList.Count(m => "太電".Equals(m.Project3));
                         salesStatisticsVO.ApplyTelCom2Count = memberList.Count(m => "遠傳".Equals(m.Project3));
                         salesStatisticsVO.ApplyTelCom3Count = memberList.Count(m => "中華".Equals(m.Project3));
@@ -94,6 +99,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                     //配件
                     Dictionary<string, string> conditionsPost = new Dictionary<string, string>();
                     conditionsPost.Add("Flag", "1");
+                    conditionsPost.Add("WithOutMemberId", "1");
                     conditionsPost.Add("Type", "1");
                     conditionsPost.Add("CloseDateStart", dateStart.ToString("yyyy/MM/dd"));
                     conditionsPost.Add("CloseDateEnd", dateEnd.ToString("yyyy/MM/dd"));
@@ -315,6 +321,11 @@ namespace WuDada.Core.Accounting.Service.Impl
                         salesStatisticsVO.ApplyCount = memberList.Count;
                         salesStatisticsVO.ApplyRevenue = memberList.Sum(m => m.Commission);
                         salesStatisticsVO.ApplyProfit = memberList.Sum(m => m.Commission + m.PhoneSellPrice - m.PhonePrice - m.BreakMoney);
+
+                        //預繳金, 幫客戶預繳的用減的, 沒有幫客戶預繳用加的
+                        salesStatisticsVO.ApplyProfit += memberList.Where(m => m.Prepayment > 0 && "否".Equals(m.SelfPrepayment)).Sum(m => m.Prepayment);
+                        salesStatisticsVO.ApplyProfit -= memberList.Where(m => m.Prepayment > 0 && "是".Equals(m.SelfPrepayment)).Sum(m => m.Prepayment);    
+
                         salesStatisticsVO.ApplyTelCom1Count = memberList.Count(m => "太電".Equals(m.Project3));
                         salesStatisticsVO.ApplyTelCom2Count = memberList.Count(m => "遠傳".Equals(m.Project3));
                         salesStatisticsVO.ApplyTelCom3Count = memberList.Count(m => "中華".Equals(m.Project3));
@@ -336,6 +347,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                     //配件
                     Dictionary<string, string> conditionsPost = new Dictionary<string, string>();
                     conditionsPost.Add("Flag", "1");
+                    conditionsPost.Add("WithOutMemberId", "1");
                     conditionsPost.Add("Type", "1");
                     conditionsPost.Add("CloseDateStart", dateStart.ToString("yyyy/MM/dd"));
                     conditionsPost.Add("CloseDateEnd", dateEnd.ToString("yyyy/MM/dd"));
