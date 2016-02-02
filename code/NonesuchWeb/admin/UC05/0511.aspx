@@ -100,6 +100,7 @@
                             <asp:ListItem Text="皇家" Value="皇家"></asp:ListItem>
                             <asp:ListItem Text="62屋" Value="62屋"></asp:ListItem>
                             <asp:ListItem Text="立穎" Value="立穎"></asp:ListItem>
+                            <asp:ListItem Text="聯強" Value="聯強"></asp:ListItem>
                         </asp:DropDownList>
                     </td>
                 </tr>
