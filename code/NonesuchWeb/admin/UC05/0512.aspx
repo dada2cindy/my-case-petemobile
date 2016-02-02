@@ -61,7 +61,7 @@
                         <asp:DropDownList ID="ddlProductList" runat="server" AutoPostBack="True" 
                             onselectedindexchanged="ddlProductList_SelectedIndexChanged">
                         </asp:DropDownList>
-                        <asp:TextBox ID="txtTitle" runat="server" Width="300px"></asp:TextBox>
+                        <asp:TextBox ID="txtTitle" runat="server" Width="300px" autocomplete="on"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="請輸入品名"
                             ControlToValidate="txtTitle" ValidationGroup="Save"></asp:RequiredFieldValidator>
                     </td>
