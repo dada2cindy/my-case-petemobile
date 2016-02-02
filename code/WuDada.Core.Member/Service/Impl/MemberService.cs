@@ -115,14 +115,15 @@ namespace WuDada.Core.Member.Service.Impl
             {
                 foreach (MemberVO member in memberList)
                 {
-                    if ("是".Equals(member.SelfPrepayment))
-                    {
-                        notGetTotalCommission += member.Commission;
-                    }
-                    else
-                    {
-                        notGetTotalCommission += (member.Commission - member.Prepayment);
-                    }
+                    //if ("是".Equals(member.SelfPrepayment))
+                    //{
+                    //    notGetTotalCommission += member.Commission;
+                    //}
+                    //else
+                    //{
+                    //    notGetTotalCommission += (member.Commission - member.Prepayment);
+                    //}
+                    notGetTotalCommission += (member.Commission - member.Prepayment);
                 }
             }
 
