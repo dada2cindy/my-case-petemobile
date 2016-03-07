@@ -340,5 +340,15 @@ namespace WuDada.Core.Post.Service.Impl
         {
             return PostDao.GetTotalQuantity(conditions);
         }
+
+        /// <summary>
+        /// 取得Node By Name
+        /// </summary>
+        /// <param name="name">Name</param>
+        /// <returns>Node</returns>
+        public NodeVO GetNodeByName(string name)
+        {
+            return PostDao.GetNodeByName(name);
+        }
     }
 }

@@ -226,5 +226,12 @@ namespace WuDada.Core.Post.Service
         /// <param name="conditions"></param>
         /// <returns></returns>
         int GetTotalQuantity(IDictionary<string, string> conditions);
+
+        /// <summary>
+        /// 取得Node By Name
+        /// </summary>
+        /// <param name="name">Name</param>
+        /// <returns>Node</returns>
+        NodeVO GetNodeByName(string name);
     }
 }

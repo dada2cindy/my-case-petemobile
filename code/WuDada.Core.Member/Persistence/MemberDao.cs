@@ -204,6 +204,11 @@ namespace WuDada.Core.Member.Persistence
                 whereScript.Append(" and m.ApplyDate2 <= ? ");
                 param.Add(Convert.ToDateTime(conditions["ApplyDate2End"]));
             }
+            if (conditions.IsContainsValue("ApplyDate2"))
+            {
+                whereScript.Append(" and m.ApplyDate2 = ? ");
+                param.Add(Convert.ToDateTime(conditions["ApplyDate2"]));
+            }
         }
 
         private string AppendMemberOrder(IDictionary<string, string> conditions)

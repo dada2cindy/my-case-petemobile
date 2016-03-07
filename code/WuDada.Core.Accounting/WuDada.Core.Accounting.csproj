@@ -87,6 +87,7 @@
     <Compile Include="AccountingFactory.cs" />
     <Compile Include="Domain\SalesStatisticsVO.cs" />
     <Compile Include="Domain\TargetVO.cs" />
+    <Compile Include="Domain\CashStatisticsVO.cs" />
     <Compile Include="Persistence\IAccountingDao.cs" />
     <Compile Include="Persistence\AccountingDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

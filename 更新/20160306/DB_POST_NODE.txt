@@ -1,0 +1,37 @@
+
+INSERT INTO [POST_NODE]
+           ([Name]
+           ,[ParentId]
+           ,[SortNo]
+           ,[Flag]
+           ,[UType]          
+           ,[CreatedBy]
+           ,[UpdatedBy])
+     VALUES
+           ('#特別現金收支'
+           ,1
+           ,4
+           ,1
+           ,0
+           ,'admin'
+           ,'admin')
+
+GO
+
+
+INSERT INTO [POST_NODE]
+           ([Name]
+           ,[ParentId]
+           ,[SortNo]
+           ,[Flag]
+           ,[UType]          
+           ,[CreatedBy]
+           ,[UpdatedBy])
+     VALUES
+           ('#每日結帳'
+           ,1
+           ,5
+           ,1
+           ,0
+           ,'admin'
+           ,'admin')

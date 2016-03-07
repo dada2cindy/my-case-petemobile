@@ -102,13 +102,13 @@ namespace WuDada.Core.Post.Domain
         public virtual DateTime? ShowDate { get; set; }
 
         /// <summary>
-        /// 下架日/銷貨日
+        /// 下架日/銷貨日  結帳日
         /// </summary>
         [DataMember]
         public virtual DateTime? CloseDate { get; set; }
 
         /// <summary>
-        /// 0.站內/庫存 1.連結/售出
+        /// 0.站內/庫存 收入 1.連結/售出 支出
         /// </summary>
         [DataMember]
         public virtual int Type { get; set; }
@@ -156,7 +156,7 @@ namespace WuDada.Core.Post.Domain
         public virtual bool IsRecommend { get; set; }
 
         /// <summary>
-        /// 價格/進貨價
+        /// 價格/進貨價,  收支金額,  結帳金額
         /// </summary>
         [DataMember]
         public virtual double? Price { get; set; }
@@ -290,6 +290,48 @@ namespace WuDada.Core.Post.Domain
 
                 return result;
             }
-        }        
+        }
+
+        /// <summary>
+        /// 取文字_收入支出
+        /// </summary>
+        [DataMember]
+        public virtual string GetStr_Type_Cash
+        {
+            get
+            {
+                string result = "";
+
+                if (Type == 0)
+                {
+                    result = "收入";
+                }
+                else if (Type == 1)
+                {
+                    result = "支出";
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 取文字_收入支出金額
+        /// </summary>
+        [DataMember]
+        public virtual string GetStr_Price_Cash
+        {
+            get
+            {
+                string result = "";
+
+                if (Price.HasValue)
+                {
+                    result = Math.Abs(Price.Value).ToString();
+                }
+
+                return result;
+            }
+        }
     }
 }

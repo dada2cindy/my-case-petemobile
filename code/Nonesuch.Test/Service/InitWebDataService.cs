@@ -286,6 +286,31 @@ ORDER BY SortNo "
         }
 
         [Test]
+        public void Test_UpdateCash()
+        {
+            m_AccountingService.UpdateCash();
+            CashStatisticsVO cashStatisticsVO = m_AccountingService.GetCashStatisticsVO(DateTime.Today);
+            Assert.IsNotNull(cashStatisticsVO);
+        }
+
+        [Test]
+        public void Test_UpdateCashByPeriod()
+        {
+            DateTime dateFrom = DateTime.Parse("2016/01/01");
+            DateTime dateTo = DateTime.Today.AddDays(-1);
+            m_AccountingService.UpdateCashByPeriod(dateFrom, dateTo);
+            CashStatisticsVO cashStatisticsVO = m_AccountingService.GetCashStatisticsVO(DateTime.Today);
+            Assert.IsNotNull(cashStatisticsVO);
+        }
+
+        [Test]
+        public void Test_GetCashStatisticsVO()
+        {            
+            CashStatisticsVO cashStatisticsVO = m_AccountingService.GetCashStatisticsVO(DateTime.Parse("2016/02/02"));
+            Assert.IsNotNull(cashStatisticsVO);
+        }
+
+        [Test]
         public void Test_CreateTarget()
         {
             IList<TargetVO> targetList = new List<TargetVO>();
@@ -296,7 +321,7 @@ ORDER BY SortNo "
             foreach (LoginUserVO user in userList)
             {
                 TargetVO targetVO = new TargetVO();
-                targetVO.Id = string.Format("{0}{1}", "201507", user.FullNameInChinese);
+                targetVO.Id = string.Format("{0}{1}", "201601", user.FullNameInChinese);
                 targetVO.Name = user.FullNameInChinese;
                 targetVO.Amount = targetAmount;
                 targetAmount += 5000;

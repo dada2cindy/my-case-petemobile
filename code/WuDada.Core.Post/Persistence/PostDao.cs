@@ -660,6 +660,18 @@ namespace WuDada.Core.Post.Persistence
                 whereScript.Append(" and p.CloseDate <= ? ");
                 param.Add(Convert.ToDateTime(conditions["CloseDateEnd"]));
             }
+
+            if (conditions.IsContainsValue("CloseDate"))
+            {
+                whereScript.Append(" and p.CloseDate = ? ");
+                param.Add(Convert.ToDateTime(conditions["CloseDate"]));
+            }
+
+            if (conditions.IsContainsValue("ShowDate"))
+            {
+                whereScript.Append(" and p.ShowDate = ? ");
+                param.Add(Convert.ToDateTime(conditions["ShowDate"]));
+            }
         }
 
         private void AppendPostIsRecommend(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
@@ -730,6 +742,26 @@ namespace WuDada.Core.Post.Persistence
             }
 
             return order;
+        }
+
+        /// <summary>
+        /// 取得Node By Name
+        /// </summary>
+        /// <param name="name">Name</param>
+        /// <returns>Node</returns>
+        public NodeVO GetNodeByName(string name)
+        {
+            DetachedCriteria dCriteria = DetachedCriteria.For<NodeVO>();
+            dCriteria.Add(Expression.Eq("Name", name));
+
+            int count = NHibernateDao.CountByDetachedCriteria(dCriteria);
+
+            if (count == 0)
+            {
+                return null;
+            }
+
+            return NHibernateDao.SearchByDetachedCriteria<NodeVO>(dCriteria).FirstOrDefault();
         }
     }
 }

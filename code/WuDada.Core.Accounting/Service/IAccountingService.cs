@@ -42,5 +42,19 @@ namespace WuDada.Core.Accounting.Service
         /// <param name="ym">yyyyMM</param>
         /// <returns></returns>
         IList<SalesStatisticsVO> GetSalesStatisticsByStore(string ym);
+
+        /// <summary>
+        /// 更新現金帳
+        /// </summary>
+        void UpdateCash();
+
+        /// <summary>
+        /// 取得結帳資訊 By 日期
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns>如果沒有前一天的結帳金額,則回傳null</returns>
+        CashStatisticsVO GetCashStatisticsVO(DateTime day);
+
+        void UpdateCashByPeriod(DateTime dateFrom, DateTime dateTo);
     }
 }

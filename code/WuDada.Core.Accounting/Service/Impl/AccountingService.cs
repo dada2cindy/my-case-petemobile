@@ -101,6 +101,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                     conditionsPost.Add("Flag", "1");
                     conditionsPost.Add("WithOutMemberId", "1");
                     conditionsPost.Add("Type", "1");
+                    conditionsPost.Add("NodeId", "2");
                     conditionsPost.Add("CloseDateStart", dateStart.ToString("yyyy/MM/dd"));
                     conditionsPost.Add("CloseDateEnd", dateEnd.ToString("yyyy/MM/dd"));
                     conditionsPost.Add("Store", store);
@@ -349,6 +350,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                     conditionsPost.Add("Flag", "1");
                     conditionsPost.Add("WithOutMemberId", "1");
                     conditionsPost.Add("Type", "1");
+                    conditionsPost.Add("NodeId", "2");
                     conditionsPost.Add("CloseDateStart", dateStart.ToString("yyyy/MM/dd"));
                     conditionsPost.Add("CloseDateEnd", dateEnd.ToString("yyyy/MM/dd"));
                     //conditionsPost.Add("Store", store.Name);
@@ -408,6 +410,159 @@ namespace WuDada.Core.Accounting.Service.Impl
                 result.Add(GetTotal(ym, result));
 
                 return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 更新現金帳
+        /// </summary>
+        public void UpdateCash()
+        {
+            NodeVO node = PostService.GetNodeByName("#每日結帳");            
+            
+            ////得最後一日的結帳金額   
+            Dictionary<string, string> conditionsPost = new Dictionary<string, string>();
+            conditionsPost.Add("Flag", "1");
+            conditionsPost.Add("NodeId", node.NodeId.ToString());
+            conditionsPost.Add("Order", "order by p.CloseDate desc");
+            conditionsPost.Add("PageIndex", "0");
+            conditionsPost.Add("PageSize", "1");
+            IList<PostVO> postList = PostService.GetPostList(conditionsPost);
+
+            if (postList != null && postList.Count > 0)
+            {
+                DateTime lastCashDate = postList[0].CloseDate.Value;
+
+                DateTime dateFrom = lastCashDate.AddDays(1);
+                DateTime dateTo = DateTime.Today.AddDays(-1);
+
+                UpdateCashByPeriod(dateFrom, dateTo);
+            }            
+        }
+
+        public void UpdateCashByPeriod(DateTime dateFrom, DateTime dateTo)
+        {
+            NodeVO node = PostService.GetNodeByName("#每日結帳");   
+
+            for (DateTime day = dateFrom; day.Date <= dateTo; day = day.AddDays(1))
+            {
+                CashStatisticsVO cashStatisticsVO = GetCashStatisticsVO(day);
+
+                if (cashStatisticsVO != null)
+                {
+                    //找出有沒有這天的舊的結帳資料,有的話刪除
+                    Dictionary<string, string> conditionsOldCash = new Dictionary<string, string>();
+                    conditionsOldCash.Add("Flag", "1");
+                    conditionsOldCash.Add("NodeId", node.NodeId.ToString());
+                    conditionsOldCash.Add("CloseDate", day.ToString("yyyy/MM/dd"));
+                    conditionsOldCash.Add("PageIndex", "0");
+                    conditionsOldCash.Add("PageSize", "1");
+                    
+                    IList<PostVO> cashList = PostService.GetPostList(conditionsOldCash);
+                    if (cashList != null && cashList.Count > 0)
+                    {
+                        PostService.DeletePost(cashList[0]);
+                    }
+
+                    PostVO post = new PostVO();
+                    post.Node = node;
+                    post.Title = "每日結帳";
+                    post.CreatedBy = "admin";
+                    post.UpdatedBy = "admin";
+                    post.CloseDate = cashStatisticsVO.CloseDate;
+                    post.Price = cashStatisticsVO.CashToday;
+
+                    PostService.CreatePost(post);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 取得結帳資訊 By 日期
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns>如果沒有前一天的結帳金額,則回傳null</returns>
+        public CashStatisticsVO GetCashStatisticsVO(DateTime day)
+        {
+            ////抓前一日的結帳金額，有的話才計算該天的結帳
+            NodeVO node = PostService.GetNodeByName("#每日結帳");
+            Dictionary<string, string> conditionsYesterdayCash = new Dictionary<string, string>();
+            conditionsYesterdayCash.Add("Flag", "1");
+            conditionsYesterdayCash.Add("NodeId", node.NodeId.ToString());
+            conditionsYesterdayCash.Add("CloseDate", day.AddDays(-1).ToString("yyyy/MM/dd"));
+            conditionsYesterdayCash.Add("PageIndex", "0");
+            conditionsYesterdayCash.Add("PageSize", "1");
+            IList<PostVO> postYesterdayCashList = PostService.GetPostList(conditionsYesterdayCash);
+            if (postYesterdayCashList != null && postYesterdayCashList.Count > 0)
+            {
+                CashStatisticsVO cashStatisticsVO = new CashStatisticsVO();
+                cashStatisticsVO.CashYesterday = postYesterdayCashList[0].Price;
+                cashStatisticsVO.CloseDate = day;
+                
+                //今日庫存進貨
+                Dictionary<string, string> conditionsBuyToday = new Dictionary<string, string>();
+                conditionsBuyToday.Add("Flag", "1");
+                conditionsBuyToday.Add("NodeId", "2");
+                conditionsBuyToday.Add("ShowDate", day.ToString("yyyy/MM/dd"));
+                IList<PostVO> postBuyTodayList = PostService.GetPostList(conditionsBuyToday);
+
+                if (postBuyTodayList != null && postBuyTodayList.Count > 0)
+                {
+                    cashStatisticsVO.BuyToday -= postBuyTodayList.Sum(p => p.Price * p.Quantity);
+                }
+
+                //今日庫存銷貨
+                Dictionary<string, string> conditionsSellToday = new Dictionary<string, string>();
+                conditionsSellToday.Add("Flag", "1");
+                conditionsSellToday.Add("NodeId", "2");
+                conditionsSellToday.Add("WithOutMemberId", "1");
+                conditionsSellToday.Add("CloseDate", day.ToString("yyyy/MM/dd"));
+                IList<PostVO> postSellTodayList = PostService.GetPostList(conditionsSellToday);
+
+                if (postSellTodayList != null && postSellTodayList.Count > 0)
+                {
+                    cashStatisticsVO.SellToday = postSellTodayList.Sum(p => p.SellPrice * p.Quantity);
+                }
+
+                //門號
+                IList<NodeVO> storeList = PostService.GetNodeListByParentName("店家");
+                Dictionary<string, string> conditionsMember = new Dictionary<string, string>();
+                conditionsMember.Add("Status", "1");
+                conditionsMember.Add("ApplyDate2", day.ToString("yyyy/MM/dd"));
+                conditionsMember.Add("Store", storeList[0].Name);
+                IList<MemberVO> memberList = MemberService.GetMemberList(conditionsMember);
+
+                if (memberList != null && memberList.Count > 0)
+                {
+                    cashStatisticsVO.MobileToday = memberList.Sum(m => m.PhoneSellPrice - m.PhonePrice - m.BreakMoney);
+                    //如果沒有幫客戶預繳, 則現金要加上預繳金額
+                    cashStatisticsVO.MobileToday += memberList.Where(m => m.Prepayment > 0 && "否".Equals(m.SelfPrepayment)).Sum(m => m.Prepayment); 
+                }
+
+                //特別現金收支
+                NodeVO nodeSpecial = PostService.GetNodeByName("#特別現金收支");
+
+                Dictionary<string, string> conditionsSpecial = new Dictionary<string, string>();
+                conditionsSpecial.Add("Flag", "1");
+                conditionsSpecial.Add("NodeId", nodeSpecial.NodeId.ToString());
+                conditionsSpecial.Add("CloseDate", day.ToString("yyyy/MM/dd"));
+                IList<PostVO> postSpecialList = PostService.GetPostList(conditionsSpecial);
+
+                if (postSpecialList != null && postSpecialList.Count > 0)
+                {
+                    cashStatisticsVO.SpecialToday = postSellTodayList.Sum(p => p.Price);
+                }
+
+                //最後總計
+                cashStatisticsVO.TotalToday = cashStatisticsVO.BuyToday + cashStatisticsVO.SellToday + cashStatisticsVO.MobileToday + cashStatisticsVO.SpecialToday;
+                cashStatisticsVO.CashToday = cashStatisticsVO.CashYesterday + cashStatisticsVO.TotalToday;
+
+
+                return cashStatisticsVO;
             }
             else
             {

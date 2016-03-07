@@ -1,0 +1,25 @@
+UPDATE [POST]
+   SET 
+      [NodeId] = 2      
+ WHERE NodeId is null 
+GO
+
+INSERT INTO [POST]
+           ([Title]           
+           ,[NodeId]           
+           ,[Flag]           
+           ,[CreatedBy]
+           ,[UpdatedBy]
+           ,[CloseDate]           
+           ,[Price])
+     VALUES
+           ('每日結帳'           
+           ,(SELECT [NodeId]      
+  FROM [POST_NODE]
+  WHERE Name = '#每日結帳')           
+           ,1           
+           ,'admin'
+           ,'admin'           
+           ,'2016/1/31'           
+           ,10000 )
+GO
