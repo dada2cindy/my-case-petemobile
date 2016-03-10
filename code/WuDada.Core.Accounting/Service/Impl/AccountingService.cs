@@ -519,7 +519,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                 Dictionary<string, string> conditionsSellToday = new Dictionary<string, string>();
                 conditionsSellToday.Add("Flag", "1");
                 conditionsSellToday.Add("NodeId", "2");
-                conditionsSellToday.Add("WithOutMemberId", "1");
+                //conditionsSellToday.Add("WithOutMemberId", "1");
                 conditionsSellToday.Add("CloseDate", day.ToString("yyyy/MM/dd"));
                 IList<PostVO> postSellTodayList = PostService.GetPostList(conditionsSellToday);
 
@@ -537,10 +537,26 @@ namespace WuDada.Core.Accounting.Service.Impl
                 IList<MemberVO> memberList = MemberService.GetMemberList(conditionsMember);
 
                 if (memberList != null && memberList.Count > 0)
-                {
+                {                    
                     cashStatisticsVO.MobileToday = memberList.Sum(m => m.PhoneSellPrice - m.PhonePrice - m.BreakMoney);
+                    
                     //如果沒有幫客戶預繳, 則現金要加上預繳金額
-                    cashStatisticsVO.MobileToday += memberList.Where(m => m.Prepayment > 0 && "否".Equals(m.SelfPrepayment)).Sum(m => m.Prepayment); 
+                    cashStatisticsVO.MobileToday += memberList.Where(m => m.Prepayment > 0 && "否".Equals(m.SelfPrepayment)).Sum(m => m.Prepayment);
+
+                    foreach (MemberVO member in memberList)
+                    {
+                        Dictionary<string, string> conditionsPostWithMember = new Dictionary<string, string>();
+                        conditionsSellToday.Add("Flag", "1");
+                        conditionsSellToday.Add("NodeId", "2");
+                        conditionsSellToday.Add("MemberId", member.MemberId.ToString());
+                        int postWithMemberCount = PostService.GetPostCount(conditionsPostWithMember);
+
+                        if (postWithMemberCount > 0)
+                        {
+                            //如果這個客戶的手機是來自庫存的, 那麼手機進價要移除支出的部分
+                            cashStatisticsVO.MobileToday += member.PhonePrice;
+                        }
+                    }
                 }
 
                 //特別現金收支
