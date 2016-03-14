@@ -59,10 +59,13 @@ public partial class admin_UC07_0711_2 : System.Web.UI.Page
         m_AccountingService = m_AccountingFactory.GetAccountingService();
 
         if (!IsPostBack)
-        {            
-            ShowMode();
-                       
-            fillGridView();
+        {
+            ////先更新到今天之前的結帳
+            m_AccountingService.UpdateCash(); 
+            txtDate.Text = DateTime.Today.ToString("yyyy/MM/dd");
+
+            ShowMode();                       
+            LoadDataToUI();
         }
     }
 
@@ -74,10 +77,58 @@ public partial class admin_UC07_0711_2 : System.Web.UI.Page
         }
     }
 
-    private void fillGridView()
+    private void LoadDataToUI()
     {
-        ////先更新到今天之前的結帳
-        m_AccountingService.UpdateCash();
+        DateTime date;
+
+        if (DateTime.TryParse(txtDate.Text.Trim(), out date))
+        {
+            ////今日目前的結餘
+            CashStatisticsVO cashStatisticsVO = m_AccountingService.GetCashStatisticsVO(DateTime.Today);
+            if (cashStatisticsVO != null)
+            {
+
+            }
+
+            ////今日進貨
+            Dictionary<string, string> conditionsBuyToday = new Dictionary<string, string>();
+            conditionsBuyToday.Add("Flag", "1");
+            conditionsBuyToday.Add("NodeId", "2");
+            conditionsBuyToday.Add("ShowDate", date.ToString("yyyy/MM/dd"));
+            //IList<PostVO> postBuyTodayList = m_PostService.GetPostList(conditionsBuyToday);
+
+
+            ////今日銷貨
+            Dictionary<string, string> conditionsSellToday = new Dictionary<string, string>();
+            conditionsSellToday.Add("Flag", "1");
+            conditionsSellToday.Add("NodeId", "2");
+            //conditionsSellToday.Add("WithOutMemberId", "1");
+            conditionsSellToday.Add("CloseDate", date.ToString("yyyy/MM/dd"));
+            //IList<PostVO> postSellTodayList = PostService.GetPostList(conditionsSellToday);
+
+            ////今日門號
+            IList<NodeVO> storeList = m_PostService.GetNodeListByParentName("店家");
+            Dictionary<string, string> conditionsMember = new Dictionary<string, string>();
+            conditionsMember.Add("Status", "1");
+            conditionsMember.Add("ApplyDate2", date.ToString("yyyy/MM/dd"));
+            conditionsMember.Add("Store", storeList[0].Name);
+            //IList<MemberVO> memberList = m_MemberService.GetMemberList(conditionsMember);
+
+
+            ////特別收支
+            NodeVO nodeSpecial = m_PostService.GetNodeByName("#特別現金收支");
+
+            Dictionary<string, string> conditionsSpecial = new Dictionary<string, string>();
+            conditionsSpecial.Add("Flag", "1");
+            conditionsSpecial.Add("NodeId", nodeSpecial.NodeId.ToString());
+            conditionsSpecial.Add("CloseDate", date.ToString("yyyy/MM/dd"));
+            //IList<PostVO> postSpecialList = m_PostService.GetPostList(conditionsSpecial);
+
+        }
+        else
+        {
+
+        }
     }    
 
     
