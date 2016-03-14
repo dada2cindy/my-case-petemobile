@@ -27,7 +27,8 @@
                         <%--<br />--%>
                         <%--<div class="customNumber">未核發佣金總額：<asp:Label ID="lblNotGetCommission" runat="server" Text="0" ForeColor="Red"></asp:Label></div>--%>
                     </td>
-                    <td align="right" class="labelText">                        
+                    <td align="right" class="labelText">  
+                             <asp:HyperLink runat="server" NavigateUrl="0711_2.aspx">每日現金結餘</asp:HyperLink>                 
                     </td>
                 </tr>
             </table>

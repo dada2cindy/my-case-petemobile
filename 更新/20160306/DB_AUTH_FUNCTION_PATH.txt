@@ -1,0 +1,7 @@
+INSERT INTO [AUTH_FUNCTION_PATH]
+           ([MenuFuncId]
+           ,[Path])
+     VALUES
+           (14
+           ,'admin/UC07/0711_2.aspx')
+GO
