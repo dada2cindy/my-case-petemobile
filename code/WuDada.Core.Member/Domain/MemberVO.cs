@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
+using WuDada.Core.Post.Domain;
 
 namespace WuDada.Core.Member.Domain
 {
@@ -325,6 +326,35 @@ namespace WuDada.Core.Member.Domain
         /// </summary>
         [DataMember]
         public virtual string SelfPrepayment { get; set; }
+
+        /// <summary>
+        /// 關聯的庫存
+        /// </summary>
+        [DataMember]
+        public virtual IList<PostVO> Posts { get; set; }
+
+        /// <summary>
+        /// 是否有關聯的庫存
+        /// </summary>
+        [DataMember]
+        public virtual string GetStr_HasPost
+        {
+            get
+            {
+                string result = "";
+
+                if (Posts != null && Posts.Count > 0)
+                {
+                    result = "是";
+                }
+                else
+                {
+                    result = "否";
+                }
+
+                return result;
+            }
+        }
 
         public virtual string GetStr_Status
         {

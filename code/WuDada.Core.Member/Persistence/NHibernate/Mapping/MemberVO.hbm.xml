@@ -57,6 +57,13 @@
     <property name="GetCommission" column="GetCommission" type="String" length="1"/>
     <property name="Prepayment" column="Prepayment" type="Double" />
     <property name="SelfPrepayment" column="SelfPrepayment" type="String" length="10" />
+    <bag name="Posts"
+               inverse="true"
+               lazy="false"
+               cascade="save-update">
+      <key column="MemberId" />
+      <one-to-many class="WuDada.Core.Post.Domain.PostVO"/>
+    </bag>
 
   </class>
 

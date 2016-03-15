@@ -545,13 +545,7 @@ namespace WuDada.Core.Accounting.Service.Impl
 
                     foreach (MemberVO member in memberList)
                     {
-                        Dictionary<string, string> conditionsPostWithMember = new Dictionary<string, string>();
-                        conditionsSellToday.Add("Flag", "1");
-                        conditionsSellToday.Add("NodeId", "2");
-                        conditionsSellToday.Add("MemberId", member.MemberId.ToString());
-                        int postWithMemberCount = PostService.GetPostCount(conditionsPostWithMember);
-
-                        if (postWithMemberCount > 0)
+                        if (member.Posts != null && member.Posts.Count > 0)
                         {
                             //如果這個客戶的手機是來自庫存的, 那麼手機進價要移除支出的部分
                             cashStatisticsVO.MobileToday += member.PhonePrice;
@@ -570,7 +564,7 @@ namespace WuDada.Core.Accounting.Service.Impl
 
                 if (postSpecialList != null && postSpecialList.Count > 0)
                 {
-                    cashStatisticsVO.SpecialToday = postSellTodayList.Sum(p => p.Price);
+                    cashStatisticsVO.SpecialToday = postSpecialList.Sum(p => p.Price);
                 }
 
                 //最後總計

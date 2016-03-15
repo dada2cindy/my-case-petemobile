@@ -333,5 +333,28 @@ namespace WuDada.Core.Post.Domain
                 return result;
             }
         }
+
+        /// <summary>
+        /// 是否跟著門號會員
+        /// </summary>
+        [DataMember]
+        public virtual string GetStr_IsFromMember
+        {
+            get
+            {
+                string result = "";
+
+                if (!string.IsNullOrEmpty(MemberId))
+                {
+                    result = "是";
+                }
+                else
+                {
+                    result = "否";
+                }
+
+                return result;
+            }
+        }
     }
 }
