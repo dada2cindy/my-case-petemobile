@@ -281,4 +281,11 @@ public partial class admin_UC07_0711_2 : System.Web.UI.Page
             return;
         }
     }
+
+    protected void btnRefresh_Click(object sender, EventArgs e)
+    {
+        DateTime dateTo = DateTime.Today.AddDays(-1);
+        DateTime dateFrom = DateTime.Today.AddMonths(-1);
+        m_AccountingService.UpdateCashByPeriod(dateFrom, dateTo); 
+    }
 }

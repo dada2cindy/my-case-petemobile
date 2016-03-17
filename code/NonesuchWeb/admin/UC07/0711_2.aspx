@@ -21,7 +21,9 @@
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ErrorMessage="日期格式錯誤"
                             ControlToValidate="txtDate" Display="Dynamic" ValidationGroup="Search" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>           
                         <br /><br />
-                        <asp:Button ID="btnSearch" runat="server" Text="查詢" OnClick="btnSearch_Click" ValidationGroup="Search" />                                                
+                        <asp:Button ID="btnSearch" runat="server" Text="查詢" OnClick="btnSearch_Click" ValidationGroup="Search" />  
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Button ID="btnRefresh" runat="server" Text="重整一個月結帳資料" OnClick="btnRefresh_Click" />                                         
                         <br />
                         <%--<br />--%>
                         <%--<div class="customNumber">未核發佣金總額：<asp:Label ID="lblNotGetCommission" runat="server" Text="0" ForeColor="Red"></asp:Label></div>--%>
