@@ -60,7 +60,8 @@
     <bag name="Posts"
                inverse="true"
                lazy="false"
-               cascade="save-update">
+               cascade="save-update"
+               where="Flag = 1">
       <key column="MemberId" />
       <one-to-many class="WuDada.Core.Post.Domain.PostVO"/>
     </bag>

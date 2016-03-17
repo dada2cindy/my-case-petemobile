@@ -541,7 +541,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                     cashStatisticsVO.MobileToday = memberList.Sum(m => m.PhoneSellPrice - m.PhonePrice - m.BreakMoney);
                     
                     //如果沒有幫客戶預繳, 則現金要加上預繳金額
-                    cashStatisticsVO.MobileToday += memberList.Where(m => m.Prepayment > 0 && "否".Equals(m.SelfPrepayment)).Sum(m => m.Prepayment);
+                    cashStatisticsVO.MobileToday += memberList.Where(m => m.Prepayment > 0 && !"是".Equals(m.SelfPrepayment)).Sum(m => m.Prepayment);
 
                     foreach (MemberVO member in memberList)
                     {

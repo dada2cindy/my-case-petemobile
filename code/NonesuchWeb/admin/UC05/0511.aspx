@@ -1,10 +1,4 @@
-﻿
-
-
-
-
-
-DateTime dat<%@ Page Title="" Language="C#" MasterPageFile="~/admin/AdmMasterPage.master" AutoEventWireup="true" CodeFile="0511.aspx.cs" Inherits="admin_UC05_0511" ValidateRequest="false" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/AdmMasterPage.master" AutoEventWireup="true" CodeFile="0511.aspx.cs" Inherits="admin_UC05_0511" ValidateRequest="false" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="aspnetpager" Namespace="Wuqi.Webdiyer" TagPrefix="Webdiyer" %>
