@@ -519,6 +519,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                 Dictionary<string, string> conditionsSellToday = new Dictionary<string, string>();
                 conditionsSellToday.Add("Flag", "1");
                 conditionsSellToday.Add("NodeId", "2");
+                conditionsSellToday.Add("Type", "1");
                 //conditionsSellToday.Add("WithOutMemberId", "1");
                 conditionsSellToday.Add("CloseDate", day.ToString("yyyy/MM/dd"));
                 IList<PostVO> postSellTodayList = PostService.GetPostList(conditionsSellToday);
