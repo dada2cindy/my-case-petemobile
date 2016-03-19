@@ -528,13 +528,6 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" Width="300" />
                         <HeaderStyle HorizontalAlign="Center" />
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="保固商">
-                        <ItemTemplate>
-                            <asp:Label ID="lblWarrantySuppliers" runat="server" Text='<%# Bind("WarrantySuppliers") %>'></asp:Label>
-                        </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Center" Width="150" />
-                        <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>                                                              
                     <asp:TemplateField HeaderText="手機進價">
                         <ItemTemplate>
@@ -553,6 +546,37 @@
                     <asp:TemplateField HeaderText="門號佣金">
                         <ItemTemplate>
                             <asp:Label ID="lblCommission" runat="server" Text='<%# Bind("Commission") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" Width="100" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            幫客戶預繳
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblSelfPrepayment" runat="server" Text='<%# Bind("SelfPrepayment") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" Width="100" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField> 
+                    <asp:TemplateField HeaderText="預繳金額">
+                        <ItemTemplate>
+                            <asp:Label ID="lblPrepayment" runat="server" Text='<%# Bind("Prepayment") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" Width="100" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="吸收違約金">
+                        <ItemTemplate>
+                            <asp:Label ID="lblBreakMoney" runat="server" Text='<%# Bind("BreakMoney") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" Width="100" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="後退佣金">
+                        <ItemTemplate>
+                            <asp:Label ID="lblReturnCommission" runat="server" Text='<%# Bind("ReturnCommission") %>'></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Right" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />
