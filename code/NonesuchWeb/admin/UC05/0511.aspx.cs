@@ -15,6 +15,7 @@ using WuDada.Core.Member.Domain;
 using WuDada.Core.Post.Service;
 using WuDada.Core.Post;
 using WuDada.Core.Post.Domain;
+using System.Linq;
 
 public partial class admin_UC05_0511 : System.Web.UI.Page
 {
@@ -651,11 +652,18 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
 
         Dictionary<string, string> conditions = new Dictionary<string, string>();
         conditions.Add("Flag", "1");
+        conditions.Add("NodeId", "2");
+        //conditions.Add("Type", "0");
         //conditions.Add("ProductSer", txtPhoneSer.Text.Trim());
         conditions.Add("KeyWord", txtPhoneSer.Text.Trim());
         conditions.Add("PageIndex", "0");
-        conditions.Add("PageSize", "1");
+        conditions.Add("PageSize", "10");
         IList<PostVO> list = m_PostService.GetPostList(conditions);
+
+        if (list != null)
+        {
+            list = list.Where(l => !string.IsNullOrEmpty(l.ProductSer)).ToList();
+        }
 
         if (list == null || list.Count == 0)
         {
@@ -667,19 +675,18 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             if (product.Type == 1)
             {
                 lblPhoneSerMsg.Text = "此序號手機已售出";
-            }
+            }            
             else
-            {
-                //lblPhoneSerMsg.Text = "此手機序號在庫";
-                hdnPhoneSerId.Value = product.PostId.ToString();
+            {                                
                 if (!string.IsNullOrEmpty(product.ProductSer))
                 {
+                    hdnPhoneSerId.Value = product.PostId.ToString();
                     txtPhoneSer.Text = product.ProductSer;
-                }                
-                txtProduct.Text = product.Title;
-                txtPhonePrice.Text = product.Price.ToString();
-                txtWarrantySuppliers.Text = product.WarrantySuppliers;
-                txtMobileWholesalers.Text = product.Wholesalers;
+                    txtProduct.Text = product.Title;
+                    txtPhonePrice.Text = product.Price.ToString();
+                    txtWarrantySuppliers.Text = product.WarrantySuppliers;
+                    txtMobileWholesalers.Text = product.Wholesalers;
+                }                                
             }
         }
     }

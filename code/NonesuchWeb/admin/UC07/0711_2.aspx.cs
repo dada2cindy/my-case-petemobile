@@ -177,6 +177,7 @@ public partial class admin_UC07_0711_2 : System.Web.UI.Page
                 Dictionary<string, string> conditionsSellToday = new Dictionary<string, string>();
                 conditionsSellToday.Add("Flag", "1");
                 conditionsSellToday.Add("NodeId", "2");
+                conditionsSellToday.Add("Type", "1");
                 //conditionsSellToday.Add("WithOutMemberId", "1");
                 conditionsSellToday.Add("CloseDate", date.ToString("yyyy/MM/dd"));
                 gvSellToday.DataSource = m_PostService.GetPostList(conditionsSellToday);
