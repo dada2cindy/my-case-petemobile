@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:db="http://www.springframework.net/database">
+  <!-- Index:
+        * DAO objects 設定
+        * Service objects 設定
+    -->
+  <!-- DAO objects 設定 -->
+  <object id="StorageFileDao" type="WuDada.Provider.ResourceHandle.Persistence.StorageFileDao, WuDada.Provider.ResourceHandle">
+    <property name="AdoTemplate" ref="AdoTemplate"/>
+    <property name="NHibernateDao" ref="NHibernateDao"/>
+  </object>
+
+  <object id="StorageHelper" type="WuDada.Provider.ResourceHandle.Helper.StorageHelper, WuDada.Provider.ResourceHandle">
+    <property name="StorageSettings" ref="storageSettings"/>
+  </object>
+  
+  <!-- Service objects 設定 --> 
+  <object id="StorageFileServiceProxy" parent="TxProxyConfigurationTemplate">
+    <property name="Target" ref="StorageFileService"/>
+  </object>
+  <object id="StorageFileService" type="WuDada.Provider.ResourceHandle.Service.Impl.StorageFileService, WuDada.Provider.ResourceHandle">
+    <property name="StorageFileDao" ref="StorageFileDao"/>
+    <property name="StorageHelper" ref="StorageHelper"/>
+  </object>
+
+  <!-- StorageSettings 設定 -->
+  <object id="storageSettings" type="Spring.Collections.SynchronizedHashtable, Spring.Core">
+    <!--<property name="['Root']" value="D:\我的case\小布\鋁門窗\SVN上傳\trunk\code\HuangjiaWeb\upload\"/>-->
+    <property name="['Root']" value=""/>
+    <property name="['Temporary']" value="temp"/>
+    <property name="['Upload']" value="temp\upload"/>
+    <property name="['Public']" value="storage\public"/>
+  </object>
+
+</objects>
