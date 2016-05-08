@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 using WuDada.Core.Post.Domain;
+using WuDada.Core.Member.Dto;
 
 namespace WuDada.Core.Member.Domain
 {
@@ -21,6 +22,60 @@ namespace WuDada.Core.Member.Domain
             Status = "0";
             UserConfirm = "0";
             GetCommission = "否";
+        }
+
+        public MemberVO(MemberDto memberDto)
+        {
+            this.MemberId = memberDto.MemberId;
+            this.LoginId = memberDto.LoginId;
+            this.Password = memberDto.Password;
+            this.Name = memberDto.Name;
+            this.Company = memberDto.Company;
+            this.CompanyNo = memberDto.CompanyNo;
+            this.Dept = memberDto.Dept;
+            this.JobTitle = memberDto.JobTitle;
+            this.Phone = memberDto.Phone;
+            this.Mobile = memberDto.Mobile;
+            this.Fax = memberDto.Fax;
+            this.Email = memberDto.Email;
+            this.CreatedDate = memberDto.CreatedDate;
+            this.UpdatedDate = memberDto.UpdatedDate;
+            this.CreateIP = memberDto.CreateIP;
+            this.Sex = memberDto.Sex;
+            this.Status = memberDto.Status;
+            this.UserConfirm = memberDto.UserConfirm;
+            this.Token = memberDto.Token;
+            this.ApplyDate = memberDto.ApplyDate;
+            this.DueDate = memberDto.DueDate;
+            this.Birthday = memberDto.Birthday;
+            this.BirthdayYear = memberDto.BirthdayYear;
+            this.BirthdayMonth = memberDto.BirthdayMonth;
+            this.BirthdayDay = memberDto.BirthdayDay;
+            this.Project = memberDto.Project;
+            this.Product = memberDto.Product;
+            this.PhoneSer = memberDto.PhoneSer;
+            this.PhonePrice = memberDto.PhonePrice;
+            this.PhoneSellPrice = memberDto.PhoneSellPrice;
+            this.Commission = memberDto.Commission;
+            this.ReturnCommission = memberDto.ReturnCommission;
+            this.BreakMoney = memberDto.BreakMoney;
+            this.Compensation = memberDto.Compensation;
+            this.ContractMonths = memberDto.ContractMonths;
+            this.Sales = memberDto.Sales;
+            this.Note = memberDto.Note;
+            this.WarrantySuppliers = memberDto.WarrantySuppliers;
+            this.MobileWholesalers = memberDto.MobileWholesalers;
+            this.ApplyDate2 = memberDto.ApplyDate2;
+            this.PID = memberDto.PID;
+            this.Store = memberDto.Store;
+            this.OnlineWholesalers = memberDto.OnlineWholesalers;
+            this.SimNo = memberDto.SimNo;
+            this.Project1 = memberDto.Project1;
+            this.Project2 = memberDto.Project2;
+            this.Project3 = memberDto.Project3;
+            this.GetCommission = memberDto.GetCommission;
+            this.Prepayment = memberDto.Prepayment;
+            this.SelfPrepayment = memberDto.SelfPrepayment;
         }
 
         #endregion

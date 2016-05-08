@@ -15,8 +15,7 @@ namespace WebUI
         void Application_Start(object sender, EventArgs e)
         {
             // 應用程式啟動時執行的程式碼
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AuthConfig.RegisterOpenAuth();
+            BundleConfig.RegisterBundles(BundleTable.Bundles);            
             RouteTable.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\MemberVO.cs" />
+    <Compile Include="Dto\MemberDto.cs" />
     <Compile Include="MemberFactory.cs" />
     <Compile Include="Persistence\IMemberDao.cs" />
     <Compile Include="Persistence\MemberDao.cs" />

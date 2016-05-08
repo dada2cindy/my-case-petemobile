@@ -10,6 +10,11 @@ using WuDada.Core.Auth;
 using WuDada.Core.Auth.Domain;
 using WuDada.Core.Auth.Container;
 using WuDada.Core.SystemApplications.Domain;
+using System.Net;
+using System.Text;
+using System.IO;
+using WuDada.Core.Member.Dto;
+using Newtonsoft.Json;
 
 public partial class admin_Login_Login : System.Web.UI.Page
 {
@@ -23,6 +28,47 @@ public partial class admin_Login_Login : System.Web.UI.Page
     {
         m_AuthFactory = new AuthFactory();
         m_AuthService = m_AuthFactory.GetAuthService();
+        testAPI();
+    }
+
+    private void testAPI()
+    {
+        string responseInfo = string.Empty;
+        try
+        {
+            string jsonData = "";
+            string method = "Get";
+            string url = "http://test.xinmingeyes.com/api/member";
+            WebRequest request = WebRequest.Create(url);
+            request.ContentType = "application/json";
+            request.Method = "Get";
+            byte[] bts = Encoding.UTF8.GetBytes(jsonData);
+            request.ContentLength = bts.Length;
+
+            if (method != "Get")
+            {
+                using (Stream st = request.GetRequestStream())
+                {
+                    st.Write(bts, 0, bts.Length);
+                    st.Close();
+                }
+            }
+
+            using (WebResponse response = request.GetResponse())
+            {
+                using (Stream stream = response.GetResponseStream())
+                {
+                    responseInfo = (new StreamReader(stream)).ReadToEnd().Trim();
+                }
+            }
+
+            IList<MemberDto> list = JsonConvert.DeserializeObject<IList<MemberDto>>(responseInfo);
+            string a = "";
+        }
+        catch (Exception e)
+        {
+            string error = e.ToString();
+        }
     }
 
 
