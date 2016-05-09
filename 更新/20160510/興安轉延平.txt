@@ -1,0 +1,25 @@
+--刪除已售出庫存
+DELETE FROM [POST]
+      WHERE NodeId=2 and [Type]=1
+GO
+
+--刪除全部會員
+DELETE FROM [MEMBER]
+
+GO
+
+--刪除現金收支
+DELETE FROM [POST]
+      WHERE NodeId=57
+GO
+
+--刪除每日結帳
+DELETE FROM [POST]
+      WHERE NodeId=58
+GO
+
+--修改店名
+UPDATE [POST_NODE]
+   SET [Name] = '延平'
+ WHERE nodeId = 55
+GO

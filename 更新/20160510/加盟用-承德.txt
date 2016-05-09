@@ -1,0 +1,39 @@
+--刪除庫存
+DELETE FROM [POST]
+      WHERE NodeId=2
+GO
+
+--刪除全部會員
+DELETE FROM [MEMBER]
+
+GO
+
+--刪除現金收支
+DELETE FROM [POST]
+      WHERE NodeId=24
+GO
+
+--刪除每日結帳
+DELETE FROM [POST]
+      WHERE NodeId=25
+GO
+
+--刪除修改紀錄
+DELETE FROM [SYSTEM_LOG_SYSTEM]
+
+GO
+
+--修改店名
+UPDATE [POST_NODE]
+   SET [Name] = '淡水'
+ WHERE nodeId = 10
+GO
+
+--刪除admin以外的帳號
+DELETE FROM [AUTH_USER_IN_ROLE]
+      WHERE USERID <> 'admin'
+GO
+
+DELETE FROM [AUTH_LOGIN_USER]
+      WHERE USERID <> 'admin'
+GO
