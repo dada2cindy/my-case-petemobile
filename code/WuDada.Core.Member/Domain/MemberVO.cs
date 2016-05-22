@@ -22,6 +22,7 @@ namespace WuDada.Core.Member.Domain
             Status = "0";
             UserConfirm = "0";
             GetCommission = "否";
+            NeedUpdate = true;
         }
 
         public MemberVO(MemberDto memberDto)
@@ -76,6 +77,9 @@ namespace WuDada.Core.Member.Domain
             this.GetCommission = memberDto.GetCommission;
             this.Prepayment = memberDto.Prepayment;
             this.SelfPrepayment = memberDto.SelfPrepayment;
+            this.ServerId = memberDto.ServerId;
+            this.NeedUpdate = memberDto.NeedUpdate;
+            this.UpdateId = memberDto.UpdateId;
         }
 
         #endregion
@@ -387,6 +391,42 @@ namespace WuDada.Core.Member.Domain
         /// </summary>
         [DataMember]
         public virtual IList<PostVO> Posts { get; set; }
+
+        /// <summary>
+        /// 同步到Server後回傳的Id
+        /// </summary>
+        [DataMember]
+        public virtual int ServerId { get; set; }
+
+        /// <summary>
+        /// ServerId
+        /// </summary>
+        [DataMember]
+        public virtual bool NeedUpdate { get; set; }
+
+        /// <summary>
+        /// 更新者
+        /// </summary>
+        [DataMember]
+        public virtual string UpdateId { get; set; }
+
+        /// <summary>
+        /// 品讚抽成
+        /// </summary>
+        [DataMember]
+        public virtual double CommissionToBoss { 
+            get 
+            {
+                if (Commission != 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return Commission * 0.03;
+                }
+            }
+        }
 
         /// <summary>
         /// 是否有關聯的庫存
