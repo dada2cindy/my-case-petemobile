@@ -65,6 +65,9 @@
       <key column="MemberId" />
       <one-to-many class="WuDada.Core.Post.Domain.PostVO"/>
     </bag>
+    <property name="ServerId" column="ServerId" type="Int32" />
+    <property name="NeedUpdate" column="NeedUpdate" type="Boolean" />
+    <property name="UpdateId" column="UpdateId" type="String" length="50" />
 
   </class>
 

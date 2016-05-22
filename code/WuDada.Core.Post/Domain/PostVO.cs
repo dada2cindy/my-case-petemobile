@@ -221,6 +221,30 @@ namespace WuDada.Core.Post.Domain
         [DataMember]
         public virtual string MemberId { get; set; }
 
+        /// <summary>
+        /// 同步到Server後回傳的Id
+        /// </summary>
+        [DataMember]
+        public virtual int ServerId { get; set; }
+
+        /// <summary>
+        /// ServerId
+        /// </summary>
+        [DataMember]
+        public virtual bool NeedUpdate { get; set; }
+
+        /// <summary>
+        /// 店家
+        /// </summary>
+        [DataMember]
+        public virtual string Store { get; set; }
+
+        /// <summary>
+        /// 更新者
+        /// </summary>
+        [DataMember]
+        public virtual string UpdateId { get; set; }
+
         #endregion
 
         /// <summary>

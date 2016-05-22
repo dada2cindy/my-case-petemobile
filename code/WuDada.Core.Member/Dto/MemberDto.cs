@@ -76,6 +76,9 @@ namespace WuDada.Core.Member.Dto
             this.GetCommission = memberVO.GetCommission;
             this.Prepayment = memberVO.Prepayment;
             this.SelfPrepayment = memberVO.SelfPrepayment;
+            this.ServerId = memberVO.ServerId;
+            this.NeedUpdate = memberVO.NeedUpdate;
+            this.UpdateId = memberVO.UpdateId;
         }
 
         #endregion
@@ -380,7 +383,44 @@ namespace WuDada.Core.Member.Dto
         /// 是否幫客戶預繳 無,是,否
         /// </summary>
         [DataMember]
-        public virtual string SelfPrepayment { get; set; }        
+        public virtual string SelfPrepayment { get; set; }
+
+        /// <summary>
+        /// 同步到Server後回傳的Id
+        /// </summary>
+        [DataMember]
+        public virtual int ServerId { get; set; }
+
+        /// <summary>
+        /// ServerId
+        /// </summary>
+        [DataMember]
+        public virtual bool NeedUpdate { get; set; }
+
+        /// <summary>
+        /// 更新者
+        /// </summary>
+        [DataMember]
+        public virtual string UpdateId { get; set; }
+
+        /// <summary>
+        /// 品讚抽成
+        /// </summary>
+        [DataMember]
+        public virtual double CommissionToBoss
+        {
+            get
+            {
+                if (Commission != 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return Commission * 0.03;
+                }
+            }
+        }
 
         #endregion
     }

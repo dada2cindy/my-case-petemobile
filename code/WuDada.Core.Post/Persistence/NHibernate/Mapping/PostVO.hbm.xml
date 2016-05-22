@@ -65,6 +65,11 @@
     <property name="Wholesalers" column="Wholesalers" type="String" length="100" />
     <property name="MemberId" column="MemberId" type="String" length="100" />
 
+    <property name="ServerId" column="ServerId" type="Int32" />
+    <property name="NeedUpdate" column="NeedUpdate" type="Boolean" />
+    <property name="Store" column="Store" type="String" length="20"/>
+    <property name="UpdateId" column="UpdateId" type="String" length="50" />
+
   </class>
 
 </hibernate-mapping>

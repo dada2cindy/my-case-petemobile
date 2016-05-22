@@ -58,18 +58,79 @@ namespace WebUI.Api
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post(MemberDto memberDto)
         {
+            if (memberDto != null)
+            {
+                try
+                {
+                    MemberVO memberVO = null;
+                    //檢查是否有ServerId 有的話把狀態改成刪除, 重新建立一筆
+                    if (memberDto.ServerId != 0)
+                    {
+                        MemberVO oldMemberVO = m_MemberService.GetMemberById(memberDto.ServerId);
+                        if (oldMemberVO != null)
+                        {
+                            oldMemberVO.Status = "0";
+                            oldMemberVO.UpdateId = "系統API";
+                            m_MemberService.UpdateMember(oldMemberVO);
+                        }
+                    }
+
+                    memberVO = new MemberVO(memberDto);
+                    memberVO.MemberId = 0;
+                    memberVO.ServerId = 0;
+                    memberVO = m_MemberService.CreateMember(memberVO);
+                    memberVO.ServerId = memberVO.MemberId;
+
+                    return Request.CreateResponse<MemberDto>(HttpStatusCode.Created, new MemberDto(memberVO));
+                }
+                catch (Exception ex)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NoContent, ex.ToString());
+                }
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NoContent);
+            }
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //// PUT api/<controller>/5
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            if (id != 0)
+            {
+                try
+                {
+                    MemberVO oldMemberVO = m_MemberService.GetMemberById(id);
+                    if (oldMemberVO != null)
+                    {
+                        oldMemberVO.Status = "0";
+                        oldMemberVO.UpdateId = "系統API";
+                        m_MemberService.UpdateMember(oldMemberVO);
+
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                    else
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Gone);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NoContent, ex.ToString());
+                }
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NoContent);
+            }
         }
     }
 }

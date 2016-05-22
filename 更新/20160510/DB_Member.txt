@@ -1,0 +1,13 @@
+ALTER TABLE Member ADD ServerId int;
+
+ALTER TABLE Member ADD NeedUpdate bit;
+
+GO
+
+UPDATE MEMBER SET [NeedUpdate] = 0;
+
+
+--更新幾號後的Member要同步
+UPDATE [MEMBER]
+   SET NeedUpdate = 1
+   where ApplyDate2 >= '2016/05/10'
