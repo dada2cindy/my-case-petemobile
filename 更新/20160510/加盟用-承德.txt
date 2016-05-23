@@ -25,7 +25,7 @@ GO
 
 --修改店名
 UPDATE [POST_NODE]
-   SET [Name] = '淡水'
+   SET [Name] = '台北淡水'
  WHERE nodeId = 10
 GO
 

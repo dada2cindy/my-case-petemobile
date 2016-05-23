@@ -20,6 +20,6 @@ GO
 
 --修改店名
 UPDATE [POST_NODE]
-   SET [Name] = '延平'
+   SET [Name] = '台北延平'
  WHERE nodeId = 55
 GO

@@ -12,6 +12,10 @@ ALTER TABLE Post Add Store nvarchar(20);
 
 GO
 
+ALTER TABLE Post Add UpdateId nvarchar(20);
+
+GO
+
 --更新Post店點
 UPDATE [Post]
    SET Store = '台北淡水'

@@ -6,6 +6,12 @@ GO
 
 UPDATE MEMBER SET [NeedUpdate] = 0;
 
+GO
+
+ALTER TABLE MEMBER Add UpdateId nvarchar(20);
+
+GO
+
 
 --更新幾號後的Member要同步
 UPDATE [MEMBER]
