@@ -16,4 +16,4 @@ GO
 --更新幾號後的Member要同步
 UPDATE [MEMBER]
    SET NeedUpdate = 1
-   where ApplyDate2 >= '2016/05/10'
+--   where ApplyDate2 >= '2016/05/10'
