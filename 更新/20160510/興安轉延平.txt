@@ -23,3 +23,23 @@ UPDATE [POST_NODE]
    SET [Name] = '台北延平'
  WHERE nodeId = 55
 GO
+
+INSERT INTO [POST]
+           ([Title]           
+           ,[NodeId]           
+           ,[Flag]           
+           ,[CreatedBy]
+           ,[UpdatedBy]
+           ,[CloseDate]           
+           ,[Price])
+     VALUES
+           ('每日結帳'           
+           ,(SELECT [NodeId]      
+  FROM [POST_NODE]
+  WHERE Name = '#每日結帳')           
+           ,1           
+           ,'admin'
+           ,'admin'           
+           ,'2016/5/23'           
+           ,0 )
+GO
