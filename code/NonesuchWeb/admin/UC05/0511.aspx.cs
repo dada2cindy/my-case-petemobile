@@ -16,6 +16,7 @@ using WuDada.Core.Post.Service;
 using WuDada.Core.Post;
 using WuDada.Core.Post.Domain;
 using System.Linq;
+using System.Threading;
 
 public partial class admin_UC05_0511 : System.Web.UI.Page
 {
@@ -183,9 +184,11 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         //postVO.PicFileName = m_PicFileName;
         memberVO.Status = "1";
         memberVO.CreateIP = m_HttpHelper.GetUserIp(Context);
+        memberVO.NeedUpdate = true;
         memberVO = m_MemberService.CreateMember(memberVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.新增, memberVO);
         UpdateProductByPhoneSer(memberVO.MemberId);
+        new Thread(new ThreadStart(ApiUtil.UpdateMemberToServer)).Start();
         ClearUI();
         fillGridView();
     }
@@ -194,9 +197,11 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
     {
         MemberVO memberVO = m_MemberService.GetMemberById(m_Mode);
         memberVO.Status = "0";
+        memberVO.NeedUpdate = true;
         m_MemberService.UpdateMember(memberVO);
         UpdateProductByPhoneSerWithDelete(memberVO.PhoneSer);
         m_WebLogService.AddSystemLog(MsgVO.Action.刪除, memberVO, "", string.Format("單號:{0}", memberVO.MemberId));
+        new Thread(new ThreadStart(ApiUtil.UpdateMemberToServer)).Start();
         ClearUI();
         fillGridView();
     }    
@@ -412,9 +417,11 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         {
             MemberVO memberVO = m_MemberService.GetMemberById(m_Mode);
             UIHelper.FillVO(pnlContent, memberVO);
+            memberVO.NeedUpdate = true;
             memberVO = m_MemberService.UpdateMember(memberVO);
             m_WebLogService.AddSystemLog(MsgVO.Action.修改, memberVO, "", string.Format("單號:{0}", memberVO.MemberId));
             UpdateProductByPhoneSer(memberVO.MemberId);
+            new Thread(new ThreadStart(ApiUtil.UpdateMemberToServer)).Start();
             fillGridView();
             ClearUI();
             ShowMode();

@@ -17,6 +17,7 @@ using WuDada.Core.Post;
 using WuDada.Core.Post.Domain;
 using WuDada.Core.Accounting.Service;
 using WuDada.Core.Accounting.Domain;
+using System.Threading;
 
 public partial class admin_UC07_0711 : System.Web.UI.Page
 {
@@ -65,6 +66,7 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
                        
             fillGridView();
 
+            new Thread(new ThreadStart(ApiUtil.UpdateMemberToServer)).Start();
             //LoadTotalCommission();
         }
     }

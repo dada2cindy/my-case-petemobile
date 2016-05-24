@@ -14,8 +14,19 @@ public class ConfigHelper
     /// </summary>
     public string Host { get; set; }
 
-	public ConfigHelper()
+    public string ApiUrl { get; set; }
+
+    public string MemberApiUrl
+    {
+        get
+        {
+            return string.Format("{0}/member", ApiUrl);
+        }
+    }
+
+    public ConfigHelper()
 	{
         Host = ConfigurationManager.AppSettings["Host"];
-	}
+        ApiUrl= ConfigurationManager.AppSettings["ApiUrl"];
+    }
 }

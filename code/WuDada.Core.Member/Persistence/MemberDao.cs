@@ -120,6 +120,7 @@ namespace WuDada.Core.Member.Persistence
             AppendMemberStore(conditions, whereScript, param);
             AppendMemberSales(conditions, whereScript, param);
             AppendMemberGetCommission(conditions, whereScript, param);
+            AppendMemberNeedUpdate(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -128,6 +129,15 @@ namespace WuDada.Core.Member.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendMemberNeedUpdate(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("NeedUpdate"))
+            {
+                whereScript.Append(" and m.NeedUpdate = ? ");
+                param.Add(bool.Parse(conditions["NeedUpdate"]));
+            }
         }
 
         private void AppendMemberGetCommission(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)

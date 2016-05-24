@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using WuDada.Core.Member;
 using WuDada.Core.Member.Service;
 using WuDada.Core.Member.Domain;
+using System.Threading;
 
 public partial class admin_Login_Login : System.Web.UI.Page
 {
@@ -28,6 +29,7 @@ public partial class admin_Login_Login : System.Web.UI.Page
     MemberFactory m_MemberFactory;
     IMemberService m_MemberService;
     WebLogService webLogService = new WebLogService();
+    ConfigHelper m_ConfigHelper = new ConfigHelper();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -35,46 +37,36 @@ public partial class admin_Login_Login : System.Web.UI.Page
         m_AuthService = m_AuthFactory.GetAuthService();
         m_MemberFactory = new MemberFactory();
         m_MemberService = m_MemberFactory.GetMemberService();
-        //testAPI();
-        //testAPI2();
-        //testAPI3(496);
-        //testAPI3(498);
+
+        //testAPI4();
+        //testAPI5();
+        //testAPI6(502);
+        //testUpdateMemberToServer();
+        //testThread();
     }
 
-    private void testAPI()
+    private void testThread()
+    {
+        //new Thread(new ThreadStart(this.testUpdateMemberToServer)).Start();
+        //new Thread(new ThreadStart(ApiUtil.UpdateMemberToServer)).Start();
+    }
+
+    private void testAPI6(int deleteMemberServerId)
     {
         string responseInfo = string.Empty;
         try
         {
-            string jsonData = "";
-            string method = "GET";
-            //string url = "http://test.xinmingeyes.com/api/member";
-            string url = "http://localhost:10261/api/member";
-            WebRequest request = WebRequest.Create(url);         
-            //request.Headers.Add("Authorization", "Bearer " + "5e01fd9b770e4d17a542e87d9636684d");
-            request.ContentType = "application/json";
-            request.Method = method;            
-            byte[] bts = Encoding.UTF8.GetBytes(jsonData);
-            request.ContentLength = bts.Length;
+            string url = m_ConfigHelper.MemberApiUrl + "/"+ deleteMemberServerId.ToString();
+            WebRequest request = ApiUtil.Post(url, "DELETE", "");
 
-            if (method != "GET")
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             {
-                using (Stream st = request.GetRequestStream())
+                if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    st.Write(bts, 0, bts.Length);
-                    st.Close();
+                    string test = "Ok";
                 }
             }
 
-            using (WebResponse response = request.GetResponse())
-            {
-                using (Stream stream = response.GetResponseStream())
-                {
-                    responseInfo = (new StreamReader(stream)).ReadToEnd().Trim();
-                }
-            }
-
-            IList<MemberDto> list = JsonConvert.DeserializeObject<IList<MemberDto>>(responseInfo);            
         }
         catch (Exception e)
         {
@@ -82,9 +74,8 @@ public partial class admin_Login_Login : System.Web.UI.Page
         }
     }
 
-    private void testAPI2()
-    {
-        string responseInfo = string.Empty;
+    private void testAPI5()
+    {        
         try
         {
             MemberVO memberVO = m_MemberService.GetMemberById(180);
@@ -94,25 +85,10 @@ public partial class admin_Login_Login : System.Web.UI.Page
             memberVO.NeedUpdate = true;
             memberVO = m_MemberService.CreateMember(memberVO);
             MemberDto memberDto = new MemberDto(memberVO);
-            string jsonData = JsonConvert.SerializeObject(memberDto);
-            string method = "POST";
-            //string url = "http://test.xinmingeyes.com/api/member";
-            string url = "http://localhost:10261/api/member";
-            WebRequest request = WebRequest.Create(url);
-            request.ContentType = "application/json";
-            request.Method = method;
-            byte[] bts = Encoding.UTF8.GetBytes(jsonData);
-            request.ContentLength = bts.Length;
 
-            if (method != "GET")
-            {
-                using (Stream st = request.GetRequestStream())
-                {
-                    st.Write(bts, 0, bts.Length);
-                    st.Close();
-                }
-            }
-            
+            WebRequest request = ApiUtil.Post<MemberDto>(m_ConfigHelper.MemberApiUrl, "POST", memberDto);
+
+            string responseInfo = string.Empty;
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             {
                 if (response.StatusCode == HttpStatusCode.Created)
@@ -127,99 +103,38 @@ public partial class admin_Login_Login : System.Web.UI.Page
                         memberVO.ServerId = newMemberDto.MemberId;
                         m_MemberService.UpdateMember(memberVO);
                     }
-                }                
-            }            
-            
-        }
-        catch (Exception e)
-        {
-            string error = e.ToString();
-        }
-    }
-
-    private void testAPI3(int deleteMemberServerId)
-    {
-        string responseInfo = string.Empty;
-        try
-        {
-            string method = "DELETE";
-            //string url = "http://test.xinmingeyes.com/api/member/"+ deleteMemberServerId.ToString();
-            string url = "http://localhost:10261/api/member/"+ deleteMemberServerId.ToString();
-            WebRequest request = WebRequest.Create(url);
-            request.Method = method;
-
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                string test = "Ok";
-            }
-
-        }
-        catch (Exception e)
-        {
-            string error = e.ToString();
-        }
-    }
-
-    private void testAPI3()
-    {
-        string responseInfo = string.Empty;
-        try
-        {
-            MemberVO memberVO = m_MemberService.GetMemberById(181);
-            memberVO.ApplyDate = DateTime.Today;
-            memberVO.ApplyDate2 = DateTime.Today;
-            memberVO.MemberId = 0;
-            memberVO.NeedUpdate = true;
-            memberVO = m_MemberService.CreateMember(memberVO);
-            MemberDto memberDto = new MemberDto(memberVO);
-            string jsonData = JsonConvert.SerializeObject(memberDto);
-            string method = "POST";
-            //string url = "http://test.xinmingeyes.com/api/member";
-            string url = "http://localhost:10261/api/member";
-            WebRequest request = WebRequest.Create(url);
-            request.ContentType = "application/json";
-            request.Method = method;
-            byte[] bts = Encoding.UTF8.GetBytes(jsonData);
-            request.ContentLength = bts.Length;
-
-            if (method != "GET")
-            {
-                using (Stream st = request.GetRequestStream())
-                {
-                    st.Write(bts, 0, bts.Length);
-                    st.Close();
                 }
             }
 
+        }
+        catch (Exception ex)
+        {
+            string error = ex.ToString();
+        }
+    }
+
+    private void testAPI4()
+    {
+        try
+        {
+            WebRequest request = ApiUtil.Post(m_ConfigHelper.MemberApiUrl, "GET", "");
+
+            string responseInfo = string.Empty;
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             {
-                if (response.StatusCode == HttpStatusCode.Created)
+                using (Stream stream = response.GetResponseStream())
                 {
-                    using (Stream stream = response.GetResponseStream())
-                    {
-                        responseInfo = (new StreamReader(stream)).ReadToEnd().Trim();
-
-                        MemberDto newMemberDto = JsonConvert.DeserializeObject<MemberDto>(responseInfo);
-
-                        memberVO.NeedUpdate = false;
-                        memberVO.ServerId = newMemberDto.MemberId;
-                        m_MemberService.UpdateMember(memberVO);
-
-
-                        //最後再刪除掉
-                    }
+                    responseInfo = (new StreamReader(stream)).ReadToEnd().Trim();
                 }
             }
 
+            IList<MemberDto> list = JsonConvert.DeserializeObject<IList<MemberDto>>(responseInfo);
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            string error = e.ToString();
+            string error = ex.ToString();
         }
-    }
-
+    }            
 
     private void doLogin(string id, string pw)
     {
