@@ -71,6 +71,7 @@ namespace WebUI.Api
                         MemberVO oldMemberVO = m_MemberService.GetMemberById(memberDto.ServerId);
                         if (oldMemberVO != null)
                         {
+                            oldMemberVO.NeedUpdate = false;
                             oldMemberVO.Status = "0";
                             oldMemberVO.UpdateId = "系統API";
                             m_MemberService.UpdateMember(oldMemberVO);
@@ -80,6 +81,7 @@ namespace WebUI.Api
                     memberVO = new MemberVO(memberDto);
                     memberVO.MemberId = 0;
                     memberVO.ServerId = 0;
+                    memberVO.NeedUpdate = false;
                     memberVO = m_MemberService.CreateMember(memberVO);
                     memberVO.ServerId = memberVO.MemberId;
 
@@ -113,6 +115,7 @@ namespace WebUI.Api
                     MemberVO oldMemberVO = m_MemberService.GetMemberById(memberId);
                     if (oldMemberVO != null)
                     {
+                        oldMemberVO.NeedUpdate = false;
                         oldMemberVO.Status = "0";
                         oldMemberVO.UpdateId = "系統API";
                         m_MemberService.UpdateMember(oldMemberVO);
