@@ -410,12 +410,14 @@ namespace WuDada.Core.Member.Domain
         [DataMember]
         public virtual string UpdateId { get; set; }
 
+        private double commissionToBoss;
         /// <summary>
         /// 品讚抽成
         /// </summary>
         [DataMember]
-        public virtual double CommissionToBoss { 
-            get 
+        public virtual double CommissionToBoss
+        {
+            get
             {
                 if (Commission != 0)
                 {
@@ -425,6 +427,10 @@ namespace WuDada.Core.Member.Domain
                 {
                     return Commission * 0.03;
                 }
+            }
+            set
+            {
+                commissionToBoss = value;
             }
         }
 
