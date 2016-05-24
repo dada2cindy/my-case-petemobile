@@ -102,13 +102,15 @@ namespace WebUI.Api
         //}
 
         // DELETE api/<controller>/5
-        public HttpResponseMessage Delete(int id)
+        [HttpDelete]
+        public HttpResponseMessage Delete(string id)
         {
-            if (id != 0)
+            int memberId;
+            if (!string.IsNullOrWhiteSpace(id) && int.TryParse(id, out memberId))
             {
                 try
                 {
-                    MemberVO oldMemberVO = m_MemberService.GetMemberById(id);
+                    MemberVO oldMemberVO = m_MemberService.GetMemberById(memberId);
                     if (oldMemberVO != null)
                     {
                         oldMemberVO.Status = "0";

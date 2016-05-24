@@ -35,8 +35,10 @@ public partial class admin_Login_Login : System.Web.UI.Page
         m_AuthService = m_AuthFactory.GetAuthService();
         m_MemberFactory = new MemberFactory();
         m_MemberService = m_MemberFactory.GetMemberService();
-        testAPI();
-        testAPI2();
+        //testAPI();
+        //testAPI2();
+        //testAPI3(496);
+        //testAPI3(498);
     }
 
     private void testAPI()
@@ -45,15 +47,17 @@ public partial class admin_Login_Login : System.Web.UI.Page
         try
         {
             string jsonData = "";
-            string method = "Get";
-            string url = "http://test.xinmingeyes.com/api/member";
-            WebRequest request = WebRequest.Create(url);
+            string method = "GET";
+            //string url = "http://test.xinmingeyes.com/api/member";
+            string url = "http://localhost:10261/api/member";
+            WebRequest request = WebRequest.Create(url);         
+            //request.Headers.Add("Authorization", "Bearer " + "5e01fd9b770e4d17a542e87d9636684d");
             request.ContentType = "application/json";
             request.Method = method;            
             byte[] bts = Encoding.UTF8.GetBytes(jsonData);
             request.ContentLength = bts.Length;
 
-            if (method != "Get")
+            if (method != "GET")
             {
                 using (Stream st = request.GetRequestStream())
                 {
@@ -91,15 +95,16 @@ public partial class admin_Login_Login : System.Web.UI.Page
             memberVO = m_MemberService.CreateMember(memberVO);
             MemberDto memberDto = new MemberDto(memberVO);
             string jsonData = JsonConvert.SerializeObject(memberDto);
-            string method = "Post";
-            string url = "http://test.xinmingeyes.com/api/member";
+            string method = "POST";
+            //string url = "http://test.xinmingeyes.com/api/member";
+            string url = "http://localhost:10261/api/member";
             WebRequest request = WebRequest.Create(url);
             request.ContentType = "application/json";
             request.Method = method;
             byte[] bts = Encoding.UTF8.GetBytes(jsonData);
             request.ContentLength = bts.Length;
 
-            if (method != "Get")
+            if (method != "GET")
             {
                 using (Stream st = request.GetRequestStream())
                 {
@@ -137,30 +142,17 @@ public partial class admin_Login_Login : System.Web.UI.Page
         string responseInfo = string.Empty;
         try
         {
-            string jsonData = JsonConvert.SerializeObject(deleteMemberServerId);
-            string method = "Delete";
-            string url = "http://test.xinmingeyes.com/api/member";
+            string method = "DELETE";
+            //string url = "http://test.xinmingeyes.com/api/member/"+ deleteMemberServerId.ToString();
+            string url = "http://localhost:10261/api/member/"+ deleteMemberServerId.ToString();
             WebRequest request = WebRequest.Create(url);
-            request.ContentType = "application/json";
             request.Method = method;
-            byte[] bts = Encoding.UTF8.GetBytes(jsonData);
-            request.ContentLength = bts.Length;
 
-            if (method != "Get")
-            {
-                using (Stream st = request.GetRequestStream())
-                {
-                    st.Write(bts, 0, bts.Length);
-                    st.Close();
-                }
-            }
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    string test = "Ok";
-                }
+                string test = "Ok";
             }
 
         }
@@ -183,15 +175,16 @@ public partial class admin_Login_Login : System.Web.UI.Page
             memberVO = m_MemberService.CreateMember(memberVO);
             MemberDto memberDto = new MemberDto(memberVO);
             string jsonData = JsonConvert.SerializeObject(memberDto);
-            string method = "Post";
-            string url = "http://test.xinmingeyes.com/api/member";
+            string method = "POST";
+            //string url = "http://test.xinmingeyes.com/api/member";
+            string url = "http://localhost:10261/api/member";
             WebRequest request = WebRequest.Create(url);
             request.ContentType = "application/json";
             request.Method = method;
             byte[] bts = Encoding.UTF8.GetBytes(jsonData);
             request.ContentLength = bts.Length;
 
-            if (method != "Get")
+            if (method != "GET")
             {
                 using (Stream st = request.GetRequestStream())
                 {
