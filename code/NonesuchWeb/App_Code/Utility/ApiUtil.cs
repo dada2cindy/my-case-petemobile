@@ -64,6 +64,11 @@ public static class ApiUtil
         IMemberService m_MemberService = m_MemberFactory.GetMemberService();
         ConfigHelper m_ConfigHelper = new ConfigHelper();
 
+        if (string.IsNullOrEmpty(m_ConfigHelper.MemberApiUrl))
+        {
+            return;
+        }
+
         Dictionary<string, string> conditions = new Dictionary<string, string>();
         conditions.Add("NeedUpdate", "true");
         IList<MemberVO> list = m_MemberService.GetMemberList(conditions);
