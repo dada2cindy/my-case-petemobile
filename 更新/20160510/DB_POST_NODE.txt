@@ -7,6 +7,25 @@ INSERT INTO [POST_NODE]
            ,[CreatedBy]
            ,[UpdatedBy])
      VALUES
+           ('台北民權'
+           ,54
+           ,3
+           ,1
+           ,0
+           ,'admin'
+           ,'admin')
+
+GO
+
+INSERT INTO [POST_NODE]
+           ([Name]
+           ,[ParentId]
+           ,[SortNo]
+           ,[Flag]
+           ,[UType]          
+           ,[CreatedBy]
+           ,[UpdatedBy])
+     VALUES
            ('台北淡水'
            ,54
            ,4
