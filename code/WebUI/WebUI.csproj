@@ -202,7 +202,6 @@
     <Content Include="App_Data\WuDada.Core.AdoTemplate.xml" />
     <Content Include="App_Data\WuDada.Core.HibernateTemplate.xml" />
     <Content Include="App_Data\WuDada.Provider.ResourceHandle.objects.xml" />
-    <Content Include="packages.config" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
@@ -223,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\API.pubxml" />
+    <None Include="Properties\PublishProfiles\Server.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
