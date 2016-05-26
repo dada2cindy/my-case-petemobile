@@ -33,6 +33,7 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
     private SessionHelper m_SessionHelper;
     private AccountingFactory m_AccountingFactory;
     private IAccountingService m_AccountingService;
+    private ConfigHelper m_ConfigHelper;
 
     private int m_Mode
     {
@@ -47,6 +48,7 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        m_ConfigHelper = new ConfigHelper();
         m_WebLogService = new WebLogService();
         m_PostFactory = new PostFactory();
         m_MemberFactory = new MemberFactory();
@@ -96,8 +98,17 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
     {
         IList<NodeVO> storeList = m_PostService.GetNodeListByParentName("店家");
         string ym = string.Format("{0}{1}", ddlSearchYear.SelectedValue, ddlSearchMonth.SelectedValue);
-
-        gvList.DataSource = m_AccountingService.GetSalesStatistics(ym, storeList[0].Name);
+        
+        if (string.IsNullOrEmpty(m_ConfigHelper.ApiUrl))
+        {
+            //空白的表示是Server的
+            gvList.DataSource = m_AccountingService.GetSalesStatisticsByLoginUser(ym);
+        }
+        else
+        {
+            //各店點的
+            gvList.DataSource = m_AccountingService.GetSalesStatistics(ym, storeList[0].Name);
+        }
         gvList.DataBind();
 
         if (storeList.Count > 1)
