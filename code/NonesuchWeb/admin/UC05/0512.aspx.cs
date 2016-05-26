@@ -22,7 +22,8 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
     private IAuthService m_AuthService;
     private WebLogService m_WebLogService;
     private SessionHelper m_SessionHelper;
-    
+    private ConfigHelper m_ConfigHelper;
+
     private int m_NodeId = 2;
 
     private int m_Mode
@@ -38,6 +39,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        m_ConfigHelper = new ConfigHelper();
         m_WebLogService = new WebLogService();
         m_PostFactory = new PostFactory();
         m_AuthFactory = new AuthFactory();
@@ -253,7 +255,8 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             }
         }
 
-        NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}庫存.xls", DateTime.Today.ToString("yyyyMMdd")), true);
+        string uploadRootPath = string.IsNullOrEmpty(m_ConfigHelper.ApiUrl) ? Server.MapPath("~\\") + "\\App_Data\\temp.xls" : "";
+        NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}庫存.xls", DateTime.Today.ToString("yyyyMMdd")), true, uploadRootPath);
     }
 
     private void ClearUI()

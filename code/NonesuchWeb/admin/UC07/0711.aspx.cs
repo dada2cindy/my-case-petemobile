@@ -128,7 +128,17 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
     {
         IList<NodeVO> storeList = m_PostService.GetNodeListByParentName("店家");
         string ym = string.Format("{0}{1}", ddlSearchYear.SelectedValue, ddlSearchMonth.SelectedValue);
-        IList<SalesStatisticsVO> salesStatisticsList = m_AccountingService.GetSalesStatistics(ym, storeList[0].Name);
+        IList<SalesStatisticsVO> salesStatisticsList = null;
+        if (string.IsNullOrEmpty(m_ConfigHelper.ApiUrl))
+        {
+            //空白的表示是Server的
+            salesStatisticsList = m_AccountingService.GetSalesStatisticsByLoginUser(ym);
+        }
+        else
+        {
+            //各店點的
+            salesStatisticsList = m_AccountingService.GetSalesStatistics(ym, storeList[0].Name);
+        }
         IList<SalesStatisticsVO> salesStatisticsList2 = m_AccountingService.GetSalesStatisticsByStore(ym);        
 
         DataTable table = new DataTable();
@@ -203,7 +213,8 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
             }
         }
 
-        NPOIHelper.ExportByWeb(table, "業績", string.Format("{0}業績.xls", ym), true);
+        string uploadRootPath = string.IsNullOrEmpty(m_ConfigHelper.ApiUrl) ? Server.MapPath("~\\") + "\\App_Data\\temp.xls" : "";
+        NPOIHelper.ExportByWeb(table, "業績", string.Format("{0}業績.xls", ym), true, uploadRootPath);
     }
 
     protected void gvList_RowDataBound(object sender, GridViewRowEventArgs e)

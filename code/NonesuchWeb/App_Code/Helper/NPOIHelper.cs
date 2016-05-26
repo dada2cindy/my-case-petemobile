@@ -1182,7 +1182,7 @@ public class NPOIHelper
     /// <param name="dtSource">源DataTable</param>
     /// <param name="strHeaderText">表头文本</param>
     /// <param name="strFileName">文件名</param>
-    public static void ExportByWeb(DataTable dtSource, string strHeaderText, string strFileName, bool usePassword)
+    public static void ExportByWeb(DataTable dtSource, string strHeaderText, string strFileName, bool usePassword, string path)
     {
         HttpContext curContext = HttpContext.Current;
 
@@ -1193,7 +1193,7 @@ public class NPOIHelper
         curContext.Response.AppendHeader("Content-Disposition",
         "attachment;filename=" + HttpUtility.UrlEncode(strFileName, Encoding.UTF8));
 
-        curContext.Response.BinaryWrite(Export(dtSource, strHeaderText, usePassword).GetBuffer());
+        curContext.Response.BinaryWrite(Export(dtSource, strHeaderText, usePassword, path).GetBuffer());
         curContext.Response.End();
     }
 
@@ -1204,13 +1204,16 @@ public class NPOIHelper
     /// </summary>
     /// <param name="dtSource">源DataTable</param>
     /// <param name="strHeaderText">表头文本</param>
-    public static MemoryStream Export(DataTable dtSource, string strHeaderText, bool usePassword)
+    public static MemoryStream Export(DataTable dtSource, string strHeaderText, bool usePassword, string path)
     {
         SystemFactory systemFactory = new SystemFactory();
         ISystemService systemService = systemFactory.GetSystemService();
         SystemParamVO systemParamVO = systemService.GetSystemParamByRoot();
 
-        string path = @"D:\temp.xls";
+        if (string.IsNullOrEmpty(path))
+        {
+            path = @"D:\temp.xls";
+        }        
 
         if (File.Exists(path))
         {
