@@ -21,9 +21,22 @@ namespace WuDada.Core.Accounting.Service.Impl
         public IPostService PostService { get; set; }
         public IMemberService MemberService { get; set; }
         public IAuthService AuthService { get; set; }
-        public IAccountingDao AccountingDao { get; set; }  
+        public IAccountingDao AccountingDao { get; set; }
 
         #region IAccountingService 成員
+
+        /// <summary>
+        /// 取得當月業績
+        /// </summary>
+        /// <param name="ym">yyyyMM</param>
+        /// <returns></returns>
+        public IList<SalesStatisticsVO> GetSalesStatisticsByLoginUser(string ym)
+        {
+            ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+            log.Debug("GetSalesStatisticsByLoginUser");
+
+            return GetSalesStatistics(ym, "");
+        }
 
         /// <summary>
         /// 取得當月業績

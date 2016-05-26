@@ -403,6 +403,7 @@ namespace WuDada.Core.Member.Dto
         [DataMember]
         public virtual string UpdateId { get; set; }
 
+        private double commissionToBoss;
         /// <summary>
         /// 品讚抽成
         /// </summary>
@@ -419,6 +420,10 @@ namespace WuDada.Core.Member.Dto
                 {
                     return Commission * 0.03;
                 }
+            }
+            set
+            {
+                commissionToBoss = value;
             }
         }
 

@@ -9,6 +9,13 @@ namespace WuDada.Core.Accounting.Service
     public interface IAccountingService
     {
         /// <summary>
+        /// 取得當月業績 帳號角度
+        /// </summary>
+        /// <param name="ym">yyyyMM</param>
+        /// <returns></returns>
+        IList<SalesStatisticsVO> GetSalesStatisticsByLoginUser(string ym);
+
+        /// <summary>
         /// 取得當月業績
         /// </summary>
         /// <param name="ym">yyyyMM</param>
