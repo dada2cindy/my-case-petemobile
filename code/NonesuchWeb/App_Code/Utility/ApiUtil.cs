@@ -78,13 +78,16 @@ public static class ApiUtil
             foreach (MemberVO vo in list)
             {
                 try
-                {
+                {                    
                     MemberDto dto = new MemberDto(vo);
 
                     //狀態為刪除
                     if (dto.Status == "0")
                     {
-                        if(dto.ServerId > 0)
+                        vo.IsUpdatingToServer = true;
+                        m_MemberService.UpdateMember(vo);
+
+                        if (dto.ServerId > 0)
                         {
                             //有serverId就去server刪除
                             string url = m_ConfigHelper.MemberApiUrl + "/" + dto.ServerId.ToString();
@@ -95,6 +98,7 @@ public static class ApiUtil
                                 if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Gone || response.StatusCode == HttpStatusCode.NoContent)
                                 {
                                     vo.NeedUpdate = false;
+                                    vo.IsUpdatingToServer = false;
                                     m_MemberService.UpdateMember(vo);
                                 }
                             }
@@ -102,12 +106,16 @@ public static class ApiUtil
                         else
                         {
                             //沒有serverId就直接標記已更新
-                            vo.NeedUpdate = false;                            
+                            vo.NeedUpdate = false;
+                            vo.IsUpdatingToServer = false;
                             m_MemberService.UpdateMember(vo);
                         }
                     }
                     else
                     {
+                        vo.IsUpdatingToServer = true;
+                        m_MemberService.UpdateMember(vo);
+
                         WebRequest request = ApiUtil.Post<MemberDto>(m_ConfigHelper.MemberApiUrl, "POST", dto);
 
                         string responseInfo = string.Empty;
@@ -121,6 +129,7 @@ public static class ApiUtil
 
                                     MemberDto newMemberDto = JsonConvert.DeserializeObject<MemberDto>(responseInfo);
 
+                                    vo.IsUpdatingToServer = false;
                                     vo.NeedUpdate = false;
                                     vo.ServerId = newMemberDto.MemberId;
                                     m_MemberService.UpdateMember(vo);
@@ -131,6 +140,8 @@ public static class ApiUtil
                 }
                 catch (Exception ex)
                 {
+                    vo.IsUpdatingToServer = false;
+                    m_MemberService.UpdateMember(vo);
                     string error = ex.ToString();
                 }
             }
