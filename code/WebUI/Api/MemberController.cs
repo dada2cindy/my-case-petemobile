@@ -82,6 +82,7 @@ namespace WebUI.Api
                     memberVO.MemberId = 0;
                     memberVO.ServerId = 0;
                     memberVO.NeedUpdate = false;
+                    memberVO.UpdateId = "系統API";
                     memberVO = m_MemberService.CreateMember(memberVO);
                     memberVO.ServerId = memberVO.MemberId;
 

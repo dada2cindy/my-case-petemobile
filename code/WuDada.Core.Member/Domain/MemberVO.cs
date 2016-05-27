@@ -410,6 +410,12 @@ namespace WuDada.Core.Member.Domain
         [DataMember]
         public virtual string UpdateId { get; set; }
 
+        /// <summary>
+        /// 是否同步到Server中
+        /// </summary>
+        [DataMember]
+        public virtual bool IsUpdatingToServer { get; set; }
+
         private double commissionToBoss;
         /// <summary>
         /// 品讚抽成

@@ -12,6 +12,14 @@ ALTER TABLE MEMBER Add UpdateId nvarchar(20);
 
 GO
 
+ALTER TABLE Member ADD IsUpdatingToServer bit;
+
+GO
+
+UPDATE MEMBER SET [IsUpdatingToServer] = 0;
+
+GO
+
 
 --更新幾號後的Member要同步
 UPDATE [MEMBER]

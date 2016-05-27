@@ -69,6 +69,7 @@
     <property name="NeedUpdate" column="NeedUpdate" type="Boolean" />
     <property name="Store" column="Store" type="String" length="20"/>
     <property name="UpdateId" column="UpdateId" type="String" length="50" />
+    <property name="IsUpdatingToServer" column="IsUpdatingToServer" type="Boolean" />
 
   </class>
 

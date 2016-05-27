@@ -228,7 +228,7 @@ namespace WuDada.Core.Post.Domain
         public virtual int ServerId { get; set; }
 
         /// <summary>
-        /// ServerId
+        /// NeedUpdate
         /// </summary>
         [DataMember]
         public virtual bool NeedUpdate { get; set; }
@@ -244,6 +244,12 @@ namespace WuDada.Core.Post.Domain
         /// </summary>
         [DataMember]
         public virtual string UpdateId { get; set; }
+
+        /// <summary>
+        /// 是否同步到Server中
+        /// </summary>
+        [DataMember]
+        public virtual bool IsUpdatingToServer { get; set; }
 
         #endregion
 
