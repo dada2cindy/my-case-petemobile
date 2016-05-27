@@ -78,7 +78,12 @@ public static class ApiUtil
             foreach (MemberVO vo in list)
             {
                 try
-                {                    
+                {
+                    if (vo.IsUpdatingToServer)
+                    {
+                        continue;
+                    }
+
                     MemberDto dto = new MemberDto(vo);
 
                     //狀態為刪除
