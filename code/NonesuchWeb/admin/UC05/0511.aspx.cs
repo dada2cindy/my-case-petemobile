@@ -85,6 +85,15 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             btnSearchExport.Visible = false;
             btnEdit.Visible = false;
         }
+        
+        if (m_ConfigHelper.ShowFranchiseesCommission)
+        {
+            pnlShowFranchiseesCommission.Visible = true;
+        }
+        else
+        {
+            pnlShowFranchiseesCommission.Visible = false;
+        }
 
         ddlProject1_SelectedIndexChanged(null, null);
     }
@@ -315,9 +324,9 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             {
                 DataRow dr = table.NewRow();
 
-                string applyDate = memberVO.ApplyDate.HasValue ? memberVO.ApplyDate.Value.ToString("yyyy/MM/dd") : "";
-                string applyDate2 = memberVO.ApplyDate2.HasValue ? memberVO.ApplyDate2.Value.ToString("yyyy/MM/dd") : "";
-                string dueDate = memberVO.DueDate.HasValue ? memberVO.DueDate.Value.ToString("yyyy/MM/dd") : "";
+                string applyDate = memberVO.ApplyDate.HasValue ? memberVO.ApplyDate.Value.ToString("yyyy\\/MM\\/dd") : "";
+                string applyDate2 = memberVO.ApplyDate2.HasValue ? memberVO.ApplyDate2.Value.ToString("yyyy\\/MM\\/dd") : "";
+                string dueDate = memberVO.DueDate.HasValue ? memberVO.DueDate.Value.ToString("yyyy\\/MM\\/dd") : "";
                 string birthday = !string.IsNullOrEmpty(memberVO.BirthdayYear) ? memberVO.BirthdayYear + "/" : "";
                 birthday += !string.IsNullOrEmpty(memberVO.BirthdayMonth) ? memberVO.BirthdayMonth + "/" : "";
                 birthday += (!string.IsNullOrEmpty(memberVO.BirthdayMonth) && !string.IsNullOrEmpty(memberVO.BirthdayDay)) ? memberVO.BirthdayDay : "";
@@ -371,6 +380,8 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         ddlOnlineWholesalers.SelectedValue = "";
         ddlGetCommission.SelectedValue = "否";
         ddlSelfPrepayment.SelectedValue = "無";
+        lblCommissionToBoss.Text = "0";
+        lblFranchiseesCommission.Text = "0";
     }
 
     //private string GetPic(string fileName)
@@ -592,11 +603,11 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                     case "24":
                     case "36":
                         dueDate = applyDate.AddDays((365 * (int.Parse(ddlContractMonths.SelectedValue) / 12)));
-                        txtDueDate.Text = dueDate.ToString("yyyy/MM/dd");
+                        txtDueDate.Text = dueDate.ToString("yyyy\\/MM\\/dd");
                         break;
                     case "30":
                         dueDate = applyDate.AddDays(910);
-                        txtDueDate.Text = dueDate.ToString("yyyy/MM/dd");
+                        txtDueDate.Text = dueDate.ToString("yyyy\\/MM\\/dd");
                         break;
                 }
                 //DateTime dueDate = applyDate.AddDays
@@ -699,5 +710,40 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                 }                                
             }
         }
+    }
+    protected void txtCommission_TextChanged(object sender, EventArgs e)
+    {
+        CalculateFranchiseesCommission();
+    }
+
+    private void CalculateFranchiseesCommission()
+    {
+        if (m_ConfigHelper.ShowFranchiseesCommission)
+        {
+            MemberVO memberVO = new MemberVO();
+            UIHelper.FillVO(pnlContent, memberVO);
+            lblCommissionToBoss.Text = memberVO.CommissionToBoss.ToString();
+            lblFranchiseesCommission.Text = memberVO.FranchiseesCommission.ToString();
+        }
+    }
+    protected void txtReturnCommission_TextChanged(object sender, EventArgs e)
+    {
+        CalculateFranchiseesCommission();
+    }
+    protected void txtPhoneSellPrice_TextChanged(object sender, EventArgs e)
+    {
+        CalculateFranchiseesCommission();
+    }
+    protected void txtPrepayment_TextChanged(object sender, EventArgs e)
+    {
+        CalculateFranchiseesCommission();
+    }
+    protected void txtBreakMoney_TextChanged(object sender, EventArgs e)
+    {
+        CalculateFranchiseesCommission();
+    }
+    protected void txtPhonePrice_TextChanged(object sender, EventArgs e)
+    {
+        CalculateFranchiseesCommission();
     }
 }

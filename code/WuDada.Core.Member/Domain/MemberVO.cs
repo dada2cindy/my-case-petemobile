@@ -425,18 +425,42 @@ namespace WuDada.Core.Member.Domain
         {
             get
             {
-                if (Commission != 0)
+                if (Commission <= 0 || ReturnCommission < 0)
                 {
                     return 0;
                 }
                 else
                 {
-                    return Commission * 0.03;
+                    return (Commission + ReturnCommission) * 0.03;
                 }
             }
             set
             {
                 commissionToBoss = value;
+            }
+        }
+
+        private double franchiseesCommission;
+        /// <summary>
+        /// 本件毛利 (加盟者毛利)
+        /// </summary>
+        [DataMember]
+        public virtual double FranchiseesCommission
+        {
+            get
+            {
+                if (Commission <= 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return (Commission + ReturnCommission + PhoneSellPrice) - (Prepayment + BreakMoney + PhonePrice + CommissionToBoss);
+                }
+            }
+            set
+            {
+                franchiseesCommission = value;
             }
         }
 

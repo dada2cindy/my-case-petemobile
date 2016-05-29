@@ -4,8 +4,13 @@
 <%@ Register Assembly="aspnetpager" Namespace="Wuqi.Webdiyer" TagPrefix="Webdiyer" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <asp:Panel ID="pnlContent" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">    
+    <asp:UpdatePanel runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+        <Triggers>
+            <asp:PostBackTrigger ControlID="btnSearchExport"/>
+        </Triggers>
+        <ContentTemplate>
+            <asp:Panel ID="pnlContent" runat="server">
         <fieldset class="fieldset">
             <h1>
                 客戶編輯</h1>
@@ -199,7 +204,7 @@
                         手機進價
                     </td>
                     <td>
-                        <asp:TextBox ID="txtPhonePrice" runat="server" Width="100px"></asp:TextBox>
+                        <asp:TextBox ID="txtPhonePrice" runat="server" Width="100px" AutoPostBack="True" OnTextChanged="txtPhonePrice_TextChanged"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="請輸入手機進價"
                                     ControlToValidate="txtPhonePrice" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
                         <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="手機進價請輸入0以上的整數"
@@ -212,7 +217,7 @@
                         銷售金額
                     </td>
                     <td>
-                        <asp:TextBox ID="txtPhoneSellPrice" runat="server" Width="100px"></asp:TextBox>
+                        <asp:TextBox ID="txtPhoneSellPrice" runat="server" Width="100px" AutoPostBack="True" OnTextChanged="txtPhoneSellPrice_TextChanged"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfSellPrice" runat="server" ErrorMessage="請輸入銷售金額"
                                     ControlToValidate="txtPhoneSellPrice" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>
                         <asp:RangeValidator ID="RangeValidator2" runat="server" ErrorMessage="銷售金額請輸入0以上的整數"
@@ -232,7 +237,7 @@
                         </asp:DropDownList>
                         &nbsp;&nbsp;&nbsp;
                         預繳金額：
-                        <asp:TextBox ID="txtPrepayment" runat="server" Width="100px"></asp:TextBox>
+                        <asp:TextBox ID="txtPrepayment" runat="server" Width="100px" AutoPostBack="True" OnTextChanged="txtPrepayment_TextChanged"></asp:TextBox>
                         <asp:RangeValidator ID="RangeValidator5" runat="server" ErrorMessage="預繳金額請輸入0以上的整數"
                             ControlToValidate="txtPrepayment" MaximumValue="1000000" MinimumValue="0" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
@@ -243,7 +248,7 @@
                         門號佣金
                     </td>
                     <td>
-                        <asp:TextBox ID="txtCommission" runat="server" Width="100px"></asp:TextBox>
+                        <asp:TextBox ID="txtCommission" runat="server" Width="100px" AutoPostBack="True" OnTextChanged="txtCommission_TextChanged"></asp:TextBox>
                         <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入門號佣金"
                                     ControlToValidate="txtCommission" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>--%>
                         <asp:RangeValidator ID="RangeValidator3" runat="server" ErrorMessage="門號佣金請輸入0以上的整數"
@@ -267,7 +272,7 @@
                         後退佣金
                     </td>
                     <td>
-                        <asp:TextBox ID="txtReturnCommission" runat="server" Width="100px"></asp:TextBox>                        
+                        <asp:TextBox ID="txtReturnCommission" runat="server" Width="100px" AutoPostBack="True" OnTextChanged="txtReturnCommission_TextChanged"></asp:TextBox>                        
                         <asp:RangeValidator ID="RangeValidator6" runat="server" ErrorMessage="後退佣金請輸入0以上的整數"
                             ControlToValidate="txtReturnCommission" MaximumValue="1000000" MinimumValue="0" Type="Integer"
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
@@ -278,7 +283,7 @@
                         吸收違約金
                     </td>
                     <td>
-                        <asp:TextBox ID="txtBreakMoney" runat="server" Width="100px"></asp:TextBox>
+                        <asp:TextBox ID="txtBreakMoney" runat="server" Width="100px" AutoPostBack="True" OnTextChanged="txtBreakMoney_TextChanged"></asp:TextBox>
                         <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入吸收違約金"
                                     ControlToValidate="txtBreakMoney" Display="Dynamic" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>--%>
                         <asp:RangeValidator ID="RangeValidator4" runat="server" ErrorMessage="吸收違約金請輸入0以上的整數"
@@ -286,6 +291,24 @@
                             Display="Dynamic" ValidationGroup="Save"></asp:RangeValidator>
                     </td>
                 </tr>
+                <asp:Panel ID="pnlShowFranchiseesCommission" runat="server" Visible="false">
+                    <tr>
+                        <td>
+                            總部抽成
+                        </td>
+                        <td>
+                            <asp:Label ID="lblCommissionToBoss" runat="server" Text=""></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            本件毛利
+                        </td>
+                        <td>
+                            <asp:Label ID="lblFranchiseesCommission" runat="server" Text=""></asp:Label>
+                        </td>
+                    </tr>
+                </asp:Panel>
                 <tr>
                     <td>
                         綁約月數
@@ -397,7 +420,7 @@
                 </tr>
             </table>
         </fieldset>
-    </asp:Panel>
+    </asp:Panel>        
     <br />
     <asp:Panel ID="pnlGv" runat="server" DefaultButton="btnSearch">
         <fieldset class="fieldset">
@@ -642,5 +665,7 @@
                     ShowPageIndexBox="Never" />
         </fieldset>
     </asp:Panel>
+            </ContentTemplate>    
+    </asp:UpdatePanel>
 </asp:Content>
 

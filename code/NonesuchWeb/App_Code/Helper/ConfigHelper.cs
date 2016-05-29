@@ -16,6 +16,8 @@ public class ConfigHelper
 
     public string ApiUrl { get; set; }
 
+    public bool ShowFranchiseesCommission { get; set; }
+
     public string MemberApiUrl
     {
         get
@@ -28,5 +30,6 @@ public class ConfigHelper
 	{
         Host = ConfigurationManager.AppSettings["Host"];
         ApiUrl= ConfigurationManager.AppSettings["ApiUrl"];
+        ShowFranchiseesCommission = Convert.ToBoolean(ConfigurationManager.AppSettings["ShowFranchiseesCommission"]);
     }
 }
