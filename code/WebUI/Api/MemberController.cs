@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Common.Logging;
+using WebUI.Util;
 using WuDada.Core.Auth;
 using WuDada.Core.Auth.Service;
 using WuDada.Core.Member;
@@ -19,9 +20,10 @@ namespace WebUI.Api
     public class MemberController : ApiController
     {
         private ILog m_Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static ConfigHelper m_ConfigHelper = new ConfigHelper();
         private static PostFactory m_PostFactory = new PostFactory();
         private static AuthFactory m_AuthFactory = new AuthFactory();
-        private static MemberFactory m_MemberFactory = new MemberFactory();
+        private static MemberFactory m_MemberFactory = new MemberFactory();       
         private static IMemberService m_MemberService = m_MemberFactory.GetMemberService();
         private static IAuthService m_AuthService = m_AuthFactory.GetAuthService();
         private static IPostService m_PostService = m_PostFactory.GetPostService();
@@ -83,6 +85,7 @@ namespace WebUI.Api
                     memberVO.ServerId = 0;
                     memberVO.NeedUpdate = false;
                     memberVO.UpdateId = "系統API";
+                    FixTimeZone(memberVO);
                     memberVO = m_MemberService.CreateMember(memberVO);
                     memberVO.ServerId = memberVO.MemberId;
 
@@ -96,6 +99,24 @@ namespace WebUI.Api
             else
             {
                 return Request.CreateResponse(HttpStatusCode.NoContent);
+            }
+        }
+
+        private void FixTimeZone(MemberVO memberVO)
+        {
+            int addHours = m_ConfigHelper.AddHours;
+
+            if (memberVO.ApplyDate.HasValue)
+            {
+                memberVO.ApplyDate = memberVO.ApplyDate.Value.AddHours(addHours);
+            }
+            if (memberVO.ApplyDate2.HasValue)
+            {
+                memberVO.ApplyDate2 = memberVO.ApplyDate2.Value.AddHours(addHours);
+            }
+            if (memberVO.DueDate.HasValue)
+            {
+                memberVO.DueDate = memberVO.DueDate.Value.AddHours(addHours);
             }
         }
 
