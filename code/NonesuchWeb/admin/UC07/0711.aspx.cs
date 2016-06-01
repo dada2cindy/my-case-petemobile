@@ -111,7 +111,7 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
         }
         gvList.DataBind();
 
-        if (storeList.Count > 1)
+        if (storeList.Count > 0)
         {
             gvListStore.DataSource = m_AccountingService.GetSalesStatisticsByStore(ym);
             gvListStore.DataBind();
