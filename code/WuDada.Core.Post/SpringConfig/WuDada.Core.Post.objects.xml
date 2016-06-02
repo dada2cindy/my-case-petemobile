@@ -21,6 +21,11 @@
     <property name="NHibernateDao" ref="NHibernateDao"/>
   </object>
 
+  <object id="PostFileDao" type="WuDada.Core.Post.Persistence.PostFileDao, WuDada.Core.Post">
+    <property name="AdoTemplate" ref="AdoTemplate"/>
+    <property name="NHibernateDao" ref="NHibernateDao"/>
+  </object>
+
   <!-- Service objects 設定 --> 
 
   <object id="PostServiceProxy" parent="TxProxyConfigurationTemplate">
@@ -43,6 +48,13 @@
   </object>
   <object id="PostMessageService" type="WuDada.Core.Post.Service.Impl.PostMessageService, WuDada.Core.Post">
     <property name="PostMessageDao" ref="PostMessageDao"/>
+  </object>
+
+  <object id="PostFileServiceProxy" parent="TxProxyConfigurationTemplate">
+    <property name="Target" ref="PostFileService"/>
+  </object>
+  <object id="PostFileService" type="WuDada.Core.Post.Service.Impl.PostFileService, WuDada.Core.Post">
+    <property name="PostFileDao" ref="PostFileDao"/>
   </object>
 
 </objects>

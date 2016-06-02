@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="WuDada.Core.Post.Domain" assembly="WuDada.Core.Post">
+
+  <class name="FileVO" table="POST_FILE" lazy="true" dynamic-update="true" dynamic-insert="true">
+
+    <id name="FileId" column="FileId" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    
+    <property column="FileNo" type="String" name="FileNo" />
+    <property column="Content1" type="String" name="Content1" />
+    <property column="Content2" type="String" name="Content2" />
+    <property column="ShowDate" type="DateTime" name="ShowDate"  />
+    <property column="FileName" type="String" name="FileName" />
+    <property column="FileName2" type="String" name="FileName2" />
+    <property column="FileName3" type="String" name="FileName3" />    
+    <property column="Flag" type="Int32" name="Flag" />    
+    <property column="Type" type="String" name="Type" />    
+    <property column="CreatedBy" type="String" name="CreatedBy"  />
+    <property column="UpdatedBy" type="String" name="UpdatedBy"  />
+    <property column="UpdatedDate" type="DateTime" name="UpdatedDate"  />
+    <property column="CreatedDate" type="DateTime" name="CreatedDate"  />
+
+  </class>
+
+</hibernate-mapping>

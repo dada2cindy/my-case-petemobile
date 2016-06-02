@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Domain\BaseObject.cs" />
     <Compile Include="Domain\BasePost.cs" />
+    <Compile Include="Domain\FileVO.cs" />
     <Compile Include="Domain\MessageVO.cs" />
     <Compile Include="Domain\PostVO.cs" />
     <Compile Include="Domain\NodeVO.cs" />
@@ -85,8 +86,10 @@
     <Compile Include="DTO\ReportPostVO.cs" />
     <Compile Include="DTO\ReportNodeVO.cs" />
     <Compile Include="Persistence\IMessageDao.cs" />
+    <Compile Include="Persistence\IPostFileDao.cs" />
     <Compile Include="Persistence\IPostDao.cs" />
     <Compile Include="Persistence\MessageDao.cs" />
+    <Compile Include="Persistence\PostFileDao.cs" />
     <Compile Include="Persistence\PostDao.cs" />
     <Compile Include="Persistence\IPostMessageDao.cs" />
     <Compile Include="Persistence\PostMessageDao.cs" />
@@ -94,8 +97,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\IMessageService.cs" />
     <Compile Include="Service\Impl\MessageService.cs" />
+    <Compile Include="Service\Impl\PostFileService.cs" />
     <Compile Include="Service\Impl\PostService.cs" />
     <Compile Include="Service\Impl\PostMessageService.cs" />
+    <Compile Include="Service\IPostFileService.cs" />
     <Compile Include="Service\IPostService.cs" />
     <Compile Include="Service\IPostMessageService.cs" />
   </ItemGroup>
@@ -121,6 +126,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Persistence\NHibernate\Mapping\PostMessageVO.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Persistence\NHibernate\Mapping\FileVO.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

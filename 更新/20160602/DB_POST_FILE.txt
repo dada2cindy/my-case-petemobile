@@ -1,0 +1,22 @@
+CREATE TABLE [dbo].[POST_FILE](
+	[FileId] [int] IDENTITY(1,1) NOT NULL,
+	[FileNo] [nvarchar](255) NULL,
+	[Content1] [nvarchar](255) NULL,
+	[Content2] [nvarchar](255) NULL,
+	[ShowDate] [datetime] NULL,
+	[FileName] [nvarchar](255) NULL,
+	[FileName2] [nvarchar](255) NULL,
+	[FileName3] [nvarchar](255) NULL,
+	[Flag] [int] NULL,
+	[Type] [nvarchar](10) NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[UpdatedBy] [nvarchar](255) NULL,
+	[UpdatedDate] [datetime] NULL,
+	[CreatedDate] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[FileId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] 
+
+GO

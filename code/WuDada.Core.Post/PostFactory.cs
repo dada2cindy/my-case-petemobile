@@ -31,5 +31,10 @@ namespace WuDada.Core.Post
         {
             return SpringHelper.ApplicationContext["MessageServiceProxy"] as IMessageService;
         }
+
+        public IPostFileService GetPostFileService()
+        {
+            return SpringHelper.ApplicationContext["PostFileServiceProxy"] as IPostFileService;
+        }
     }
 }
