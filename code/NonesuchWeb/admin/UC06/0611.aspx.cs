@@ -363,6 +363,12 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
     {
         try
         {
+            string folder = Server.MapPath("~\\") + "\\App_Data\\upload\\";
+            if (!System.IO.Directory.Exists(folder))
+            {
+                System.IO.Directory.CreateDirectory(folder);
+            }
+
             HttpFileCollection hfc = Request.Files;
             for (int i = 0; i < hfc.Count; i++)
             {
