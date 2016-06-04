@@ -1,0 +1,10 @@
+INSERT INTO [AUTH_MENU_FUNC]
+           ([MenuFuncName]
+           ,[ParentId]
+           ,[ListOrder]
+           ,[MainPath])
+     VALUES
+           ('ÀÉ®×¤W¶Ç'
+           ,1
+           ,1002
+           ,'admin/UC06/0611.aspx')
