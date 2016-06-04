@@ -14,6 +14,7 @@ using WuDada.Core.Auth.Service;
 using WuDada.Core.Auth.Domain;
 using WuDada.Core.Common;
 using WuDada.Core.Common.Service;
+using System.IO;
 
 public partial class admin_UC06_0611 : System.Web.UI.Page
 {
@@ -36,8 +37,8 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
     }
     private string m_FileName
     {
-        get { if (ViewState["picfilename"] == null) { ViewState["picfilename"] = string.Empty; } return ViewState["picfilename"].ToString(); }
-        set { ViewState["picfilename"] = value; }
+        get { if (ViewState["filename"] == null) { ViewState["filename"] = string.Empty; } return ViewState["filename"].ToString(); }
+        set { ViewState["filename"] = value; }
     }
 
     protected void Page_Load(object sender, EventArgs e)
@@ -239,7 +240,9 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
     {
         m_Mode = 0;
         m_FileName = string.Empty;
-        //ltlImg.Text = string.Empty;
+        //ltlFile.Text = string.Empty;
+        lnkFile.Text = string.Empty;
+        lnkFile.Visible = false;
         trContent1.Visible = false;
         trContent2.Visible = false;
         ddlType.Enabled = true;
@@ -250,9 +253,10 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
         btnShowAdd.Enabled = true;        
     }
 
-    //private string GetPic(string fileName)
+    //private string GetFile(string fileName)
     //{
-    //    return "<img src='../../upload/" + fileName + "' width='145' height='108' border='0'>";
+    //    string folderPath = "../../App_Data/upload/"+ fileName;
+    //    return string.Format("<a href='{0}' target='_blank'>{1}</a>", folderPath, fileName);
     //}
 
     protected void gvList_RowCommand1(object sender, GridViewCommandEventArgs e)
@@ -267,6 +271,10 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
                 ddlType.Enabled = false;
                 m_Mode = fileId;		        
                 UIHelper.FillUI(pnlContent, fileVO);
+                m_FileName = fileVO.FileName;
+                //ltlFile.Text = GetFile(m_FileName);
+                lnkFile.Text = m_FileName;
+                lnkFile.Visible = true;
                 ShowMode();
                 ddlType_SelectedIndexChanged(null, null);
                 pnlContent.Visible = true;
@@ -295,6 +303,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
         {
             FileVO fileVO = m_PostFileService.GetFileById(m_Mode);
             UIHelper.FillVO(pnlContent, fileVO);
+            fileVO.FileName = m_FileName;
             fileVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
             fileVO = m_PostFileService.UpdateFile(fileVO);
             m_WebLogService.AddSystemLog(MsgVO.Action.修改, fileVO, "", string.Format("單號:{0}", fileVO.FileId));                        
@@ -350,32 +359,119 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
         }
     }
 
-    //protected void btnUpliad_Click(object sender, EventArgs e)
-    //{
-    //    try
-    //    {
-    //        HttpFileCollection hfc = Request.Files;
-    //        for (int i = 0; i < hfc.Count; i++)
-    //        {
-    //            HttpPostedFile hpf = hfc[i];
-    //            if (hpf.ContentLength > 0)
-    //            {
-    //                string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + System.IO.Path.GetFileName(hpf.FileName);
-    //                hpf.SaveAs(Server.MapPath("~\\") + "\\upload\\" + fileName);
-    //                ltlImg.Text = GetPic(fileName);
-    //                m_PicFileName = fileName;
-    //            }
-    //            else
-    //            {
-    //                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("請點選您要上傳的照片!"), false);
-    //                return;
-    //            }
-    //        }
-    //    }
-    //    catch
-    //    {
-    //        ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("檔案傳輸錯誤!"), false);
-    //        return;
-    //    }
-    //}        
+    protected void btnUpliad_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            HttpFileCollection hfc = Request.Files;
+            for (int i = 0; i < hfc.Count; i++)
+            {
+                HttpPostedFile hpf = hfc[i];
+                if (hpf.ContentLength > 0)
+                {
+                    string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + System.IO.Path.GetFileName(hpf.FileName);
+                    hpf.SaveAs(Server.MapPath("~\\") + "\\App_Data\\upload\\" + fileName);
+                    //ltlFile.Text = GetFile(fileName);
+                    lnkFile.Text = fileName;
+                    lnkFile.Visible = true;
+                    m_FileName = fileName;
+                }
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("請點選您要上傳的檔案!"), false);
+                    return;
+                }
+            }
+        }
+        catch
+        {
+            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("檔案傳輸錯誤!"), false);
+            return;
+        }
+    }
+
+    protected void lnkFile_Click(object sender, EventArgs e)
+    {
+        string filePath = Server.MapPath("../../App_Data/upload/" + m_FileName);
+        if (System.IO.File.Exists(filePath) == false)
+        {
+            return;
+        }
+
+        System.IO.Stream oStream = null;
+
+        try
+        {
+            oStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+
+            // **************************************************
+            Response.Buffer = false;
+
+            // Setting the unknown [ContentType]
+            // will display the saving dialog for the user
+            Response.ContentType = "application/octet-stream";
+
+            // With setting the file name,
+            // in the saving dialog, user will see
+            // the [strFileName] name instead of [download]!
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + m_FileName);
+
+            long lngFileLength = oStream.Length;
+
+            // Notify user (client) the total file length
+            Response.AddHeader("Content-Length", lngFileLength.ToString());
+            // **************************************************
+
+            // Total bytes that should be read
+            long lngDataToRead = lngFileLength;
+
+            // Read the bytes of file
+            while (lngDataToRead > 0)
+            {
+                // The below code is just for testing! So we commented it!
+                //System.Threading.Thread.Sleep(200);
+
+                // Verify that the client is connected or not?
+                if (Response.IsClientConnected)
+                {
+                    // 8KB
+                    int intBufferSize = 8 * 1024;
+
+                    // Create buffer for reading [intBufferSize] bytes from file
+                    byte[] bytBuffers =
+                        new System.Byte[intBufferSize];
+
+                    // Read the data and put it in the buffer.
+                    int intTheBytesThatReallyHasBeenReadFromTheStream = oStream.Read(bytBuffers, 0, intBufferSize);
+
+                    // Write the data from buffer to the current output stream.
+                    Response.OutputStream.Write(bytBuffers, 0, intTheBytesThatReallyHasBeenReadFromTheStream);
+
+                    // Flush (Send) the data to output
+                    // (Don't buffer in server's RAM!)
+                    Response.Flush();
+
+                    lngDataToRead =
+                        lngDataToRead - intTheBytesThatReallyHasBeenReadFromTheStream;
+                }
+                else
+                {
+                    // Prevent infinite loop if user disconnected!
+                    lngDataToRead = -1;
+                }
+            }
+        }
+        catch { }
+        finally
+        {
+            if (oStream != null)
+            {
+                //Close the file.
+                oStream.Close();
+                oStream.Dispose();
+                oStream = null;
+            }
+            Response.Close();
+        }
+    }
 }

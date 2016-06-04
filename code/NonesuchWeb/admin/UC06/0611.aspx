@@ -61,7 +61,7 @@
                             ControlToValidate="txtContent1" ValidationGroup="Save"></asp:RequiredFieldValidator>
                     </td>
                 </tr>                              
-                <%--<tr>
+                <tr>
                     <td valign="top">
                         圖片
                     </td>
@@ -79,12 +79,13 @@
                             <tr>
                                 
                                 <td>
-                                    <asp:Literal ID="ltlImg" runat="server"></asp:Literal>
+                                    <asp:LinkButton ID="lnkFile" runat="server" OnClick="lnkFile_Click"></asp:LinkButton>
+                                    <%--<asp:Literal ID="ltlFile" runat="server"></asp:Literal>--%>
                                 </td>
                             </tr>
                         </table>
                     </td>
-                </tr>--%>
+                </tr>
                 <tr>
                     <td colspan="2" height="30px" align="center">
                         <asp:Button ID="btnAdd" runat="server" Text="確定新增" ValidationGroup="Save" OnClick="btnAdd_Click" />                        
