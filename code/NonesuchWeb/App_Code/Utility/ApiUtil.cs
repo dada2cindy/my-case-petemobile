@@ -79,7 +79,8 @@ public static class ApiUtil
             {
                 try
                 {
-                    if (vo.IsUpdatingToServer)
+                    MemberVO memberVO = m_MemberService.GetMemberById(vo.MemberId);
+                    if (memberVO.IsUpdatingToServer)
                     {
                         continue;
                     }
