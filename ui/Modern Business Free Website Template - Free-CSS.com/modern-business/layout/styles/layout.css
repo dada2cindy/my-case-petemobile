@@ -14,7 +14,7 @@ File: Layout CSS
 @import url("featured_slide.css");
 
 html{overflow-y:scroll;}
-body{margin:0; padding:0; font-size:13px; font-family:Georgia, "Times New Roman", Times, serif; color:#605B5B; background-color:#D0D0D0;}
+body{margin:0; padding:0; font-size:13px; color:#605B5B; background-color:#D0D0D0;}
 
 .justify{text-align:justify;}
 .bold{font-weight:bold;}
@@ -38,7 +38,7 @@ img{display:block; margin:0; padding:0; border:none;}
 /* ----------------------------------------------Wrapper------------------------------------- */
 
 div.wrapper{display:block; width:100%; margin:0; text-align:left;}
-div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, div.wrapper h6{margin:0 0 15px 0; padding:0; font-size:20px; font-weight:normal; line-height:normal;}
+/*div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, div.wrapper h6{margin:0 0 15px 0; padding:0; font-size:20px; font-weight:normal; line-height:normal;}*/
 .col1, .col1 a{color:#AAAAAA; background-color:#FFFFFF;}
 /*.col2{color:#333333; background-color:#373E46; border-bottom:1px solid #D5D5D5;}*/
 .col2{color:#333333; background-color:#5c5bff; border-bottom:1px solid #D5D5D5;}
@@ -151,3 +151,9 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 
 #copyright{padding:15px 0;}
 #copyright p{margin:0; padding:0;}
+
+
+.center {
+  text-align: center;  
+  font-size: 200%;      
+}
