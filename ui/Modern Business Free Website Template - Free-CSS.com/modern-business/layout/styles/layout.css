@@ -92,7 +92,7 @@ div.wrapper{display:block; width:100%; margin:0; text-align:left;}
 /* ----------------------------------------------Content------------------------------------- */
 
 .container{padding:20px 0;}
-.content{display:block; float:left; width:630px;}
+.content{display:block; float:left; width:690px;}
 .left {
   text-align: left;
 }
@@ -125,6 +125,7 @@ div.wrapper{display:block; width:100%; margin:0; text-align:left;}
 
 .column{display:block; float:right; width:270px;}
 .column .holder{display:block; width:260px; margin-bottom:20px; padding-left:10px;}
+.column .holder2{display:block; width:260px; margin-bottom:20px; padding-left:18px;}
 
 /* Sponsors Block */
 
@@ -156,4 +157,26 @@ div.wrapper{display:block; width:100%; margin:0; text-align:left;}
 .center {
   text-align: center;  
   font-size: 200%;      
+}
+
+alert.success, tag.success {
+    color: #08922c;
+    background: #e3f8e8;
+    border-color: #c6ecd0;
+}
+
+alert, tag {
+    display: block;
+    padding: 5px 10px;
+    margin: 5px;
+    font-size: 14px;
+    font-style: normal;
+    color: #8a8a8a;
+    background: #f5f5f5;
+    border: 1px solid #e0e3e4;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
 }
