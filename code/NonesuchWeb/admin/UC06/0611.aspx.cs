@@ -29,6 +29,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
     private WebLogService m_WebLogService;
     private SessionHelper m_SessionHelper;
     private ConfigHelper m_ConfigHelper;
+    private WebUtility m_WebUtility;
 
     private int m_Mode
     {
@@ -49,6 +50,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
         m_AuthFactory = new AuthFactory();
         m_CommonFactory = new CommonFactory();
         m_SessionHelper = new SessionHelper();
+        m_WebUtility = new WebUtility();
         m_AuthService = m_AuthFactory.GetAuthService();
         m_PostFileService = m_PostFactory.GetPostFileService();
         m_CommonService = m_CommonFactory.GetCommonService();
@@ -278,6 +280,10 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
                 ShowMode();
                 ddlType_SelectedIndexChanged(null, null);
                 pnlContent.Visible = true;
+
+                //Test 檔案傳到ftp
+                //m_WebUtility.UploadFileToFTP(Server.MapPath("../../App_Data/upload/" + m_FileName));
+
                 break;
             //case "myDel":
             //    postVO.Flag = 0;
