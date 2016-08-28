@@ -84,6 +84,7 @@
     <Compile Include="DTOConverter\PostVOConverter.cs" />
     <Compile Include="DTOConverter\NodeVOConverter.cs" />
     <Compile Include="DTO\FileDto.cs" />
+    <Compile Include="DTO\PostDto.cs" />
     <Compile Include="DTO\ReportPostVO.cs" />
     <Compile Include="DTO\ReportNodeVO.cs" />
     <Compile Include="Persistence\IMessageDao.cs" />

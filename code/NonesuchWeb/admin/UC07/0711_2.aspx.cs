@@ -106,6 +106,11 @@ public partial class admin_UC07_0711_2 : System.Web.UI.Page
 
         gvSpecialToday.DataSource = null;
         gvSpecialToday.DataBind();
+
+        if (!m_SessionHelper.IsAdmin)
+        {
+            btnRefresh.Visible = false;
+        }
     }
 
     private void SetLabelColor(Label lbl)

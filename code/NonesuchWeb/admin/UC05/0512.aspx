@@ -152,10 +152,11 @@
                     <td>
                         <asp:DropDownList ID="ddlCustomField2" runat="server">
                         </asp:DropDownList>
+                        <asp:HiddenField ID="hiddenStore" runat="server" />
                         <asp:RequiredFieldValidator ID="rfCustomField2" runat="server" ErrorMessage="請選擇銷售員"
                             ControlToValidate="ddlCustomField2" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>
                     </td>
-                </tr>
+                </tr>                 
                 <%--<tr>
                     <td valign="top">
                         圖片

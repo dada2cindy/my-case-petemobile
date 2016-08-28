@@ -1,0 +1,14 @@
+--更新庫存的Store
+UPDATE [POST]
+   SET Store = '酒泉'
+where NodeId=2
+
+GO
+
+--更新幾號後的Post要同步
+UPDATE [POST]
+   SET NeedUpdate = 1
+where NodeId=2
+--   and ShowDate2 >= '2016/05/10'
+
+GO

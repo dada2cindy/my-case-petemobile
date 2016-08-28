@@ -19,6 +19,45 @@ namespace WuDada.Core.Post.Domain
             CloseDate = DateTime.MaxValue;
         }
 
+        public PostVO(PostDto postDto)
+        {
+            this.PostId = postDto.PostId;
+            this.PicFileName = postDto.PicFileName;
+            this.PicFileName2 = postDto.PicFileName2;
+            this.DocFileName = postDto.DocFileName;
+            this.SortNo = postDto.SortNo;
+            this.Flag = postDto.Flag;
+            this.Quantity = postDto.Quantity;
+            this.ShowDate = postDto.ShowDate;
+            this.CloseDate = postDto.CloseDate;
+            this.Type = postDto.Type;
+            this.LinkUrl = postDto.LinkUrl;
+            this.IsRecommend = postDto.IsRecommend;
+            this.Price = postDto.Price;
+            this.SellPrice = postDto.SellPrice;
+            this.IsTemp = postDto.IsTemp;
+            this.CustomField1 = postDto.CustomField1;
+            this.CustomField2 = postDto.CustomField2;
+            this.MemberName = postDto.MemberName;
+            this.MemberPhone = postDto.MemberPhone;
+            this.ProductSer = postDto.ProductSer;
+            this.WarrantySuppliers = postDto.WarrantySuppliers;
+            this.Wholesalers = postDto.Wholesalers;
+            this.MemberId = postDto.MemberId;                        
+            this.Store = postDto.Store;            
+            this.Title = postDto.Title;
+            this.Summary = postDto.Summary;
+            this.HtmlContent = postDto.HtmlContent;
+            this.KeyWord = postDto.KeyWord;
+            this.UpdateId = postDto.UpdateId;
+            this.ServerId = postDto.ServerId;
+            this.NeedUpdate = postDto.NeedUpdate;
+            this.CreatedBy = postDto.CreatedBy;
+            this.UpdatedBy = postDto.UpdatedBy;
+            this.CreatedDate = postDto.CreatedDate;
+            this.UpdatedDate = postDto.UpdatedDate;
+        }
+
         #endregion
 
         #region Property

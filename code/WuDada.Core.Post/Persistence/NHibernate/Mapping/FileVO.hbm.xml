@@ -21,6 +21,11 @@
     <property column="UpdatedDate" type="DateTime" name="UpdatedDate"  />
     <property column="CreatedDate" type="DateTime" name="CreatedDate"  />
 
+    <property name="ServerId" column="ServerId" type="Int32" />
+    <property name="NeedUpdate" column="NeedUpdate" type="Boolean" />
+    <property name="UpdateId" column="UpdateId" type="String" length="50" />
+    <property name="IsUpdatingToServer" column="IsUpdatingToServer" type="Boolean" />
+
   </class>
 
 </hibernate-mapping>

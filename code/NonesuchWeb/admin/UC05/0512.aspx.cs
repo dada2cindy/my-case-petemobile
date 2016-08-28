@@ -53,7 +53,8 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             pnlContent.Visible = false;
             fillGridView();
             ShowMode();
-
+            IList<NodeVO> storeList = m_PostService.GetNodeListByParentName("店家");
+            hiddenStore.Value = storeList[0].Name;
         }
     }
 
@@ -147,6 +148,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         PostVO postVO = new PostVO();
         UIHelper.FillVO(pnlContent, postVO);
         postVO.Node = m_PostService.GetNodeById(m_NodeId);
+        postVO.Store = hiddenStore.Value;
         //postVO.PicFileName = m_PicFileName;
         postVO.Flag = 1;
         //if (!string.IsNullOrEmpty(txtShowDate.Text.Trim()))
@@ -334,6 +336,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             {
                 PostVO newPostVO = new PostVO();
                 UIHelper.FillVO(pnlContent, newPostVO);
+                newPostVO.Store = hiddenStore.Value;
                 newPostVO.Node = postVO.Node;
                 newPostVO.Quantity = 1;
                 newPostVO.Type = 1;
@@ -341,6 +344,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
                 m_WebLogService.AddSystemLog(MsgVO.Action.售出, postVO, "", string.Format("單號:{0}", postVO.PostId));
 
                 postVO.Quantity -= 1;
+                postVO.Store = hiddenStore.Value;
                 m_PostService.UpdatePost(postVO);
                 fillGridView();
                 ClearUI();
@@ -350,6 +354,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             {
                 UIHelper.FillVO(pnlContent, postVO);
                 postVO.Type = 1;
+                postVO.Store = hiddenStore.Value;
                 m_PostService.UpdatePost(postVO);
                 m_WebLogService.AddSystemLog(MsgVO.Action.售出, postVO, "", string.Format("單號:{0}", postVO.PostId));
                 fillGridView();
