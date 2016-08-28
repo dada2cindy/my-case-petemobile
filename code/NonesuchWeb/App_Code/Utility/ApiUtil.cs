@@ -69,7 +69,7 @@ public static class ApiUtil
         ConfigHelper m_ConfigHelper = new ConfigHelper();
         WebUtility m_WebUtility = new WebUtility();
 
-        if (string.IsNullOrEmpty(m_ConfigHelper.MemberApiUrl))
+        if (string.IsNullOrEmpty(m_ConfigHelper.PostFileApiUrl))
         {
             return;
         }
@@ -101,7 +101,7 @@ public static class ApiUtil
                         if (dto.ServerId > 0)
                         {
                             //有serverId就去server刪除
-                            string url = m_ConfigHelper.MemberApiUrl + "/" + dto.ServerId.ToString();
+                            string url = m_ConfigHelper.PostFileApiUrl + "/" + dto.ServerId.ToString();
                             WebRequest request = ApiUtil.Post(url, "DELETE", "");
 
                             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
@@ -127,7 +127,7 @@ public static class ApiUtil
                         vo.IsUpdatingToServer = true;
                         m_PostFileService.UpdateFile(vo);
 
-                        WebRequest request = ApiUtil.Post<FileDto>(m_ConfigHelper.MemberApiUrl, "POST", dto);
+                        WebRequest request = ApiUtil.Post<FileDto>(m_ConfigHelper.PostFileApiUrl, "POST", dto);
 
                         string responseInfo = string.Empty;
                         using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
@@ -255,6 +255,106 @@ public static class ApiUtil
                 {
                     vo.IsUpdatingToServer = false;
                     m_MemberService.UpdateMember(vo);
+                    string error = ex.ToString();
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// 同步Post到Server
+    /// </summary>
+    public static void UpdatePostToServer(int nodeId)
+    {
+        PostFactory m_PostFactory = new PostFactory();
+        IPostService m_PostService = m_PostFactory.GetPostService();
+        ConfigHelper m_ConfigHelper = new ConfigHelper();
+
+        if (string.IsNullOrEmpty(m_ConfigHelper.PostApiUrl))
+        {
+            return;
+        }
+
+        Dictionary<string, string> conditions = new Dictionary<string, string>();
+        conditions.Add("NeedUpdate", "true");
+        conditions.Add("NodeId", nodeId.ToString());
+        IList<PostVO> list = m_PostService.GetPostList(conditions);
+
+        if (list != null && list.Count > 0)
+        {
+            foreach (PostVO vo in list)
+            {
+                try
+                {
+                    PostVO postVO = m_PostService.GetPostById(vo.PostId);
+                    if (postVO.IsUpdatingToServer)
+                    {
+                        continue;
+                    }
+
+                    PostDto dto = new PostDto(vo);
+
+                    //狀態為刪除
+                    if (dto.Flag == 0)
+                    {
+                        vo.IsUpdatingToServer = true;
+                        m_PostService.UpdatePost(vo);
+
+                        if (dto.ServerId > 0)
+                        {
+                            //有serverId就去server刪除
+                            string url = m_ConfigHelper.PostApiUrl + "/" + dto.ServerId.ToString();
+                            WebRequest request = ApiUtil.Post(url, "DELETE", "");
+
+                            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                            {
+                                if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Gone || response.StatusCode == HttpStatusCode.NoContent)
+                                {
+                                    vo.NeedUpdate = false;
+                                    vo.IsUpdatingToServer = false;
+                                    m_PostService.UpdatePost(vo);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //沒有serverId就直接標記已更新
+                            vo.NeedUpdate = false;
+                            vo.IsUpdatingToServer = false;
+                            m_PostService.UpdatePost(vo);
+                        }
+                    }
+                    else
+                    {
+                        vo.IsUpdatingToServer = true;
+                        m_PostService.UpdatePost(vo);
+
+                        WebRequest request = ApiUtil.Post<PostDto>(m_ConfigHelper.PostApiUrl, "POST", dto);
+
+                        string responseInfo = string.Empty;
+                        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                        {
+                            if (response.StatusCode == HttpStatusCode.Created)
+                            {
+                                using (Stream stream = response.GetResponseStream())
+                                {
+                                    responseInfo = (new StreamReader(stream)).ReadToEnd().Trim();
+
+                                    PostDto newPostDto = JsonConvert.DeserializeObject<PostDto>(responseInfo);
+
+                                    vo.IsUpdatingToServer = false;
+                                    vo.NeedUpdate = false;
+                                    vo.ServerId = newPostDto.PostId;
+                                    m_PostService.UpdatePost(vo);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    vo.IsUpdatingToServer = false;
+                    m_PostService.UpdatePost(vo);
                     string error = ex.ToString();
                 }
             }

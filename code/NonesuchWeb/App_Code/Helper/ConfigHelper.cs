@@ -22,7 +22,44 @@ public class ConfigHelper
     {
         get
         {
-            return string.Format("{0}/member", ApiUrl);
+            if (string.IsNullOrEmpty(ApiUrl))
+            {
+                return "";
+            }
+            else
+            {
+                return string.Format("{0}/member", ApiUrl);
+            }            
+        }
+    }
+
+    public string PostApiUrl
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(ApiUrl))
+            {
+                return "";
+            }
+            else
+            {
+                return string.Format("{0}/post", ApiUrl);
+            }
+        }
+    }
+
+    public string PostFileApiUrl
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(ApiUrl))
+            {
+                return "";
+            }
+            else
+            {
+                return string.Format("{0}/postfile", ApiUrl);
+            }
         }
     }
 

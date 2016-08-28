@@ -103,6 +103,10 @@ namespace WebUI.Api
                         {
                             postVO.MemberId = memberList[0].MemberId.ToString();
                         }
+			else
+			{
+			    postVO.MemberId ="";
+			}
                     }
 
                     postVO = m_PostService.CreatePost(postVO);
