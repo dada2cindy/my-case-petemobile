@@ -1,0 +1,27 @@
+ALTER TABLE POST_FILE ADD ServerId int;
+
+ALTER TABLE POST_FILE ADD NeedUpdate bit;
+
+GO
+
+UPDATE POST_FILE SET [NeedUpdate] = 0;
+
+GO
+
+ALTER TABLE POST_FILE Add UpdateId nvarchar(20);
+
+GO
+
+ALTER TABLE POST_FILE ADD IsUpdatingToServer bit;
+
+GO
+
+UPDATE POST_FILE SET [IsUpdatingToServer] = 0;
+
+GO
+
+
+--更新幾號後的File要同步
+UPDATE [POST_FILE]
+   SET NeedUpdate = 1
+--   where ApplyDate2 >= '2016/05/10'

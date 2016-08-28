@@ -15,6 +15,7 @@ using WuDada.Core.Auth.Domain;
 using WuDada.Core.Common;
 using WuDada.Core.Common.Service;
 using System.IO;
+using System.Threading;
 
 public partial class admin_UC06_0611 : System.Web.UI.Page
 {
@@ -135,16 +136,20 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
         FileVO fileVO = new FileVO();
         UIHelper.FillVO(pnlContent, fileVO);
         fileVO.FileName = m_FileName;
-        fileVO.Flag = 1;
+        fileVO.Flag = 1;        
         if (!string.IsNullOrEmpty(txtShowDate.Text.Trim()))
         {
             fileVO.ShowDate = DateTime.Parse(txtShowDate.Text.Trim());
         }
         fileVO.FileNo = GetFileNo(fileVO);
+        fileVO.NeedUpdate = true;
         fileVO.CreatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
         fileVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
+        fileVO.CreatedDate = DateTime.Now;
+        fileVO.UpdatedDate = DateTime.Now;
         m_PostFileService.CreateFile(fileVO);                
         m_WebLogService.AddSystemLog(MsgVO.Action.新增, fileVO);
+        new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer("../../App_Data/upload/"))).Start();
         ClearUI();
         fillGridView();
     }
@@ -178,9 +183,12 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
     {
         FileVO fileVO = m_PostFileService.GetFileById(m_Mode);
         fileVO.Flag = 0;
+        fileVO.NeedUpdate = true;
         fileVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
+        fileVO.UpdatedDate = DateTime.Now;
         m_PostFileService.UpdateFile(fileVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.刪除, fileVO, "", string.Format("單號:{0}", fileVO.FileId));
+        new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer("../../App_Data/upload/"))).Start();
         ClearUI();
         fillGridView();
     }
@@ -310,9 +318,12 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
             FileVO fileVO = m_PostFileService.GetFileById(m_Mode);
             UIHelper.FillVO(pnlContent, fileVO);
             fileVO.FileName = m_FileName;
+            fileVO.NeedUpdate = true;
             fileVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
+            fileVO.UpdatedDate = DateTime.Now;
             fileVO = m_PostFileService.UpdateFile(fileVO);
-            m_WebLogService.AddSystemLog(MsgVO.Action.修改, fileVO, "", string.Format("單號:{0}", fileVO.FileId));                        
+            m_WebLogService.AddSystemLog(MsgVO.Action.修改, fileVO, "", string.Format("單號:{0}", fileVO.FileId));
+            new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer("../../App_Data/upload/"))).Start();           
             fillGridView();
             ClearUI();
             ShowMode();
@@ -369,6 +380,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
     {
         try
         {
+            IList<NodeVO> storeList = m_PostService.GetNodeListByParentName("店家");
             string folder = Server.MapPath("~\\") + "\\App_Data\\upload\\";
             if (!System.IO.Directory.Exists(folder))
             {
@@ -381,7 +393,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
                 HttpPostedFile hpf = hfc[i];
                 if (hpf.ContentLength > 0)
                 {
-                    string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + System.IO.Path.GetFileName(hpf.FileName);
+                    string fileName = storeList[0].Name + DateTime.Now.ToString("yyyyMMddHHmmss") + System.IO.Path.GetFileName(hpf.FileName);
                     hpf.SaveAs(Server.MapPath("~\\") + "\\App_Data\\upload\\" + fileName);
                     //ltlFile.Text = GetFile(fileName);
                     lnkFile.Text = fileName;

@@ -8,34 +8,34 @@ namespace WuDada.Core.Post.Domain
 {
     [Serializable]
     [DataContract]
-    public class FileVO : BaseObject
+    public class FileDto : BaseObject
     {
         #region Constructor
 
-        public FileVO()
+        public FileDto()
         {
             this.Flag = 1;
         }
 
-        public FileVO(FileDto fileDto)
+        public FileDto(FileVO fileVO)
         {
-            this.FileId = fileDto.FileId;
-            this.FileNo = fileDto.FileNo;
-            this.Content1 = fileDto.Content1;
-            this.Content2 = fileDto.Content2;
-            this.ShowDate = fileDto.ShowDate;
-            this.FileName = fileDto.FileName;
-            this.FileName2 = fileDto.FileName2;
-            this.FileName3 = fileDto.FileName3;
-            this.Flag = fileDto.Flag;
-            this.Type = fileDto.Type;
-            this.UpdateId = fileDto.UpdateId;
-            this.ServerId = fileDto.ServerId;
-            this.NeedUpdate = fileDto.NeedUpdate;
-            this.CreatedBy = fileDto.CreatedBy;
-            this.UpdatedBy = fileDto.UpdatedBy;
-            this.CreatedDate = fileDto.CreatedDate;
-            this.UpdatedDate = fileDto.UpdatedDate;
+            this.FileId = fileVO.FileId;
+            this.FileNo = fileVO.FileNo;
+            this.Content1 = fileVO.Content1;
+            this.Content2 = fileVO.Content2;
+            this.ShowDate = fileVO.ShowDate;
+            this.FileName = fileVO.FileName;
+            this.FileName2 = fileVO.FileName2;
+            this.FileName3 = fileVO.FileName3;
+            this.Flag = fileVO.Flag;
+            this.Type = fileVO.Type;
+            this.UpdateId = fileVO.UpdateId;
+            this.ServerId = fileVO.ServerId;
+            this.NeedUpdate = fileVO.NeedUpdate;
+            this.CreatedBy = fileVO.CreatedBy;
+            this.UpdatedBy = fileVO.UpdatedBy;
+            this.CreatedDate = fileVO.CreatedDate;
+            this.UpdatedDate = fileVO.UpdatedDate;
         }
 
         #endregion
@@ -103,12 +103,6 @@ namespace WuDada.Core.Post.Domain
         public virtual string Type { get; set; }
 
         /// <summary>
-        /// 是否同步到Server中
-        /// </summary>
-        [DataMember]
-        public virtual bool IsUpdatingToServer { get; set; }
-
-        /// <summary>
         /// 更新者
         /// </summary>
         [DataMember]
@@ -124,29 +118,7 @@ namespace WuDada.Core.Post.Domain
         /// 需要同步
         /// </summary>
         [DataMember]
-        public virtual bool NeedUpdate { get; set; }
-
-        public virtual string GetStr_Type
-        {
-            get
-            {
-                string result = string.Empty;
-                switch (this.Type)
-                {
-                    case "1":
-                        result = "門號";
-                        break;
-                    case "2":
-                        result = "進貨";
-                        break;
-                    case "3":
-                        result = "切結書";
-                        break;
-                }
-
-                return result;
-            }
-        }
+        public virtual bool NeedUpdate { get; set; }        
 
         #endregion
     }

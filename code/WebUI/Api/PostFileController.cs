@@ -13,18 +13,19 @@ using WuDada.Core.Member.Domain;
 using WuDada.Core.Member.Dto;
 using WuDada.Core.Member.Service;
 using WuDada.Core.Post;
+using WuDada.Core.Post.Domain;
 using WuDada.Core.Post.Service;
 
 namespace WebUI.Api
 {
-    public class MemberController : ApiController
+    public class PostFileController : ApiController
     {
         private ILog m_Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private static ConfigHelper m_ConfigHelper = new ConfigHelper();
         private static PostFactory m_PostFactory = new PostFactory();
         private static AuthFactory m_AuthFactory = new AuthFactory();
-        private static MemberFactory m_MemberFactory = new MemberFactory();       
-        private static IMemberService m_MemberService = m_MemberFactory.GetMemberService();
+        private static MemberFactory m_MemberFactory = new MemberFactory();
+        private static IPostFileService m_PostFileService = m_PostFactory.GetPostFileService();
         private static IAuthService m_AuthService = m_AuthFactory.GetAuthService();
         private static IPostService m_PostService = m_PostFactory.GetPostService();
         //private WebLogService m_WebLogService;
@@ -33,63 +34,63 @@ namespace WebUI.Api
         // GET api/<controller>
         public HttpResponseMessage Get()
         {
-            IList<MemberDto> result = new List<MemberDto>();
+            IList<FileDto> result = new List<FileDto>();
 
             Dictionary<string, string> conditions = new Dictionary<string, string>();
-            conditions.Add("Status", "1");
+            conditions.Add("Flag", "1");
             conditions.Add("PageIndex", "0");
             conditions.Add("PageSize", "10");
-            conditions.Add("Order", "order by m.ApplyDate desc, m.Name");
+            //conditions.Add("Order", "order by f.FileId");
 
-            IList<MemberVO> memberVOList = m_MemberService.GetMemberList(conditions);
-            if (memberVOList != null && memberVOList.Count > 0)
+            IList<FileVO> fileVOList = m_PostFileService.GetFileList(conditions);
+            if (fileVOList != null && fileVOList.Count > 0)
             {
-                foreach (MemberVO vo in memberVOList)
+                foreach (FileVO vo in fileVOList)
                 {
-                    result.Add(new MemberDto(vo));
+                    result.Add(new FileDto(vo));
                 }
             }
 
-            return Request.CreateResponse<IList<MemberDto>>(HttpStatusCode.OK, result);
+            return Request.CreateResponse<IList<FileDto>>(HttpStatusCode.OK, result);
         }
 
-        //// GET api/<controller>/5
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        // GET api/<controller>/5
+        public string Get(int id)
+        {
+            return "value";
+        }
 
         // POST api/<controller>
-        public HttpResponseMessage Post(MemberDto memberDto)
+        public HttpResponseMessage Post(FileDto fileDto)
         {
-            if (memberDto != null)
+            if (fileDto != null)
             {
                 try
                 {
-                    MemberVO memberVO = null;
+                    FileVO fileVO = null;
                     //檢查是否有ServerId 有的話把狀態改成刪除, 重新建立一筆
-                    if (memberDto.ServerId != 0)
+                    if (fileDto.ServerId != 0)
                     {
-                        MemberVO oldMemberVO = m_MemberService.GetMemberById(memberDto.ServerId);
-                        if (oldMemberVO != null)
+                        FileVO oldFileVO = m_PostFileService.GetFileById(fileDto.ServerId);
+                        if (oldFileVO != null)
                         {
-                            oldMemberVO.NeedUpdate = false;
-                            oldMemberVO.Status = "0";
-                            oldMemberVO.UpdateId = "系統API";
-                            m_MemberService.UpdateMember(oldMemberVO);
+                            oldFileVO.NeedUpdate = false;
+                            oldFileVO.Flag = 0;
+                            oldFileVO.UpdateId = "系統API";
+                            m_PostFileService.UpdateFile(oldFileVO);
                         }
                     }
 
-                    memberVO = new MemberVO(memberDto);
-                    memberVO.MemberId = 0;
-                    memberVO.ServerId = 0;
-                    memberVO.NeedUpdate = false;
-                    memberVO.UpdateId = "系統API";
-                    FixTimeZone(memberVO);
-                    memberVO = m_MemberService.CreateMember(memberVO);
-                    memberVO.ServerId = memberVO.MemberId;
+                    fileVO = new FileVO(fileDto);
+                    fileVO.FileId = 0;
+                    fileVO.ServerId = 0;
+                    fileVO.NeedUpdate = false;
+                    fileVO.UpdateId = "系統API";
+                    FixTimeZone(fileVO);
+                    fileVO = m_PostFileService.UpdateFile(fileVO);
+                    fileVO.ServerId = fileVO.FileId;
 
-                    return Request.CreateResponse<MemberDto>(HttpStatusCode.Created, new MemberDto(memberVO));
+                    return Request.CreateResponse<FileDto>(HttpStatusCode.Created, new FileDto(fileVO));
                 }
                 catch (Exception ex)
                 {
@@ -102,21 +103,13 @@ namespace WebUI.Api
             }
         }
 
-        private void FixTimeZone(MemberVO memberVO)
+        private void FixTimeZone(FileVO fileVO)
         {
             int addHours = m_ConfigHelper.AddHours;
 
-            if (memberVO.ApplyDate.HasValue)
+            if (fileVO.ShowDate.HasValue)
             {
-                memberVO.ApplyDate = memberVO.ApplyDate.Value.AddHours(addHours);
-            }
-            if (memberVO.ApplyDate2.HasValue)
-            {
-                memberVO.ApplyDate2 = memberVO.ApplyDate2.Value.AddHours(addHours);
-            }
-            if (memberVO.DueDate.HasValue)
-            {
-                memberVO.DueDate = memberVO.DueDate.Value.AddHours(addHours);
+                fileVO.ShowDate = fileVO.ShowDate.Value.AddHours(addHours);
             }
         }
 
@@ -129,18 +122,18 @@ namespace WebUI.Api
         [HttpDelete]
         public HttpResponseMessage Delete(string id)
         {
-            int memberId;
-            if (!string.IsNullOrWhiteSpace(id) && int.TryParse(id, out memberId))
+            int fileId;
+            if (!string.IsNullOrWhiteSpace(id) && int.TryParse(id, out fileId))
             {
                 try
                 {
-                    MemberVO oldMemberVO = m_MemberService.GetMemberById(memberId);
-                    if (oldMemberVO != null)
+                    FileVO oldFileVO = m_PostFileService.GetFileById(fileId);
+                    if (oldFileVO != null)
                     {
-                        oldMemberVO.NeedUpdate = false;
-                        oldMemberVO.Status = "0";
-                        oldMemberVO.UpdateId = "系統API";
-                        m_MemberService.UpdateMember(oldMemberVO);
+                        oldFileVO.NeedUpdate = false;
+                        oldFileVO.Flag = 0;
+                        oldFileVO.UpdateId = "系統API";
+                        m_PostFileService.UpdateFile(oldFileVO);
 
                         return Request.CreateResponse(HttpStatusCode.OK);
                     }

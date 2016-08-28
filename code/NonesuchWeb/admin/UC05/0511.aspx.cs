@@ -196,6 +196,10 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         memberVO.Status = "1";
         memberVO.CreateIP = m_HttpHelper.GetUserIp(Context);
         memberVO.NeedUpdate = true;
+        memberVO.CreatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
+        memberVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
+        memberVO.CreatedDate = DateTime.Now;
+        memberVO.UpdatedDate = DateTime.Now;
         memberVO = m_MemberService.CreateMember(memberVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.新增, memberVO);
         UpdateProductByPhoneSer(memberVO.MemberId);
@@ -208,7 +212,9 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
     {
         MemberVO memberVO = m_MemberService.GetMemberById(m_Mode);
         memberVO.Status = "0";
-        memberVO.NeedUpdate = true;
+        memberVO.NeedUpdate = true;        
+        memberVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;        
+        memberVO.UpdatedDate = DateTime.Now;
         m_MemberService.UpdateMember(memberVO);
         UpdateProductByPhoneSerWithDelete(memberVO.PhoneSer);
         m_WebLogService.AddSystemLog(MsgVO.Action.刪除, memberVO, "", string.Format("單號:{0}", memberVO.MemberId));
@@ -431,7 +437,9 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         {
             MemberVO memberVO = m_MemberService.GetMemberById(m_Mode);
             UIHelper.FillVO(pnlContent, memberVO);
-            memberVO.NeedUpdate = true;
+            memberVO.NeedUpdate = true;            
+            memberVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;            
+            memberVO.UpdatedDate = DateTime.Now;
             memberVO = m_MemberService.UpdateMember(memberVO);
             m_WebLogService.AddSystemLog(MsgVO.Action.修改, memberVO, "", string.Format("單號:{0}", memberVO.MemberId));
             UpdateProductByPhoneSer(memberVO.MemberId);

@@ -79,6 +79,8 @@ namespace WuDada.Core.Member.Dto
             this.ServerId = memberVO.ServerId;
             this.NeedUpdate = memberVO.NeedUpdate;
             this.UpdateId = memberVO.UpdateId;
+            this.CreatedBy = memberVO.CreatedBy;
+            this.UpdatedBy = memberVO.UpdatedBy;
         }
 
         #endregion
@@ -402,6 +404,18 @@ namespace WuDada.Core.Member.Dto
         /// </summary>
         [DataMember]
         public virtual string UpdateId { get; set; }
+
+        /// <summary>
+        /// 新增的使用者ID
+        /// </summary>
+        [DataMember]
+        public virtual string CreatedBy { get; set; }
+
+        /// <summary>
+        /// 更新的使用者ID
+        /// </summary>
+        [DataMember]
+        public virtual string UpdatedBy { get; set; }
 
         private double commissionToBoss;
         /// <summary>

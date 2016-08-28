@@ -80,6 +80,8 @@ namespace WuDada.Core.Member.Domain
             this.ServerId = memberDto.ServerId;
             this.NeedUpdate = memberDto.NeedUpdate;
             this.UpdateId = memberDto.UpdateId;
+            this.CreatedBy = memberDto.CreatedBy;
+            this.UpdatedBy = memberDto.UpdatedBy;
         }
 
         #endregion
@@ -399,7 +401,7 @@ namespace WuDada.Core.Member.Domain
         public virtual int ServerId { get; set; }
 
         /// <summary>
-        /// ServerId
+        /// 需要同步
         /// </summary>
         [DataMember]
         public virtual bool NeedUpdate { get; set; }
@@ -415,6 +417,18 @@ namespace WuDada.Core.Member.Domain
         /// </summary>
         [DataMember]
         public virtual bool IsUpdatingToServer { get; set; }
+
+        /// <summary>
+        /// 新增的使用者ID
+        /// </summary>
+        [DataMember]
+        public virtual string CreatedBy { get; set; }
+
+        /// <summary>
+        /// 更新的使用者ID
+        /// </summary>
+        [DataMember]
+        public virtual string UpdatedBy { get; set; }
 
         private double commissionToBoss;
         /// <summary>

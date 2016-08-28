@@ -95,7 +95,8 @@ namespace WuDada.Core.Post.Persistence
             AppendFileKeyWord(conditions, whereScript, param);           
             AppendFileFlag(conditions, whereScript, param);            
             AppendFileDate(conditions, whereScript, param);
-            AppendFileType(conditions, whereScript, param);            
+            AppendFileType(conditions, whereScript, param);
+            AppendFileNeedUpdate(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -104,6 +105,15 @@ namespace WuDada.Core.Post.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendFileNeedUpdate(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("NeedUpdate"))
+            {
+                whereScript.Append(" and f.NeedUpdate = ? ");
+                param.Add(bool.Parse(conditions["NeedUpdate"]));
+            }
         }        
 
         private void AppendFileType(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)

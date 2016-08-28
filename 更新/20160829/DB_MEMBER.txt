@@ -1,0 +1,7 @@
+ALTER TABLE MEMBER Add CreatedBy nvarchar(20);
+
+GO
+
+ALTER TABLE MEMBER Add UpdatedBy nvarchar(20);
+
+GO

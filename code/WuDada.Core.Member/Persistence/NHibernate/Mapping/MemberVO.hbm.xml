@@ -70,6 +70,9 @@
     <property name="UpdateId" column="UpdateId" type="String" length="50" />
     <property name="IsUpdatingToServer" column="IsUpdatingToServer" type="Boolean" />
 
+    <property column="CreatedBy" type="String" name="CreatedBy"  />
+    <property column="UpdatedBy" type="String" name="UpdatedBy"  />
+
   </class>
 
 </hibernate-mapping>

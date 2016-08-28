@@ -11,6 +11,9 @@ using WuDada.Core.Member.Service;
 using WuDada.Core.Member.Domain;
 using WuDada.Core.Member.Dto;
 using System.Collections.Specialized;
+using WuDada.Core.Post;
+using WuDada.Core.Post.Service;
+using WuDada.Core.Post.Domain;
 
 /// <summary>
 /// ApiUtil 的摘要描述
@@ -54,6 +57,109 @@ public static class ApiUtil
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// 同步到Server
+    /// </summary>
+    public static void UpdateFileToServer(string filePath)
+    {
+        PostFactory m_PostFactory = new PostFactory();
+        IPostFileService m_PostFileService = m_PostFactory.GetPostFileService();
+        ConfigHelper m_ConfigHelper = new ConfigHelper();
+        WebUtility m_WebUtility = new WebUtility();
+
+        if (string.IsNullOrEmpty(m_ConfigHelper.MemberApiUrl))
+        {
+            return;
+        }
+
+        Dictionary<string, string> conditions = new Dictionary<string, string>();
+        conditions.Add("NeedUpdate", "true");
+        IList<FileVO> list = m_PostFileService.GetFileList(conditions);
+
+        if (list != null && list.Count > 0)
+        {
+            foreach (FileVO vo in list)
+            {
+                try
+                {
+                    FileVO fileVO = m_PostFileService.GetFileById(vo.FileId);
+                    if (fileVO.IsUpdatingToServer)
+                    {
+                        continue;
+                    }
+
+                    FileDto dto = new FileDto(vo);
+
+                    //狀態為刪除
+                    if (dto.Flag == 0)
+                    {
+                        vo.IsUpdatingToServer = true;
+                        m_PostFileService.UpdateFile(vo);
+
+                        if (dto.ServerId > 0)
+                        {
+                            //有serverId就去server刪除
+                            string url = m_ConfigHelper.MemberApiUrl + "/" + dto.ServerId.ToString();
+                            WebRequest request = ApiUtil.Post(url, "DELETE", "");
+
+                            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                            {
+                                if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Gone || response.StatusCode == HttpStatusCode.NoContent)
+                                {
+                                    vo.NeedUpdate = false;
+                                    vo.IsUpdatingToServer = false;
+                                    m_PostFileService.UpdateFile(vo);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //沒有serverId就直接標記已更新
+                            vo.NeedUpdate = false;
+                            vo.IsUpdatingToServer = false;
+                            m_PostFileService.UpdateFile(vo);
+                        }
+                    }
+                    else
+                    {
+                        vo.IsUpdatingToServer = true;
+                        m_PostFileService.UpdateFile(vo);
+
+                        WebRequest request = ApiUtil.Post<FileDto>(m_ConfigHelper.MemberApiUrl, "POST", dto);
+
+                        string responseInfo = string.Empty;
+                        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                        {
+                            if (response.StatusCode == HttpStatusCode.Created)
+                            {
+                                using (Stream stream = response.GetResponseStream())
+                                {
+                                    responseInfo = (new StreamReader(stream)).ReadToEnd().Trim();
+
+                                    MemberDto newMemberDto = JsonConvert.DeserializeObject<MemberDto>(responseInfo);
+
+                                    vo.IsUpdatingToServer = false;
+                                    vo.NeedUpdate = false;
+                                    vo.ServerId = newMemberDto.MemberId;
+                                    m_PostFileService.UpdateFile(vo);
+
+                                    //成功的話在ftp檔案
+                                    m_WebUtility.UploadFileToFTP(Path.Combine(filePath,vo.FileName));
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    vo.IsUpdatingToServer = false;
+                    m_PostFileService.UpdateFile(vo);
+                    string error = ex.ToString();
+                }
+            }
+        }
     }
 
     /// <summary>
