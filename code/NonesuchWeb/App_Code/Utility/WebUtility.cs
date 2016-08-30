@@ -114,7 +114,8 @@ public class WebUtility
     {
         string ftpServerIP = "salal.arvixe.com/";
         string ftpUserName = "plike";
-        string ftpPassword = "dada2cindy";
+        //string ftpUserName = "pliketest";
+        string ftpPassword = "plike7788";
 
         FileInfo objFile = new FileInfo(filename);
         FtpWebRequest objFTPRequest;

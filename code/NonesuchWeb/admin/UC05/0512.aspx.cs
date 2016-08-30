@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -151,6 +152,11 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         postVO.Store = hiddenStore.Value;
         //postVO.PicFileName = m_PicFileName;
         postVO.Flag = 1;
+        postVO.NeedUpdate = true;
+        postVO.CreatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
+        postVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
+        postVO.CreatedDate = DateTime.Now;
+        postVO.UpdatedDate = DateTime.Now;
         //if (!string.IsNullOrEmpty(txtShowDate.Text.Trim()))
         //{
         //    postVO.ShowDate = DateTime.Parse(txtShowDate.Text.Trim());
@@ -161,6 +167,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         //}
         m_PostService.CreatePost(postVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.新增, postVO);
+        new Thread(new ThreadStart(() => ApiUtil.UpdatePostToServer(2))).Start();
         ClearUI();
         fillGridView();
     }
@@ -169,8 +176,12 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
     {
         PostVO postVO = m_PostService.GetPostById(m_Mode);
         postVO.Flag = 0;
+        postVO.NeedUpdate = true;
+        postVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
+        postVO.UpdatedDate = DateTime.Now;
         m_PostService.UpdatePost(postVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.刪除, postVO, "", string.Format("單號:{0}", postVO.PostId));
+        new Thread(new ThreadStart(() => ApiUtil.UpdatePostToServer(2))).Start();
         ClearUI();
         fillGridView();
     }
@@ -340,12 +351,21 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
                 newPostVO.Node = postVO.Node;
                 newPostVO.Quantity = 1;
                 newPostVO.Type = 1;
+                newPostVO.NeedUpdate = true;
+                newPostVO.CreatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
+                newPostVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
+                newPostVO.CreatedDate = DateTime.Now;
+                newPostVO.UpdatedDate = DateTime.Now;
                 m_PostService.CreatePost(newPostVO);
                 m_WebLogService.AddSystemLog(MsgVO.Action.售出, postVO, "", string.Format("單號:{0}", postVO.PostId));
 
                 postVO.Quantity -= 1;
                 postVO.Store = hiddenStore.Value;
+                postVO.NeedUpdate = true;
+                postVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
+                postVO.UpdatedDate = DateTime.Now;
                 m_PostService.UpdatePost(postVO);
+                new Thread(new ThreadStart(() => ApiUtil.UpdatePostToServer(2))).Start();
                 fillGridView();
                 ClearUI();
                 ShowMode();
@@ -355,8 +375,12 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
                 UIHelper.FillVO(pnlContent, postVO);
                 postVO.Type = 1;
                 postVO.Store = hiddenStore.Value;
+                postVO.NeedUpdate = true;
+                postVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
+                postVO.UpdatedDate = DateTime.Now;
                 m_PostService.UpdatePost(postVO);
                 m_WebLogService.AddSystemLog(MsgVO.Action.售出, postVO, "", string.Format("單號:{0}", postVO.PostId));
+                new Thread(new ThreadStart(() => ApiUtil.UpdatePostToServer(2))).Start();
                 fillGridView();
                 ClearUI();
                 ShowMode();

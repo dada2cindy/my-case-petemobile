@@ -84,6 +84,7 @@ namespace WebUI.Api
                     }
 
                     postVO = new PostVO(postDto);
+                    postVO.Node = m_PostService.GetNodeById(2);
                     postVO.PostId = 0;
                     postVO.ServerId = 0;
                     postVO.NeedUpdate = false;
@@ -103,14 +104,14 @@ namespace WebUI.Api
                         {
                             postVO.MemberId = memberList[0].MemberId.ToString();
                         }
-			else
-			{
-			    postVO.MemberId ="";
-			}
+                        else
+                        {
+                            postVO.MemberId = "";
+                        }
                     }
 
                     postVO = m_PostService.CreatePost(postVO);
-                    postVO.ServerId = postVO.PostId;                    
+                    postVO.ServerId = postVO.PostId;
 
                     return Request.CreateResponse<PostDto>(HttpStatusCode.Created, new PostDto(postVO));
                 }

@@ -149,7 +149,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
         fileVO.UpdatedDate = DateTime.Now;
         m_PostFileService.CreateFile(fileVO);                
         m_WebLogService.AddSystemLog(MsgVO.Action.新增, fileVO);
-        new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer("../../App_Data/upload/"))).Start();
+        new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer(Server.MapPath("../../App_Data/upload/")))).Start();
         ClearUI();
         fillGridView();
     }
@@ -188,7 +188,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
         fileVO.UpdatedDate = DateTime.Now;
         m_PostFileService.UpdateFile(fileVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.刪除, fileVO, "", string.Format("單號:{0}", fileVO.FileId));
-        new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer("../../App_Data/upload/"))).Start();
+        new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer(Server.MapPath("../../App_Data/upload/")))).Start();
         ClearUI();
         fillGridView();
     }
@@ -323,7 +323,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
             fileVO.UpdatedDate = DateTime.Now;
             fileVO = m_PostFileService.UpdateFile(fileVO);
             m_WebLogService.AddSystemLog(MsgVO.Action.修改, fileVO, "", string.Format("單號:{0}", fileVO.FileId));
-            new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer("../../App_Data/upload/"))).Start();           
+            new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer(Server.MapPath("../../App_Data/upload/")))).Start();           
             fillGridView();
             ClearUI();
             ShowMode();

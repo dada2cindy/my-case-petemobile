@@ -69,7 +69,8 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
             fillGridView();
 
             new Thread(new ThreadStart(ApiUtil.UpdateMemberToServer)).Start();
-            new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer("../../App_Data/upload/"))).Start();
+            new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer(Server.MapPath("../../App_Data/upload/")))).Start();
+            new Thread(new ThreadStart(() => ApiUtil.UpdatePostToServer(2))).Start();
             //LoadTotalCommission();
         }
     }

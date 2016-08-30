@@ -138,11 +138,11 @@ public static class ApiUtil
                                 {
                                     responseInfo = (new StreamReader(stream)).ReadToEnd().Trim();
 
-                                    MemberDto newMemberDto = JsonConvert.DeserializeObject<MemberDto>(responseInfo);
+                                    FileDto newFileDto = JsonConvert.DeserializeObject<FileDto>(responseInfo);
 
                                     vo.IsUpdatingToServer = false;
                                     vo.NeedUpdate = false;
-                                    vo.ServerId = newMemberDto.MemberId;
+                                    vo.ServerId = newFileDto.FileId;
                                     m_PostFileService.UpdateFile(vo);
 
                                     //成功的話在ftp檔案

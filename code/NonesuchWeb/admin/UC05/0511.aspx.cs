@@ -461,7 +461,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         {
             PostVO postVO = m_PostService.GetPostById(int.Parse(hdnPhoneSerId.Value));
 
-            if (postVO.Flag == 1 && postVO.Type == 0)
+            if (postVO != null && postVO.Flag == 1 && postVO.Type == 0 && postVO.ProductSer == txtPhoneSer.Text.Trim())
             {
                 postVO.MemberId = memberId.ToString();
                 postVO.Type = 1;
@@ -470,8 +470,12 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
                 postVO.SellPrice = 0;
                 postVO.CloseDate = DateTime.Parse(txtApplyDate2.Text.Trim());
                 postVO.CustomField2 = ddlSales.SelectedValue;
+                postVO.NeedUpdate = true;
+                postVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
+                postVO.UpdatedDate = DateTime.Now;
                 m_PostService.UpdatePost(postVO);
                 m_WebLogService.AddSystemLog(MsgVO.Action.售出, postVO, "", string.Format("單號:{0}", postVO.PostId));
+                new Thread(new ThreadStart(() => ApiUtil.UpdatePostToServer(2))).Start();
             }
         }
     }

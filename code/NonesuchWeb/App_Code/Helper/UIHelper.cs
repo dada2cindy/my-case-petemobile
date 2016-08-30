@@ -716,8 +716,12 @@ public class UIHelper
                 {
                     if (propertyType == typeof(DateTime) || propertyType == typeof(DateTime?))
                     {
-
-                        setValue = ConvertUtil.ToDateTime(txtCtrl.Text);
+                        string date = txtCtrl.Text;
+                        if (!string.IsNullOrEmpty(date))
+                        {
+                            date = date.Replace("-", "/");
+                        }
+                        setValue = ConvertUtil.ToDateTime(date);
                     }
 
                     log.Debug(string.Format("set {0}, {1} = {2}", ow.WrappedInstance.GetType().Name, fieldName, setValue));
