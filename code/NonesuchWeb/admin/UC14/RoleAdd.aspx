@@ -1,4 +1,4 @@
-<%@ Page Language="C#" MasterPageFile="~/admin/AdmMasterPage.master" AutoEventWireup="true"
+Ôªø<%@ Page Language="C#" MasterPageFile="~/admin/AdmMasterPage.master" AutoEventWireup="true"
     CodeFile="RoleAdd.aspx.cs" Inherits="adm_UC14_UC14_1_RoleAdd" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -11,13 +11,13 @@
                     <tr>
                         <td height="30px" colspan="2" class="labelHeader">
                             <div id="title" align="center">
-                                ∏s≤’∑sºW</div>
+                                Áæ§ÁµÑÊñ∞Â¢û</div>
                             <hr border="1" />
                         </td>
                     </tr>
                     <tr>
                         <td width="50%" class="labelHeader" height="30px" align="right">
-                            ∏s≤’¶W∫Ÿ°G
+                            Áæ§ÁµÑÂêçÁ®±Ôºö
                         </td>
                         <td height="30px">
                             <asp:TextBox ID="txtRoleName" runat="server" Width="150px"></asp:TextBox>
@@ -46,31 +46,31 @@
                 AllowPaging="False" OnRowCommand="GridView1_RowCommand" CssClass="datagrid">
                                 <SelectedRowStyle CssClass="SelectedRowStyle" />
                 <Columns>
-                    <asp:TemplateField HeaderText="∏s≤’">
+                    <asp:TemplateField HeaderText="Áæ§ÁµÑ">
                         <ItemTemplate>
                             <asp:Label ID="lblRoleName" runat="server" Text='<%# Bind("RoleName") %>'></asp:Label>
                             <asp:TextBox ID="txtRoleName" runat="server" Text='<%# Bind("RoleName") %>' Visible="false"></asp:TextBox>
                             <asp:HiddenField ID="hdnRoleId" runat="server" Value='<%# Bind("RoleId") %>' />
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="§£•i¨∞™≈"
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="‰∏çÂèØÁÇ∫Á©∫"
                                 ControlToValidate="txtRoleName"></asp:RequiredFieldValidator>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="≠◊ßÔ">
+                    <asp:TemplateField HeaderText="‰øÆÊîπ">
                         <ItemTemplate>
                             <asp:LinkButton ID="imgUpdate" runat="server" CausesValidation="False" CommandName="MyUpdate"
-                            Text="≠◊ßÔ" Visible="true" CommandArgument='<%# Bind("RoleId") %>' />
+                            Text="‰øÆÊîπ" Visible="true" CommandArgument='<%# Bind("RoleId") %>' />
                             <asp:LinkButton ID="imgCancel" runat="server" CausesValidation="False" CommandName="MyCancel"
-                             Text="®˙Æ¯" Visible="false" CommandArgument='<%# Bind("RoleId") %>' />
+                             Text="ÂèñÊ∂à" Visible="false" CommandArgument='<%# Bind("RoleId") %>' />
                             <asp:LinkButton ID="imgUpdateSure" runat="server" CausesValidation="False" CommandName="MyUpdateSure"
-                                Visible="false"  Text="ΩT©w" CommandArgument='<%# Bind("RoleId") %>' /></ItemTemplate>
+                                Visible="false"  Text="Á¢∫ÂÆö" CommandArgument='<%# Bind("RoleId") %>' /></ItemTemplate>
                         <HeaderStyle Width="150px" />
                         <ItemStyle HorizontalAlign="Left" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="ßR∞£">
+                    <asp:TemplateField HeaderText="Âà™Èô§">
                         <ItemTemplate>
                             <asp:LinkButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="MyDelete"
-                                OnClientClick="return confirm('ΩT©wßR∞£?')"
-                                CommandArgument='<%# Bind("RoleId") %>' Text="ßR∞£" /></ItemTemplate>
+                                OnClientClick="return confirm('Á¢∫ÂÆöÂà™Èô§?')"
+                                CommandArgument='<%# Bind("RoleId") %>' Text="Âà™Èô§" /></ItemTemplate>
                         <HeaderStyle Width="50px" />
                         <ItemStyle HorizontalAlign="Left" />
                     </asp:TemplateField>

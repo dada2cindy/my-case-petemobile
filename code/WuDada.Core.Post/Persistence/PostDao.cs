@@ -8,6 +8,7 @@ using WuDada.Core.Persistence;
 using NHibernate.Criterion;
 using System.Collections;
 using WuDada.Core.Generic.Extension;
+using Common.Logging;
 
 namespace WuDada.Core.Post.Persistence
 {
@@ -660,6 +661,8 @@ namespace WuDada.Core.Post.Persistence
 
         private void AppendPostDate(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
         {
+            ILog m_Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
             if (conditions.IsContainsValue("ShowDateStart"))
             {
                 whereScript.Append(" and p.ShowDate >= ? ");
@@ -668,7 +671,8 @@ namespace WuDada.Core.Post.Persistence
             if (conditions.IsContainsValue("ShowDateEnd"))
             {
                 whereScript.Append(" and p.ShowDate <= ? ");
-                param.Add(Convert.ToDateTime(conditions["ShowDateEnd"]));
+                m_Log.Debug("p.ShowDate <=" + (Convert.ToDateTime(conditions["ShowDateEnd"]).AddDays(1).AddMinutes(-1)).ToString());
+                param.Add(Convert.ToDateTime(conditions["ShowDateEnd"]).AddDays(1).AddMinutes(-1));
             }
             if (conditions.IsContainsValue("CloseDateStart"))
             {
@@ -678,7 +682,8 @@ namespace WuDada.Core.Post.Persistence
             if (conditions.IsContainsValue("CloseDateEnd"))
             {
                 whereScript.Append(" and p.CloseDate <= ? ");
-                param.Add(Convert.ToDateTime(conditions["CloseDateEnd"]));
+                m_Log.Debug("p.CloseDateEnd <=" + (Convert.ToDateTime(conditions["CloseDateEnd"]).AddDays(1).AddMinutes(-1)).ToString());
+                param.Add(Convert.ToDateTime(conditions["CloseDateEnd"]).AddDays(1).AddMinutes(-1));
             }
 
             if (conditions.IsContainsValue("CloseDate"))

@@ -83,10 +83,13 @@ namespace WuDada.Core.Accounting.Service.Impl
                     IList<MemberVO> memberList = MemberService.GetMemberList(conditionsMember);
                     if (memberList != null)
                     {
+                        log.Debug("memberList != null");
                         salesStatisticsVO.ApplyCount = memberList.Count;
                         salesStatisticsVO.ApplyRevenue = memberList.Sum(m => m.Commission);
-                        salesStatisticsVO.ApplyProfit = memberList.Sum(m => m.Commission + m.PhoneSellPrice - m.PhonePrice - m.BreakMoney);    
-                        
+                        salesStatisticsVO.ApplyProfit = memberList.Sum(m => m.Commission + m.PhoneSellPrice - m.PhonePrice - m.BreakMoney);
+
+                        log.Debug("salesStatisticsVO.ApplyCount: " + salesStatisticsVO.ApplyCount);
+
                         //預繳金, 幫客戶預繳的用減的, 沒有幫客戶預繳不用算
                         //salesStatisticsVO.ApplyProfit += memberList.Where(m => m.Prepayment > 0 && "否".Equals(m.SelfPrepayment)).Sum(m => m.Prepayment);
                         salesStatisticsVO.ApplyProfit -= memberList.Where(m => m.Prepayment > 0 && "是".Equals(m.SelfPrepayment)).Sum(m => m.Prepayment);    
@@ -122,6 +125,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                     IList<PostVO> postList = PostService.GetPostList(conditionsPost);
                     if (postList != null)
                     {
+                        log.Debug("postList != null");
                         salesStatisticsVO.FittingCount = postList.Count;
                         salesStatisticsVO.FittingRevenue = postList.Sum(p => p.SellPrice);
                         salesStatisticsVO.FittingProfit = postList.Sum(p => p.SellPrice - p.Price);

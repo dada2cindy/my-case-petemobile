@@ -286,6 +286,13 @@ ORDER BY SortNo "
         }
 
         [Test]
+        public void Test_GetSalesStatisticsByLoginUser()
+        {
+            IList<SalesStatisticsVO> list = m_AccountingService.GetSalesStatisticsByLoginUser("201608");
+            Assert.IsNotNull(list);
+        }
+
+        [Test]
         public void Test_UpdateCash()
         {
             m_AccountingService.UpdateCash();

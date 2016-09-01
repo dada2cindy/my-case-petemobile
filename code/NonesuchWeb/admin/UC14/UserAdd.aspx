@@ -109,8 +109,8 @@
                 </fieldset>
                 <br />
                 <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width="100%"
-                    AllowPaging="True" DataKeyNames="UserId" OnRowDeleting="GridView1_RowDeleting"
-                    OnRowCommand="GridView1_RowCommand" AllowSorting="True" CssClass="datagrid">
+                    DataKeyNames="UserId" OnRowDeleting="GridView1_RowDeleting"
+                    OnRowCommand="GridView1_RowCommand" CssClass="datagrid" >
                     <SelectedRowStyle CssClass="SelectedRowStyle" />
                     <Columns>
                         <asp:BoundField DataField="UserId" HeaderText="帳號" ReadOnly="True" ItemStyle-HorizontalAlign="left">

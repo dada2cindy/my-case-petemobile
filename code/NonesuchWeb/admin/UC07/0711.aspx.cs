@@ -104,7 +104,8 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
         if (string.IsNullOrEmpty(m_ConfigHelper.ApiUrl))
         {
             //空白的表示是Server的
-            gvList.DataSource = m_AccountingService.GetSalesStatisticsByLoginUser(ym);
+            IList<SalesStatisticsVO> list = m_AccountingService.GetSalesStatisticsByLoginUser(ym);
+            gvList.DataSource = list;
         }
         else
         {

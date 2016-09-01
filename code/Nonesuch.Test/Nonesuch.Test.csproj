@@ -65,27 +65,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WuDada.Core">
-      <HintPath>..\lib\WuDada.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="WuDada.Core.Auth">
-      <HintPath>..\lib\WuDada.Core.Auth.dll</HintPath>
-    </Reference>
-    <Reference Include="WuDada.Core.Common">
-      <HintPath>..\lib\WuDada.Core.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="WuDada.Core.Member">
-      <HintPath>..\lib\WuDada.Core.Member.dll</HintPath>
-    </Reference>
-    <Reference Include="WuDada.Core.Post">
-      <HintPath>..\lib\WuDada.Core.Post.dll</HintPath>
-    </Reference>
-    <Reference Include="WuDada.Core.SystemApplications">
-      <HintPath>..\lib\WuDada.Core.SystemApplications.dll</HintPath>
-    </Reference>
-    <Reference Include="WuDada.Provider.ResourceHandle">
-      <HintPath>..\lib\WuDada.Provider.ResourceHandle.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NHibernate\TestSchema.cs" />
@@ -119,6 +98,38 @@
     <ProjectReference Include="..\WuDada.Core.Accounting\WuDada.Core.Accounting.csproj">
       <Project>{8C461AB0-30DB-49AC-A1B2-978F77C2E586}</Project>
       <Name>WuDada.Core.Accounting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WuDada.Core.Auth\WuDada.Core.Auth.csproj">
+      <Project>{CCFD9830-20D6-4B51-8B95-3F64D71A6BFD}</Project>
+      <Name>WuDada.Core.Auth</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WuDada.Core.Common\WuDada.Core.Common.csproj">
+      <Project>{6F1BF203-5488-46C7-A64C-CDCA7ED318A2}</Project>
+      <Name>WuDada.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WuDada.Core.Member\WuDada.Core.Member.csproj">
+      <Project>{50EE2BD0-A126-43F9-804A-EAA7DF4DD3B2}</Project>
+      <Name>WuDada.Core.Member</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WuDada.Core.Post\WuDada.Core.Post.csproj">
+      <Project>{1956573D-E86A-4951-8370-0059510E07BF}</Project>
+      <Name>WuDada.Core.Post</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WuDada.Core.SystemApplications.Test\WuDada.Core.SystemApplications.Test.csproj">
+      <Project>{56C46B80-FE2A-428E-B74B-B1E405BE56D6}</Project>
+      <Name>WuDada.Core.SystemApplications.Test</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WuDada.Core.SystemApplications\WuDada.Core.SystemApplications.csproj">
+      <Project>{C9CCE516-1092-44F1-984A-FDA93DFB5BB4}</Project>
+      <Name>WuDada.Core.SystemApplications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WuDada.Core\WuDada.Core.csproj">
+      <Project>{82FA4F65-92DF-40B8-AF7F-1E7E33640B0B}</Project>
+      <Name>WuDada.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WuDada.Provider.ResourceHandle\WuDada.Provider.ResourceHandle.csproj">
+      <Project>{DF44FA38-39A1-497D-8056-6BEE6DC6D4DE}</Project>
+      <Name>WuDada.Provider.ResourceHandle</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

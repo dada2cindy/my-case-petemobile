@@ -7,6 +7,7 @@ using WuDada.Core.Persistence;
 using WuDada.Core.Member.Domain;
 using System.Collections;
 using WuDada.Core.Generic.Extension;
+using Common.Logging;
 
 namespace WuDada.Core.Member.Persistence
 {
@@ -184,6 +185,8 @@ namespace WuDada.Core.Member.Persistence
 
         private void AppendMemberDate(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
         {
+            ILog m_Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
             if (conditions.IsContainsValue("ApplyDateStart"))
             {
                 whereScript.Append(" and m.ApplyDate >= ? ");
@@ -192,7 +195,8 @@ namespace WuDada.Core.Member.Persistence
             if (conditions.IsContainsValue("ApplyDateEnd"))
             {
                 whereScript.Append(" and m.ApplyDate <= ? ");
-                param.Add(Convert.ToDateTime(conditions["ApplyDateEnd"]));
+                m_Log.Debug("m.ApplyDate <=" + (Convert.ToDateTime(conditions["ApplyDate"]).AddDays(1).AddMinutes(-1)).ToString());
+                param.Add(Convert.ToDateTime(conditions["ApplyDateEnd"]).AddDays(1).AddMinutes(-1));
             }
             if (conditions.IsContainsValue("DueDateStart"))
             {
@@ -202,7 +206,8 @@ namespace WuDada.Core.Member.Persistence
             if (conditions.IsContainsValue("DueDateEnd"))
             {
                 whereScript.Append(" and m.DueDate <= ? ");
-                param.Add(Convert.ToDateTime(conditions["DueDateEnd"]));
+                m_Log.Debug("m.DueDateEnd <=" + (Convert.ToDateTime(conditions["DueDateEnd"]).AddDays(1).AddMinutes(-1)).ToString());
+                param.Add(Convert.ToDateTime(conditions["DueDateEnd"]).AddDays(1).AddMinutes(-1));
             }
             if (conditions.IsContainsValue("ApplyDate2Start"))
             {
@@ -212,7 +217,8 @@ namespace WuDada.Core.Member.Persistence
             if (conditions.IsContainsValue("ApplyDate2End"))
             {
                 whereScript.Append(" and m.ApplyDate2 <= ? ");
-                param.Add(Convert.ToDateTime(conditions["ApplyDate2End"]));
+                m_Log.Debug("m.ApplyDate2End <=" + (Convert.ToDateTime(conditions["ApplyDate2End"]).AddDays(1).AddMinutes(-1)).ToString());
+                param.Add(Convert.ToDateTime(conditions["ApplyDate2End"]).AddDays(1).AddMinutes(-1));
             }
             if (conditions.IsContainsValue("ApplyDate2"))
             {
