@@ -578,6 +578,7 @@ namespace WuDada.Core.Post.Persistence
             AppendPostWithOutMemberId(conditions, whereScript, param);
             AppendPostMemberId(conditions, whereScript, param);
             AppendPostNeedUpdate(conditions, whereScript, param);
+            AppendMemberStore(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -586,6 +587,15 @@ namespace WuDada.Core.Post.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendMemberStore(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("Store"))
+            {
+                whereScript.Append(" and p.Store = ? ");
+                param.Add(conditions["Store"]);
+            }
         }
 
         private void AppendPostNeedUpdate(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
