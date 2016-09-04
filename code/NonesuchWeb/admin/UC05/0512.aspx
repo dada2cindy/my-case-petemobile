@@ -156,7 +156,18 @@
                         <asp:RequiredFieldValidator ID="rfCustomField2" runat="server" ErrorMessage="請選擇銷售員"
                             ControlToValidate="ddlCustomField2" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>
                     </td>
-                </tr>                 
+                </tr>
+                <tr>
+                    <td>
+                        銷售店點
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlStore" runat="server" Enabled="false">
+                        </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="請選擇銷售店點"
+                            ControlToValidate="ddlStore" ValidationGroup="Save" Visible="false"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>                  
                 <%--<tr>
                     <td valign="top">
                         圖片
@@ -220,6 +231,10 @@
                             <asp:ListItem Text="全部" Value=""></asp:ListItem>
                             <asp:ListItem Text="庫存" Value="0"></asp:ListItem>
                             <asp:ListItem Text="售出" Value="1"></asp:ListItem>
+                        </asp:DropDownList>    
+                        &nbsp;&nbsp;&nbsp;                    
+                        銷售店點:
+                        <asp:DropDownList ID="ddlSearchStore" runat="server">
                         </asp:DropDownList>
                         <br />
                         進貨日:
@@ -363,6 +378,16 @@
                     <asp:TemplateField HeaderText="銷售員">
                         <ItemTemplate>
                             <asp:Label ID="lblCustomField2" runat="server" Text='<%# Bind("CustomField2") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Left" Width="100" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            銷售<br />店點
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblStore" runat="server" Text='<%# Bind("Store") %>'></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left" Width="100" />
                         <HeaderStyle HorizontalAlign="Center" />

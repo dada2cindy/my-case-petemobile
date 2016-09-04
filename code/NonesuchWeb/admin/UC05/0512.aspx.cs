@@ -53,9 +53,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             InitDDL();
             pnlContent.Visible = false;
             fillGridView();
-            ShowMode();
-            IList<NodeVO> storeList = m_PostService.GetNodeListByParentName("店家");
-            hiddenStore.Value = storeList[0].Name;
+            ShowMode();         
         }
     }
 
@@ -115,7 +113,11 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         {
             conditions.Add("CloseDateEnd", txtSearchCloseDateEnd.Text.Trim());
         }
-        
+
+        if (!string.IsNullOrEmpty(ddlSearchStore.SelectedValue))
+        {
+            conditions.Add("Store", ddlSearchStore.SelectedValue);
+        }
 
         //分頁
         AspNetPager1.RecordCount = m_PostService.GetPostCount(conditions);
@@ -148,8 +150,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
     {
         PostVO postVO = new PostVO();
         UIHelper.FillVO(pnlContent, postVO);
-        postVO.Node = m_PostService.GetNodeById(m_NodeId);
-        postVO.Store = hiddenStore.Value;
+        postVO.Node = m_PostService.GetNodeById(m_NodeId);        
         //postVO.PicFileName = m_PicFileName;
         postVO.Flag = 1;
         postVO.NeedUpdate = true;
@@ -219,6 +220,12 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         {
             conditions.Add("CloseDateEnd", txtSearchCloseDateEnd.Text.Trim());
         }
+
+        if (!string.IsNullOrEmpty(ddlSearchStore.SelectedValue))
+        {
+            conditions.Add("Store", ddlSearchStore.SelectedValue);
+        }
+
         conditions.Add("Order", string.Format("order by {0}", ddlSearchOrder.SelectedValue));
         //conditions.Add("Order", "order by p.CloseDate desc, p.ShowDate desc, p.Title");
 
@@ -346,8 +353,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             if (postVO.Quantity > 1)
             {
                 PostVO newPostVO = new PostVO();
-                UIHelper.FillVO(pnlContent, newPostVO);
-                newPostVO.Store = hiddenStore.Value;
+                UIHelper.FillVO(pnlContent, newPostVO);                
                 newPostVO.Node = postVO.Node;
                 newPostVO.Quantity = 1;
                 newPostVO.Type = 1;
@@ -359,8 +365,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
                 m_PostService.CreatePost(newPostVO);
                 m_WebLogService.AddSystemLog(MsgVO.Action.售出, postVO, "", string.Format("單號:{0}", postVO.PostId));
 
-                postVO.Quantity -= 1;
-                postVO.Store = hiddenStore.Value;
+                postVO.Quantity -= 1;                
                 postVO.NeedUpdate = true;
                 postVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
                 postVO.UpdatedDate = DateTime.Now;
@@ -373,8 +378,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             else
             {
                 UIHelper.FillVO(pnlContent, postVO);
-                postVO.Type = 1;
-                postVO.Store = hiddenStore.Value;
+                postVO.Type = 1;                
                 postVO.NeedUpdate = true;
                 postVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;
                 postVO.UpdatedDate = DateTime.Now;
@@ -474,7 +478,24 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             {
                 ddlCustomField2.Items.Add(loginUserVO.FullNameInChinese);
             }
-        }        
+        }
+
+        ////帶入店家
+        IList<NodeVO> storetList = m_PostService.GetNodeListByParentName("店家");
+        ddlStore.Items.Clear();
+        ddlSearchStore.Items.Clear();
+        if (storetList != null && storetList.Count > 0)
+        {
+            ddlStore.Items.Add(new ListItem("請選擇店家", ""));
+            ddlSearchStore.Items.Add(new ListItem("全部", ""));
+            foreach (NodeVO node in storetList)
+            {
+                ddlStore.Items.Add(node.Name);
+                ddlSearchStore.Items.Add(node.Name);
+            }
+        }
+
+        ddlStore.SelectedValue = storetList[0].Name;
     }
 
     protected void ddlProductList_SelectedIndexChanged(object sender, EventArgs e)
