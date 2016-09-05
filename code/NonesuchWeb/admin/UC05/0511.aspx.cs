@@ -405,7 +405,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             case "myModify":
                 ClearUI();
                 m_Mode = memberId;
-		InitDDL();
+		        InitDDL();
                 UIHelper.FillUI(pnlContent, memberVO);                
                 ShowMode();
                 ddlProject1.SelectedValue = memberVO.Project1;

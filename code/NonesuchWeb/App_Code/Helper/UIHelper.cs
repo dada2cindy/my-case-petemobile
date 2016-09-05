@@ -226,8 +226,18 @@ public class UIHelper
                     }
                 }
                 //沒有包含值
-                ddlList.Items.Insert(0, listItem);
-                ddlList.SelectedIndex = 0;
+                //ddlList.Items.Insert(0, listItem);
+                if (!string.IsNullOrEmpty(value))
+                {
+                    ListItem listNoItem = new ListItem(value, value);
+                    ddlList.Items.Add(listNoItem);
+                    ddlList.SelectedValue = value;
+
+                }
+                else
+                {
+                    ddlList.SelectedIndex = 0;
+                }                
                 ddlList.DataBind();
             }
             else
