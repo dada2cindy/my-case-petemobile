@@ -245,6 +245,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         table.Columns.Add("保固商", typeof(string));
         table.Columns.Add("進貨盤商", typeof(string));
         table.Columns.Add("銷售員", typeof(string));
+        table.Columns.Add("銷售店點", typeof(string));
         table.Columns.Add("從建立客戶時銷售", typeof(string));
 
         if (postList != null && postList.Count > 0)
@@ -270,7 +271,8 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
                 dr[11] = postVO.WarrantySuppliers;
                 dr[12] = postVO.Wholesalers;
                 dr[13] = postVO.CustomField2;
-                dr[14] = string.IsNullOrEmpty(postVO.MemberId) ? "" : "是";
+                dr[14] = postVO.Store;
+                dr[15] = string.IsNullOrEmpty(postVO.MemberId) ? "" : "是";
                 table.Rows.Add(dr);                
             }
         }
