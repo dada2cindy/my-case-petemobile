@@ -201,9 +201,9 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         memberVO.CreatedDate = DateTime.Now;
         memberVO.UpdatedDate = DateTime.Now;
         memberVO = m_MemberService.CreateMember(memberVO);
-        m_WebLogService.AddSystemLog(MsgVO.Action.新增, memberVO);
-        UpdateProductByPhoneSer(memberVO.MemberId);
         new Thread(new ThreadStart(ApiUtil.UpdateMemberToServer)).Start();
+        m_WebLogService.AddSystemLog(MsgVO.Action.新增, memberVO);
+        UpdateProductByPhoneSer(memberVO.MemberId);        
         ClearUI();
         fillGridView();
     }
@@ -216,9 +216,9 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         memberVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;        
         memberVO.UpdatedDate = DateTime.Now;
         m_MemberService.UpdateMember(memberVO);
-        UpdateProductByPhoneSerWithDelete(memberVO.PhoneSer);
+        new Thread(new ThreadStart(ApiUtil.UpdateMemberToServer)).Start();       
         m_WebLogService.AddSystemLog(MsgVO.Action.刪除, memberVO, "", string.Format("單號:{0}", memberVO.MemberId));
-        new Thread(new ThreadStart(ApiUtil.UpdateMemberToServer)).Start();
+        UpdateProductByPhoneSerWithDelete(memberVO.PhoneSer);
         ClearUI();
         fillGridView();
     }    
@@ -441,9 +441,9 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             memberVO.UpdatedBy = m_SessionHelper.LoginUser.FullNameInChinese;            
             memberVO.UpdatedDate = DateTime.Now;
             memberVO = m_MemberService.UpdateMember(memberVO);
-            m_WebLogService.AddSystemLog(MsgVO.Action.修改, memberVO, "", string.Format("單號:{0}", memberVO.MemberId));
-            UpdateProductByPhoneSer(memberVO.MemberId);
+            m_WebLogService.AddSystemLog(MsgVO.Action.修改, memberVO, "", string.Format("單號:{0}", memberVO.MemberId));            
             new Thread(new ThreadStart(ApiUtil.UpdateMemberToServer)).Start();
+            UpdateProductByPhoneSer(memberVO.MemberId);
             fillGridView();
             ClearUI();
             ShowMode();
@@ -675,6 +675,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             postVO.CustomField2 = string.Empty;
             m_PostService.UpdatePost(postVO);
             m_WebLogService.AddSystemLog(MsgVO.Action.修改, postVO, "", string.Format("單號:{0}", postVO.PostId));
+            new Thread(new ThreadStart(() => ApiUtil.UpdatePostToServer(2))).Start();        
         }
     }
 
