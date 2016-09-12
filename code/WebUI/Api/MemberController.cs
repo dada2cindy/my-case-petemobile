@@ -14,6 +14,7 @@ using WuDada.Core.Member.Dto;
 using WuDada.Core.Member.Service;
 using WuDada.Core.Post;
 using WuDada.Core.Post.Service;
+using WuDada.Core.Post.Domain;
 
 namespace WebUI.Api
 {
@@ -66,7 +67,17 @@ namespace WebUI.Api
             {
                 try
                 {
-                    MemberVO memberVO = null;
+                    MemberVO memberVO = null;                    
+
+                    memberVO = new MemberVO(memberDto);
+                    memberVO.MemberId = 0;
+                    memberVO.ServerId = 0;
+                    memberVO.NeedUpdate = false;
+                    memberVO.UpdateId = "系統API";
+                    FixTimeZone(memberVO);
+                    memberVO = m_MemberService.CreateMember(memberVO);
+                    memberVO.ServerId = memberVO.MemberId;
+
                     //檢查是否有ServerId 有的話把狀態改成刪除, 重新建立一筆
                     if (memberDto.ServerId != 0)
                     {
@@ -77,17 +88,25 @@ namespace WebUI.Api
                             oldMemberVO.Status = "0";
                             oldMemberVO.UpdateId = "系統API";
                             m_MemberService.UpdateMember(oldMemberVO);
+
+
+                            //檢查庫存有沒有關聯這個memberid, 有的話庫存要更新memberid
+                            Dictionary<string, string> conditions = new Dictionary<string, string>();
+                            conditions.Add("Flag", "1");
+                            conditions.Add("NodeId", "2");
+                            conditions.Add("MemberId", memberVO.MemberId.ToString());                            
+
+                            if (m_PostService.GetPostCount(conditions) > 0)
+                            {
+                                conditions.Add("PageIndex", "0");
+                                conditions.Add("PageSize", "1");
+                                IList<PostVO> postVOList = m_PostService.GetPostList(conditions);
+                                PostVO postVO = m_PostService.GetPostById(postVOList[0].PostId);
+                                postVO.MemberId = memberVO.MemberId.ToString();
+                                m_PostService.UpdatePost(postVO);
+                            }
                         }
                     }
-
-                    memberVO = new MemberVO(memberDto);
-                    memberVO.MemberId = 0;
-                    memberVO.ServerId = 0;
-                    memberVO.NeedUpdate = false;
-                    memberVO.UpdateId = "系統API";
-                    FixTimeZone(memberVO);
-                    memberVO = m_MemberService.CreateMember(memberVO);
-                    memberVO.ServerId = memberVO.MemberId;
 
                     return Request.CreateResponse<MemberDto>(HttpStatusCode.Created, new MemberDto(memberVO));
                 }
