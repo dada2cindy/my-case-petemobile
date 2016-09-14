@@ -340,12 +340,18 @@ ORDER BY SortNo "
 
         private void InitMenu()
         {
-            MenuFuncVO parentMenu51 = CreateParentMenu("客戶/庫存管理", 1000);
-            CreateSubMenu("客戶列表", parentMenu51, 1001, "admin/UC05/0511.aspx");
-            CreateSubMenu("庫存列表", parentMenu51, 1002, "admin/UC05/0512.aspx");
-            CreateSubMenu("庫存類別", parentMenu51, 1003, "admin/UC04/0411.aspx");
-            CreateSubMenu("庫存品名", parentMenu51, 1004, "admin/UC04/0421.aspx");
-            CreateSubMenu("業績報表", parentMenu51, 1005, "admin/UC07/0711.aspx");
+            MenuFuncVO parentMenu41 = CreateParentMenu("網站管理", 1000);
+            CreateSubMenu("手機價格列表", parentMenu41, 1001, "admin/UC04/0432.aspx");
+            CreateSubMenu("配件價格列表", parentMenu41, 1002, "admin/UC04/0433.aspx");
+            CreateSubMenu("門號折扣列表", parentMenu41, 1003, "admin/UC04/0442.aspx");
+            CreateSubMenu("門市據點列表", parentMenu41, 1004, "admin/UC05/0521.aspx");
+            CreateSubMenu("品牌管理", parentMenu41, 1005, "admin/UC04/0431.aspx");
+            CreateSubMenu("電信公司管理", parentMenu41, 1006, "admin/UC04/0441.aspx");
+
+            MenuFuncVO parentMenu7 = CreateParentMenu("網站設定與廣告管理", 8000);
+            CreateSubMenu("首頁廣告", parentMenu7, 8001, "admin/UC07/0701.aspx");
+            CreateSubMenu("網站右方廣告", parentMenu7, 8002, "admin/UC07/0702.aspx");
+            //CreateSubMenu("首頁Facebook設定", parentMenu7, 8003, "admin/UC07/0711.aspx");
 
             //MenuFuncVO parentMenu42 = CreateParentMenu("服務項目管理", 2000);
             //CreateSubMenu("服務項目分類", parentMenu42, 2001, "admin/UC04/0421.aspx");
@@ -371,12 +377,7 @@ ORDER BY SortNo "
             //MenuFuncVO parentMenu6 = CreateParentMenu("聯絡臻美/收件者信箱管理", 7000);
             //CreateSubMenu("線上諮詢紀錄", parentMenu6, 7001, "admin/UC06/0601.aspx");
             //CreateSubMenu("收件者信箱設定", parentMenu6, 7002, "admin/UC06/0602.aspx");
-            //CreateSubMenu("人才招募列表", parentMenu6, 7003, "admin/UC01/0111.aspx");
-
-            //MenuFuncVO parentMenu7 = CreateParentMenu("網站設定與廣告管理", 8000);
-            //CreateSubMenu("首頁廣告", parentMenu7, 8001, "admin/UC07/0701.aspx");
-            //CreateSubMenu("網站左方廣告", parentMenu7, 8002, "admin/UC07/0702.aspx");
-            //CreateSubMenu("首頁Facebook設定", parentMenu7, 8003, "admin/UC07/0711.aspx");
+            //CreateSubMenu("人才招募列表", parentMenu6, 7003, "admin/UC01/0111.aspx");            
 
             MenuFuncVO parentMenu30 = CreateParentMenu("個人設定", 99998);
             CreateSubMenu("登入密碼變更", parentMenu30, 1, "admin/UC30/3001Personal.aspx");
@@ -396,7 +397,7 @@ ORDER BY SortNo "
             loginRoleVO.MenuFuncList = m_AuthService.GetNotTopMenuFunc(); //角色功能權限
             m_AuthService.CreateLoginRole(loginRoleVO);
 
-            LoginRoleVO loginRoleVO2 = new LoginRoleVO("店員");
+            LoginRoleVO loginRoleVO2 = new LoginRoleVO("行銷人員");
             loginRoleVO2.MenuFuncList = m_AuthService.GetNotTopMenuFunc().Where(m => !8.Equals(m.ParentMenu.MenuFuncId)).ToList(); //角色功能權限
             m_AuthService.CreateLoginRole(loginRoleVO2);
 
@@ -413,7 +414,7 @@ ORDER BY SortNo "
             LoginUserVO loginUserVO2 = new LoginUserVO();
             loginUserVO2.UserId = "test";
             loginUserVO2.Password = "1234";
-            loginUserVO2.FullNameInChinese = "店員";
+            loginUserVO2.FullNameInChinese = "行銷人員";
             loginUserVO2.FullNameInEnglish = "Administrator";
             loginUserVO2.LoginRoleList = new List<LoginRoleVO>();
             loginUserVO2.LoginRoleList.Add(loginRoleVO2);
@@ -424,19 +425,41 @@ ORDER BY SortNo "
         private void InitNode()
         {
             NodeVO rootNodeVO = CreateNode("Root", null, 0);
-            NodeVO nodeVO1 = CreateNode("庫存", rootNodeVO, 1);
-            CreatePost("庫存1", nodeVO1, 1);
+            NodeVO nodeVO1 = CreateNode("網站", rootNodeVO, 1);
+            NodeVO nodeVO111 = CreateNode("手機", rootNodeVO, 2);
+            NodeVO nodeVO112 = CreateNode("配件", rootNodeVO, 2);
+            NodeVO nodeVO113 = CreateNode("門號折扣", rootNodeVO, 2);
+            NodeVO nodeVO114 = CreateNode("首頁廣告", rootNodeVO, 3);
+            NodeVO nodeVO115 = CreateNode("網站右方廣告", rootNodeVO, 3);
+            
+            
+            NodeVO nodeVO14 = CreateNode("門市據點", rootNodeVO, 2);
+            CreatePost("台北酒泉", nodeVO14, 1); //參考門市據點
+            CreatePost("台北延平", nodeVO14, 2);
+            CreatePost("台北淡水", nodeVO14, 3);
 
-            NodeVO nodeVO4 = CreateNode("庫存類別", rootNodeVO, 2);
-            NodeVO nodeVO41 = CreateNode("手機殼", nodeVO4, 1);
-            NodeVO nodeVO42 = CreateNode("保護貼", nodeVO4, 2);
+            NodeVO nodeVO4 = CreateNode("品牌", rootNodeVO, 2);
+            NodeVO nodeVO41 = CreateNode("Apple", nodeVO4, 1);
+            NodeVO nodeVO42 = CreateNode("Asus", nodeVO4, 2);
+            NodeVO nodeVO43 = CreateNode("HTC", nodeVO4, 3);
+            NodeVO nodeVO44 = CreateNode("LG", nodeVO4, 4);
+            NodeVO nodeVO45 = CreateNode("Samsung", nodeVO4, 5);
+            NodeVO nodeVO46 = CreateNode("Sony", nodeVO4, 6);
+            NodeVO nodeVO47 = CreateNode("Infocus", nodeVO4, 7);
+            NodeVO nodeVO48 = CreateNode("Huawei", nodeVO4, 8);
+            NodeVO nodeVO49 = CreateNode("Sharp", nodeVO4, 8);
+            NodeVO nodeVO491 = CreateNode("Oppo", nodeVO4, 8);
+            NodeVO nodeVO492 = CreateNode("mi 小米", nodeVO4, 8);
 
-            NodeVO nodeVO5 = CreateNode("庫存品名", rootNodeVO, 3);
-            NodeVO nodeVO51 = CreateNode("I6 玻璃包護貼-普通", nodeVO5, 1);
-            NodeVO nodeVO52 = CreateNode("I6 玻璃包護貼-高級", nodeVO5, 2);
+            NodeVO nodeVO5 = CreateNode("電信公司", rootNodeVO, 3);
 
-            NodeVO nodeVO6 = CreateNode("店家", rootNodeVO, 4);
-            NodeVO nodeVO61 = CreateNode("台北承德", nodeVO6, 1);
+            NodeVO nodeVO51 = CreateNode("中華電信", nodeVO5, 1);
+            //CreatePost("台北酒泉", nodeVO51, 1); //參考門號折扣
+
+            NodeVO nodeVO52 = CreateNode("遠傳", nodeVO5, 2);
+            NodeVO nodeVO53 = CreateNode("台灣大哥大", nodeVO5, 3);
+            NodeVO nodeVO54 = CreateNode("台灣之星", nodeVO5, 4);
+            NodeVO nodeVO55 = CreateNode("亞太電信", nodeVO5, 5);
         }
 
         private PostVO CreatePost(string title, NodeVO nodeVO, int sort)
