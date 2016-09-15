@@ -147,7 +147,7 @@ namespace WuDada.Core.Post.Domain
         public virtual DateTime? CloseDate { get; set; }
 
         /// <summary>
-        /// 0.站內/庫存 收入 1.連結/售出 支出
+        /// 0.站內/庫存 收入, 3G   1.連結/售出 支出 4G
         /// </summary>
         [DataMember]
         public virtual int Type { get; set; }
@@ -213,13 +213,13 @@ namespace WuDada.Core.Post.Domain
         public virtual bool IsTemp { get; set; }
 
         /// <summary>
-        /// 自定欄位1
+        /// 自定欄位1, 攜碼折扣
         /// </summary>
         [DataMember]
         public virtual string CustomField1 { get; set; }
 
         /// <summary>
-        /// 自定欄位2
+        /// 自定欄位2, 預繳
         /// </summary>
         [DataMember]
         public virtual string CustomField2 { get; set; }
@@ -243,7 +243,7 @@ namespace WuDada.Core.Post.Domain
         public virtual string ProductSer { get; set; }
 
         /// <summary>
-        /// 保固商
+        /// 保固商, 電信
         /// </summary>
         [DataMember]
         public virtual string WarrantySuppliers { get; set; }
@@ -378,6 +378,29 @@ namespace WuDada.Core.Post.Domain
                 else if (Type == 1)
                 {
                     result = "支出";
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 取文字_3G4G
+        /// </summary>
+        [DataMember]
+        public virtual string GetStr_Type_3G4G
+        {
+            get
+            {
+                string result = "";
+
+                if (Type == 0)
+                {
+                    result = "3G";
+                }
+                else if (Type == 1)
+                {
+                    result = "4G";
                 }
 
                 return result;
