@@ -65,6 +65,10 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WuDada.Core.Auth, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\WuDada.Core.Auth.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NHibernate\TestSchema.cs" />
@@ -75,18 +79,18 @@
   <ItemGroup>
     <Content Include="SpringConfig\Nonesuch.SQLServer.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SpringConfig\WuDada.Core.AdoTemplate.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SpringConfig\WuDada.Core.HibernateTemplate.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SpringConfig\WuDada.Provider.ResourceHandle.objects.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -98,10 +102,6 @@
     <ProjectReference Include="..\WuDada.Core.Accounting\WuDada.Core.Accounting.csproj">
       <Project>{8C461AB0-30DB-49AC-A1B2-978F77C2E586}</Project>
       <Name>WuDada.Core.Accounting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WuDada.Core.Auth\WuDada.Core.Auth.csproj">
-      <Project>{CCFD9830-20D6-4B51-8B95-3F64D71A6BFD}</Project>
-      <Name>WuDada.Core.Auth</Name>
     </ProjectReference>
     <ProjectReference Include="..\WuDada.Core.Common\WuDada.Core.Common.csproj">
       <Project>{6F1BF203-5488-46C7-A64C-CDCA7ED318A2}</Project>
