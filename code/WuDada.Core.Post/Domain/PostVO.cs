@@ -107,14 +107,17 @@ namespace WuDada.Core.Post.Domain
         //[DataMember]
         //public virtual string StoreName { get; set; }
 
-        //[DataMember]
-        //public virtual string Phone { get; set; }
+        [DataMember]
+        public virtual string Phone { get; set; }
 
-        //[DataMember]
-        //public virtual string Fax { get; set; }
+        [DataMember]
+        public virtual string Fax { get; set; }
 
-        //[DataMember]
-        //public virtual string Address { get; set; }
+        [DataMember]
+        public virtual string Address { get; set; }
+
+        [DataMember]
+        public virtual string Mobile { get; set; }
 
         //[DataMember]
         //public virtual string GoogleMap { get; set; }
@@ -213,13 +216,13 @@ namespace WuDada.Core.Post.Domain
         public virtual bool IsTemp { get; set; }
 
         /// <summary>
-        /// 自定欄位1, 攜碼折扣
+        /// 自定欄位1, 攜碼折扣, Email
         /// </summary>
         [DataMember]
         public virtual string CustomField1 { get; set; }
 
         /// <summary>
-        /// 自定欄位2, 預繳
+        /// 自定欄位2, 預繳, Line
         /// </summary>
         [DataMember]
         public virtual string CustomField2 { get; set; }

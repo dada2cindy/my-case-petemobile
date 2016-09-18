@@ -1,0 +1,15 @@
+ALTER TABLE Post Add Phone nvarchar(20);
+
+GO
+
+ALTER TABLE Post Add Fax nvarchar(20);
+
+GO
+
+ALTER TABLE Post Add Address nvarchar(255);
+
+GO
+
+ALTER TABLE Post Add Mobile nvarchar(20);
+
+GO

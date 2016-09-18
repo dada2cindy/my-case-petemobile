@@ -32,11 +32,12 @@
     <property column="PicFileName2" type="String" name="PicFileName2" />
     <!--<property column="PicFileNameENG" type="String" name="PicFileNameENG" />-->
     <property column="DocFileName" type="String" name="DocFileName" />
-    <!--<property column="StoreName" type="String" name="StoreName" />
+    <!--<property column="StoreName" type="String" name="StoreName" />-->
     <property column="Phone" type="String" name="Phone" />
     <property column="Fax" type="String" name="Fax" />
     <property column="Address" type="String" name="Address" />
-    <property column="GoogleMap" type="String" name="GoogleMap" />-->
+    <property column="Mobile" type="String" name="Mobile" />
+    <!--<property column="GoogleMap" type="String" name="GoogleMap" />-->
 
     <property column="CreatedBy" type="String" name="CreatedBy"  />
     <property column="UpdatedBy" type="String" name="UpdatedBy"  />
