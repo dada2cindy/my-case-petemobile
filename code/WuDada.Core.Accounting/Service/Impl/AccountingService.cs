@@ -85,8 +85,8 @@ namespace WuDada.Core.Accounting.Service.Impl
                     {
                         log.Debug("memberList != null");
                         salesStatisticsVO.ApplyCount = memberList.Count;
-                        salesStatisticsVO.ApplyRevenue = memberList.Sum(m => m.Commission);
-                        salesStatisticsVO.ApplyProfit = memberList.Sum(m => m.Commission + m.PhoneSellPrice - m.PhonePrice - m.BreakMoney);
+                        salesStatisticsVO.ApplyRevenue = memberList.Sum(m => m.Commission + m.ReturnCommission);
+                        salesStatisticsVO.ApplyProfit = memberList.Sum(m => m.Commission + m.PhoneSellPrice - m.PhonePrice - m.BreakMoney + m.ReturnCommission);
 
                         log.Debug("salesStatisticsVO.ApplyCount: " + salesStatisticsVO.ApplyCount);
 
@@ -337,8 +337,8 @@ namespace WuDada.Core.Accounting.Service.Impl
                     if (memberList != null)
                     {
                         salesStatisticsVO.ApplyCount = memberList.Count;
-                        salesStatisticsVO.ApplyRevenue = memberList.Sum(m => m.Commission);
-                        salesStatisticsVO.ApplyProfit = memberList.Sum(m => m.Commission + m.PhoneSellPrice - m.PhonePrice - m.BreakMoney);
+                        salesStatisticsVO.ApplyRevenue = memberList.Sum(m => m.Commission + m.ReturnCommission);
+                        salesStatisticsVO.ApplyProfit = memberList.Sum(m => m.Commission + m.PhoneSellPrice - m.PhonePrice - m.BreakMoney + m.ReturnCommission);
 
                         //預繳金, 幫客戶預繳的用減的, 沒有幫客戶預繳不用算
                         //salesStatisticsVO.ApplyProfit += memberList.Where(m => m.Prepayment > 0 && "否".Equals(m.SelfPrepayment)).Sum(m => m.Prepayment);
