@@ -85,6 +85,14 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             btnSearchExport.Visible = false;
             btnEdit.Visible = false;
         }
+
+        if (m_ConfigHelper.OnlyAdminCreate && !m_SessionHelper.IsAdmin)
+        {
+            btnSearchExport.Visible = false;
+            btnEdit.Visible = false;
+            btnAdd.Visible = false;
+            btnShowAdd.Visible = false;
+        }
         
         if (m_ConfigHelper.ShowFranchiseesCommission)
         {

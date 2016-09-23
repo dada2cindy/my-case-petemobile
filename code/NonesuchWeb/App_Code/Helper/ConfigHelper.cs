@@ -18,6 +18,8 @@ public class ConfigHelper
 
     public bool ShowFranchiseesCommission { get; set; }
 
+    public bool OnlyAdminCreate { get; set; }
+
     public string MemberApiUrl
     {
         get
@@ -68,5 +70,6 @@ public class ConfigHelper
         Host = ConfigurationManager.AppSettings["Host"];
         ApiUrl= ConfigurationManager.AppSettings["ApiUrl"];
         ShowFranchiseesCommission = Convert.ToBoolean(ConfigurationManager.AppSettings["ShowFranchiseesCommission"]);
+        OnlyAdminCreate = Convert.ToBoolean(ConfigurationManager.AppSettings["OnlyAdminCreate"]);
     }
 }
