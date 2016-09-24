@@ -1,0 +1,15 @@
+ALTER TABLE Post ADD IsNew bit;
+
+GO
+
+UPDATE Post SET [IsNew] = 0;
+
+GO
+
+ALTER TABLE Post ADD IsHot bit;
+
+GO
+
+UPDATE Post SET [IsHot] = 0;
+
+GO
