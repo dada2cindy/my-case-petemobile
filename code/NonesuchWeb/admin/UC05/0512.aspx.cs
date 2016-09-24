@@ -90,6 +90,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
             btnSold.Visible = false;
             btnAdd.Visible = false;
             btnShowAdd.Visible = false;
+            btnDelete.Visible = false;
         }
     }
 
