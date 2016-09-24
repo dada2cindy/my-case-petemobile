@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/AdmMasterPage.master" AutoEventWireup="true" CodeFile="0701.aspx.cs" Inherits="admin_UC07_0701" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/AdmMasterPage.master" AutoEventWireup="true" CodeFile="0433.aspx.cs" Inherits="admin_UC04_0433" validateRequest="false" %>
 
 <%@ Register Src="../UserControl/CKEditor.ascx" TagName="CKEditor" TagPrefix="uc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
@@ -9,32 +9,59 @@
     <asp:Panel ID="pnlContent" runat="server">
         <fieldset class="fieldset">
             <h1>
-                首頁廣告編輯</h1>
+                配件價格編輯</h1>
             <table style="width: 100%" class="FormTable">                
                 <tr>
                     <td>
                         名稱
                     </td>
                     <td>
-                        <asp:TextBox ID="txtTitle" runat="server" Width="700px"></asp:TextBox>
+                        <asp:TextBox ID="txtTitle" runat="server" Width="300px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="請輸入名稱"
                             ControlToValidate="txtTitle"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        上架
+                        品牌
                     </td>
                     <td>
-                        <asp:DropDownList ID="ddlFlag" runat="server">
-                            <asp:ListItem Text="請選擇" Value=""></asp:ListItem>
-                            <asp:ListItem Text="是" Value="1"></asp:ListItem>
-                            <asp:ListItem Text="否" Value="0"></asp:ListItem>
+                        <asp:DropDownList ID="ddlWarrantySuppliers" runat="server">
                         </asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="請選擇是否上架"
-                            ControlToValidate="ddlFlag"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="請選擇品牌"
+                            ControlToValidate="ddlWarrantySuppliers"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        市價
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtPrice" runat="server" Width="100px"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="請輸入市價"
+                            ControlToValidate="txtPrice"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        售價
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtSellPrice" runat="server" Width="100px"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入售價"
+                            ControlToValidate="txtSellPrice"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>                
+                <tr>
+                    <td>
+                        產品簡易說明
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtSummary" runat="server" Width="400px" Height="150px" TextMode="MultiLine"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="請輸入產品簡易說明"
+                            ControlToValidate="txtSummary"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>                
                 <%--<tr>
                     <td>
                         上稿日
@@ -49,23 +76,7 @@
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="日期格式錯誤"
                             ControlToValidate="txtShowDate" Display="Dynamic" ValidationExpression="^((?:19|20)\d\d)[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
                     </td>
-                </tr>--%>
-                <tr>
-                    <td>
-                        連結網址
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txtLinkUrl" runat="server" Width="500px"></asp:TextBox>
-                        <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server"
-                    TargetControlID="txtLinkUrl"
-                    WatermarkText="ex:http://www.google.com"
-                    WatermarkCssClass="labelWatermark" />
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="請輸入連結網址"
-                            ControlToValidate="txtLinkUrl" Display="Dynamic"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="連結網址格式錯誤"
-                            ControlToValidate="txtLinkUrl" Display="Dynamic" ValidationExpression="http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?"></asp:RegularExpressionValidator>
-                    </td>
-                </tr>
+                </tr>--%>               
                 <tr>
                     <td>
                         排序編號
@@ -80,7 +91,7 @@
                 </tr>
                 <tr>
                     <td valign="top">
-                        大圖 (1080*430)
+                        大圖 (340*340)
                     </td>
                     <td>
                         <table cellpadding="0" cellspacing="0" border="0">
@@ -103,13 +114,49 @@
                     </td>
                 </tr>
                 <%--<tr>
-                    <td valign="top">
-                        內容
+                    <td>
+                        首頁最新
                     </td>
                     <td>
-                        <uc1:CKEditor ID="ckeContent" runat="server" />
+                        <asp:DropDownList ID="ddlIsNew" runat="server">         
+                            <asp:ListItem Text="否" Value="False"></asp:ListItem>                   
+                            <asp:ListItem Text="是" Value="True"></asp:ListItem>                            
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        首頁熱門
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlIsHot" runat="server">         
+                            <asp:ListItem Text="否" Value="False"></asp:ListItem>                   
+                            <asp:ListItem Text="是" Value="True"></asp:ListItem>                            
+                        </asp:DropDownList>
                     </td>
                 </tr>--%>
+                 <tr>
+                    <td>
+                        上架
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlFlag" runat="server">
+                            <asp:ListItem Text="請選擇" Value=""></asp:ListItem>
+                            <asp:ListItem Text="是" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="否" Value="0"></asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="請選擇是否上架"
+                            ControlToValidate="ddlFlag"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        產品介紹
+                    </td>
+                    <td>
+                        <uc1:CKEditor ID="fckHtmlContent" runat="server" />
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="2" height="30px" align="center">
                         <asp:Button ID="btnAdd" runat="server" Text="確定新增" OnClick="btnAdd_Click" />
@@ -127,7 +174,10 @@
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr>
                     <td align="left">
-                        <asp:Button ID="btnShowAdd" runat="server" Text="新增首頁廣告" OnClick="btnShowAdd_Click"/>
+                        <asp:Button ID="btnShowAdd" runat="server" Text="新增配件價格" OnClick="btnShowAdd_Click"/>
+                        <br />
+                        <br />
+                        <asp:Label ID="lblTotalCount" runat="server" Text="" ForeColor="Blue"></asp:Label>
                     </td>
                     <td align="right" class="labelText">
                       <%--  分類搜尋:<asp:DropDownList ID="ddlSelect" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSelect_SelectedIndexChanged">
@@ -150,16 +200,23 @@
                     <asp:TemplateField HeaderText="名稱">
                         <ItemTemplate>
                             <asp:HiddenField ID="hdnPostId" runat="server" Value='<%# Eval("PostId") %>' />
-                            <asp:Label ID="lblName" runat="server" Text='<%# Bind("Title") %>'></asp:Label>
+                            <asp:Label ID="lblTitle" runat="server" Text='<%# Bind("Title") %>'></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left" Width="20%" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="連結網址">
+                    <asp:TemplateField HeaderText="品牌">
                         <ItemTemplate>
-                            <asp:Label ID="lblLinkUrl" runat="server" Text='<%# Bind("LinkUrl") %>'></asp:Label>
+                            <asp:Label ID="lblWarrantySuppliers" runat="server" Text='<%# Bind("WarrantySuppliers") %>'></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left" Width="20%" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="售價">
+                        <ItemTemplate>
+                            <asp:Label ID="lblSellPrice" runat="server" Text='<%# Bind("SellPrice") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" Width="20%" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="排序">

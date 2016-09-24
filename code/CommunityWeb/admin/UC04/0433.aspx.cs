@@ -7,16 +7,17 @@ using WuDada.Core.Post;
 using WuDada.Core.Post.Domain;
 using WuDada.Core.Post.Service;
 using WuDada.Core.SystemApplications.Domain;
+using System.Collections.Generic;
 
-public partial class admin_UC07_0701 : System.Web.UI.Page
+public partial class admin_UC04_0433 : System.Web.UI.Page
 {
     private ILog m_Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
     private PostFactory m_PostFactory;
     private IPostService m_PostService;
     private WebLogService m_WebLogService;
 
-    //首頁廣告NodeId=6
-    private int m_NodeId = 6;
+    //配件NodeId=4
+    private int m_NodeId = 4;
 
     private int m_Mode
     {
@@ -37,9 +38,21 @@ public partial class admin_UC07_0701 : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            initDDL();
             pnlContent.Visible = false;
             fillGridView();
             ShowMode();
+        }
+    }
+
+    private void initDDL()
+    {
+        IList<NodeVO> nodeList = m_PostService.GetNodeListByParentId(9);
+        ddlWarrantySuppliers.Items.Clear();
+        ddlWarrantySuppliers.Items.Add(new ListItem("請選擇品牌", ""));
+        foreach (NodeVO vo in nodeList)
+        {
+            ddlWarrantySuppliers.Items.Add(new ListItem(vo.Name, vo.Name));
         }
     }
 
@@ -60,18 +73,20 @@ public partial class admin_UC07_0701 : System.Web.UI.Page
     private void fillGridView()
     {
         //搜尋條件
-        //DateTime? startDate = ConvertUtil.ToDateTimeMin(DateTime.Now);
-
-        DateTime? startDate = null;
-        string sortField = "SortNo";
-        bool sortDesc = false;
+        Dictionary<string, string> conditions = new Dictionary<string, string>();
+        conditions.Add("NodeId", m_NodeId.ToString());
 
         //分頁
-        AspNetPager1.RecordCount = m_PostService.CountPostListByNodeId(m_NodeId, false, startDate);
+        AspNetPager1.RecordCount = m_PostService.GetPostCount(conditions);
+        lblTotalCount.Text = string.Format("共查出 {0} 筆資料", AspNetPager1.RecordCount.ToString());
+
         int pageIndex = (AspNetPager1.CurrentPageIndex - 1);
         int pageSize = AspNetPager1.PageSize;
+        conditions.Add("PageIndex", pageIndex.ToString());
+        conditions.Add("PageSize", pageSize.ToString());
+        conditions.Add("Order", string.Format("order by {0}", "p.WarrantySuppliers, p.SortNo, p.Title"));
 
-        gvList.DataSource = m_PostService.GetPostListByNodeId(m_NodeId, false, startDate, pageIndex, pageSize, sortField, sortDesc);
+        gvList.DataSource = m_PostService.GetPostList(conditions);
         gvList.DataBind();
     }
 
@@ -83,25 +98,10 @@ public partial class admin_UC07_0701 : System.Web.UI.Page
     protected void btnAdd_Click(object sender, EventArgs e)
     {
         PostVO postVO = new PostVO();
-        postVO.Title = txtTitle.Text.Trim();
-        postVO.SortNo = int.Parse(txtSortNo.Text.Trim());
-        postVO.Node = m_PostService.GetNodeById(m_NodeId);
+        UIHelper.FillVO(pnlContent, postVO);
         postVO.PicFileName = m_PicFileName;
-        postVO.Flag = int.Parse(ddlFlag.SelectedValue);
-        postVO.ShowDate = DateTime.Today;
-        //if (!string.IsNullOrEmpty(txtShowDate.Text.Trim()))
-        //{
-        //    postVO.ShowDate = DateTime.Parse(txtShowDate.Text.Trim());
-        //}
-        postVO.LinkUrl = txtLinkUrl.Text.Trim();
-        if (!string.IsNullOrEmpty(txtLinkUrl.Text.Trim()))
-        {
-            postVO.Type = 1;
-        }
-        else
-        {
-            postVO.Type = 0;
-        }
+        postVO.HtmlContent = fckHtmlContent.value;
+        postVO.Node = m_PostService.GetNodeById(m_NodeId);
         m_PostService.CreatePost(postVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.新增, postVO);
         ClearUI();
@@ -113,18 +113,17 @@ public partial class admin_UC07_0701 : System.Web.UI.Page
         m_Mode = 0;
         m_PicFileName = string.Empty;
         ltlImg.Text = string.Empty;
-        txtTitle.Text = string.Empty;
-        txtSortNo.Text = string.Empty;
-        ddlFlag.SelectedValue = string.Empty;
-        //txtShowDate.Text = string.Empty;
-        txtLinkUrl.Text = string.Empty;
+        UIHelper.ClearUI(pnlContent);
+        fckHtmlContent.value = string.Empty;
         pnlContent.Visible = false;
         btnShowAdd.Enabled = true;
+        //ddlIsHot.SelectedValue = "False";
+        //ddlIsNew.SelectedValue = "False";
     }
 
     private string GetPic(string fileName)
     {
-        return "<img src='../../upload/" + fileName + "' width='270' height='61' border='108'>";
+        return "<img src='../../upload/" + fileName + "' width='340' height='340' border='0'>";
     }
 
     protected void gvList_RowCommand1(object sender, GridViewCommandEventArgs e)
@@ -139,17 +138,8 @@ public partial class admin_UC07_0701 : System.Web.UI.Page
                 m_Mode = postId;
                 m_PicFileName = postVO.PicFileName;
                 ltlImg.Text = GetPic(m_PicFileName);
-                txtTitle.Text = postVO.Title;
-                txtSortNo.Text = postVO.SortNo.ToString();
-                ddlFlag.SelectedValue = postVO.Flag.ToString();
-                //if (postVO.ShowDate != null)
-                //{
-                //    txtShowDate.Text = postVO.ShowDate.Value.ToShortDateString();
-                //}
-                if (postVO.Type == 1)
-                {
-                    txtLinkUrl.Text = postVO.LinkUrl;
-                }
+                UIHelper.FillUI(pnlContent, postVO);
+                fckHtmlContent.value = postVO.HtmlContent;
                 ShowMode();
                 pnlContent.Visible = true;
                 break;
@@ -172,24 +162,9 @@ public partial class admin_UC07_0701 : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         PostVO postVO = m_PostService.GetPostById(m_Mode);
-        postVO.Title = txtTitle.Text.Trim();
-        postVO.SortNo = int.Parse(txtSortNo.Text.Trim());
-        postVO.Node = m_PostService.GetNodeById(m_NodeId);
+        UIHelper.FillVO(pnlContent, postVO);
         postVO.PicFileName = m_PicFileName;
-        postVO.Flag = int.Parse(ddlFlag.SelectedValue);
-        //if (!string.IsNullOrEmpty(txtShowDate.Text.Trim()))
-        //{
-        //    postVO.ShowDate = DateTime.Parse(txtShowDate.Text.Trim());
-        //}
-        postVO.LinkUrl = txtLinkUrl.Text.Trim();
-        if (!string.IsNullOrEmpty(txtLinkUrl.Text.Trim()))
-        {
-            postVO.Type = 1;
-        }
-        else
-        {
-            postVO.Type = 0;
-        }
+        postVO.HtmlContent = fckHtmlContent.value;
         m_PostService.UpdatePost(postVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.修改, postVO);
         fillGridView();
@@ -218,10 +193,10 @@ public partial class admin_UC07_0701 : System.Web.UI.Page
         btnShowAdd.Enabled = false;
     }
 
-    protected void ddlSelect_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        fillGridView();
-    }
+    //protected void ddlSelect_SelectedIndexChanged(object sender, EventArgs e)
+    //{
+    //    fillGridView();
+    //}
 
     protected void btnUpliad_Click(object sender, EventArgs e)
     {

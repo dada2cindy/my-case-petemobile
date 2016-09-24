@@ -81,7 +81,7 @@
                 </tr>
                 <tr>
                     <td valign="top">
-                        大圖
+                        大圖 (300*80)
                     </td>
                     <td>
                         <table cellpadding="0" cellspacing="0" border="0">
