@@ -40,6 +40,7 @@ public partial class index : System.Web.UI.Page
         //搜尋條件
         Dictionary<string, string> conditions = new Dictionary<string, string>();
         conditions.Add("NodeId", "3");
+        conditions.Add("Flag", "1");
         conditions.Add("PageIndex", "0");
         conditions.Add("PageSize", "9");
         conditions.Add("IsHot", "True");
@@ -55,6 +56,7 @@ public partial class index : System.Web.UI.Page
         //搜尋條件
         Dictionary<string, string> conditions = new Dictionary<string, string>();
         conditions.Add("NodeId", "3");
+        conditions.Add("Flag", "1");
         conditions.Add("PageIndex", "0");
         conditions.Add("PageSize", "9");
         conditions.Add("IsNew", "True");
@@ -73,6 +75,7 @@ public partial class index : System.Web.UI.Page
         //搜尋條件
         Dictionary<string, string> conditions = new Dictionary<string, string>();
         conditions.Add("NodeId", "7");
+        conditions.Add("Flag", "1");
         conditions.Add("PageIndex", "0");
         conditions.Add("PageSize", "9");
         conditions.Add("Order", string.Format("order by {0}", "p.SortNo, p.PostId"));
@@ -103,7 +106,8 @@ public partial class index : System.Web.UI.Page
 
         //搜尋條件
         Dictionary<string, string> conditions = new Dictionary<string, string>();
-        conditions.Add("NodeId","6");        
+        conditions.Add("NodeId","6");
+        conditions.Add("Flag", "1");
         conditions.Add("PageIndex", "0");
         conditions.Add("PageSize", "5");
         conditions.Add("Order", string.Format("order by {0}", "p.SortNo, p.PostId"));

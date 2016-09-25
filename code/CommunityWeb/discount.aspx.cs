@@ -38,10 +38,6 @@ public partial class discount : System.Web.UI.Page
         StringBuilder sb = new StringBuilder();
 
         //搜尋條件
-        Dictionary<string, string> conditions = new Dictionary<string, string>();
-        conditions.Add("NodeId", "21");
-        conditions.Add("Order", string.Format("order by {0}", "p.SortNo"));
-        
         IList<NodeVO> list = m_PostService.GetNodeListByParentId(21);
 
         if (list != null && list.Count > 0)
@@ -50,7 +46,7 @@ public partial class discount : System.Web.UI.Page
             {
                 NodeVO vo = list[i];
                 string lastCss = "";
-                if (i <= list.Count - 1)
+                if (i == list.Count - 1)
                 {
                     lastCss = " store_item_a_last";
                 }
@@ -88,6 +84,7 @@ public partial class discount : System.Web.UI.Page
         conditions.Add("NodeId", "5");
         conditions.Add("WarrantySuppliers", vo.Name);
         conditions.Add("Type", "0");
+        conditions.Add("Flag", "1");
         conditions.Add("Order", string.Format("order by {0}", "p.WarrantySuppliers, p.Type, p.SortNo, p.PostId"));
 
         IList<PostVO> list = m_PostService.GetPostList(conditions);
@@ -122,6 +119,7 @@ public partial class discount : System.Web.UI.Page
         conditions.Add("NodeId", "5");
         conditions.Add("WarrantySuppliers", vo.Name);
         conditions.Add("Type", "1");
+        conditions.Add("Flag", "1");
         conditions.Add("Order", string.Format("order by {0}", "p.WarrantySuppliers, p.Type, p.SortNo, p.PostId"));
 
         IList<PostVO> list = m_PostService.GetPostList(conditions);

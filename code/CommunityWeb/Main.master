@@ -21,6 +21,7 @@
     <meta property="og:description" content="品讚行動通訊">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="js/jquery.cycle2.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){        	
             $("#btnSearch").click(function () {

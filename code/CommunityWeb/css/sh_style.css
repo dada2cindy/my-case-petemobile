@@ -237,7 +237,8 @@ li{
 .product_item{
   clear: both;
   width: 100%;
-  height: 765px;
+  /*height: 765px;*/
+  min-height: 500px;
 }
 
 .product_item_img{
