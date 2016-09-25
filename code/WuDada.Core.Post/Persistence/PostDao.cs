@@ -799,8 +799,8 @@ namespace WuDada.Core.Post.Persistence
             if (conditions.IsContainsValue("ProductKeyWord"))
             {
                 whereScript.Append(" and (p.Title like ? or p.WarrantySuppliers like ? ) ");
-                param.Add("%" + conditions["KeyWord"] + "%");
-                param.Add("%" + conditions["KeyWord"] + "%");
+                param.Add("%" + conditions["ProductKeyWord"] + "%");
+                param.Add("%" + conditions["ProductKeyWord"] + "%");
             }
         }
 
