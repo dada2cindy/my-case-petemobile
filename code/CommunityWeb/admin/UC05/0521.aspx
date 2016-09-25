@@ -105,15 +105,15 @@
                         GoogleMap Iframe 網址
                     </td>
                     <td>
-                        <asp:TextBox ID="txtLinkUrl" runat="server" Width="500px"></asp:TextBox>
+                        <asp:TextBox ID="txtHtmlContent" runat="server" Width="500px"></asp:TextBox>
                         <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server"
-                    TargetControlID="txtLinkUrl"
+                    TargetControlID="txtHtmlContent"
                     WatermarkText="ex:http://www.google.com"
                     WatermarkCssClass="labelWatermark" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="請輸入連結網址"
-                            ControlToValidate="txtLinkUrl" Display="Dynamic"></asp:RequiredFieldValidator>
+                            ControlToValidate="txtHtmlContent" Display="Dynamic"></asp:RequiredFieldValidator>
                         <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="連結網址格式錯誤"
-                            ControlToValidate="txtLinkUrl" Display="Dynamic" ValidationExpression="http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?"></asp:RegularExpressionValidator>--%>
+                            ControlToValidate="txtHtmlContent" Display="Dynamic" ValidationExpression="http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?"></asp:RegularExpressionValidator>--%>
                     </td>
                 </tr>               
                 <tr>

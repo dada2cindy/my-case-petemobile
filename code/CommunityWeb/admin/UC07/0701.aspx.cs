@@ -124,7 +124,7 @@ public partial class admin_UC07_0701 : System.Web.UI.Page
 
     private string GetPic(string fileName)
     {
-        return "<img src='../../upload/" + fileName + "' width='270' height='61' border='108'>";
+        return "<img src='../../upload/" + fileName + "' width='270' height='61' border='0'>";
     }
 
     protected void gvList_RowCommand1(object sender, GridViewCommandEventArgs e)

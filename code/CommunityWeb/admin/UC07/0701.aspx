@@ -60,8 +60,8 @@
                     TargetControlID="txtLinkUrl"
                     WatermarkText="ex:http://www.google.com"
                     WatermarkCssClass="labelWatermark" />
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="請輸入連結網址"
-                            ControlToValidate="txtLinkUrl" Display="Dynamic"></asp:RequiredFieldValidator>
+                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="請輸入連結網址"
+                            ControlToValidate="txtLinkUrl" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="連結網址格式錯誤"
                             ControlToValidate="txtLinkUrl" Display="Dynamic" ValidationExpression="http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?"></asp:RegularExpressionValidator>
                     </td>

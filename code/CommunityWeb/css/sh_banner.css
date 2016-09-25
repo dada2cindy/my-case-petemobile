@@ -1,0 +1,34 @@
+/* Banner CSS 開始*/
+  .banner_br{width: 100%;}
+  .banner_img{width: 100%; cursor: pointer}
+  /* 五個點點的 CSS ~*/
+  .banner_pager{
+    text-align: center;
+    width: 100%;
+    z-index: 500;
+    position: absolute;
+    bottom: 20px;
+    overflow: hidden;
+    color: #e4e4e4;
+    font-size: 2.2em;
+    letter-spacing: 10px;
+  }
+  .banner_pager span{opacity: 0.7}
+  .banner_pager span:hover{cursor: pointer; opacity:1.0;}
+  .cycle-pager-active{color: #F2972C;}
+  /* 左右箭頭的 CSS ~*/
+  .pager_left,.pager_right{
+    position: absolute;
+    text-align: center;
+    width: 7%;
+    z-index: 500;
+    bottom: 46%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    opacity: 0.9;
+    color: #e4e4e4;
+  }
+  .pager_left:hover,.pager_right:hover{cursor: pointer;opacity: 0.6;color: white;}
+  .pager_right{right: 0px;}
+/* Banner CSS 結束*/
