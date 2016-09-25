@@ -72,6 +72,9 @@
     <property name="UpdateId" column="UpdateId" type="String" length="50" />
     <property name="IsUpdatingToServer" column="IsUpdatingToServer" type="Boolean" />
 
+    <property name="IsNew" column="IsNew" type="Boolean" />
+    <property name="IsHot" column="IsHot" type="Boolean" />
+
   </class>
 
 </hibernate-mapping>

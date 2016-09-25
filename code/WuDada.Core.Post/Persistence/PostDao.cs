@@ -579,6 +579,9 @@ namespace WuDada.Core.Post.Persistence
             AppendPostMemberId(conditions, whereScript, param);
             AppendPostNeedUpdate(conditions, whereScript, param);
             AppendMemberStore(conditions, whereScript, param);
+            AppendPostIsNew(conditions, whereScript, param);
+            AppendPostIsHot(conditions, whereScript, param);
+            AppendPostWarrantySuppliers(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -587,6 +590,33 @@ namespace WuDada.Core.Post.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendPostWarrantySuppliers(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("WarrantySuppliers"))
+            {
+                whereScript.Append(" and p.WarrantySuppliers = ? ");
+                param.Add(conditions["WarrantySuppliers"]);
+            }
+        }
+
+        private void AppendPostIsHot(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("IsHot"))
+            {
+                whereScript.Append(" and p.IsHot = ? ");
+                param.Add(bool.Parse(conditions["IsHot"]));
+            }
+        }
+
+        private void AppendPostIsNew(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("IsNew"))
+            {
+                whereScript.Append(" and p.IsNew = ? ");
+                param.Add(bool.Parse(conditions["IsNew"]));
+            }
         }
 
         private void AppendMemberStore(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
@@ -762,6 +792,13 @@ namespace WuDada.Core.Post.Persistence
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
+                param.Add("%" + conditions["KeyWord"] + "%");
+                param.Add("%" + conditions["KeyWord"] + "%");
+            }
+
+            if (conditions.IsContainsValue("ProductKeyWord"))
+            {
+                whereScript.Append(" and (p.Title like ? or p.WarrantySuppliers like ? ) ");
                 param.Add("%" + conditions["KeyWord"] + "%");
                 param.Add("%" + conditions["KeyWord"] + "%");
             }

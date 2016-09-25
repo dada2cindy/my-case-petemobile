@@ -198,7 +198,7 @@ namespace WuDada.Core.Post.Domain
         public virtual bool IsRecommend { get; set; }
 
         /// <summary>
-        /// 價格/進貨價,  收支金額,  結帳金額
+        /// 價格/進貨價,  收支金額,  結帳金額 , 市價
         /// </summary>
         [DataMember]
         public virtual double? Price { get; set; }
@@ -246,7 +246,7 @@ namespace WuDada.Core.Post.Domain
         public virtual string ProductSer { get; set; }
 
         /// <summary>
-        /// 保固商, 電信
+        /// 保固商, 電信 , 品牌
         /// </summary>
         [DataMember]
         public virtual string WarrantySuppliers { get; set; }
@@ -292,6 +292,18 @@ namespace WuDada.Core.Post.Domain
         /// </summary>
         [DataMember]
         public virtual bool IsUpdatingToServer { get; set; }
+
+        /// <summary>
+        /// 最新
+        /// </summary>
+        [DataMember]
+        public virtual bool IsNew { get; set; }
+
+        /// <summary>
+        /// 熱門
+        /// </summary>
+        [DataMember]
+        public virtual bool IsHot { get; set; }
 
         #endregion
 
