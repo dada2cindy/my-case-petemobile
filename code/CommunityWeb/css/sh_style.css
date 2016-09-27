@@ -253,6 +253,7 @@ li{
 .product_item_info{
   float: right;
   width: 340px;
+  font-size: 16px;
 }
 .product_item_title{
   height: 80px;

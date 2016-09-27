@@ -30,6 +30,11 @@ public partial class admin_UC04_0432 : System.Web.UI.Page
         set { ViewState["picfilename"] = value; }
     }
 
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        fillGridView();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         m_WebLogService = new WebLogService();
@@ -75,6 +80,7 @@ public partial class admin_UC04_0432 : System.Web.UI.Page
         //搜尋條件
         Dictionary<string, string> conditions = new Dictionary<string, string>();
         conditions.Add("NodeId", m_NodeId.ToString());
+        conditions.Add("ProductKeyWord", txtSearchKeyword.Text.Trim());
 
         //分頁
         AspNetPager1.RecordCount = m_PostService.GetPostCount(conditions);

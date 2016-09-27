@@ -40,6 +40,8 @@
                         <asp:TextBox ID="txtPrice" runat="server" Width="100px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="請輸入市價"
                             ControlToValidate="txtPrice"></asp:RequiredFieldValidator>
+                        <asp:RangeValidator ID="RangeValidator2" runat="server" ErrorMessage="請輸入市價(數字)"
+                            ControlToValidate="txtPrice" MaximumValue="1000000" MinimumValue="0" Type="Integer"></asp:RangeValidator>
                     </td>
                 </tr>
                 <tr>
@@ -50,6 +52,8 @@
                         <asp:TextBox ID="txtSellPrice" runat="server" Width="100px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="請輸入售價"
                             ControlToValidate="txtSellPrice"></asp:RequiredFieldValidator>
+                        <asp:RangeValidator ID="RangeValidator3" runat="server" ErrorMessage="請輸入售價(數字)"
+                            ControlToValidate="txtSellPrice" MaximumValue="1000000" MinimumValue="0" Type="Integer"></asp:RangeValidator>
                     </td>
                 </tr>                
                 <tr>
@@ -174,6 +178,13 @@
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr>
                     <td align="left">
+                        關鍵字:
+                        <asp:TextBox ID="txtSearchKeyword" runat="server"></asp:TextBox>
+                        &nbsp;&nbsp;&nbsp;
+                        <br />
+                        <br />
+                        <asp:Button ID="btnSearch" runat="server" Text="查詢" OnClick="btnSearch_Click" ValidationGroup="Search" />
+                        &nbsp;&nbsp;&nbsp;
                         <asp:Button ID="btnShowAdd" runat="server" Text="新增手機價格" OnClick="btnShowAdd_Click"/>
                         <br />
                         <br />

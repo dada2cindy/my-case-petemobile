@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="product.aspx.cs" Inherits="product" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">    
     <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
     <script type="text/javascript">
 
@@ -64,10 +64,9 @@
             $("#detial_dis").hide();
         }
 
-
 </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">        
     <div class="breadcrumb">
 		<p>目前位置 <i class="fa fa-angle-right fa-1x comment_pagger_angle" aria-hidden="true"></i> <a href="index.html">首頁</a> <i class="fa fa-angle-right fa-1x comment_pagger_angle" aria-hidden="true"></i> <span class="txt_themecolor_main">產品目錄</span></p>
 	</div>
@@ -123,134 +122,10 @@
 	<!-- detial discount ##################-->
 	<div class="product_detail" id="detial_dis">
 		<div class="contant_title">門號折扣</div>
-    <%--<ul class="store_list_a">
-      <a href="#pro_1"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_hinet.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_2"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_fet.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_3"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_twm.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_4"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_tstartel.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_5"><li class="store_item_a store_item_logo border store_item_a_last"
-          style="background-image: url('imgs/logo/logo_aptg.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <!--最後一組請記得在li之處要加上 store_item_a_last 這個class-->
-    </ul>--%>
-    <!-- ################### Hinet ################### -->
-			<%--<table class="discount_list border">
-				<tr class="discount_list_title border">
-					<th class="discount_list_img" style="background-image:url('imgs/logo/logo_hinet.png')">
-						<a name="pro_1" id="pro_1"></a></th>
-						<th class="discount_list_pro bg_disfrom_pro"></th>
-						<th class="discount_list_dis bg_disfrom_dis"></th>
-						<th class="discount_list_pre bg_disfrom_pre"></th>
-						<th class="discount_list_tran bg_disfrom_tran"></th>
-						<th class="discount_list_con bg_disfrom_con"></th>
-				</tr>
-
-				<!--     3G     -->
-				<tr class="discount_list_contant">
-					<td rowspan="6"
-							class="discount_list_type discount_list_type_3G" >3G</td>
-					<td class="discount_list_pro">383月租半價192(30)</td>
-					<td class="discount_list_dis">3000</td>
-					<td class="discount_list_pre">2500</td>
-					<td class="discount_list_tran">依量計價</td>
-					<td class="discount_list_con">383抵通話</td>
-				</tr>
-				<tr class="discount_list_contant">
-					<td class="discount_list_pro">383月租半價192(30)</td>
-					<td class="discount_list_dis">3000</td>
-					<td class="discount_list_pre">2500</td>
-					<td class="discount_list_tran">依量計價</td>
-					<td class="discount_list_con">383抵通話</td>
-				</tr>
-				<tr class="discount_list_contant">
-					<td class="discount_list_pro">383(24)</td>
-					<td class="discount_list_dis">4000</td>
-					<td class="discount_list_pre">4000</td>
-					<td class="discount_list_tran">依量計價</td>
-					<td class="discount_list_con">383抵通話</td>
-				</tr>
-				<tr class="discount_list_contant">
-					<td class="discount_list_pro">583/589/699(24)</td>
-					<td class="discount_list_dis">5000</td>
-					<td class="discount_list_pre">5000</td>
-					<td class="discount_list_tran">依量計價</td>
-					<td class="discount_list_con">583抵通話</td>
-				</tr>
-				<tr class="discount_list_contant">
-					<td class="discount_list_pro">583/589/699(24)</td>
-					<td class="discount_list_dis">5000</td>
-					<td class="discount_list_pre">5000</td>
-					<td class="discount_list_tran">依量計價</td>
-					<td class="discount_list_con">589抵網內外行動語音共122分</td>
-				</tr>
-				<tr class="discount_list_contant discount_list_contant-last">
-					<td class="discount_list_pro">583/589/699(24)</td>
-					<td class="discount_list_dis">5000</td>
-					<td class="discount_list_pre">5000</td>
-					<td class="discount_list_tran">依量計價</td>
-					<td class="discount_list_con">699抵網內外市話各699元</td>
-				</tr>
-
-				<!--     4G     -->
-				<tr class="discount_list_contant">
-					<td rowspan="6"
-							class="discount_list_type discount_list_type_4G" >4G</td>
-					<td class="discount_list_pro">383月租半價192(30)</td>
-					<td class="discount_list_dis">3000</td>
-					<td class="discount_list_pre">2500</td>
-					<td class="discount_list_tran">依量計價</td>
-					<td class="discount_list_con">383抵通話</td>
-				</tr>
-				<tr class="discount_list_contant">
-					<td class="discount_list_pro">383月租半價192(30)</td>
-					<td class="discount_list_dis">3000</td>
-					<td class="discount_list_pre">2500</td>
-					<td class="discount_list_tran">依量計價</td>
-					<td class="discount_list_con">383抵通話</td>
-				</tr>
-				<tr class="discount_list_contant">
-					<td class="discount_list_pro">383(24)</td>
-					<td class="discount_list_dis">4000</td>
-					<td class="discount_list_pre">4000</td>
-					<td class="discount_list_tran">依量計價</td>
-					<td class="discount_list_con">383抵通話</td>
-				</tr>
-				<tr class="discount_list_contant">
-					<td class="discount_list_pro">583/589/699(24)</td>
-					<td class="discount_list_dis">5000</td>
-					<td class="discount_list_pre">5000</td>
-					<td class="discount_list_tran">依量計價</td>
-					<td class="discount_list_con">583抵通話</td>
-				</tr>
-				<tr class="discount_list_contant">
-					<td class="discount_list_pro">583/589/699(24)</td>
-					<td class="discount_list_dis">5000</td>
-					<td class="discount_list_pre">5000</td>
-					<td class="discount_list_tran">依量計價</td>
-					<td class="discount_list_con">589抵網內外行動語音共122分</td>
-				</tr>
-				<tr class="discount_list_contant discount_list_contant-last">
-					<td class="discount_list_pro">583/589/699(24)</td>
-					<td class="discount_list_dis">5000</td>
-					<td class="discount_list_pre">5000</td>
-					<td class="discount_list_tran">依量計價</td>
-					<td class="discount_list_con">699抵網內外市話各699元</td>
-				</tr>
-			</table>--%>
-		<!-- ################### Hinet ################### -->
+    <ul class="store_list_a">
+        <asp:Literal ID="ltlSuppliersTag" runat="server"></asp:Literal>      
+    </ul>
+        <asp:Literal ID="ltlDiscounts" runat="server"></asp:Literal>
 	</div>
 	<!-- ################## detial discount-->
 
@@ -264,50 +139,8 @@
 	<!-- detial comment ##################-->
 	<div class="product_detail" id="detial_com">
 		<div class="contant_title">評論分享</div>
-		<%--<div class="comment_form border">
-			<form>
-				<div class="comment_right">
-					<textarea class="comment_textarea border"></textarea>
-				</div>
-				<div class="comment_right comment_title" style="letter-spacing: 5px;">留言與建議</div>
-				<div class="comment_item"><span class="comment_title">姓名</span><input class="bg_gray" type="text" /></div>
-				<div class="comment_item"><span class="comment_title">電話</span><input class="bg_gray" type="text" /></div>
-				<div class="comment_item"><span class="comment_title">電子信箱</span><input class="bg_gray" type="text" /></div>
-				<input class="comment_submit themecolor_main" type="submit" value="送出">
-			</form>
-		</div>
-
-		<!--  user messages -->
-		<div class="comment_msg border">
-			<span class="comment_msg_time">留言時間： 2016-09-19 13:40:30</span>
-			<div class="comment_msg_title txt_themecolor_main">陳**</div>
-			<div class="comment_msg_msg">請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～</div>
-			<div class="comment_reply bg_gray" >
-				<div class="comment_msg_title txt_highline">品讚 於 2016-09-19 13:40:30 回覆 ：</div>
-				<div>
-					請問～～～～
-				</div>
-			</div>
-		</div>
-		<!--  user messages -->
-		<div class="comment_msg border">
-			<span class="comment_msg_time">留言時間： 2016-09-19 13:40:30</span>
-			<div class="comment_msg_title txt_themecolor_main">陳**</div>
-			<div class="comment_msg_msg">請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～請問～～～～</div>
-		</div>
-
-		<div class="comment_pagger">
-			<i class="fa fa-angle-left fa-1x comment_pagger_angle" aria-hidden="true"></i>
-			<i class="fa fa-1x border comment_pagger_item comment_pagger_item-avtive" aria-hidden="true">1</i>
-			<i class="fa fa-1x border comment_pagger_item" aria-hidden="true">2</i>
-			<i class="fa fa-1x border comment_pagger_item" aria-hidden="true">3</i>
-			<i class="fa fa-1x border comment_pagger_item" aria-hidden="true">...</i>
-			<i class="fa fa-angle-right fa-1x comment_pagger_angle" aria-hidden="true"></i>
-		</div>
-		<div class="comment_info">顯示 1 - 5 項，共 34 項</div>--%>
-
-
-
+        <asp:Literal ID="ltlFbComments" runat="server"></asp:Literal>
+        <%--<div class="fb-comments" data-href="http://p-like.com.tw/product.aspx?id=74" data-width="1080" data-include-parent="false" data-numposts="5"></div>--%>
 	</div>
 	<!-- ################## detial comment -->
 

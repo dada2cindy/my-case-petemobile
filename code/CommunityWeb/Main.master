@@ -5,6 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta property="fb:app_id" content="524421854429406" />
+    <!--Dada:100000267221525, Cindy:100000267221525, Pete:100000175246193-->
+    <meta property="fb:admins" content="100000267221525, 633455117, 100000175246193"/>
     <title>品讚行動通訊</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -13,12 +16,13 @@
     <link rel="stylesheet" href="css/sh_banner.css" type="text/css" />
     <link rel="stylesheet" href="css/sh_style.css" type="text/css" />
     <link rel="Shortcut Icon" type="image/x-icon" href="imgs/common/favicon.ico" />
-    <meta name="description" content="品讚行動通訊">
+    <meta name="description" content="中華電信-台灣大哥大-遠傳-台灣之星-各家電信門號攜碼/ 新辦/ 續約 品讚行動通訊 品讚 攜碼 續約 台哥大 台灣大哥大 中華 中華電信 神腦 遠傳 台灣之星 亞太 Apple 蘋果 手機 np 門號折扣 htc samsung asus 優惠 iphone 吃到飽 sony lg">
+    <meta name="keyword" content="中華電信-台灣大哥大-遠傳-台灣之星-各家電信門號攜碼/ 新辦/ 續約 品讚行動通訊 品讚 攜碼 續約 台哥大 台灣大哥大 中華 中華電信 神腦 遠傳 台灣之星 亞太 Apple 蘋果 手機 np 門號折扣 htc samsung asus 優惠 iphone 吃到飽 sony lg">
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="品讚行動通訊" />
+    <meta property="og:title" content="品讚行動通訊 品讚" />
     <meta property="og:image" content="" />
-    <meta property="og:site_name" content="品讚行動通訊" />
-    <meta property="og:description" content="品讚行動通訊">
+    <meta property="og:site_name" content="品讚行動通訊 品讚" />
+    <meta property="og:description" content="中華電信-台灣大哥大-遠傳-台灣之星-各家電信門號攜碼/ 新辦/ 續約 品讚行動通訊 品讚 攜碼 續約 台哥大 台灣大哥大 中華 中華電信 神腦 遠傳 台灣之星 亞太 Apple 蘋果 手機 np 門號折扣 htc samsung asus 優惠 iphone 吃到飽 sony lg">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="js/jquery.cycle2.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -36,21 +40,40 @@
                 }
             });
         });
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '524421854429406',
+                xfbml: true,
+                version: 'v2.7'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/zh_TW/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     </script>
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body id="top">
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
     <form id="form1" runat="server">
         <div class="sh_main">
             <!--Header ##################-->
             <div class="header">
                 <a href="index.aspx">
                     <div class="header_logo"></div>
-                </a>
+                </a>                
                 <a href="https://www.facebook.com/%E5%93%81%E8%AE%9A%E8%A1%8C%E5%8B%95%E9%80%9A%E8%A8%8A-1743733255899753/" target="_blank">
                     <div class="header_fb"></div>
                 </a>
+                <div class="fb-like" style="float:right;padding-right:10px;" data-href="http://p-like.com.tw/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
             </div>
             <!-- ################## Header-->
 
