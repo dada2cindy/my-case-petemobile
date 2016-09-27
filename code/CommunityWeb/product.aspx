@@ -82,10 +82,10 @@
 				<div class="product_item_info">
 					<div class="product_item_title"><asp:Literal ID="ltlTitle" runat="server"></asp:Literal></div>
 					<ul>
-                        <asp:Literal ID="ltlSummary" runat="server"></asp:Literal>\
+                        <asp:Literal ID="ltlSummary" runat="server"></asp:Literal>
                         <li>
                             市價：<span class="product_item_priceDis">$<asp:Literal ID="ltlPrice" runat="server"></asp:Literal></span>
-						    <br/>會員單機價：<span class="product_item_price">$<asp:Literal ID="ltlSellPrice" runat="server"></asp:Literal></span>
+						    <br/>單機價：<span class="product_item_price">$<asp:Literal ID="ltlSellPrice" runat="server"></asp:Literal></span>
 						</li>
 					</ul>
 					<div class="product_item_line"></div>
