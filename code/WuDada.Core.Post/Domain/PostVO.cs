@@ -305,7 +305,36 @@ namespace WuDada.Core.Post.Domain
         [DataMember]
         public virtual bool IsHot { get; set; }
 
+        /// <summary>
+        /// 推薦
+        /// </summary>
+        [DataMember]
+        public virtual bool IsPromote { get; set; }
+
         #endregion
+
+        /// <summary>
+        /// 取文字_推薦
+        /// </summary>
+        [DataMember]
+        public virtual string GetStr_IsPromote
+        {
+            get
+            {
+                string result = "";
+
+                if (!IsPromote)
+                {
+                    result = "否";
+                }
+                else
+                {
+                    result = "是";
+                }
+
+                return result;
+            }
+        }
 
         /// <summary>
         /// 取文字_上下架

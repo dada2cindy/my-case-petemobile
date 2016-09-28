@@ -582,6 +582,7 @@ namespace WuDada.Core.Post.Persistence
             AppendPostIsNew(conditions, whereScript, param);
             AppendPostIsHot(conditions, whereScript, param);
             AppendPostWarrantySuppliers(conditions, whereScript, param);
+            AppendPostIsPromote(conditions, whereScript, param);
 
             string hql = fromScript + "where 1=1 " + whereScript;
             if (useOrder)
@@ -590,6 +591,15 @@ namespace WuDada.Core.Post.Persistence
             }
 
             return NHibernateDao.Query(hql, param, conditions);
+        }
+
+        private void AppendPostIsPromote(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)
+        {
+            if (conditions.IsContainsValue("IsPromote"))
+            {
+                whereScript.Append(" and p.IsPromote = ? ");
+                param.Add(bool.Parse(conditions["IsPromote"]));
+            }
         }
 
         private void AppendPostWarrantySuppliers(IDictionary<string, string> conditions, StringBuilder whereScript, ArrayList param)

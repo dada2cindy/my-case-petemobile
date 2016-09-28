@@ -233,5 +233,11 @@ namespace WuDada.Core.Post.Service
         /// <param name="name">Name</param>
         /// <returns>Node</returns>
         NodeVO GetNodeByName(string name);
+
+        /// <summary>
+        /// 抓出推薦的手機折扣
+        /// <param name="count">數量</param>
+        /// <returns>搜尋結果</returns>
+        IList<PromoteVO> GetPromoteList(int count);
     }
 }

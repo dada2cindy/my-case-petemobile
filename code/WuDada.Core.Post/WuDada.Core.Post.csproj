@@ -81,6 +81,7 @@
     <Compile Include="Domain\NodeVO.cs" />
     <Compile Include="Domain\PageTagObject.cs" />
     <Compile Include="Domain\PostMessageVO.cs" />
+    <Compile Include="Domain\PromoteVO.cs" />
     <Compile Include="DTOConverter\PostVOConverter.cs" />
     <Compile Include="DTOConverter\NodeVOConverter.cs" />
     <Compile Include="DTO\FileDto.cs" />

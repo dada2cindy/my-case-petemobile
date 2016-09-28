@@ -74,6 +74,7 @@
 
     <property name="IsNew" column="IsNew" type="Boolean" />
     <property name="IsHot" column="IsHot" type="Boolean" />
+    <property name="IsPromote" column="IsPromote" type="Boolean" />
 
   </class>
 

@@ -350,5 +350,83 @@ namespace WuDada.Core.Post.Service.Impl
         {
             return PostDao.GetNodeByName(name);
         }
+
+        /// <summary>
+        /// 抓出推薦的手機折扣
+        /// <param name="count">數量</param>
+        /// <returns>搜尋結果</returns>
+        public IList<PromoteVO> GetPromoteList(int count)
+        {
+            IList<PromoteVO> result = new List<PromoteVO>();
+
+            //50強手機
+            Dictionary<string, string> conditionsPhone = new Dictionary<string, string>();
+            conditionsPhone.Add("NodeId", "3");
+            conditionsPhone.Add("PageIndex", "0");
+            conditionsPhone.Add("PageSize", count.ToString());
+            conditionsPhone.Add("Order", string.Format("order by {0}", "p.WarrantySuppliers, p.SortNo, p.Title"));
+
+            IList<PostVO> phoneList = PostDao.GetPostList(conditionsPhone);
+
+            if (phoneList != null && phoneList.Count > 0)
+            {
+                foreach (PostVO vo in phoneList)
+                {
+                    PromoteVO promoteVO = new PromoteVO();
+                    promoteVO.WarrantySuppliers = vo.WarrantySuppliers;
+                    promoteVO.SortNo = vo.SortNo;
+                    promoteVO.Title = vo.Title;
+                    promoteVO.SellPrice = vo.SellPrice.ToString();
+                    promoteVO.SellPriceW1 = GetPromoteSellPrice(vo.SellPrice, "中華電信");
+                    promoteVO.SellPriceW2 = GetPromoteSellPrice(vo.SellPrice, "遠傳");
+                    promoteVO.SellPriceW3 = GetPromoteSellPrice(vo.SellPrice, "台哥大");
+                    promoteVO.SellPriceW4 = GetPromoteSellPrice(vo.SellPrice, "亞太電信");
+                    promoteVO.SellPriceW5 = GetPromoteSellPrice(vo.SellPrice, "台灣之星");
+
+                    result.Add(promoteVO);
+                }
+            }
+
+
+            return result;
+        }
+
+        private string GetPromoteSellPrice(double? sellPrice, string warrantySuppliers)
+        {
+            string result = "特價中";
+
+            //搜尋條件
+            Dictionary<string, string> conditions = new Dictionary<string, string>();
+            conditions.Add("NodeId", "5");
+            conditions.Add("ProductKeyWord", warrantySuppliers);
+            conditions.Add("PageIndex", "0");
+            conditions.Add("PageSize", "1");
+            conditions.Add("IsPromote", "true");
+            conditions.Add("Order", string.Format("order by {0}", "p.WarrantySuppliers, p.Type, p.SortNo, p.PostId"));
+
+            IList<PostVO> discountList = PostDao.GetPostList(conditions);
+
+            if (discountList != null && discountList.Count > 0)
+            {
+                PostVO discount = discountList[0];
+                double discountPrice = 0;
+
+                if (sellPrice.HasValue && double.TryParse(discount.CustomField1, out discountPrice))
+                {
+                    double finalPrice = sellPrice.Value - discountPrice;
+
+                    if (finalPrice > 0)
+                    {
+                        result = finalPrice.ToString();
+                    }
+                    else
+                    {
+                        result = "0";
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }
