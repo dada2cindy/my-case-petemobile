@@ -121,6 +121,17 @@
                         </table>
                     </td>
                 </tr>--%>
+                <tr>
+                    <td>
+                        50強
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlIsPromote" runat="server">         
+                            <asp:ListItem Text="否" Value="False"></asp:ListItem>                   
+                            <asp:ListItem Text="是" Value="True"></asp:ListItem>                            
+                        </asp:DropDownList>
+                    </td>
+                </tr>
                  <tr>
                     <td>
                         上架
@@ -160,6 +171,13 @@
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr>
                     <td align="left">
+                        關鍵字:
+                        <asp:TextBox ID="txtSearchKeyword" runat="server"></asp:TextBox>
+                        &nbsp;&nbsp;&nbsp;
+                        <br />
+                        <br />
+                        <asp:Button ID="btnSearch" runat="server" Text="查詢" OnClick="btnSearch_Click" ValidationGroup="Search" />
+                        &nbsp;&nbsp;&nbsp;
                         <asp:Button ID="btnShowAdd" runat="server" Text="新增門號折扣" OnClick="btnShowAdd_Click"/>
                         <br />
                         <br />
@@ -194,7 +212,7 @@
                         <ItemTemplate>
                             <asp:Label ID="lblType" runat="server" Text='<%# Bind("GetStr_Type_3G4G") %>'></asp:Label>
                         </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Left" Width="20%" />
+                        <ItemStyle HorizontalAlign="Left" Width="5%" />
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:TemplateField> 
                     <asp:TemplateField HeaderText="方案">
@@ -204,10 +222,31 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left" Width="20%" />
                         <HeaderStyle HorizontalAlign="Center" />
-                    </asp:TemplateField>                                        
+                    </asp:TemplateField>   
+                    <asp:TemplateField HeaderText="折扣">
+                        <ItemTemplate>                           
+                            <asp:Label ID="lblCustomField1" runat="server" Text='<%# Bind("CustomField1") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Left" Width="20%" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>  
+                    <asp:TemplateField HeaderText="預繳">
+                        <ItemTemplate>                            
+                            <asp:Label ID="lblCustomField2" runat="server" Text='<%# Bind("CustomField2") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Left" Width="20%" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>                                       
                     <asp:TemplateField HeaderText="排序">
                         <ItemTemplate>
                             <asp:Label ID="lblSort" runat="server" Text='<%# Bind("SortNo") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" Width="10%" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="50強">
+                        <ItemTemplate>
+                            <asp:Label ID="lblGetStr_IsPromote" runat="server" Text='<%# Bind("GetStr_IsPromote") %>'></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" Width="10%" />
                         <HeaderStyle HorizontalAlign="Center" />

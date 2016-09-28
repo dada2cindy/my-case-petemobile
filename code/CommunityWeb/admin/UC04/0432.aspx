@@ -141,6 +141,17 @@
                 </tr>
                  <tr>
                     <td>
+                        50強
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlIsPromote" runat="server">         
+                            <asp:ListItem Text="否" Value="False"></asp:ListItem>                   
+                            <asp:ListItem Text="是" Value="True"></asp:ListItem>                            
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
                         上架
                     </td>
                     <td>
@@ -233,6 +244,13 @@
                     <asp:TemplateField HeaderText="排序">
                         <ItemTemplate>
                             <asp:Label ID="lblSort" runat="server" Text='<%# Bind("SortNo") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" Width="10%" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="50強">
+                        <ItemTemplate>
+                            <asp:Label ID="lblGetStr_IsPromote" runat="server" Text='<%# Bind("GetStr_IsPromote") %>'></asp:Label>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" Width="10%" />
                         <HeaderStyle HorizontalAlign="Center" />

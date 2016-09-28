@@ -32,6 +32,13 @@ public partial class product : System.Web.UI.Page
         LoadBannerRight();
         LoadProduct();
         LoadSuppliersTag();
+        LoadPromoteList();
+    }
+
+    private void LoadPromoteList()
+    {
+        //IList<PromoteVO> list = m_PostService.GetPromoteList(50);
+        //int count = list.Count;
     }
 
     private void LoadSuppliersTag()
