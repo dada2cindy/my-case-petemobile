@@ -147,88 +147,37 @@
 	<!-- detial fifty ##################-->
 	<div class="product_detail" id="detial_fif">
 		<div class="contant_title">50強</div>
-    <%--<ul class="store_list_a">
-      <a href="#pro_1"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_apple.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_2"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_asus.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_3"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_htc.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_4"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_lg.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_5"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_samsung.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_6"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_sony.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_7"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_infocus.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_8"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_wuawei.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_9"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_sharp.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_10"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_oppo.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_11"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_pin.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_12"><li class="store_item_a store_item_logo border"
-          style="background-image: url('imgs/logo/logo_jbl.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-      <a href="#pro_12"><li class="store_item_a store_item_logo border store_item_a_last"
-          style="background-image: url('imgs/logo/logo_mi.png');">
-          <div class="corner_bg corner_img"></div>
-      </li></a>
-
-      <!--最後一組請記得在li之處要加上 store_list_a_last 這個class-->
-    </ul>--%>
-
-    <!-- apple -->
-    <%--<div class="product_ov">
-      <div class="product_ov_img">
-        <a name="pro_1" id="A1"><div style="background-image:url('imgs/logo/logo_apple.png')"></div></a>
-      </div>
-      <div class="product_ov_item">
-        <div class="product_ov_item_name">
-          <a href="products_detail.php?idept=1&amp;pk=527">iphone se 16GB</a>
-        </div>
-        <div class="product_ov_item_price">$13800</div>
-      </div>
-      <div class="product_ov_item">
-        <div class="product_ov_item_name">
-          <a href="products_detail.php?idept=1&amp;pk=527">iphone se 16GB</a>
-        </div>
-        <div class="product_ov_item_price">$13800</div>
-      </div>
-      <div class="product_ov_item product_ov_item-last">
-        <div class="product_ov_item_name">
-          <a href="products_detail.php?idept=1&amp;pk=527">iphone se 16GB</a>
-        </div>
-        <div class="product_ov_item_price">$13800</div>
-      </div>
-    </div>--%>
-	</div>
+    <ul class="store_list_a">
+      <asp:Literal ID="ltlSuppliersTag2" runat="server"></asp:Literal>	      
+    </ul>
+        <asp:Literal ID="ltlProducts2" runat="server"></asp:Literal>	
+        <%--<div class="product_ov_br" id="pro_1">
+            <table class="product_ov" style="width: 100%;">
+                <tr>
+                    <th>
+                        <div style="position: relative; height: 25px;">
+                            <img src="imgs/logo/logo_apple.png" width="94" height="42" style="position: absolute;" />
+                        </div>
+                    </th>
+                    <th>單機價</th>
+                    <th>中華電信699(4G吃到飽)</th>
+                    <th>台哥大689(4G吃到飽)</th>
+                    <th>遠傳698(4G吃到飽)</th>
+                    <th>亞太750(4G吃到飽)</th>
+                    <th>台灣之星799(4G吃到飽)</th>
+                </tr>
+                <tr>
+                    <td class="product_ov_type">iphone se 16GB</td>
+                    <td class="product_ov_price">$13800</td>
+                    <td class="product_ov_price">$13800</td>
+                    <td class="product_ov_price">$13800</td>
+                    <td class="product_ov_price">$13800</td>
+                    <td class="product_ov_price">$13800</td>
+                    <td class="product_ov_price">$13800</td>
+                </tr>
+            </table>
+        </div>--%>        
+    </div>
 	<!-- ################## detial fifty-->
 </asp:Content>
 

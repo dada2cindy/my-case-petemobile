@@ -126,13 +126,8 @@ public partial class products : System.Web.UI.Page
             for (int i = 0; i < list.Count; i++)
             {
                 PostVO post = list[i];
-                string lastCss = "";
-                if (i == list.Count - 1)
-                {
-                    lastCss = " product_ov_item-last";
-                }
-                sb.AppendFormat("<div class='product_ov_item {0}'><div class='product_ov_item_name'><a href='product.aspx?id={1}'>{2}</a></div><div class='product_ov_item_price'>{3}</div></div>"
-                    , lastCss, post.PostId, post.Title, post.SellPrice);
+                sb.AppendFormat("<tr onclick=\"window.location='product.aspx?id={0}';\" style='cursor:pointer;'><td class='product_ov_type'>{1}</td><td class='product_ov_price'>${2}</td></tr>"
+                    , post.PostId, post.Title, post.SellPrice);
             }
         }
        
@@ -142,10 +137,12 @@ public partial class products : System.Web.UI.Page
     private string GetSupplierTable(NodeVO vo)
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append("<div class='product_ov'>");
-        sb.AppendFormat("<div class='product_ov_img'><a name='pro_{0}' id='pro_{0}'><div style=\"background-image:url('upload/{1}')\"></div></a></div>"
-            , vo.NodeId, vo.PicFileName);
+        sb.AppendFormat("<div class='product_ov_br' id='pro_{0}'>", vo.NodeId);
+        sb.AppendFormat("<div class='product_ovlogo' style=\"background-image:url('upload/{0}')\"></div>"
+            , vo.PicFileName);
+        sb.Append("<table class='product_ov'><tr><th class='product_ov_thtype'></th><th class='product_ov_thprice'></th></tr>");
         sb.Append("{0}");
+        sb.Append("</table>");
         sb.Append("</div>");
         return sb.ToString();
     }

@@ -25,7 +25,6 @@ li{
 .thethree
 {width: 1080px;}
 
-
 /*  ---------------------------- Color ---------------------------- */
 .themecolor_main{ background-color: #00469B; color: white;}
 .themecolor_sec{ background-color: #d7f234; color: black;}
@@ -37,7 +36,8 @@ li{
 .border{border: #CCCCCC solid 1px;}
 .txt_themecolor_main{ color: #00469B;}
 .txt_highline{color: #C2272D;}
-
+.discount_list_pro,.discount_list_dis,.discount_list_pre,.discount_list_tran,
+.discount_list_con{border-bottom: #CCCCCC solid 1px;}
 /*  ---------------------------- font ---------------------------- */
 .cycle-pager-active{color: #00469B;}
 .store_item_a{font-size: 20px; font-weight: 700;}
@@ -57,8 +57,8 @@ li{
 .discount_list_contant td{font-size: 18px;}
 .discount_list_dis{color: #C2272D; font-weight: 700}
 .discount_list_pre{color: #C2272D; font-weight: 700}
-.product_ov_item_name{ font-size: 18px;}
-.product_ov_item_price{ font-size: 18px; color: #C2272D;}
+.product_ov_type{ font-size: 18px;}
+.product_ov_price{ font-size: 18px; color: #C2272D;}
 .product_item_title {font-size: 18px; font-weight: 700}
 .product_item_priceDis{color: #C2272D; text-decoration:line-through}
 .product_item_price{color: #C2272D;}
@@ -72,7 +72,7 @@ li{
 
 /* ---------------------------- imgs ---------------------------- */
 .header_logo,.header_fb,.navbar,.nav_search_txt,.navbar_products,.bg_nowkill,.contant_title,
-.store_item_b_img,.corner_bg,.store_item_a,.discount_list_img,.product_ov_img div,
+.store_item_b_img,.corner_bg,.store_item_a,.discount_list_img,.product_ovlogo,
 .detial_tab_dis,.detial_tab_pro,.detial_tab_com,.detial_tab_fif{
   background-repeat: no-repeat;
 }
@@ -100,8 +100,9 @@ li{
 .bg_disfrom_pre{background-image: url("../imgs/common/disfrom_pre.png"); background-size: 120px 40px; background-position: center center;}
 .bg_disfrom_tran{background-image: url("../imgs/common/disfrom_tran.png"); background-size: 140px 40px; background-position: center center;}
 .bg_disfrom_con{background-image: url("../imgs/common/disfrom_con.png"); background-size: 300px 40px; background-position: center center;}
-.product_ov_img{background-image: url("../imgs/common/greenline.png"); background-size: 648px 40px;}
-.product_ov_img div{ background-size: 92px 40px; background-position: left center;}
+.product_ovlogo{background-size: auto 40px; background-position: center center; background-color: white;}
+.product_ov_thtype{background-image: url("../imgs/common/proform_type.png"); background-size: 410px 40px; background-position: center center;}
+.product_ov_thprice{background-image: url("../imgs/common/proform_price.png"); background-size: 220px 40px; background-position: center center;}
 .detial_tab_dis{background-image: url("../imgs/common/detial_tab_dis.png");}
 .detial_tab_pro{background-image: url("../imgs/common/detial_tab_pro.png");}
 .detial_tab_com{background-image: url("../imgs/common/detial_tab_com.png");}
@@ -201,18 +202,29 @@ li{
 }
 
 /* product overview */
-.product_ov{
+.product_ov_br{
   clear: both;
   margin-bottom: 40px;
 }
-.product_ov_img{
-  height: 40px;
+.product_ovlogo{float:left; width: 110px; height: 40px; border-bottom:#CCCCCC solid 1px;}
+.product_ov{width: 634px;}
+.product_ov th{height: 40px; border-bottom:#CCCCCC solid 1px;}
+.product_ov td{height: 40px;line-height: 40px; border-bottom:#CCCCCC solid 1px;}
+.product_ov_thimg{width: 110px;}
+.product_ov_type{
+  width: 414px;
+  text-align: left;
+  padding-left: 15px;
 }
-.product_ov_img div{
-  height: 40px;
-  width: 92px;
-  background-color: white;
+.product_ov_price{
+	width: 220px;
+	text-align: center;
+	vertical-align: middle;
 }
+
+
+
+
 .product_ov_item{
   height: 40px;
   line-height: 40px;
@@ -221,17 +233,7 @@ li{
 .product_ov_item-last{
   border-bottom:#CCCCCC solid 1px;
 }
-.product_ov_item_name{
-  float: left;
-  height: 40px;
-  margin-left: 15px;
-}
-.product_ov_item_price{
-  float: right;
-  height: 40px;
-  text-align: right;
-  margin-right: 15px;
-}
+
 
 /* product item */
 .product_item{
@@ -435,7 +437,6 @@ li{
 .discount_list_info_tran{width: 12.43299%; text-align: center; background-color: #F7F5F6;}
 .discount_list_info_con{width: 28.927835%}
 
-
 /* --------- comment --------- */
 .comment_form{
   width: 95%;
@@ -522,3 +523,7 @@ li{
   text-align: center;
 }
 /* -------------------------------------------------------- */
+
+.promote_title {
+	font-weight:bold;
+}
