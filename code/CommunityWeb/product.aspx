@@ -150,33 +150,7 @@
     <ul class="store_list_a">
       <asp:Literal ID="ltlSuppliersTag2" runat="server"></asp:Literal>	      
     </ul>
-        <asp:Literal ID="ltlProducts2" runat="server"></asp:Literal>	
-        <%--<div class="product_ov_br" id="pro_1">
-            <table class="product_ov" style="width: 100%;">
-                <tr>
-                    <th>
-                        <div style="position: relative; height: 25px;">
-                            <img src="imgs/logo/logo_apple.png" width="94" height="42" style="position: absolute;" />
-                        </div>
-                    </th>
-                    <th>單機價</th>
-                    <th>中華電信699(4G吃到飽)</th>
-                    <th>台哥大689(4G吃到飽)</th>
-                    <th>遠傳698(4G吃到飽)</th>
-                    <th>亞太750(4G吃到飽)</th>
-                    <th>台灣之星799(4G吃到飽)</th>
-                </tr>
-                <tr>
-                    <td class="product_ov_type">iphone se 16GB</td>
-                    <td class="product_ov_price">$13800</td>
-                    <td class="product_ov_price">$13800</td>
-                    <td class="product_ov_price">$13800</td>
-                    <td class="product_ov_price">$13800</td>
-                    <td class="product_ov_price">$13800</td>
-                    <td class="product_ov_price">$13800</td>
-                </tr>
-            </table>
-        </div>--%>        
+        <asp:Literal ID="ltlProducts2" runat="server"></asp:Literal>	                
     </div>
 	<!-- ################## detial fifty-->
 </asp:Content>

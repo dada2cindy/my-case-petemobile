@@ -39,9 +39,7 @@ public partial class product : System.Web.UI.Page
     {
         IList<PromoteVO> list = m_PostService.GetPromoteList(50);
 
-        LoadSuppliersTag2(list);
-
-        //int count = list.Count;
+        LoadSuppliersTag2(list);        
     }
 
     private void LoadSuppliersTag2(IList<PromoteVO> promoteList)
