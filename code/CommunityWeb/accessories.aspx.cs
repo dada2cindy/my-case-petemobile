@@ -126,7 +126,7 @@ public partial class accessories : System.Web.UI.Page
             for (int i = 0; i < list.Count; i++)
             {
                 PostVO post = list[i];
-                sb.AppendFormat("<tr onclick=\"window.location='product.aspx?id={0}';\"><td class='product_ov_type'>{1}</td><td class='product_ov_price'>${2}</td></tr>"
+                sb.AppendFormat("<tr onclick=\"window.location='product.aspx?id={0}';\" style='cursor:pointer;'><td class='product_ov_type'>{1}</td><td class='product_ov_price'>${2}</td></tr>"
                     , post.PostId, post.Title, post.SellPrice);
             }
         }

@@ -80,7 +80,7 @@ public partial class promote : System.Web.UI.Page
             if (promoteList.Count(p => p.WarrantySuppliers.Equals(vo.Name)) > 0)
             {
                 string supplierTable = GetSupplierTable2(vo);
-                string productList = GetProductList2(vo, promoteList);
+                string productList = GetProductList(vo, promoteList);
                 sb.AppendFormat(supplierTable, productList);
             }
         }
@@ -88,7 +88,7 @@ public partial class promote : System.Web.UI.Page
         ltlProducts.Text = sb.ToString();
     }
 
-    private string GetProductList2(NodeVO vo, IList<PromoteVO> promoteList)
+    private string GetProductList(NodeVO vo, IList<PromoteVO> promoteList)
     {
         StringBuilder sb = new StringBuilder();
 
@@ -99,13 +99,14 @@ public partial class promote : System.Web.UI.Page
             for (int i = 0; i < list.Count; i++)
             {
                 PromoteVO promoteVO = list[i];
-                sb.AppendFormat("<tr><td class='product_ov_type'>{0}</td><td class='product_ov_price'>${1}</td><td class='product_ov_price'>${2}</td><td class='product_ov_price'>${3}</td><td class='product_ov_price'>${4}</td><td class='product_ov_price'>${5}</td><td class='product_ov_price'>${6}</td></tr>"
+                sb.AppendFormat("<tr onclick=\"window.location='product.aspx?id={7}';\" style='cursor:pointer;'><td class='product_ov_type'>{0}</td><td class='product_ov_price'>${1}</td><td class='product_ov_price'>${2}</td><td class='product_ov_price'>${3}</td><td class='product_ov_price'>${4}</td><td class='product_ov_price'>${5}</td><td class='product_ov_price'>${6}</td></tr>"
                     , promoteVO.Title, promoteVO.SellPrice
                     , promoteVO.SellPriceW1
                     , promoteVO.SellPriceW2
                     , promoteVO.SellPriceW3
                     , promoteVO.SellPriceW4
-                    , promoteVO.SellPriceW5);
+                    , promoteVO.SellPriceW5
+                    , promoteVO.Id);
             }
         }
 
