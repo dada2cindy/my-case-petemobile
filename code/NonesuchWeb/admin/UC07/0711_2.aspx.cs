@@ -18,6 +18,7 @@ using WuDada.Core.Post.Domain;
 using WuDada.Core.Accounting.Service;
 using WuDada.Core.Accounting.Domain;
 using System.Drawing;
+using WuDada.Core.Generic.Util;
 
 public partial class admin_UC07_0711_2 : System.Web.UI.Page
 {
@@ -62,8 +63,8 @@ public partial class admin_UC07_0711_2 : System.Web.UI.Page
         if (!IsPostBack)
         {
             ////先更新到今天之前的結帳
-            m_AccountingService.UpdateCash(); 
-            txtDate.Text = DateTime.Today.ToString("yyyy/MM/dd");
+            m_AccountingService.UpdateCash();            
+            txtDate.Text = ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).ToString("yyyy/MM/dd");
 
             ShowMode();                       
             LoadDataToUI();
