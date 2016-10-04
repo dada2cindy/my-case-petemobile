@@ -768,5 +768,11 @@ namespace WuDada.Core.Generic.Util
         {
             return (pageIndex * pageSize) + pageSize;
         }
+
+        public static DateTime UtcDateTimeToTaiwanDateTime (DateTime dateTime)
+        {
+            TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
+            return TimeZoneInfo.ConvertTimeFromUtc(dateTime, cstZone);
+        }
     }
 }

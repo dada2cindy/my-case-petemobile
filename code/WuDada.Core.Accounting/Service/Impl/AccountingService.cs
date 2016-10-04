@@ -13,6 +13,7 @@ using WuDada.Core.Accounting.Persistence;
 using WuDada.Core.Member.Domain;
 using WuDada.Core.Post.Domain;
 using Common.Logging;
+using WuDada.Core.Generic.Util;
 
 namespace WuDada.Core.Accounting.Service.Impl
 {
@@ -144,7 +145,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                     //進度達成率  總毛利/ [本月目標* (當月已過天數/當月天數)]
                     if (salesStatisticsVO.TotalProfit != 0 && salesStatisticsVO.Target != 0)
                     {
-                        if (DateTime.Today.ToString("yyyyMM").Equals(dateStart.ToString("yyyyMM")))
+                        if (ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).ToString("yyyyMM").Equals(dateStart.ToString("yyyyMM")))
                         {
                             //為本月要算出目前日子已過了本月幾分之幾, 進度達成率=總毛利/ [本月目標* (當月已過天數/當月天數)]
                             //salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TotalProfit / (salesStatisticsVO.Target * (DateTime.Today.Day / DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month))));
@@ -153,7 +154,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                             double rates = Convert.ToDouble(salesStatisticsVO.TargetAchievementRates * 100);
                             salesStatisticsVO.TargetAchievementRates = Math.Round(rates, 2);
 
-                            salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TargetAchievementRates * DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month)) / DateTime.Today.Day;
+                            salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TargetAchievementRates * DateTime.DaysInMonth(ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Year, ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Month)) / ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Day;
 
                             rates = Convert.ToDouble(salesStatisticsVO.TargetAchievementRates);
                             salesStatisticsVO.TargetAchievementRates = Math.Round(rates, 2);
@@ -210,7 +211,7 @@ namespace WuDada.Core.Accounting.Service.Impl
 
             if (salesStatisticsVO.TotalProfit != 0 && salesStatisticsVO.Target != 0)
             {
-                if (DateTime.Today.ToString("yyyyMM").Equals(dateStart.ToString("yyyyMM")))
+                if (ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).ToString("yyyyMM").Equals(dateStart.ToString("yyyyMM")))
                 {
                     //為本月要算出目前日子已過了本月幾分之幾, 進度達成率=總毛利/ [本月目標* (當月已過天數/當月天數)]
                     //salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TotalProfit / (salesStatisticsVO.Target * (DateTime.Today.Day / DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month))));
@@ -219,7 +220,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                     double rates = Convert.ToDouble(salesStatisticsVO.TargetAchievementRates * 100);
                     salesStatisticsVO.TargetAchievementRates = Math.Round(rates, 2);
 
-                    salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TargetAchievementRates * DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month)) / DateTime.Today.Day;
+                    salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TargetAchievementRates * DateTime.DaysInMonth(ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Year, ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Month)) / ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Day;
 
                     rates = Convert.ToDouble(salesStatisticsVO.TargetAchievementRates);
                     salesStatisticsVO.TargetAchievementRates = Math.Round(rates, 2);
@@ -394,7 +395,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                     //進度達成率  總毛利/ [本月目標* (當月已過天數/當月天數)]
                     if (salesStatisticsVO.TotalProfit != 0 && salesStatisticsVO.Target != 0)
                     {
-                        if (DateTime.Today.ToString("yyyyMM").Equals(dateStart.ToString("yyyyMM")))
+                        if (ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).ToString("yyyyMM").Equals(dateStart.ToString("yyyyMM")))
                         {
                             //為本月要算出目前日子已過了本月幾分之幾, 進度達成率=總毛利/ [本月目標* (當月已過天數/當月天數)]
                             //salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TotalProfit / (salesStatisticsVO.Target * (DateTime.Today.Day / DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month))));
@@ -403,7 +404,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                             double rates = Convert.ToDouble(salesStatisticsVO.TargetAchievementRates * 100);
                             salesStatisticsVO.TargetAchievementRates = Math.Round(rates, 2);
 
-                            salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TargetAchievementRates * DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month)) / DateTime.Today.Day;
+                            salesStatisticsVO.TargetAchievementRates = (salesStatisticsVO.TargetAchievementRates * DateTime.DaysInMonth(ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Year, ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Month)) / ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Day;
 
                             rates = Convert.ToDouble(salesStatisticsVO.TargetAchievementRates);
                             salesStatisticsVO.TargetAchievementRates = Math.Round(rates, 2);
@@ -456,7 +457,7 @@ namespace WuDada.Core.Accounting.Service.Impl
                 DateTime lastCashDate = postList[0].CloseDate.Value;
 
                 DateTime dateFrom = lastCashDate.AddDays(1);
-                DateTime dateTo = DateTime.Today.AddDays(-1);
+                DateTime dateTo = ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).AddDays(-1);
 
                 UpdateCashByPeriod(dateFrom, dateTo);
             }            
