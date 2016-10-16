@@ -137,7 +137,7 @@ public partial class promote : System.Web.UI.Page
         string result = "無";
 
         //搜尋條件
-        Dictionary<string, string> conditions = new Dictionary<string, string>();
+        Dictionary<string, string> conditions = new Dictionary<string, string>();        
         conditions.Add("NodeId", "5");
         conditions.Add("ProductKeyWord", warrantySuppliers);
         conditions.Add("PageIndex", "0");
