@@ -21,7 +21,13 @@ namespace WuDada.Core.Post.Domain
         #region Property
 
         /// <summary>
-        /// 圖檔
+        /// Id
+        /// </summary>
+        [DataMember]
+        public virtual int Id { get; set; }
+
+        /// <summary>
+        /// 品名
         /// </summary>
         [DataMember]
         public virtual string Title { get; set; }

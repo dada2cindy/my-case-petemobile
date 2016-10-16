@@ -373,6 +373,7 @@ namespace WuDada.Core.Post.Service.Impl
                 foreach (PostVO vo in phoneList)
                 {
                     PromoteVO promoteVO = new PromoteVO();
+                    promoteVO.Id = vo.PostId;
                     promoteVO.WarrantySuppliers = vo.WarrantySuppliers;
                     promoteVO.SortNo = vo.SortNo;
                     promoteVO.Title = vo.Title;
