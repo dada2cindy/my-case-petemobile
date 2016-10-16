@@ -63,8 +63,8 @@
             $("#detial_com").hide();
             $("#detial_dis").hide();
         }
-
-</script>
+    </script>
+    <link rel="stylesheet" href="css/product.css" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">        
     <div class="breadcrumb">
@@ -130,7 +130,7 @@
 	<!-- ################## detial discount-->
 
 	<!-- detial product ##################-->
-	<div class="product_detail" id="detial_pro">
+	<div class="product_detail sogi" id="detial_pro">
 		<div class="contant_title">產品介紹</div>
         <asp:Literal ID="ltlHtmlContent" runat="server"></asp:Literal>        
 	</div>
