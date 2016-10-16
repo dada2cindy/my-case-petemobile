@@ -361,9 +361,10 @@ namespace WuDada.Core.Post.Service.Impl
 
             //50強手機
             Dictionary<string, string> conditionsPhone = new Dictionary<string, string>();
+            conditionsPhone.Add("IsPromote", "true");            
             conditionsPhone.Add("NodeId", "3");
             conditionsPhone.Add("PageIndex", "0");
-            conditionsPhone.Add("PageSize", count.ToString());
+            conditionsPhone.Add("PageSize", count.ToString());            
             conditionsPhone.Add("Order", string.Format("order by {0}", "p.WarrantySuppliers, p.SortNo, p.Title"));
 
             IList<PostVO> phoneList = PostDao.GetPostList(conditionsPhone);
