@@ -17,6 +17,7 @@ using WuDada.Core.Post;
 using WuDada.Core.Post.Domain;
 using System.Linq;
 using System.Threading;
+using WuDada.Core.Generic.Util;
 
 public partial class admin_UC05_0511 : System.Web.UI.Page
 {
@@ -84,6 +85,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         {
             btnSearchExport.Visible = false;
             btnEdit.Visible = false;
+            btnDelete.Visible = false;
         }
 
         if (m_ConfigHelper.OnlyAdminCreate && !m_SessionHelper.IsAdmin)
@@ -149,14 +151,14 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             switch (ddlSearchBirthDay.SelectedValue)
             {
                 case "今天生日":
-                    conditions.Add("BirthdayMonth", DateTime.Today.Month.ToString());
-                    conditions.Add("BirthdayDay", DateTime.Today.Day.ToString());
+                    conditions.Add("BirthdayMonth", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Month.ToString());
+                    conditions.Add("BirthdayDay", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Day.ToString());
                     break;
                 case "本月生日":
-                    conditions.Add("BirthdayMonth", DateTime.Today.Month.ToString());
+                    conditions.Add("BirthdayMonth", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Month.ToString());
                     break;
                 case "下個月生日":
-                    conditions.Add("BirthdayMonth", DateTime.Today.AddMonths(1).Month.ToString());
+                    conditions.Add("BirthdayMonth", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).AddMonths(1).Month.ToString());
                     break;
             }
         }
@@ -279,14 +281,14 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             switch (ddlSearchBirthDay.SelectedValue)
             {
                 case "今天生日":
-                    conditions.Add("BirthdayMonth", DateTime.Today.Month.ToString());
-                    conditions.Add("BirthdayDay", DateTime.Today.Day.ToString());
+                    conditions.Add("BirthdayMonth", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Month.ToString());
+                    conditions.Add("BirthdayDay", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Day.ToString());
                     break;
                 case "本月生日":
-                    conditions.Add("BirthdayMonth", DateTime.Today.Month.ToString());
+                    conditions.Add("BirthdayMonth", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Month.ToString());
                     break;
                 case "下個月生日":
-                    conditions.Add("BirthdayMonth", DateTime.Today.AddMonths(1).Month.ToString());
+                    conditions.Add("BirthdayMonth", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).AddMonths(1).Month.ToString());
                     break;
             }
         }
@@ -379,7 +381,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         }
 
         string uploadRootPath = string.IsNullOrEmpty(m_ConfigHelper.ApiUrl) ? Server.MapPath("~\\") + "\\App_Data\\temp.xls" : "";
-        NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}客戶.xls", DateTime.Today.ToString("yyyyMMdd")), true, uploadRootPath);
+        NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}客戶.xls", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).ToString("yyyyMMdd")), true, uploadRootPath);
     }
 
     private void ClearUI()
@@ -535,7 +537,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
         ////生日年月日
         ddlBirthDayYear.Items.Clear();
         ddlBirthDayYear.Items.Add(new ListItem("請選擇年", ""));
-        for (int i = 1900; i <= DateTime.Today.Year; i++)
+        for (int i = 1900; i <= ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Year; i++)
         {
             ddlBirthDayYear.Items.Add(i.ToString());
         }

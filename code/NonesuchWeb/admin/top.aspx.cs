@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using System.Web.UI;
+using WuDada.Core.Generic.Util;
 
 public partial class admin_top : System.Web.UI.Page
 {
@@ -12,7 +13,7 @@ public partial class admin_top : System.Web.UI.Page
         {
             if (m_SessionHelper.LoginUser != null)
             {
-                lblMsg.Text = m_SessionHelper.LoginUser.FullNameInChinese + "@" + HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"] + " > 歡迎您再次登入！今天是民國" + (DateTime.Today.Year - 1911).ToString() + "年" + DateTime.Today.Month.ToString("00") + "月" + DateTime.Today.Day.ToString("00") + "日";
+                lblMsg.Text = m_SessionHelper.LoginUser.FullNameInChinese + "@" + HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"] + " > 歡迎您再次登入！今天是民國" + (ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Year - 1911).ToString() + "年" + ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Month.ToString("00") + "月" + ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Day.ToString("00") + "日";
             }
         }
     }

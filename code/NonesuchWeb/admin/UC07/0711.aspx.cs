@@ -18,6 +18,7 @@ using WuDada.Core.Post.Domain;
 using WuDada.Core.Accounting.Service;
 using WuDada.Core.Accounting.Domain;
 using System.Threading;
+using WuDada.Core.Generic.Util;
 
 public partial class admin_UC07_0711 : System.Web.UI.Page
 {
@@ -281,7 +282,7 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
     private void InitDDL()
     {
         ddlSearchYear.Items.Clear();
-        for (int i = DateTime.Today.Year; i >= 2014; i--)
+        for (int i = ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Year; i >= 2014; i--)
         {
             ddlSearchYear.Items.Add(new ListItem(i.ToString()));
         }
@@ -292,7 +293,7 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
             ddlSearchMonth.Items.Add(new ListItem(i.ToString().PadLeft(2, '0')));
         }
 
-        ddlSearchMonth.SelectedValue = DateTime.Today.Month.ToString().PadLeft(2, '0');
+        ddlSearchMonth.SelectedValue = ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Month.ToString().PadLeft(2, '0');
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {

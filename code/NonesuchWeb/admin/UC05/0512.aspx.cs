@@ -13,6 +13,7 @@ using System.Data;
 using WuDada.Core.Auth;
 using WuDada.Core.Auth.Service;
 using WuDada.Core.Auth.Domain;
+using WuDada.Core.Generic.Util;
 
 public partial class admin_UC05_0512 : System.Web.UI.Page
 {
@@ -82,6 +83,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         if (!m_SessionHelper.IsAdmin)
         {
             btnSearchExport.Visible = false;
+            btnDelete.Visible = false;
         }
 
         if (m_ConfigHelper.OnlyAdminCreate && !m_SessionHelper.IsAdmin)
@@ -287,7 +289,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
         }
 
         string uploadRootPath = string.IsNullOrEmpty(m_ConfigHelper.ApiUrl) ? Server.MapPath("~\\") + "\\App_Data\\temp.xls" : "";
-        NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}庫存.xls", DateTime.Today.ToString("yyyyMMdd")), true, uploadRootPath);
+        NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}庫存.xls", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).ToString("yyyyMMdd")), true, uploadRootPath);
     }
 
     private void ClearUI()
@@ -327,7 +329,7 @@ public partial class admin_UC05_0512 : System.Web.UI.Page
                 }
                 else
                 {
-                    txtCloseDate.Text = DateTime.Today.ToString("yyyy/MM/dd");
+                    txtCloseDate.Text = ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).ToString("yyyy/MM/dd");
                 }
                 pnlContent.Visible = true;
                 rfCloseDate.Visible = true;

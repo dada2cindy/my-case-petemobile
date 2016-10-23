@@ -16,6 +16,7 @@ using WuDada.Core.Common;
 using WuDada.Core.Common.Service;
 using System.IO;
 using System.Threading;
+using WuDada.Core.Generic.Util;
 
 public partial class admin_UC06_0611 : System.Web.UI.Page
 {
@@ -243,7 +244,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
         }
 
         string uploadRootPath = string.IsNullOrEmpty(m_ConfigHelper.ApiUrl) ? Server.MapPath("~\\") + "\\App_Data\\temp.xls" : "";
-        NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}檔案上傳.xls", DateTime.Today.ToString("yyyyMMdd")), true, uploadRootPath);
+        NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}檔案上傳.xls", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).ToString("yyyyMMdd")), true, uploadRootPath);
     }
 
     private void ClearUI()

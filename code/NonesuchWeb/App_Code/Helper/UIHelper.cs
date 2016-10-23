@@ -452,7 +452,7 @@ public class UIHelper
         string excelHeader = "<html><head><meta http-equiv=Content-Type content=text/html; charset=UTF-8></head><body>";
         string excelFooter = "</body></html>";
 
-        outFileName += "_" + DateTime.Today.Month.ToString("00") + DateTime.Today.Day.ToString("00") + ".xls";
+        outFileName += "_" + ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Month.ToString("00") + ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).Day.ToString("00") + ".xls";
 
         HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=" + outFileName);
 
