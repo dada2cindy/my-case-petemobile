@@ -84,7 +84,8 @@
                         <asp:Literal ID="ltlSummary" runat="server"></asp:Literal>
                         <li>
                             市價：<span class="product_item_priceDis">$<asp:Literal ID="ltlPrice" runat="server"></asp:Literal></span>
-						    <br/>單機價：<span class="product_item_price">$<asp:Literal ID="ltlSellPrice" runat="server"></asp:Literal></span>
+						    <br/>
+                            <asp:literal runat="server" ID="ltlPriceTitle" ></asp:literal>：<span class="product_item_price">$<asp:Literal ID="ltlSellPrice" runat="server"></asp:Literal></span>
 						</li>
 					</ul>
 					<div class="product_item_line"></div>

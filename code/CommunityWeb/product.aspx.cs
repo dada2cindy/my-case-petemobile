@@ -297,9 +297,14 @@ public partial class product : System.Web.UI.Page
         int id;
         if (!string.IsNullOrEmpty(Request["id"]) && int.TryParse(Request["id"], out id))
         {
-            PostVO post = m_PostService.GetPostById(id);
+            ltlPriceTitle.Text = "單機價";
+            PostVO post = m_PostService.GetPostByIdNoLazy(id);
             if (post != null && post.Flag == 1)
             {
+                if(post.Node!=null && post.Node.NodeId== 4)
+                {
+                    ltlPriceTitle.Text = "特價";
+                }
                 ltlProductPic.Text = string.Format("<div class='product_item_img' style=\"background-image:url('upload/{0}')\"></div>", post.PicFileName);
                 ltlTitle.Text = post.Title;
                 ltlPrice.Text = post.Price.ToString();

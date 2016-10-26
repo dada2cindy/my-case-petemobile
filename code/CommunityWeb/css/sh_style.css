@@ -259,7 +259,7 @@ li{
 }
 .product_item_title{
   height: 80px;
-  line-height: 80px;
+  line-height: 35px;
 }
 .product_item_info ul{
   margin-left: 15px;
