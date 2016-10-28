@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title> 品讚行動通訊聯合系統</title>
+    <asp:Literal ID="ltlTitle" runat="server"></asp:Literal>
     <link href="css/css.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -12,7 +12,7 @@
         <table border="0" align="center" cellpadding="0" cellspacing="0" width="100%">
             <tr>
                 <td height="34" class="text01-12-black" colspan="2">
-                    <font size="3"> 品讚行動通訊聯合系統</font>
+                    <font size="3"> <asp:Literal ID="ltlTitle2" runat="server"></asp:Literal></font>
                 </td>
             </tr>
             <tr>

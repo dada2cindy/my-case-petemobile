@@ -19,6 +19,9 @@ using WuDada.Core.Member;
 using WuDada.Core.Member.Service;
 using WuDada.Core.Member.Domain;
 using System.Threading;
+using WuDada.Core.Post;
+using WuDada.Core.Post.Service;
+using WuDada.Core.Post.Domain;
 
 public partial class admin_Login_Login : System.Web.UI.Page
 {
@@ -28,6 +31,8 @@ public partial class admin_Login_Login : System.Web.UI.Page
     IAuthService m_AuthService;
     MemberFactory m_MemberFactory;
     IMemberService m_MemberService;
+    PostFactory m_PostFactory;
+    IPostService m_PostService;
     WebLogService webLogService = new WebLogService();
     ConfigHelper m_ConfigHelper = new ConfigHelper();
 
@@ -37,6 +42,15 @@ public partial class admin_Login_Login : System.Web.UI.Page
         m_AuthService = m_AuthFactory.GetAuthService();
         m_MemberFactory = new MemberFactory();
         m_MemberService = m_MemberFactory.GetMemberService();
+        m_PostFactory = new PostFactory();
+        m_PostService = m_PostFactory.GetPostService();
+
+        if (!IsPostBack)
+        {
+            IList<NodeVO> storeList = m_PostService.GetNodeListByParentName("店家");
+            ltlTitle.Text = string.Format("<title> 品讚行動通訊聯合系統-{0}</title>", storeList[0].Name);
+            ltlTitle2.Text = string.Format("<品讚行動通訊聯合系統-{0}", storeList[0].Name);
+        }
     }      
 
     private void doLogin(string id, string pw)
