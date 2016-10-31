@@ -380,7 +380,7 @@ public partial class admin_UC05_0511 : System.Web.UI.Page
             }
         }
 
-        string uploadRootPath = string.IsNullOrEmpty(m_ConfigHelper.ApiUrl) ? Server.MapPath("~\\") + "\\App_Data\\temp.xls" : "";
+        string uploadRootPath = Server.MapPath("~\\") + "\\App_Data\\temp.xls";
         NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}客戶.xls", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).ToString("yyyyMMdd")), true, uploadRootPath);
     }
 

@@ -217,7 +217,7 @@ public partial class admin_UC07_0711 : System.Web.UI.Page
             }
         }
 
-        string uploadRootPath = string.IsNullOrEmpty(m_ConfigHelper.ApiUrl) ? Server.MapPath("~\\") + "\\App_Data\\temp.xls" : "";
+        string uploadRootPath = Server.MapPath("~\\") + "\\App_Data\\temp.xls";
         NPOIHelper.ExportByWeb(table, "業績", string.Format("{0}業績.xls", ym), true, uploadRootPath);
     }
 

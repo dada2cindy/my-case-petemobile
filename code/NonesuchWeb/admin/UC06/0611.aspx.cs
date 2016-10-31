@@ -243,7 +243,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
             }
         }
 
-        string uploadRootPath = string.IsNullOrEmpty(m_ConfigHelper.ApiUrl) ? Server.MapPath("~\\") + "\\App_Data\\temp.xls" : "";
+        string uploadRootPath = Server.MapPath("~\\") + "\\App_Data\\temp.xls";
         NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}檔案上傳.xls", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).ToString("yyyyMMdd")), true, uploadRootPath);
     }
 
@@ -408,8 +408,11 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
                 }
             }
         }
-        catch
+        catch(Exception ex)
         {
+            m_Log.Error("檔案傳輸錯誤");
+            m_Log.Error("ex:" + ex.Message);
+            lblMsg.Text = ex.Message;
             ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "js", JavascriptUtil.AlertJS("檔案傳輸錯誤!"), false);
             return;
         }
