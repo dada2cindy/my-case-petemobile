@@ -23,6 +23,7 @@ namespace WuDada.Core.Accounting.Service.Impl
         public IMemberService MemberService { get; set; }
         public IAuthService AuthService { get; set; }
         public IAccountingDao AccountingDao { get; set; }
+        private ILog m_Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         #region IAccountingService 成員
 
@@ -465,10 +466,13 @@ namespace WuDada.Core.Accounting.Service.Impl
 
         public void UpdateCashByPeriod(DateTime dateFrom, DateTime dateTo)
         {
+            m_Log.Debug("UpdateCashByPeriod dateFrom: " + dateFrom.ToString("yyyy/MM/dd"));
+            m_Log.Debug("UpdateCashByPeriod dateTo: " + dateTo.ToString("yyyy/MM/dd"));
             NodeVO node = PostService.GetNodeByName("#每日結帳");   
 
             for (DateTime day = dateFrom; day.Date <= dateTo; day = day.AddDays(1))
             {
+                m_Log.Debug("UpdateCashByPeriod day: " + day.ToString("yyyy/MM/dd"));
                 CashStatisticsVO cashStatisticsVO = GetCashStatisticsVO(day);
 
                 if (cashStatisticsVO != null)
