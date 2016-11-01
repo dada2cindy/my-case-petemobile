@@ -291,8 +291,10 @@ public partial class admin_UC07_0711_2 : System.Web.UI.Page
 
     protected void btnRefresh_Click(object sender, EventArgs e)
     {
-        DateTime dateTo = ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).AddDays(-1);
         DateTime dateFrom = ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).AddMonths(-1);
+        DateTime dateTo = ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).AddDays(-1);        
+        m_Log.Debug("btnRefresh_Click dateFrom: "+ dateFrom.ToString("yyyy/MM/dd"));
+        m_Log.Debug("btnRefresh_Click dateTo: " + dateTo.ToString("yyyy/MM/dd"));
         m_AccountingService.UpdateCashByPeriod(dateFrom, dateTo); 
     }
 }
