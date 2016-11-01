@@ -1,6 +1,7 @@
 ﻿using System;
 using WuDada.Core.Common.Domain;
 using WuDada.Core.Common.Persistence;
+using WuDada.Core.Generic.Util;
 
 namespace WuDada.Core.Common.Service.Impl
 {
@@ -28,7 +29,7 @@ namespace WuDada.Core.Common.Service.Impl
                 {
                     count += serialVO.Count;
                     serialVO.Count = count;
-                    serialVO.Date = DateTime.Now;
+                    serialVO.Date = ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow);
                     CommonDao.UpdateSerial(serialVO);
                 }
                 else
@@ -36,7 +37,7 @@ namespace WuDada.Core.Common.Service.Impl
                     serialVO = new SerialVO();
                     serialVO.SerialId = codeSearch;
                     serialVO.Count = count;
-                    serialVO.Date = DateTime.Now;
+                    serialVO.Date = ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow);
                     CommonDao.CreateSerial(serialVO);
                 }
 
