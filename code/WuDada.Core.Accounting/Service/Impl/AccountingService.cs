@@ -511,6 +511,7 @@ namespace WuDada.Core.Accounting.Service.Impl
         /// <returns>如果沒有前一天的結帳金額,則回傳null</returns>
         public CashStatisticsVO GetCashStatisticsVO(DateTime day)
         {
+            m_Log.Debug("GetCashStatisticsVO day: " + day.ToString("yyyy/MM/dd"));
             ////抓前一日的結帳金額，有的話才計算該天的結帳
             NodeVO node = PostService.GetNodeByName("#每日結帳");
             Dictionary<string, string> conditionsYesterdayCash = new Dictionary<string, string>();
@@ -524,7 +525,7 @@ namespace WuDada.Core.Accounting.Service.Impl
             {
                 CashStatisticsVO cashStatisticsVO = new CashStatisticsVO();
                 cashStatisticsVO.CashYesterday = postYesterdayCashList[0].Price;
-                cashStatisticsVO.CloseDate = day;
+                cashStatisticsVO.CloseDate = DateTime.Parse(day.ToString("yyyy/MM/dd"));
                 
                 //今日庫存進貨
                 Dictionary<string, string> conditionsBuyToday = new Dictionary<string, string>();
