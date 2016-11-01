@@ -150,7 +150,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
         fileVO.UpdatedDate = DateTime.Now;
         m_PostFileService.CreateFile(fileVO);                
         m_WebLogService.AddSystemLog(MsgVO.Action.新增, fileVO);
-        new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer(Server.MapPath("../../App_Data/upload/")))).Start();
+        new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer(Server.MapPath("../../upload/")))).Start();
         ClearUI();
         fillGridView();
     }
@@ -189,7 +189,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
         fileVO.UpdatedDate = DateTime.Now;
         m_PostFileService.UpdateFile(fileVO);
         m_WebLogService.AddSystemLog(MsgVO.Action.刪除, fileVO, "", string.Format("單號:{0}", fileVO.FileId));
-        new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer(Server.MapPath("../../App_Data/upload/")))).Start();
+        new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer(Server.MapPath("../../upload/")))).Start();
         ClearUI();
         fillGridView();
     }
@@ -243,7 +243,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
             }
         }
 
-        string uploadRootPath = Server.MapPath("~\\") + "\\App_Data\\temp.xls";
+        string uploadRootPath = Server.MapPath("~\\") + "\\temp.xls";
         NPOIHelper.ExportByWeb(table, "類別", string.Format("{0}檔案上傳.xls", ConvertUtil.UtcDateTimeToTaiwanDateTime(DateTime.UtcNow).ToString("yyyyMMdd")), true, uploadRootPath);
     }
 
@@ -324,7 +324,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
             fileVO.UpdatedDate = DateTime.Now;
             fileVO = m_PostFileService.UpdateFile(fileVO);
             m_WebLogService.AddSystemLog(MsgVO.Action.修改, fileVO, "", string.Format("單號:{0}", fileVO.FileId));
-            new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer(Server.MapPath("../../App_Data/upload/")))).Start();           
+            new Thread(new ThreadStart(() => ApiUtil.UpdateFileToServer(Server.MapPath("../../upload/")))).Start();           
             fillGridView();
             ClearUI();
             ShowMode();
@@ -382,7 +382,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
         try
         {
             IList<NodeVO> storeList = m_PostService.GetNodeListByParentName("店家");
-            string folder = Server.MapPath("~\\") + "\\App_Data\\upload\\";
+            string folder = Server.MapPath("~\\") + "\\upload\\";
             if (!System.IO.Directory.Exists(folder))
             {
                 System.IO.Directory.CreateDirectory(folder);
@@ -395,7 +395,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
                 if (hpf.ContentLength > 0)
                 {
                     string fileName = storeList[0].Name + DateTime.Now.ToString("yyyyMMddHHmmss") + System.IO.Path.GetFileName(hpf.FileName);
-                    hpf.SaveAs(Server.MapPath("~\\") + "\\App_Data\\upload\\" + fileName);
+                    hpf.SaveAs(Server.MapPath("~\\") + "\\upload\\" + fileName);
                     //ltlFile.Text = GetFile(fileName);
                     lnkFile.Text = fileName;
                     lnkFile.Visible = true;
@@ -420,7 +420,7 @@ public partial class admin_UC06_0611 : System.Web.UI.Page
 
     protected void lnkFile_Click(object sender, EventArgs e)
     {
-        string filePath = Server.MapPath("../../App_Data/upload/" + m_FileName);
+        string filePath = Server.MapPath("../../upload/" + m_FileName);
         if (System.IO.File.Exists(filePath) == false)
         {
             return;
